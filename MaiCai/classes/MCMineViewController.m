@@ -89,7 +89,7 @@ MCMineFooter* footer;
             
             [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:Nil];
         }else{
-            [[[UIAlertView alloc]initWithTitle:Nil message:@"请先登入" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil]show];
+            
         }
 
     }else if(indexPath.row == 2) {
@@ -103,7 +103,7 @@ MCMineFooter* footer;
             
             [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:Nil];
         }else{
-            [[[UIAlertView alloc]initWithTitle:Nil message:@"请先登入" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil]show];
+            
         }
 
     }else if(indexPath.row == 4) {
@@ -122,7 +122,7 @@ MCMineFooter* footer;
             
             [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:Nil];
         }else{
-            [[[UIAlertView alloc]initWithTitle:Nil message:@"请先登入" delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil]show];
+            
         }
         
     }
@@ -135,19 +135,39 @@ MCMineFooter* footer;
         cell.image.image = [UIImage imageNamed:@"mine_basket_normal"];
         cell.label.text = @"我的菜篮";
     }else if(indexPath.row == 1) {
-        cell.image.image = [UIImage imageNamed:@"mine_order_normal"];
+        BOOL isLoged = [[MCContextManager getInstance]isLogged];
+        if(isLoged) {
+            cell.image.image = [UIImage imageNamed:@"mine_order_normal"];
+        }else {
+            cell.image.image = [UIImage imageNamed:@"mine_order_grey"];
+        }
         cell.label.text = @"我的订单";
     }else if(indexPath.row == 2) {
-        //cell.image.image = [UIImage imageNamed:@"mine_"];
+        BOOL isLoged = [[MCContextManager getInstance]isLogged];
+        if(isLoged) {
+            cell.image.image = [UIImage imageNamed:@"mine_cookbook_normal"];
+        }else {
+            cell.image.image = [UIImage imageNamed:@"mine_cookbook_grey"];
+        }
         cell.label.text = @"我的菜单";
     }else if(indexPath.row == 3) {
-        cell.image.image = [UIImage imageNamed:@"mine_address_normal"];
+        BOOL isLoged = [[MCContextManager getInstance]isLogged];
+        if(isLoged) {
+            cell.image.image = [UIImage imageNamed:@"mine_address_normal"];
+        }else {
+            cell.image.image = [UIImage imageNamed:@"mine_address_grey"];
+        }
         cell.label.text = @"收货地址";
     }else if(indexPath.row == 4) {
         cell.image.image = [UIImage imageNamed:@"mine_opinion_normal"];
         cell.label.text = @"意见反馈";
     }else if(indexPath.row == 5) {
-        cell.image.image = [UIImage imageNamed:@"mine_personal_normal"];
+        BOOL isLoged = [[MCContextManager getInstance]isLogged];
+        if(isLoged) {
+            cell.image.image = [UIImage imageNamed:@"mine_personal_normal"];
+        }else {
+            cell.image.image = [UIImage imageNamed:@"mine_personal_grey"];
+        }
         cell.label.text = @"个人信息";
     }
     return cell;
