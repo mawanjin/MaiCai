@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>${PRODUCT_NAME}</string>
+	<key>CFBundleExecutable</key>
+	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleIcons</key>
+	<dict/>
+	<key>CFBundleIdentifier</key>
+	<string>com.joinsoft.${PRODUCT_NAME:rfc1034identifier}</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>${PRODUCT_NAME}</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.1</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string></string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>MaiCaiAlipay</string>
+			</array>
+		</dict>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>0.1</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>Partner</key>
+	<string>2088011702793110</string>
+	<key>RSA private key</key>
+	<string>MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBAPN1Xft4cOGLnomfbGA7yn0Xved6mMCN9lwcXvuLHLtkY0h+lAHLR3p+c7YE+I88KeNH6M2c6sssjXTUMeuB5gSJFK1DoHaSpVzSONiyDmxZfbaTrbWuljtxwLzb+xMOR9VnD8j8jCPlN0BVB3YDsuDAdAJMRd0W7rIeEcOJLrP/AgMBAAECgYEAkCwe3b5zSn2+As3QBiUiQnX+1ce6Eb1/+QgsD1ZQS4ClctbSm0VgLOAZcd77uwbr31ZEPQ8B1BOsKVVHwqmIJlu8EmbtEvpqncbf/wGU3nqDYoKjDJOw7Z+X66u8rOcNHJkLsP6Lp8Cd9OvZ5wEfb5PaZPxX8OdY7bvMQAtG9aECQQD8XOonGB5gIUaNbgnoB/2T/PzjmlbzIrgwTzZeSVz/RhWDJ/xAho2McTLGkQXCUecsECIq6RxroSUh6UR+0+sZAkEA9veZgk2FGD09+z7jn3QuNirgCcYzAepeRhBXW0XRofiOheF68+afYb8XIrAY3/Zw6QiDF5Sgsf4cl+9ftiCS1wJAKtu0wHLuJbFBBB/d+tPwksNyR00c2ynYUgwB1b1r18aVPLL7uhGf1GwdDW/vpHK4adlLlDIGq5iwb7Pn+AoRcQJBAJ6j+fXbue0SGeh0Q19AEBc3f2aH7GgElr5G7PZyaPC0a0jQyFw3/pWZXFEp8TCca3clwp+5F2h+pPtsBn1Fe00CQQCixCU8CLL3ILs3FmVJwap9Uxg8EarWoo9+Q79g928CLTk4O5w0I8UhFwZNvPGMtBwThY+z9UwX1YRIwTBYmmVi</string>
+	<key>RSA public key</key>
+	<string>gedkc1qnyqeaq0r7vr68uzxh14xym6ap</string>
+	<key>Seller</key>
+	<string>mall@join-cn.com</string>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
+	<key>UIStatusBarTintParameters</key>
+	<dict>
+		<key>UINavigationBar</key>
+		<dict>
+			<key>Style</key>
+			<string>UIBarStyleDefault</string>
+			<key>Translucent</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+</dict>
+</plist>
