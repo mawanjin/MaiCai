@@ -15,4 +15,7 @@
 -(NSMutableDictionary*)getRelationshipBetweenProductAndImage;
 -(NSMutableArray*)getShopVegetablesByProductId:(int)id Longitude:(NSString*)longitude Latitude:(NSString*)latitude;
 -(NSMutableDictionary*)getShopVegetablesByShopId:(NSString*)id;
+-(NSMutableArray*)getHotWordsByQuantity:(int)quantity;
+-(NSMutableArray*)getSearchResultByKeywords:(NSString*)words Quantity:(int)quantity;
+-(NSMutableArray*)getSuggestResultByKeywords:(NSString*)words Quantity:(int)quantity;
 @end

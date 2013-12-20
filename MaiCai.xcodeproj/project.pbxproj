@@ -12,6 +12,9 @@
 		04069921185021D8006F615C /* MCMarketTradeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04069920185021D8006F615C /* MCMarketTradeCell.xib */; };
 		0419D53A18505ECD000F7D51 /* MCVegetableDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0419D53918505ECD000F7D51 /* MCVegetableDetailViewController.m */; };
 		0419D53C18507748000F7D51 /* MCMarketIndexCookBookCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0419D53B18507748000F7D51 /* MCMarketIndexCookBookCell.xib */; };
+		0423D3931862CB6100F08F1E /* MCSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0423D3921862CB6100F08F1E /* MCSearchViewController.m */; };
+		0423D3961863D71300F08F1E /* MCHotWordsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0423D3951863D71300F08F1E /* MCHotWordsCell.m */; };
+		0423D3991864170500F08F1E /* MCSearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0423D3981864170500F08F1E /* MCSearchResultCell.m */; };
 		042F252D186044FE006783C2 /* MCMineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F252C186044FE006783C2 /* MCMineCell.m */; };
 		042F253018613FC3006783C2 /* MCMineFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F252F18613FC3006783C2 /* MCMineFooter.m */; };
 		042F25321861400A006783C2 /* MCMineFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042F25311861400A006783C2 /* MCMineFooter.xib */; };
@@ -152,6 +155,12 @@
 		0419D53818505ECD000F7D51 /* MCVegetableDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCVegetableDetailViewController.h; sourceTree = "<group>"; };
 		0419D53918505ECD000F7D51 /* MCVegetableDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCVegetableDetailViewController.m; sourceTree = "<group>"; };
 		0419D53B18507748000F7D51 /* MCMarketIndexCookBookCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCMarketIndexCookBookCell.xib; sourceTree = "<group>"; };
+		0423D3911862CB6100F08F1E /* MCSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSearchViewController.h; sourceTree = "<group>"; };
+		0423D3921862CB6100F08F1E /* MCSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSearchViewController.m; sourceTree = "<group>"; };
+		0423D3941863D71300F08F1E /* MCHotWordsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCHotWordsCell.h; sourceTree = "<group>"; };
+		0423D3951863D71300F08F1E /* MCHotWordsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCHotWordsCell.m; sourceTree = "<group>"; };
+		0423D3971864170500F08F1E /* MCSearchResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSearchResultCell.h; sourceTree = "<group>"; };
+		0423D3981864170500F08F1E /* MCSearchResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSearchResultCell.m; sourceTree = "<group>"; };
 		042F252B186044FE006783C2 /* MCMineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMineCell.h; sourceTree = "<group>"; };
 		042F252C186044FE006783C2 /* MCMineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMineCell.m; sourceTree = "<group>"; };
 		042F252E18613FC3006783C2 /* MCMineFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMineFooter.h; sourceTree = "<group>"; };
@@ -501,6 +510,8 @@
 				04F059F7185EA68A00BB25C6 /* MCCookBookDetailViewController.m */,
 				042F253318616A64006783C2 /* MCFeedbackViewController.h */,
 				042F253418616A64006783C2 /* MCFeedbackViewController.m */,
+				0423D3911862CB6100F08F1E /* MCSearchViewController.h */,
+				0423D3921862CB6100F08F1E /* MCSearchViewController.m */,
 			);
 			path = classes;
 			sourceTree = "<group>";
@@ -732,6 +743,10 @@
 				042F252E18613FC3006783C2 /* MCMineFooter.h */,
 				042F252F18613FC3006783C2 /* MCMineFooter.m */,
 				042F25311861400A006783C2 /* MCMineFooter.xib */,
+				0423D3941863D71300F08F1E /* MCHotWordsCell.h */,
+				0423D3951863D71300F08F1E /* MCHotWordsCell.m */,
+				0423D3971864170500F08F1E /* MCSearchResultCell.h */,
+				0423D3981864170500F08F1E /* MCSearchResultCell.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -917,6 +932,7 @@
 				048445CC183DF42D006F4090 /* MCChangePasswordView.m in Sources */,
 				044BC9B41830A6C900D43115 /* MCMineAdressCell.m in Sources */,
 				0497B8071839EEBE008A6F8B /* FMDatabaseAdditions.m in Sources */,
+				0423D3991864170500F08F1E /* MCSearchResultCell.m in Sources */,
 				0497B8091839EEBE008A6F8B /* FMDatabaseQueue.m in Sources */,
 				04DAF4CD1842FA44009C7720 /* MCOrderConfirmHeader_.m in Sources */,
 				04DAF4BB1841A369009C7720 /* MCOrderConfirmViewController.m in Sources */,
@@ -953,6 +969,7 @@
 				046E99C718261F6D0005FB53 /* MCBaseViewController.m in Sources */,
 				04DAF4D718457FE4009C7720 /* MCMineOrderViewController.m in Sources */,
 				048445D1183DF96D006F4090 /* MCChangeNicknameView.m in Sources */,
+				0423D3931862CB6100F08F1E /* MCSearchViewController.m in Sources */,
 				04DAF4D218442BCA009C7720 /* MCOrderConfirmFooter.m in Sources */,
 				04D230A7182B357E00D4B4AC /* MCBaseNavViewController.m in Sources */,
 				04DAF4BE1842D9AF009C7720 /* MCOrderConfirmHeader.m in Sources */,
@@ -990,6 +1007,7 @@
 				0497B80A1839EEBE008A6F8B /* FMResultSet.m in Sources */,
 				046E99C818261F6D0005FB53 /* MCCookBookViewController.m in Sources */,
 				04DAF4B7183EF853009C7720 /* MCAddressHelperView.m in Sources */,
+				0423D3961863D71300F08F1E /* MCHotWordsCell.m in Sources */,
 				04B990BE183496E10018F84E /* MCContextManager.m in Sources */,
 				04F05A18185EE08700BB25C6 /* AFNetworkReachabilityManager.m in Sources */,
 				04D230DC182B883E00D4B4AC /* MCNetwork.m in Sources */,

@@ -18,6 +18,7 @@
 #import "MCCategoryViewController.h"
 #import "MCVegetableDetailViewController.h"
 #import "HMSegmentedControl.h"
+#import "MCSearchViewController.h"
 
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 
@@ -40,7 +41,20 @@
     table.delegate = self;
     table.dataSource = self;
     [table registerNib:[UINib nibWithNibName:@"MCMarketIndexCookBookCell" bundle:nil] forCellReuseIdentifier:@"cookBookCell"];
+    
+    self.navigationItem.rightBarButtonItem=
+    [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchBtnAction)];
+    self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
+
     [self.scrollView addSubview:table];
+}
+
+
+-(void)searchBtnAction{
+    MCSearchViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCSearchViewController"];
+    [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
+        
+    }];
 }
 
 -(void)viewWillDisappear:(BOOL)animated

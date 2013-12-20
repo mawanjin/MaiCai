@@ -36,7 +36,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.navItem.title = self.vegetable.name;
+    
     
     NSString* product_id =[[NSString alloc]initWithFormat:@"%d",self.vegetable.product_id];
     NSString* image = [[MCVegetableManager getInstance]getRelationshipBetweenProductAndImage][product_id];
@@ -49,6 +49,8 @@
     [super viewDidAppear:animated];
     NSString* lng = ((NSDictionary*)[[MCContextManager getInstance]getDataByKey:MC_CONTEXT_POSITION])[@"lng"];
     NSString* lat = ((NSDictionary*)[[MCContextManager getInstance]getDataByKey:MC_CONTEXT_POSITION])[@"lat"];
+    
+    self.navItem.title = self.vegetable.name;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

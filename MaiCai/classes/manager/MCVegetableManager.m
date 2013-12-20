@@ -28,6 +28,68 @@ static NSMutableDictionary* relationship;
     return instance;
 }
 
+
+-(NSMutableArray*)getHotWordsByQuantity:(int)quantity
+{
+    
+    NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithDictionary:@{
+                                                                                   @"hot":[[NSString alloc]initWithFormat:@"%d",quantity],
+                    
+                                                                                   }];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/public/search/hot.do" Params:params];
+    NSError *error;
+    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
+    
+    BOOL flag = [responseData[@"success"]boolValue];
+    NSLog([[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    if(!flag) {
+        @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
+    }
+    
+    return responseData[@"data"];
+}
+
+-(NSMutableArray*)getSearchResultByKeywords:(NSString*)words Quantity:(int)quantity
+{
+    NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithDictionary:@{
+                                                                                   @"keyword":words,
+                                                                                   @"hot":[[NSString alloc]initWithFormat:@"%d",quantity],
+                                                                                   
+                                                                                   }];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/public/search/go.do" Params:params];
+    NSError *error;
+    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
+    
+    BOOL flag = [responseData[@"success"]boolValue];
+    NSLog([[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    if(!flag) {
+        @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
+    }
+    
+    return responseData[@"data"];
+}
+
+-(NSMutableArray*)getSuggestResultByKeywords:(NSString*)words Quantity:(int)quantity
+{
+    NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithDictionary:@{
+                                                                                   @"keyword":words,
+                                                                                   @"hot":[[NSString alloc]initWithFormat:@"%d",quantity],
+                                                                                   
+                                                                                   }];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/public/search/suggest.do" Params:params];
+    NSError *error;
+    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
+    
+    BOOL flag = [responseData[@"success"]boolValue];
+    NSLog([[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    if(!flag) {
+        @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
+    }
+    
+    return responseData[@"data"];
+
+}
+
 //首页信息
 -(NSMutableDictionary*)getMarketIndexInfo
 {
@@ -291,5 +353,7 @@ static NSMutableDictionary* relationship;
     }
     return relationship;
 }
+
+
 
 @end
