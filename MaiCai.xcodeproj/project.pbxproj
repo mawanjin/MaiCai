@@ -100,6 +100,8 @@
 		04BEB3121859685800A5D39F /* MCOrderDetailHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BEB3101859685800A5D39F /* MCOrderDetailHeader.xib */; };
 		04BFBCF51867D9D60085F39F /* MCTipsHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BFBCF41867D9D60085F39F /* MCTipsHeader.m */; };
 		04BFBCF71867D9F10085F39F /* MCTipsHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BFBCF61867D9F10085F39F /* MCTipsHeader.xib */; };
+		04BFBCFF1868111E0085F39F /* NSDictionary+MCJsonString.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BFBCFE1868111E0085F39F /* NSDictionary+MCJsonString.m */; };
+		04BFBD021868116F0085F39F /* NSArray+MCJsonString.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BFBD011868116F0085F39F /* NSArray+MCJsonString.m */; };
 		04C3733E182A1E9500B01341 /* MCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C3733D182A1E9500B01341 /* MCLoginViewController.m */; };
 		04D230A7182B357E00D4B4AC /* MCBaseNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D230A6182B357E00D4B4AC /* MCBaseNavViewController.m */; };
 		04D230D5182B883E00D4B4AC /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D230B1182B883E00D4B4AC /* MBProgressHUD.m */; };
@@ -306,6 +308,10 @@
 		04BFBCF31867D9D60085F39F /* MCTipsHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTipsHeader.h; sourceTree = "<group>"; };
 		04BFBCF41867D9D60085F39F /* MCTipsHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTipsHeader.m; sourceTree = "<group>"; };
 		04BFBCF61867D9F10085F39F /* MCTipsHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCTipsHeader.xib; sourceTree = "<group>"; };
+		04BFBCFD1868111E0085F39F /* NSDictionary+MCJsonString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+MCJsonString.h"; sourceTree = "<group>"; };
+		04BFBCFE1868111E0085F39F /* NSDictionary+MCJsonString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+MCJsonString.m"; sourceTree = "<group>"; };
+		04BFBD001868116F0085F39F /* NSArray+MCJsonString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MCJsonString.h"; sourceTree = "<group>"; };
+		04BFBD011868116F0085F39F /* NSArray+MCJsonString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+MCJsonString.m"; sourceTree = "<group>"; };
 		04C3733C182A1E9500B01341 /* MCLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCLoginViewController.h; sourceTree = "<group>"; };
 		04C3733D182A1E9500B01341 /* MCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCLoginViewController.m; sourceTree = "<group>"; };
 		04D230A5182B357E00D4B4AC /* MCBaseNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCBaseNavViewController.h; sourceTree = "<group>"; };
@@ -476,6 +482,7 @@
 		046E99BA18261F6D0005FB53 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				04BFBCFC1868110E0085F39F /* category */,
 				04B98D8018331D680018F84E /* model */,
 				04BDEEE3182CD12A004E1C84 /* views */,
 				046E99D11827298C0005FB53 /* manager */,
@@ -759,6 +766,17 @@
 			path = views;
 			sourceTree = "<group>";
 		};
+		04BFBCFC1868110E0085F39F /* category */ = {
+			isa = PBXGroup;
+			children = (
+				04BFBCFD1868111E0085F39F /* NSDictionary+MCJsonString.h */,
+				04BFBCFE1868111E0085F39F /* NSDictionary+MCJsonString.m */,
+				04BFBD001868116F0085F39F /* NSArray+MCJsonString.h */,
+				04BFBD011868116F0085F39F /* NSArray+MCJsonString.m */,
+			);
+			path = category;
+			sourceTree = "<group>";
+		};
 		04D230AE182B883E00D4B4AC /* library */ = {
 			isa = PBXGroup;
 			children = (
@@ -971,6 +989,7 @@
 				04F05A1A185EE08700BB25C6 /* AFURLConnectionOperation.m in Sources */,
 				0437A4981847491A000D427B /* SBJSON.m in Sources */,
 				046E99CC18261F6D0005FB53 /* MCCategoryViewController.m in Sources */,
+				04BFBD021868116F0085F39F /* NSArray+MCJsonString.m in Sources */,
 				0497B813183A012B008A6F8B /* MCUserManager.m in Sources */,
 				04F05A15185EE08700BB25C6 /* AFHTTPRequestOperation.m in Sources */,
 				0406991C18500C50006F615C /* MCMarketTradeCell.m in Sources */,
@@ -1013,6 +1032,7 @@
 				0419D53A18505ECD000F7D51 /* MCVegetableDetailViewController.m in Sources */,
 				04B98D8A18331D680018F84E /* MCMarket.m in Sources */,
 				04069919184F6693006F615C /* HMSegmentedControl.m in Sources */,
+				04BFBCFF1868111E0085F39F /* NSDictionary+MCJsonString.m in Sources */,
 				04C3733E182A1E9500B01341 /* MCLoginViewController.m in Sources */,
 				0497B80A1839EEBE008A6F8B /* FMResultSet.m in Sources */,
 				046E99C818261F6D0005FB53 /* MCCookBookViewController.m in Sources */,

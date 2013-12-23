@@ -90,7 +90,12 @@
         @try {
             if ([[MCContextManager getInstance]isLogged]) {
                 MCUser* user = [[MCContextManager getInstance]getDataByKey:MC_USER];
-                [[MCTradeManager getInstance]addProductToCartOnlineByUserId:user.userId Product:self.vegetable];
+                
+                NSArray* products =@[@{
+                                          @"id":[[NSNumber alloc]initWithInt:self.vegetable.shop_product_id],
+                                          @"quantity":[[NSNumber alloc]initWithInt:self.vegetable.quantity]
+                                          }];
+                [[MCTradeManager getInstance]addProductToCartOnlineByUserId:user.userId Products:products];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (self.previousView.popupViewController != nil) {
                         [self.previousView dismissPopupViewControllerAnimated:NO completion:^{
@@ -99,7 +104,12 @@
                 });
             }else {
                 NSString* macId = (NSString*)[[MCContextManager getInstance]getDataByKey:MC_MAC_ID];
-                [[MCTradeManager getInstance]addProductToCartByUserId:macId Product:self.vegetable];
+                
+                NSArray* products =@[@{
+                                         @"id":[[NSNumber alloc]initWithInt:self.vegetable.shop_product_id],
+                                         @"quantity":[[NSNumber alloc]initWithInt:self.vegetable.quantity]
+                                         }];
+                [[MCTradeManager getInstance]addProductToCartByUserId:macId Products:products];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (self.previousView.popupViewController != nil) {
                         [self.previousView dismissPopupViewControllerAnimated:NO completion:^{

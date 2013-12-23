@@ -41,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MaiCai/classes/manager/MCVegetableManager.m"
-            timestampString = "409455751.817335"
+            filePath = "MaiCai/classes/manager/MCTradeManager.m"
+            timestampString = "409475540.324505"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "230"
-            endingLineNumber = "230"
-            landmarkName = "@implementation MCVegetableManager"
+            startingLineNumber = "236"
+            endingLineNumber = "236"
+            landmarkName = "@implementation MCTradeManager"
             landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>

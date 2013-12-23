@@ -78,6 +78,7 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
+            self.data = [[MCVegetableManager getInstance]getMarketIndexInfo];
             self.recipes = [[MCVegetableManager getInstance]getRecipes];
         }
         @catch (NSException *exception) {

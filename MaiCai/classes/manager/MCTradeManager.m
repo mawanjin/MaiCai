@@ -16,6 +16,8 @@
 #import "MCOrder.h"
 #import "MCUser.h"
 #import "MCContextManager.h"
+#import "NSDictionary+MCJsonString.h"
+#import "NSArray+MCJsonString.h"
 
 @implementation MCTradeManager
 
@@ -133,43 +135,54 @@ static MCTradeManager* instance;
     }
 }
 
--(void)addProductToCartByUserId:(NSString*)id Product:(MCVegetable*)vegetable
+
+-(void)addProductToCartByUserId:(NSString *)id Products:(NSArray*)products
 {
-    
-    
-    NSString* param = [[NSString alloc]initWithFormat:@"{\"id\":%d,\"customer_id\":\"%@\",\"quantity\":%d}",vegetable.shop_product_id,id,vegetable.quantity] ;
-     NSLog(@"data contents: %@", param);
+    NSDictionary* dic = @{
+                          @"customer_id":id,
+                          @"products":products
+                          };
+    NSString* param = [dic jsonStringWithPrettyPrint:NO];
     NSDictionary* params = @{
                              @"param":param
-                             };
+                            };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
     NSData* result = [[MCNetwork getInstance]httpPostSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/public/offline/cart/save.do" Params:data];
     NSError *error;
+
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
     if(!flag) {
-        
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
+
 }
 
--(void)addProductToCartOnlineByUserId:(NSString *)id Product:(MCVegetable *)vegetable
+-(void)addProductToCartOnlineByUserId:(NSString *)id Products:(NSArray*)products;
 {
-    NSString* param = [[NSString alloc]initWithFormat:@"{\"id\":%d,\"customer_id\":\"%@\",\"quantity\":%d}",vegetable.shop_product_id,id,vegetable.quantity] ;
-     NSString* sign = [@"/api/ios/v1/private/cart/save.dodhfuewjcuehiudjuwdwyfcs" stringFromMD5];
+   
+   
+    NSDictionary* dic = @{
+                          @"customer_id":id,
+                          @"products":products
+                          };
+    NSString* param = [dic jsonStringWithPrettyPrint:NO];
+    
+    NSString* sign = [@"/api/ios/v1/private/cart/save.dodhfuewjcuehiudjuwdwyfcs" stringFromMD5];
     NSDictionary* params = @{
                              @"param":param,
                              @"sign":sign
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
     NSData* result = [[MCNetwork getInstance]httpPostSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/private/cart/save.do" Params:data];
-    NSError *error;
+    NSError* error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
     if(!flag) {
         
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
+
 
 }
 

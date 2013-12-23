@@ -191,6 +191,8 @@ static NSMutableDictionary* relationship;
     NSError *error;
     NSDictionary* dicResult = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
+    NSLog([[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    
     BOOL flag = [dicResult[@"success"]boolValue];
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];

@@ -24,12 +24,15 @@ typedef enum
 @interface MCTradeManager : NSObject
 +(MCTradeManager*)getInstance;
 -(NSMutableArray*)getCartProductsByUserId:(NSString*)id;
--(void)addProductToCartByUserId:(NSString*)id Product:(MCVegetable*)vegetable;
+
 -(int)getProductsNumInCartByUserId:(NSString*)id;
 -(void)deleteProductsInCartByUserId:(NSString*)id ProductIds:(NSMutableArray*)productIds;
 -(void)changeProductNumInCartByUserId:(NSString*)id ProductId:(int)productId Quantity:(int)quantity;
 -(NSMutableArray*)getCartProductsOnlineByUserId:(NSString*)id;
--(void)addProductToCartOnlineByUserId:(NSString *)id Product:(MCVegetable *)vegetable;
+
+-(void)addProductToCartOnlineByUserId:(NSString *)id Products:(NSArray*)products;
+-(void)addProductToCartByUserId:(NSString *)id Products:(NSArray*)products;
+
 -(int)getProductsNumInCartOnlineByUserId:(NSString*)id;
 -(void)deleteProductsInCartOnlineByUserId:(NSString*)id ProductIds:(NSMutableArray*)productIds;
 -(void)changeProductNumInCartOnlineByUserId:(NSString*)id ProductId:(int)productId Quantity:(int)quantity;
