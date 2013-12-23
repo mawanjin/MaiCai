@@ -19,6 +19,7 @@
 #import "MCVegetableDetailViewController.h"
 #import "HMSegmentedControl.h"
 #import "MCSearchViewController.h"
+#import "MCTipsHeader.h"
 
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 
@@ -36,7 +37,7 @@
 {
     [super viewDidLoad];
     
-    UITableView* table = [[UITableView alloc]initWithFrame:CGRectMake(8, 370, 304, 66*3+25) style:UITableViewStylePlain];
+    UITableView* table = [[UITableView alloc]initWithFrame:CGRectMake(8, 370, 304, 66*3+50) style:UITableViewStylePlain];
     self.tableView = table;
     table.delegate = self;
     table.dataSource = self;
@@ -70,7 +71,7 @@
     }else{
         self.scrollView.contentSize = CGSizeMake(320, self.newsView.frame.size.height+self.vegetablePriceCollectionView.frame.size.height+self.categoryCollectionView.frame.size.height+self.tableView.frame.size.height+140);
     }
-    
+    //注意这里scrollview不能滚动的原因是因为 MBProgressbar与toast需要在scrollview里面创建
     self.scrollView.scrollEnabled = YES;
     
     [MBProgressHUD showHUDAddedTo:self.scrollView animated:YES];
@@ -128,14 +129,13 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView* view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 304, 25)];
-    UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 304, 25)];
-    label.font = [UIFont systemFontOfSize:13];
-    label.text = @"热门菜谱";
-    label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [UIColor grayColor];
-    [view addSubview:label];
+    UIView* view = [MCTipsHeader initInstance];
     return view;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 46;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section

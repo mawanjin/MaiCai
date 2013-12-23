@@ -98,6 +98,8 @@
 		04B990BE183496E10018F84E /* MCContextManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B990BD183496E10018F84E /* MCContextManager.m */; };
 		04BEB3111859685800A5D39F /* MCOrderDetailHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BEB30F1859685800A5D39F /* MCOrderDetailHeader.m */; };
 		04BEB3121859685800A5D39F /* MCOrderDetailHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BEB3101859685800A5D39F /* MCOrderDetailHeader.xib */; };
+		04BFBCF51867D9D60085F39F /* MCTipsHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BFBCF41867D9D60085F39F /* MCTipsHeader.m */; };
+		04BFBCF71867D9F10085F39F /* MCTipsHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BFBCF61867D9F10085F39F /* MCTipsHeader.xib */; };
 		04C3733E182A1E9500B01341 /* MCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C3733D182A1E9500B01341 /* MCLoginViewController.m */; };
 		04D230A7182B357E00D4B4AC /* MCBaseNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D230A6182B357E00D4B4AC /* MCBaseNavViewController.m */; };
 		04D230D5182B883E00D4B4AC /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D230B1182B883E00D4B4AC /* MBProgressHUD.m */; };
@@ -301,6 +303,9 @@
 		04BEB30E1859685800A5D39F /* MCOrderDetailHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOrderDetailHeader.h; sourceTree = "<group>"; };
 		04BEB30F1859685800A5D39F /* MCOrderDetailHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCOrderDetailHeader.m; sourceTree = "<group>"; };
 		04BEB3101859685800A5D39F /* MCOrderDetailHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCOrderDetailHeader.xib; sourceTree = "<group>"; };
+		04BFBCF31867D9D60085F39F /* MCTipsHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTipsHeader.h; sourceTree = "<group>"; };
+		04BFBCF41867D9D60085F39F /* MCTipsHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTipsHeader.m; sourceTree = "<group>"; };
+		04BFBCF61867D9F10085F39F /* MCTipsHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCTipsHeader.xib; sourceTree = "<group>"; };
 		04C3733C182A1E9500B01341 /* MCLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCLoginViewController.h; sourceTree = "<group>"; };
 		04C3733D182A1E9500B01341 /* MCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCLoginViewController.m; sourceTree = "<group>"; };
 		04D230A5182B357E00D4B4AC /* MCBaseNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCBaseNavViewController.h; sourceTree = "<group>"; };
@@ -747,6 +752,9 @@
 				0423D3951863D71300F08F1E /* MCHotWordsCell.m */,
 				0423D3971864170500F08F1E /* MCSearchResultCell.h */,
 				0423D3981864170500F08F1E /* MCSearchResultCell.m */,
+				04BFBCF31867D9D60085F39F /* MCTipsHeader.h */,
+				04BFBCF41867D9D60085F39F /* MCTipsHeader.m */,
+				04BFBCF61867D9F10085F39F /* MCTipsHeader.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -896,6 +904,7 @@
 				04DAF4D418442C1A009C7720 /* MCOrderConfirmFooter.xib in Resources */,
 				048445CD183DF42D006F4090 /* MCChangePasswordView.xib in Resources */,
 				04DAF4C01842D9EA009C7720 /* MCOrderConfirmHeader.xib in Resources */,
+				04BFBCF71867D9F10085F39F /* MCTipsHeader.xib in Resources */,
 				0464C99D182F7074009066C3 /* MCCartConfirmPopupView.xib in Resources */,
 				04F05A00185ECF4C00BB25C6 /* MCCookBookDetailHeader.xib in Resources */,
 				04BEB3121859685800A5D39F /* MCOrderDetailHeader.xib in Resources */,
@@ -987,6 +996,7 @@
 				0486A0EF1835BAD100FDC854 /* MCTradeManager.m in Sources */,
 				0437A49A1847491A000D427B /* SBJsonParser.m in Sources */,
 				0497B7EF1838C51A008A6F8B /* MCCartHeader.m in Sources */,
+				04BFBCF51867D9D60085F39F /* MCTipsHeader.m in Sources */,
 				0497B80D1839FD40008A6F8B /* MCUser.m in Sources */,
 				0497B8061839EEBE008A6F8B /* FMDatabase.m in Sources */,
 				0437A4971847491A000D427B /* NSString+SBJSON.m in Sources */,
