@@ -11,7 +11,7 @@
 		0406991C18500C50006F615C /* MCMarketTradeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0406991B18500C50006F615C /* MCMarketTradeCell.m */; };
 		04069921185021D8006F615C /* MCMarketTradeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04069920185021D8006F615C /* MCMarketTradeCell.xib */; };
 		0419D53A18505ECD000F7D51 /* MCVegetableDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0419D53918505ECD000F7D51 /* MCVegetableDetailViewController.m */; };
-		0419D53C18507748000F7D51 /* MCMarketIndexCookBookCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0419D53B18507748000F7D51 /* MCMarketIndexCookBookCell.xib */; };
+		0419D53C18507748000F7D51 /* MCMarketIndexTipCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0419D53B18507748000F7D51 /* MCMarketIndexTipCell.xib */; };
 		0423D3931862CB6100F08F1E /* MCSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0423D3921862CB6100F08F1E /* MCSearchViewController.m */; };
 		0423D3961863D71300F08F1E /* MCHotWordsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0423D3951863D71300F08F1E /* MCHotWordsCell.m */; };
 		0423D3991864170500F08F1E /* MCSearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0423D3981864170500F08F1E /* MCSearchResultCell.m */; };
@@ -40,7 +40,7 @@
 		0464C99D182F7074009066C3 /* MCCartConfirmPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0464C99B182F7074009066C3 /* MCCartConfirmPopupView.xib */; };
 		0467B7F6184EBCA2005A72F0 /* MCMarketIndexNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0467B7F5184EBCA2005A72F0 /* MCMarketIndexNewsCell.m */; };
 		0467B7F9184ED066005A72F0 /* MCMarketIndexCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0467B7F8184ED066005A72F0 /* MCMarketIndexCategoryCell.m */; };
-		0467B7FC184ED7AB005A72F0 /* MCMarketIndexVegetablePriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0467B7FB184ED7AB005A72F0 /* MCMarketIndexVegetablePriceCell.m */; };
+		0467B7FC184ED7AB005A72F0 /* MCMarketIndexQuickOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0467B7FB184ED7AB005A72F0 /* MCMarketIndexQuickOrderCell.m */; };
 		046E99C718261F6D0005FB53 /* MCBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E99BC18261F6D0005FB53 /* MCBaseViewController.m */; };
 		046E99C818261F6D0005FB53 /* MCCookBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E99BE18261F6D0005FB53 /* MCCookBookViewController.m */; };
 		046E99C918261F6D0005FB53 /* MCMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E99C018261F6D0005FB53 /* MCMineViewController.m */; };
@@ -154,7 +154,7 @@
 		04069920185021D8006F615C /* MCMarketTradeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCMarketTradeCell.xib; sourceTree = "<group>"; };
 		0419D53818505ECD000F7D51 /* MCVegetableDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCVegetableDetailViewController.h; sourceTree = "<group>"; };
 		0419D53918505ECD000F7D51 /* MCVegetableDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCVegetableDetailViewController.m; sourceTree = "<group>"; };
-		0419D53B18507748000F7D51 /* MCMarketIndexCookBookCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCMarketIndexCookBookCell.xib; sourceTree = "<group>"; };
+		0419D53B18507748000F7D51 /* MCMarketIndexTipCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCMarketIndexTipCell.xib; sourceTree = "<group>"; };
 		0423D3911862CB6100F08F1E /* MCSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSearchViewController.h; sourceTree = "<group>"; };
 		0423D3921862CB6100F08F1E /* MCSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSearchViewController.m; sourceTree = "<group>"; };
 		0423D3941863D71300F08F1E /* MCHotWordsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCHotWordsCell.h; sourceTree = "<group>"; };
@@ -205,8 +205,8 @@
 		0467B7F5184EBCA2005A72F0 /* MCMarketIndexNewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMarketIndexNewsCell.m; sourceTree = "<group>"; };
 		0467B7F7184ED066005A72F0 /* MCMarketIndexCategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMarketIndexCategoryCell.h; sourceTree = "<group>"; };
 		0467B7F8184ED066005A72F0 /* MCMarketIndexCategoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMarketIndexCategoryCell.m; sourceTree = "<group>"; };
-		0467B7FA184ED7AB005A72F0 /* MCMarketIndexVegetablePriceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMarketIndexVegetablePriceCell.h; sourceTree = "<group>"; };
-		0467B7FB184ED7AB005A72F0 /* MCMarketIndexVegetablePriceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMarketIndexVegetablePriceCell.m; sourceTree = "<group>"; };
+		0467B7FA184ED7AB005A72F0 /* MCMarketIndexQuickOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMarketIndexQuickOrderCell.h; sourceTree = "<group>"; };
+		0467B7FB184ED7AB005A72F0 /* MCMarketIndexQuickOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMarketIndexQuickOrderCell.m; sourceTree = "<group>"; };
 		046E99BB18261F6D0005FB53 /* MCBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCBaseViewController.h; sourceTree = "<group>"; };
 		046E99BC18261F6D0005FB53 /* MCBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCBaseViewController.m; sourceTree = "<group>"; };
 		046E99BD18261F6D0005FB53 /* MCCookBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCookBookViewController.h; sourceTree = "<group>"; };
@@ -727,12 +727,12 @@
 				0467B7F5184EBCA2005A72F0 /* MCMarketIndexNewsCell.m */,
 				0467B7F7184ED066005A72F0 /* MCMarketIndexCategoryCell.h */,
 				0467B7F8184ED066005A72F0 /* MCMarketIndexCategoryCell.m */,
-				0467B7FA184ED7AB005A72F0 /* MCMarketIndexVegetablePriceCell.h */,
-				0467B7FB184ED7AB005A72F0 /* MCMarketIndexVegetablePriceCell.m */,
+				0467B7FA184ED7AB005A72F0 /* MCMarketIndexQuickOrderCell.h */,
+				0467B7FB184ED7AB005A72F0 /* MCMarketIndexQuickOrderCell.m */,
 				0406991A18500C50006F615C /* MCMarketTradeCell.h */,
 				0406991B18500C50006F615C /* MCMarketTradeCell.m */,
 				04069920185021D8006F615C /* MCMarketTradeCell.xib */,
-				0419D53B18507748000F7D51 /* MCMarketIndexCookBookCell.xib */,
+				0419D53B18507748000F7D51 /* MCMarketIndexTipCell.xib */,
 				04F059FC185ECF1100BB25C6 /* MCCookBookDetailHeader.h */,
 				04F059FD185ECF1100BB25C6 /* MCCookBookDetailHeader.m */,
 				04F059FF185ECF4C00BB25C6 /* MCCookBookDetailHeader.xib */,
@@ -900,7 +900,7 @@
 				04F05A00185ECF4C00BB25C6 /* MCCookBookDetailHeader.xib in Resources */,
 				04BEB3121859685800A5D39F /* MCOrderDetailHeader.xib in Resources */,
 				0497B7F11838C531008A6F8B /* MCCartHeader.xib in Resources */,
-				0419D53C18507748000F7D51 /* MCMarketIndexCookBookCell.xib in Resources */,
+				0419D53C18507748000F7D51 /* MCMarketIndexTipCell.xib in Resources */,
 				04069921185021D8006F615C /* MCMarketTradeCell.xib in Resources */,
 				0489952A181A115100E1B156 /* Images.xcassets in Resources */,
 				04DAF4B8183EF853009C7720 /* MCAddressHelperView.xib in Resources */,
@@ -992,7 +992,7 @@
 				0437A4971847491A000D427B /* NSString+SBJSON.m in Sources */,
 				047390BD183C51AE003F443D /* Toast+UIView.m in Sources */,
 				0437A4941847491A000D427B /* AlixPayResult.m in Sources */,
-				0467B7FC184ED7AB005A72F0 /* MCMarketIndexVegetablePriceCell.m in Sources */,
+				0467B7FC184ED7AB005A72F0 /* MCMarketIndexQuickOrderCell.m in Sources */,
 				04F05A1D185EE08700BB25C6 /* AFURLSessionManager.m in Sources */,
 				044BC9AC1830687800D43115 /* MCMineAddressViewController.m in Sources */,
 				04DAF4DD1845921B009C7720 /* MCOrderCell.m in Sources */,

@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MaiCai/classes/manager/MCVegetableManager.m"
-            timestampString = "409215148.768185"
+            timestampString = "409455751.817335"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "211"
-            endingLineNumber = "211"
+            startingLineNumber = "230"
+            endingLineNumber = "230"
             landmarkName = "@implementation MCVegetableManager"
             landmarkType = "3">
          </BreakpointContent>

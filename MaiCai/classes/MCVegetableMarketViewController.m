@@ -14,7 +14,7 @@
 #import "Toast+UIView.h"
 #import "MCMarketIndexNewsCell.h"
 #import "MCMarketIndexCategoryCell.h"
-#import "MCMarketIndexVegetablePriceCell.h"
+#import "MCMarketIndexQuickOrderCell.h"
 #import "MCCategoryViewController.h"
 #import "MCVegetableDetailViewController.h"
 #import "HMSegmentedControl.h"
@@ -36,11 +36,11 @@
 {
     [super viewDidLoad];
     
-    UITableView* table = [[UITableView alloc]initWithFrame:CGRectMake(8, 355, 304, 66*3+25) style:UITableViewStylePlain];
+    UITableView* table = [[UITableView alloc]initWithFrame:CGRectMake(8, 370, 304, 66*3+25) style:UITableViewStylePlain];
     self.tableView = table;
     table.delegate = self;
     table.dataSource = self;
-    [table registerNib:[UINib nibWithNibName:@"MCMarketIndexCookBookCell" bundle:nil] forCellReuseIdentifier:@"cookBookCell"];
+    [table registerNib:[UINib nibWithNibName:@"MCMarketIndexTipCell" bundle:nil] forCellReuseIdentifier:@"tipCell"];
     
     self.navigationItem.rightBarButtonItem=
     [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchBtnAction)];
@@ -66,9 +66,9 @@
 {
     [super viewDidAppear:animated];
     if(IS_IPHONE_5){
-        self.scrollView.contentSize = CGSizeMake(320, self.newsView.frame.size.height+self.vegetablePriceCollectionView.frame.size.height+self.categoryCollectionView.frame.size.height+self.tableView.frame.size.height+20);
+        self.scrollView.contentSize = CGSizeMake(320, self.newsView.frame.size.height+self.vegetablePriceCollectionView.frame.size.height+self.categoryCollectionView.frame.size.height+self.tableView.frame.size.height+40);
     }else{
-        self.scrollView.contentSize = CGSizeMake(320, self.newsView.frame.size.height+self.vegetablePriceCollectionView.frame.size.height+self.categoryCollectionView.frame.size.height+self.tableView.frame.size.height+120);
+        self.scrollView.contentSize = CGSizeMake(320, self.newsView.frame.size.height+self.vegetablePriceCollectionView.frame.size.height+self.categoryCollectionView.frame.size.height+self.tableView.frame.size.height+140);
     }
     
     self.scrollView.scrollEnabled = YES;
@@ -77,11 +77,11 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
-            self.data = [[MCVegetableManager getInstance]getMarketIndexInfo];
+            self.recipes = [[MCVegetableManager getInstance]getRecipes];
         }
         @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.view makeToast:@"无法获取网络数据！"
+                [self.scrollView makeToast:@"无法获取网络数据！"
                             duration:2.0
                             position:@"center"
                                title:@"提示"];
@@ -91,8 +91,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
               [MBProgressHUD hideHUDForView:self.scrollView animated:YES];
                 [self.vegetablePriceCollectionView reloadData];
-                NSMutableArray* vegetables = self.data[@"prices"];
-                self.vegetablePricePageControl.numberOfPages = (vegetables.count%6 ==0)?vegetables.count/6:(vegetables.count/6+1);
+                self.vegetablePricePageControl.numberOfPages = (self.recipes.count%6 ==0)?self.recipes.count/6:(self.recipes.count/6+1);
             });
         }
     });
@@ -108,7 +107,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cookBookCell"];
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"tipCell"];
     return cell;
 }
 
@@ -167,9 +166,7 @@
 -(NSInteger)numberOfSectionsInCollectionView:
 (UICollectionView *)collectionView
 {
-    if([collectionView.restorationIdentifier isEqualToString:@"newsCollectionView"]){
-        return 1;
-    }else if([collectionView.restorationIdentifier isEqualToString:@"categoryCollectionView"]){
+    if([collectionView.restorationIdentifier isEqualToString:@"categoryCollectionView"]){
         return 1;
     }else if([collectionView.restorationIdentifier isEqualToString:@"vegetablePriceCollectionView"]){
         return 1;
@@ -181,9 +178,7 @@
 -(NSInteger)collectionView:(UICollectionView *)collectionView
     numberOfItemsInSection:(NSInteger)section
 {
-    if([collectionView.restorationIdentifier isEqualToString:@"newsCollectionView"]){
-        return 3;
-    }else if([collectionView.restorationIdentifier isEqualToString:@"categoryCollectionView"]){
+    if([collectionView.restorationIdentifier isEqualToString:@"categoryCollectionView"]){
         return 6;
     }else if([collectionView.restorationIdentifier isEqualToString:@"vegetablePriceCollectionView"]){
         return 18;
@@ -197,21 +192,7 @@
 {
     UICollectionViewCell* myCell = nil;
     
-    if([collectionView.restorationIdentifier isEqualToString:@"newsCollectionView"]){
-        myCell = [collectionView
-                  dequeueReusableCellWithReuseIdentifier:@"newsCollectionCell"
-                  forIndexPath:indexPath];
-        MCMarketIndexNewsCell* cell =(MCMarketIndexNewsCell*) myCell;
-        if(indexPath.row == 0) {
-           cell.newsLabel.text = @"新闻1.....";
-        }else if(indexPath.row == 1) {
-            cell.newsLabel.text = @"新闻2.....";
-
-        }else{
-            cell.newsLabel.text = @"新闻3.....";
-
-        }
-    }else if([collectionView.restorationIdentifier isEqualToString:@"categoryCollectionView"]){
+    if([collectionView.restorationIdentifier isEqualToString:@"categoryCollectionView"]){
         myCell = [collectionView
                   dequeueReusableCellWithReuseIdentifier:@"categoryCollectionCell"
                   forIndexPath:indexPath];
@@ -239,7 +220,7 @@
         myCell = [collectionView
                   dequeueReusableCellWithReuseIdentifier:@"vegetablePriceCollectionCell"
                   forIndexPath:indexPath];
-        MCMarketIndexVegetablePriceCell* cell = (MCMarketIndexVegetablePriceCell*)myCell;
+        MCMarketIndexQuickOrderCell* cell = (MCMarketIndexQuickOrderCell*)myCell;
         NSMutableArray* vegetables = self.data[@"prices"];
         MCVegetable* vegetable = vegetables[indexPath.row];
         cell.nameLabel.text = vegetable.name;

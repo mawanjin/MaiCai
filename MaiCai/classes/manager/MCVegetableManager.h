@@ -18,4 +18,5 @@
 -(NSMutableArray*)getHotWordsByQuantity:(int)quantity;
 -(NSMutableArray*)getSearchResultByKeywords:(NSString*)words Quantity:(int)quantity;
 -(NSMutableArray*)getSuggestResultByKeywords:(NSString*)words Quantity:(int)quantity;
+-(NSMutableArray*)getRecipes;
 @end

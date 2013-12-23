@@ -6,9 +6,9 @@
 //  Copyright (c) 2013年 JoinSoft. All rights reserved.
 //
 
-#import "MCMarketIndexVegetablePriceCell.h"
+#import "MCMarketIndexQuickOrderCell.h"
 
-@implementation MCMarketIndexVegetablePriceCell
+@implementation MCMarketIndexQuickOrderCell
 
 - (id)initWithFrame:(CGRect)frame
 {

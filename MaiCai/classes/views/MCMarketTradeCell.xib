@@ -31,6 +31,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="r_p_xiaonangua" width="110" height="110"/>
+        <image name="r_p_xiaonangua" width="150" height="150"/>
     </resources>
 </document>

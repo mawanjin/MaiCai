@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MCMarketIndexVegetablePriceCell : UICollectionViewCell
+@interface MCMarketIndexQuickOrderCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
