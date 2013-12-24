@@ -17,4 +17,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *quantityLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *line;
 
+- (IBAction)chooseBtnAction:(id)sender;
+
 @end
