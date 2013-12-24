@@ -15,7 +15,7 @@
 @property NSMutableArray* recipes;
 @property (weak, nonatomic) IBOutlet UICollectionView *newsCollectionView;
 @property (weak, nonatomic) IBOutlet UICollectionView *categoryCollectionView;
-@property (weak, nonatomic) IBOutlet UICollectionView *vegetablePriceCollectionView;
+@property (weak, nonatomic) IBOutlet UICollectionView *quickOrderCollectionView;
 @property (weak, nonatomic) IBOutlet UIPageControl *newsPageControl;
 @property (weak, nonatomic) IBOutlet UIPageControl *vegetablePricePageControl;
 @property (weak, nonatomic) IBOutlet UIView *newsView;

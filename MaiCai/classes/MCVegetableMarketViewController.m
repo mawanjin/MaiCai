@@ -20,6 +20,9 @@
 #import "HMSegmentedControl.h"
 #import "MCSearchViewController.h"
 #import "MCTipsHeader.h"
+#import "MCNetwork.h"
+#import "MCQuickOrderViewController.h"
+#import "MCRecipe.h"
 
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 
@@ -67,9 +70,9 @@
 {
     [super viewDidAppear:animated];
     if(IS_IPHONE_5){
-        self.scrollView.contentSize = CGSizeMake(320, self.newsView.frame.size.height+self.vegetablePriceCollectionView.frame.size.height+self.categoryCollectionView.frame.size.height+self.tableView.frame.size.height+40);
+        self.scrollView.contentSize = CGSizeMake(320, self.newsView.frame.size.height+self.quickOrderCollectionView.frame.size.height+self.categoryCollectionView.frame.size.height+self.tableView.frame.size.height+40);
     }else{
-        self.scrollView.contentSize = CGSizeMake(320, self.newsView.frame.size.height+self.vegetablePriceCollectionView.frame.size.height+self.categoryCollectionView.frame.size.height+self.tableView.frame.size.height+140);
+        self.scrollView.contentSize = CGSizeMake(320, self.newsView.frame.size.height+self.quickOrderCollectionView.frame.size.height+self.categoryCollectionView.frame.size.height+self.tableView.frame.size.height+140);
     }
     //注意这里scrollview不能滚动的原因是因为 MBProgressbar与toast需要在scrollview里面创建
     self.scrollView.scrollEnabled = YES;
@@ -92,7 +95,7 @@
         @finally {
             dispatch_async(dispatch_get_main_queue(), ^{
               [MBProgressHUD hideHUDForView:self.scrollView animated:YES];
-                [self.vegetablePriceCollectionView reloadData];
+                [self.quickOrderCollectionView reloadData];
                 self.vegetablePricePageControl.numberOfPages = (self.recipes.count%6 ==0)?self.recipes.count/6:(self.recipes.count/6+1);
             });
         }
@@ -157,9 +160,9 @@
     if([view.restorationIdentifier isEqualToString:@"newsCollectionView"]){
         CGFloat pageWidth = self.newsCollectionView.frame.size.width;
         self.newsPageControl.currentPage = self.newsCollectionView.contentOffset.x / pageWidth;
-    }else if([view.restorationIdentifier isEqualToString:@"vegetablePriceCollectionView"]){
-        CGFloat pageWidth = self.vegetablePriceCollectionView.frame.size.width-10;
-        self.vegetablePricePageControl.currentPage = self.vegetablePriceCollectionView.contentOffset.x / pageWidth;
+    }else if([view.restorationIdentifier isEqualToString:@"quickOrderCollectionView"]){
+        CGFloat pageWidth = self.quickOrderCollectionView.frame.size.width-10;
+        self.vegetablePricePageControl.currentPage = self.quickOrderCollectionView.contentOffset.x / pageWidth;
     }
 }
 
@@ -169,7 +172,7 @@
 {
     if([collectionView.restorationIdentifier isEqualToString:@"categoryCollectionView"]){
         return 1;
-    }else if([collectionView.restorationIdentifier isEqualToString:@"vegetablePriceCollectionView"]){
+    }else if([collectionView.restorationIdentifier isEqualToString:@"quickOrderCollectionView"]){
         return 1;
     }
     return 1;
@@ -181,8 +184,8 @@
 {
     if([collectionView.restorationIdentifier isEqualToString:@"categoryCollectionView"]){
         return 6;
-    }else if([collectionView.restorationIdentifier isEqualToString:@"vegetablePriceCollectionView"]){
-        return 18;
+    }else if([collectionView.restorationIdentifier isEqualToString:@"quickOrderCollectionView"]){
+        return self.recipes.count;
     }
     return 1;
     
@@ -217,15 +220,21 @@
             cell.nameLabel.text = @"米面杂粮";
             cell.imageIcon.image = [UIImage imageNamed:@"c_shucai"];
         }
-    }else if([collectionView.restorationIdentifier isEqualToString:@"vegetablePriceCollectionView"]){
+    }else if([collectionView.restorationIdentifier isEqualToString:@"quickOrderCollectionView"]){
         myCell = [collectionView
-                  dequeueReusableCellWithReuseIdentifier:@"vegetablePriceCollectionCell"
+                  dequeueReusableCellWithReuseIdentifier:@"quickOrderCollectionCell"
                   forIndexPath:indexPath];
         MCMarketIndexQuickOrderCell* cell = (MCMarketIndexQuickOrderCell*)myCell;
-        NSMutableArray* vegetables = self.data[@"prices"];
-        MCVegetable* vegetable = vegetables[indexPath.row];
-        cell.nameLabel.text = vegetable.name;
-        cell.priceLabel.text = [[NSString alloc]initWithFormat:@"￥%.02f/%@",vegetable.price,vegetable.unit];
+        MCRecipe* obj = self.recipes[indexPath.row];
+        cell.label.text = obj.name;
+        NSString* source = [[NSString alloc]initWithFormat:@"http://61.172.243.70:1980/test/step%d.png",(indexPath.row+1)];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            UIImage* image = [[MCNetwork getInstance]loadImageFromSource:source];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                cell.image.image = image;
+            });
+        });
+ 
     }
     return myCell;
 }
@@ -239,11 +248,9 @@
         [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
             
         }];
-    }else if([collectionView.restorationIdentifier isEqualToString:@"vegetablePriceCollectionView"]){
-        NSMutableArray* vegetables = self.data[@"prices"];
-        MCVegetable* vegetable = vegetables[indexPath.row];
-        MCVegetableDetailViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCVegetableDetailViewController"];
-        vc.vegetable = vegetable;
+    }else if([collectionView.restorationIdentifier isEqualToString:@"quickOrderCollectionView"]){
+       MCRecipe* object = self.recipes[indexPath.row];
+        MCQuickOrderViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCQuickOrderViewController"];
         [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
             
         }];

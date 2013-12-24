@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface MCMarketIndexQuickOrderCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *image;
+@property (weak, nonatomic) IBOutlet UILabel *label;
 
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @end

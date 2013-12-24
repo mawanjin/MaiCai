@@ -60,6 +60,7 @@ bool flag = false;
             [MBProgressHUD hideHUDForView:self.view animated:YES];
         });
     });
+    [self.searchDisplayController.searchResultsTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -89,7 +90,7 @@ bool flag = false;
         if(!flag) {
             return self.suggestData.count;
         }else {
-            return self.filterData.count;
+            return self.filterData.count+1;
         }
     } else {
         return self.hotWords.count;
@@ -110,24 +111,30 @@ bool flag = false;
             cell = hotCell;
         }else{
             //搜索结果
-            NSDictionary* obj = self.filterData[indexPath.row];
-            MCSearchResultCell* resultCell = [self.tableView dequeueReusableCellWithIdentifier:@"searchResultCell"];
-            if([obj[@"type"]integerValue] == 2) {
-                NSDictionary* dic = [[MCVegetableManager getInstance]getRelationshipBetweenProductAndImage];
-                NSString* product_id =[[NSString alloc]initWithFormat:@"%d",[obj[@"image"]integerValue]];
-                NSString* imageName = dic[product_id];
-                resultCell.image.image = [UIImage imageNamed:imageName];
-            }else {
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    UIImage* image = [[MCNetwork getInstance]loadImageFromSource:obj[@"image"]];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        resultCell.image.image = image;
+            if(indexPath.row != self.filterData.count) {
+                NSDictionary* obj = self.filterData[indexPath.row];
+                MCSearchResultCell* resultCell = [self.tableView dequeueReusableCellWithIdentifier:@"searchResultCell"];
+                if([obj[@"type"]integerValue] == 2) {
+                    NSDictionary* dic = [[MCVegetableManager getInstance]getRelationshipBetweenProductAndImage];
+                    NSString* product_id =[[NSString alloc]initWithFormat:@"%d",[obj[@"image"]integerValue]];
+                    NSString* imageName = dic[product_id];
+                    resultCell.image.image = [UIImage imageNamed:imageName];
+                }else {
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                        UIImage* image = [[MCNetwork getInstance]loadImageFromSource:obj[@"image"]];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            resultCell.image.image = image;
+                        });
                     });
-                });
+                }
+                
+                resultCell.label.text = obj[@"name"];
+                cell = resultCell;
+
+            }else {
+                cell = [self.tableView dequeueReusableCellWithIdentifier:@"loadMoreCell"];
             }
             
-            resultCell.label.text = obj[@"name"];
-            cell = resultCell;
         }
         
     } else {
@@ -151,17 +158,20 @@ bool flag = false;
             [self.searchDisplayController.searchBar resignFirstResponder];
         }else{
             //搜索结果
-            NSDictionary* obj = self.filterData[indexPath.row];
-            if([obj[@"type"]integerValue] == 2 ) {
-                MCVegetableDetailViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCVegetableDetailViewController"];
-                MCVegetable* temp = [[MCVegetable alloc]init];
-                temp.id = [obj[@"id"]integerValue];
-                temp.product_id = [obj[@"image"]integerValue];
-                vc.vegetable = temp;
-                [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
-                    
-                }];
+            if(indexPath.row != self.filterData.count) {
+                NSDictionary* obj = self.filterData[indexPath.row];
+                if([obj[@"type"]integerValue] == 2 ) {
+                    MCVegetableDetailViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCVegetableDetailViewController"];
+                    MCVegetable* temp = [[MCVegetable alloc]init];
+                    temp.id = [obj[@"id"]integerValue];
+                    temp.product_id = [obj[@"image"]integerValue];
+                    vc.vegetable = temp;
+                    [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
+                        
+                    }];
 
+                }
+            }else {
             }
         }
     } else {

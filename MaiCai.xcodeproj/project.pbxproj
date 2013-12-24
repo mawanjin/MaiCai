@@ -103,6 +103,9 @@
 		04BFBCFF1868111E0085F39F /* NSDictionary+MCJsonString.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BFBCFE1868111E0085F39F /* NSDictionary+MCJsonString.m */; };
 		04BFBD021868116F0085F39F /* NSArray+MCJsonString.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BFBD011868116F0085F39F /* NSArray+MCJsonString.m */; };
 		04C3733E182A1E9500B01341 /* MCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C3733D182A1E9500B01341 /* MCLoginViewController.m */; };
+		04C9732E186928D200138DB8 /* MCQuickOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C9732D186928D200138DB8 /* MCQuickOrderCell.m */; };
+		04C973311869297A00138DB8 /* MCQuickOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C973301869297A00138DB8 /* MCQuickOrderViewController.m */; };
+		04C9733418692D5400138DB8 /* MCRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C9733318692D5400138DB8 /* MCRecipe.m */; };
 		04D230A7182B357E00D4B4AC /* MCBaseNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D230A6182B357E00D4B4AC /* MCBaseNavViewController.m */; };
 		04D230D5182B883E00D4B4AC /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D230B1182B883E00D4B4AC /* MBProgressHUD.m */; };
 		04D230DC182B883E00D4B4AC /* MCNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D230C0182B883E00D4B4AC /* MCNetwork.m */; };
@@ -314,6 +317,12 @@
 		04BFBD011868116F0085F39F /* NSArray+MCJsonString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+MCJsonString.m"; sourceTree = "<group>"; };
 		04C3733C182A1E9500B01341 /* MCLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCLoginViewController.h; sourceTree = "<group>"; };
 		04C3733D182A1E9500B01341 /* MCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCLoginViewController.m; sourceTree = "<group>"; };
+		04C9732C186928D200138DB8 /* MCQuickOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCQuickOrderCell.h; sourceTree = "<group>"; };
+		04C9732D186928D200138DB8 /* MCQuickOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCQuickOrderCell.m; sourceTree = "<group>"; };
+		04C9732F1869297A00138DB8 /* MCQuickOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCQuickOrderViewController.h; sourceTree = "<group>"; };
+		04C973301869297A00138DB8 /* MCQuickOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCQuickOrderViewController.m; sourceTree = "<group>"; };
+		04C9733218692D5400138DB8 /* MCRecipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCRecipe.h; sourceTree = "<group>"; };
+		04C9733318692D5400138DB8 /* MCRecipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCRecipe.m; sourceTree = "<group>"; };
 		04D230A5182B357E00D4B4AC /* MCBaseNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCBaseNavViewController.h; sourceTree = "<group>"; };
 		04D230A6182B357E00D4B4AC /* MCBaseNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCBaseNavViewController.m; sourceTree = "<group>"; };
 		04D230B0182B883E00D4B4AC /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -524,6 +533,8 @@
 				042F253418616A64006783C2 /* MCFeedbackViewController.m */,
 				0423D3911862CB6100F08F1E /* MCSearchViewController.h */,
 				0423D3921862CB6100F08F1E /* MCSearchViewController.m */,
+				04C9732F1869297A00138DB8 /* MCQuickOrderViewController.h */,
+				04C973301869297A00138DB8 /* MCQuickOrderViewController.m */,
 			);
 			path = classes;
 			sourceTree = "<group>";
@@ -682,6 +693,8 @@
 				0497B80C1839FD40008A6F8B /* MCUser.m */,
 				04DAF4D8184584E3009C7720 /* MCOrder.h */,
 				04DAF4D9184584E3009C7720 /* MCOrder.m */,
+				04C9733218692D5400138DB8 /* MCRecipe.h */,
+				04C9733318692D5400138DB8 /* MCRecipe.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -762,6 +775,8 @@
 				04BFBCF31867D9D60085F39F /* MCTipsHeader.h */,
 				04BFBCF41867D9D60085F39F /* MCTipsHeader.m */,
 				04BFBCF61867D9F10085F39F /* MCTipsHeader.xib */,
+				04C9732C186928D200138DB8 /* MCQuickOrderCell.h */,
+				04C9732D186928D200138DB8 /* MCQuickOrderCell.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -965,6 +980,7 @@
 				04DAF4BB1841A369009C7720 /* MCOrderConfirmViewController.m in Sources */,
 				04DAF4E61845DD9C009C7720 /* MCOrderDetailFooter.m in Sources */,
 				044BC9B118308CB200D43115 /* MCNewMineAddressViewController.m in Sources */,
+				04C9732E186928D200138DB8 /* MCQuickOrderCell.m in Sources */,
 				0497B8101839FF1D008A6F8B /* MCDBManger.m in Sources */,
 				04B98D8B18331D680018F84E /* MCShop.m in Sources */,
 				04F05A20185FE5F100BB25C6 /* MCCookStepCell.m in Sources */,
@@ -992,6 +1008,7 @@
 				04BFBD021868116F0085F39F /* NSArray+MCJsonString.m in Sources */,
 				0497B813183A012B008A6F8B /* MCUserManager.m in Sources */,
 				04F05A15185EE08700BB25C6 /* AFHTTPRequestOperation.m in Sources */,
+				04C9733418692D5400138DB8 /* MCRecipe.m in Sources */,
 				0406991C18500C50006F615C /* MCMarketTradeCell.m in Sources */,
 				0489951F181A115100E1B156 /* MCAppDelegate.m in Sources */,
 				046E99C718261F6D0005FB53 /* MCBaseViewController.m in Sources */,
@@ -1020,6 +1037,7 @@
 				0497B8061839EEBE008A6F8B /* FMDatabase.m in Sources */,
 				0437A4971847491A000D427B /* NSString+SBJSON.m in Sources */,
 				047390BD183C51AE003F443D /* Toast+UIView.m in Sources */,
+				04C973311869297A00138DB8 /* MCQuickOrderViewController.m in Sources */,
 				0437A4941847491A000D427B /* AlixPayResult.m in Sources */,
 				0467B7FC184ED7AB005A72F0 /* MCMarketIndexQuickOrderCell.m in Sources */,
 				04F05A1D185EE08700BB25C6 /* AFURLSessionManager.m in Sources */,

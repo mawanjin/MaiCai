@@ -13,6 +13,7 @@
 #import "MCVegetable.h"
 #import "MCCategory.h"
 #import "MCContextManager.h"
+#import "MCRecipe.h"
 
 @implementation MCVegetableManager
 static MCVegetableManager* instance;
@@ -75,7 +76,7 @@ static NSMutableDictionary* relationship;
     NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithDictionary:@{
                                                                                   
                                                                                    }];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/public/recipe/index.do" Params:params];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/public/recipe/list.do" Params:params];
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
@@ -84,7 +85,19 @@ static NSMutableDictionary* relationship;
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
-    return responseData[@"data"];
+    
+    NSMutableArray* recipes = [[NSMutableArray alloc]init];
+    NSArray* data = responseData[@"data"];
+    for(int i=0;i<data.count;i++) {
+        MCRecipe* recipe = [[MCRecipe alloc]init];
+        recipe.id = [data[i][@"id"]integerValue];
+        recipe.name = data[i][@"name"];
+        recipe.image = data[i][@"image"];
+        recipe.introduction = data[i][@"introduction"];
+        recipe.tags = data[i][@"tags"];
+        [recipes addObject:recipe];
+    }
+    return recipes;
 }
 
 
