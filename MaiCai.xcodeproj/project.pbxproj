@@ -106,6 +106,8 @@
 		04C9732E186928D200138DB8 /* MCQuickOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C9732D186928D200138DB8 /* MCQuickOrderCell.m */; };
 		04C973311869297A00138DB8 /* MCQuickOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C973301869297A00138DB8 /* MCQuickOrderViewController.m */; };
 		04C9733418692D5400138DB8 /* MCRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C9733318692D5400138DB8 /* MCRecipe.m */; };
+		04C97337186962F400138DB8 /* MCQuickOrderHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C97336186962F400138DB8 /* MCQuickOrderHeader.m */; };
+		04C973391869633100138DB8 /* MCQuickOrderHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C973381869633100138DB8 /* MCQuickOrderHeader.xib */; };
 		04D230A7182B357E00D4B4AC /* MCBaseNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D230A6182B357E00D4B4AC /* MCBaseNavViewController.m */; };
 		04D230D5182B883E00D4B4AC /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D230B1182B883E00D4B4AC /* MBProgressHUD.m */; };
 		04D230DC182B883E00D4B4AC /* MCNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D230C0182B883E00D4B4AC /* MCNetwork.m */; };
@@ -323,6 +325,9 @@
 		04C973301869297A00138DB8 /* MCQuickOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCQuickOrderViewController.m; sourceTree = "<group>"; };
 		04C9733218692D5400138DB8 /* MCRecipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCRecipe.h; sourceTree = "<group>"; };
 		04C9733318692D5400138DB8 /* MCRecipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCRecipe.m; sourceTree = "<group>"; };
+		04C97335186962F300138DB8 /* MCQuickOrderHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCQuickOrderHeader.h; sourceTree = "<group>"; };
+		04C97336186962F400138DB8 /* MCQuickOrderHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCQuickOrderHeader.m; sourceTree = "<group>"; };
+		04C973381869633100138DB8 /* MCQuickOrderHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCQuickOrderHeader.xib; sourceTree = "<group>"; };
 		04D230A5182B357E00D4B4AC /* MCBaseNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCBaseNavViewController.h; sourceTree = "<group>"; };
 		04D230A6182B357E00D4B4AC /* MCBaseNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCBaseNavViewController.m; sourceTree = "<group>"; };
 		04D230B0182B883E00D4B4AC /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -777,6 +782,9 @@
 				04BFBCF61867D9F10085F39F /* MCTipsHeader.xib */,
 				04C9732C186928D200138DB8 /* MCQuickOrderCell.h */,
 				04C9732D186928D200138DB8 /* MCQuickOrderCell.m */,
+				04C97335186962F300138DB8 /* MCQuickOrderHeader.h */,
+				04C97336186962F400138DB8 /* MCQuickOrderHeader.m */,
+				04C973381869633100138DB8 /* MCQuickOrderHeader.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -939,6 +947,7 @@
 				04DAF4C01842D9EA009C7720 /* MCOrderConfirmHeader.xib in Resources */,
 				04BFBCF71867D9F10085F39F /* MCTipsHeader.xib in Resources */,
 				0464C99D182F7074009066C3 /* MCCartConfirmPopupView.xib in Resources */,
+				04C973391869633100138DB8 /* MCQuickOrderHeader.xib in Resources */,
 				04F05A00185ECF4C00BB25C6 /* MCCookBookDetailHeader.xib in Resources */,
 				04BEB3121859685800A5D39F /* MCOrderDetailHeader.xib in Resources */,
 				0497B7F11838C531008A6F8B /* MCCartHeader.xib in Resources */,
@@ -1036,6 +1045,7 @@
 				0497B80D1839FD40008A6F8B /* MCUser.m in Sources */,
 				0497B8061839EEBE008A6F8B /* FMDatabase.m in Sources */,
 				0437A4971847491A000D427B /* NSString+SBJSON.m in Sources */,
+				04C97337186962F400138DB8 /* MCQuickOrderHeader.m in Sources */,
 				047390BD183C51AE003F443D /* Toast+UIView.m in Sources */,
 				04C973311869297A00138DB8 /* MCQuickOrderViewController.m in Sources */,
 				0437A4941847491A000D427B /* AlixPayResult.m in Sources */,

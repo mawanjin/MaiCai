@@ -100,6 +100,58 @@ static NSMutableDictionary* relationship;
     return recipes;
 }
 
+-(MCRecipe*)getRecipeById:(int)id
+{
+    NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithDictionary:@{
+                                                                                   @"id":[[NSString alloc]initWithFormat:@"%d",id]
+                                                                                   }];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/public/recipe/buy.do" Params:params];
+    NSError *error;
+    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
+    
+    BOOL flag = [responseData[@"success"]boolValue];
+    NSLog([[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    if(!flag) {
+        @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
+    }
+    NSDictionary* data = responseData[@"data"];
+    MCRecipe* recipe = [[MCRecipe alloc]init];
+    recipe.id = [data[@"id"]integerValue];
+    recipe.name = data[@"name"];
+    recipe.bigImage = data[@"big_image"];
+    recipe.introduction = data[@"introduction"];
+    
+    NSArray* mainIngredients_ = data[@"main_ingredients"];
+    NSMutableArray* mainIngredients = [[NSMutableArray alloc]init];
+    for(int i=0;i<mainIngredients_.count;i++){
+        MCVegetable* vegetable = [[MCVegetable alloc]init];
+        vegetable.id = [mainIngredients_[i][@"id"]integerValue];
+        vegetable.name = mainIngredients_[i][@"name"];
+        vegetable.product_id = [mainIngredients_[i][@"product_id"]integerValue];
+        vegetable.dosage = mainIngredients_[i][@"dosage"];
+        vegetable.price = [mainIngredients_[i][@"price"]floatValue];
+        vegetable.unit = mainIngredients_[i][@"unit"];
+        [mainIngredients addObject:vegetable];
+    }
+    recipe.mainIngredients = mainIngredients;
+    
+    NSArray* accessoryIngredients_ = data[@"accessory_ingredients"];
+    NSMutableArray* accessoryIngredients = [[NSMutableArray alloc]init];
+    for(int i=0;i<accessoryIngredients_.count;i++){
+        MCVegetable* vegetable = [[MCVegetable alloc]init];
+        vegetable.id = [accessoryIngredients_[i][@"id"]integerValue];
+        vegetable.name = accessoryIngredients_[i][@"name"];
+        vegetable.product_id = [accessoryIngredients_[i][@"product_id"]integerValue];
+        vegetable.dosage = accessoryIngredients_[i][@"dosage"];
+        vegetable.price = [accessoryIngredients_[i][@"price"]floatValue];
+        vegetable.unit = accessoryIngredients_[i][@"unit"];
+        [accessoryIngredients addObject:vegetable];
+    }
+    recipe.accessoryIngredients = accessoryIngredients;
+    
+    return recipe;
+}
+
 
 -(NSMutableArray*)getSuggestResultByKeywords:(NSString*)words Quantity:(int)quantity
 {

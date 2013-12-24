@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@class MCRecipe;
 
 @interface MCVegetableManager : NSObject
 +(MCVegetableManager*)getInstance;
@@ -19,4 +20,6 @@
 -(NSMutableArray*)getSearchResultByKeywords:(NSString*)words Quantity:(int)quantity;
 -(NSMutableArray*)getSuggestResultByKeywords:(NSString*)words Quantity:(int)quantity;
 -(NSMutableArray*)getRecipes;
+//这是一键买菜接口
+-(MCRecipe*)getRecipeById:(int)id;
 @end

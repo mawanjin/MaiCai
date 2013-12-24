@@ -17,6 +17,7 @@
 @property  float price;
 @property  MCShop* shop;
 @property  NSString* unit;
+@property  NSString* dosage;
 @property  unsigned int quantity;
 @property BOOL isSelected;
 @end

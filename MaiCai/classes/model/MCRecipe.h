@@ -15,4 +15,6 @@
 @property NSString* bigImage;
 @property NSString* introduction;
 @property NSString* tags;
+@property NSMutableArray* mainIngredients;
+@property NSMutableArray* accessoryIngredients;
 @end

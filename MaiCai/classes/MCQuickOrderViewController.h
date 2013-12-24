@@ -11,5 +11,6 @@
 @class MCRecipe;
 
 @interface MCQuickOrderViewController : MCBaseNavViewController<UITableViewDataSource,UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property MCRecipe* recipe;
 @end

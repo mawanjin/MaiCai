@@ -251,6 +251,7 @@
     }else if([collectionView.restorationIdentifier isEqualToString:@"quickOrderCollectionView"]){
        MCRecipe* object = self.recipes[indexPath.row];
         MCQuickOrderViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCQuickOrderViewController"];
+        vc.recipe = object;
         [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
             
         }];

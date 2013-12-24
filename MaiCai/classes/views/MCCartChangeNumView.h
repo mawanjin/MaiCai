@@ -8,13 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "UIViewController+CWPopup.h"
-@class MCMineCartViewController;
 @class MCVegetable;
 
 
 @interface MCCartChangeNumView :UIViewController
 - (IBAction)cancelBtnAction:(UIButton *)sender;
-@property  MCMineCartViewController* previousView;
+@property  UIViewController* previousView;
 @property  NSIndexPath* indexPath;
 @property  MCVegetable* vegetable;
 @property (weak, nonatomic) IBOutlet UIButton *plusBtn;
