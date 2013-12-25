@@ -15,6 +15,8 @@
 @property NSString* bigImage;
 @property NSString* introduction;
 @property NSString* tags;
+@property BOOL isMainIngredientsAllSelected;
+@property BOOL isAccessoryIngredientsAllSelected;
 @property NSMutableArray* mainIngredients;
 @property NSMutableArray* accessoryIngredients;
 @end

@@ -124,6 +124,7 @@
                     ((MCMineCartViewController*)self.previousView).data = [[MCTradeManager getInstance]getCartProductsOnlineByUserId:user.userId];
                 }else if([self.previousView isKindOfClass:[MCQuickOrderViewController class]]) {
                     //如果是MCQuickOrderViewController
+                    [(MCQuickOrderViewController*)self.previousView resetTotalChooseBtn];
                 }
             }else {
                 if([self.previousView isKindOfClass:[MCMineCartViewController class]]) {
@@ -134,6 +135,7 @@
 
                 }else if([self.previousView isKindOfClass:[MCQuickOrderViewController class]]) {
                     //如果是MCQuickOrderViewController
+                     [(MCQuickOrderViewController*)self.previousView resetTotalChooseBtn];
                 }
             }
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -144,6 +146,7 @@
                             [ ((MCMineCartViewController*)self.previousView).tableView reloadData];
                         }else if([self.previousView isKindOfClass:[MCQuickOrderViewController class]]) {
                             //如果是MCQuickOrderViewController
+                             [(MCQuickOrderViewController*)self.previousView resetTotalChooseBtn];
                             [ ((MCQuickOrderViewController*)self.previousView).tableView reloadData];
 
                         }

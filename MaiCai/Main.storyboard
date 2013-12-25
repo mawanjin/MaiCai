@@ -2036,6 +2036,9 @@
                                         <state key="normal" backgroundImage="cart_choose_btn_normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="totalChooseAction:" destination="mhx-V8-rCH" eventType="touchUpInside" id="RmU-tc-EVC"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DP5-cd-B3w">
                                         <rect key="frame" x="226" y="0.0" width="94" height="47"/>
@@ -2062,6 +2065,8 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="tableView" destination="IyW-VD-440" id="4WI-V2-Kt9"/>
+                        <outlet property="totalChooseBtn" destination="9LU-8C-0Lf" id="PZt-hw-Nqh"/>
+                        <outlet property="totalPriceLabel" destination="hcj-4h-dAg" id="hvx-df-nSY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E1j-Yn-XJj" userLabel="First Responder" sceneMemberID="firstResponder"/>

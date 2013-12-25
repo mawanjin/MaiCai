@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+@class MCQuickOrderViewController;
 
 @interface MCQuickOrderHeader : UIView
+
+@property int section;
 @property (weak, nonatomic) IBOutlet UIButton *chooseBtn;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property UIViewController* parentViewController;
+@property MCQuickOrderViewController* parentView;
 +(id)initInstance;
+- (IBAction)chooseBtnClickAction:(UIButton *)sender;
 @end
