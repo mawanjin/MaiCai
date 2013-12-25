@@ -30,8 +30,9 @@ typedef enum
 -(void)changeProductNumInCartByUserId:(NSString*)id ProductId:(int)productId Quantity:(int)quantity;
 -(NSMutableArray*)getCartProductsOnlineByUserId:(NSString*)id;
 
--(void)addProductToCartOnlineByUserId:(NSString *)id Products:(NSArray*)products;
--(void)addProductToCartByUserId:(NSString *)id Products:(NSArray*)products;
+-(void)addProductToCartOnlineByUserId:(NSString *)id Products:(NSArray*)products Recipe:(NSDictionary*)recipe;
+
+-(void)addProductToCartByUserId:(NSString *)id Products:(NSArray*)products Recipe:(NSDictionary*)recipe;
 
 -(int)getProductsNumInCartOnlineByUserId:(NSString*)id;
 -(void)deleteProductsInCartOnlineByUserId:(NSString*)id ProductIds:(NSMutableArray*)productIds;

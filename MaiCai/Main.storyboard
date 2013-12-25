@@ -2047,6 +2047,9 @@
                                         <state key="normal" title="一键买菜">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="addCartAction:" destination="mhx-V8-rCH" eventType="touchUpInside" id="hLU-rz-yBh"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="总价：0.00元" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcj-4h-dAg">
                                         <rect key="frame" x="58" y="13" width="124" height="21"/>

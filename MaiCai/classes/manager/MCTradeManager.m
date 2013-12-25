@@ -18,6 +18,7 @@
 #import "MCContextManager.h"
 #import "NSDictionary+MCJsonString.h"
 #import "NSArray+MCJsonString.h"
+#import "MCRecipe.h"
 
 @implementation MCTradeManager
 
@@ -52,6 +53,7 @@ static MCTradeManager* instance;
             NSArray* shops = obj[@"tenants"];
             unsigned int i=0;
             unsigned int j=0;
+            unsigned int z=0;
             for(i=0;i<shops.count;i++) {
                 NSDictionary* shop = shops[i];
                 MCShop* temp = [[MCShop alloc]init];
@@ -71,6 +73,18 @@ static MCTradeManager* instance;
                     vegetable.price = [product[@"price"]floatValue];
                     vegetable.unit = product[@"unit"];
                     vegetable.quantity = [product[@"quantity"]integerValue];
+                    NSArray* recipes_ = product[@"recipes"];
+                    NSMutableArray* recipes = [[NSMutableArray alloc]init];
+                    for(z=0;z<recipes_.count;z++) {
+                        NSDictionary* recipe_ = recipes[z];
+                        MCRecipe* recipe = [[MCRecipe alloc]init];
+                        recipe.id = [recipe_[@"id"]integerValue];
+                        recipe.name = recipe_[@"name"];
+                        recipe.image = recipe_[@"image"];
+                        recipe.dosage = recipe_[@"dosage"];
+                        [recipes addObject:recipe];
+                    }
+                    vegetable.recipes = recipes;
                     [vegetables addObject:vegetable];
                 }
                 temp.vegetables = vegetables;
@@ -136,12 +150,22 @@ static MCTradeManager* instance;
 }
 
 
--(void)addProductToCartByUserId:(NSString *)id Products:(NSArray*)products
+-(void)addProductToCartByUserId:(NSString *)id Products:(NSArray*)products Recipe:(NSDictionary*)recipe
 {
-    NSDictionary* dic = @{
-                          @"customer_id":id,
-                          @"products":products
-                          };
+    NSDictionary* dic = nil;
+    if(recipe == nil) {
+        dic = @{
+                  @"customer_id":id,
+                  @"products":products
+               };
+    }else {
+        dic = @{
+                  @"customer_id":id,
+                  @"products":products,
+                  @"recipe":recipe
+               };
+    }
+   
     NSString* param = [dic jsonStringWithPrettyPrint:NO];
     NSDictionary* params = @{
                              @"param":param
@@ -155,17 +179,28 @@ static MCTradeManager* instance;
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
-
 }
 
--(void)addProductToCartOnlineByUserId:(NSString *)id Products:(NSArray*)products;
+
+
+-(void)addProductToCartOnlineByUserId:(NSString *)id Products:(NSArray*)products Recipe:(NSDictionary*)recipe
 {
    
    
-    NSDictionary* dic = @{
-                          @"customer_id":id,
-                          @"products":products
-                          };
+    NSDictionary* dic = nil;
+    if(recipe == nil) {
+        dic = @{
+                @"customer_id":id,
+                @"products":products
+                };
+    }else {
+        dic = @{
+                @"customer_id":id,
+                @"products":products,
+                @"recipe":recipe
+                };
+    }
+    
     NSString* param = [dic jsonStringWithPrettyPrint:NO];
     
     NSString* sign = [@"/api/ios/v1/private/cart/save.dodhfuewjcuehiudjuwdwyfcs" stringFromMD5];
@@ -182,8 +217,6 @@ static MCTradeManager* instance;
         
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
-
-
 }
 
 

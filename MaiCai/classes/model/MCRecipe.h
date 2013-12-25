@@ -14,6 +14,7 @@
 @property NSString* image;
 @property NSString* bigImage;
 @property NSString* introduction;
+@property NSString* dosage;
 @property NSString* tags;
 @property BOOL isMainIngredientsAllSelected;
 @property BOOL isAccessoryIngredientsAllSelected;

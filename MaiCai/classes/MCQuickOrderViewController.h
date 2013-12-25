@@ -20,4 +20,5 @@
 -(void)dispLayTotalChoosedBtn;
 - (IBAction)totalChooseAction:(id)sender;
 -(void)resetTotalChooseBtn;
+- (IBAction)addCartAction:(id)sender;
 @end

@@ -108,6 +108,8 @@
 		04C9733418692D5400138DB8 /* MCRecipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C9733318692D5400138DB8 /* MCRecipe.m */; };
 		04C97337186962F400138DB8 /* MCQuickOrderHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C97336186962F400138DB8 /* MCQuickOrderHeader.m */; };
 		04C973391869633100138DB8 /* MCQuickOrderHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C973381869633100138DB8 /* MCQuickOrderHeader.xib */; };
+		04C9733B186A6EF600138DB8 /* MCQuickOrderTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C9733A186A6EF600138DB8 /* MCQuickOrderTableHeader.xib */; };
+		04C9733E186A6F1700138DB8 /* MCQuickOrderTableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C9733D186A6F1700138DB8 /* MCQuickOrderTableHeader.m */; };
 		04D230A7182B357E00D4B4AC /* MCBaseNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D230A6182B357E00D4B4AC /* MCBaseNavViewController.m */; };
 		04D230D5182B883E00D4B4AC /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D230B1182B883E00D4B4AC /* MBProgressHUD.m */; };
 		04D230DC182B883E00D4B4AC /* MCNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D230C0182B883E00D4B4AC /* MCNetwork.m */; };
@@ -328,6 +330,9 @@
 		04C97335186962F300138DB8 /* MCQuickOrderHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCQuickOrderHeader.h; sourceTree = "<group>"; };
 		04C97336186962F400138DB8 /* MCQuickOrderHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCQuickOrderHeader.m; sourceTree = "<group>"; };
 		04C973381869633100138DB8 /* MCQuickOrderHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCQuickOrderHeader.xib; sourceTree = "<group>"; };
+		04C9733A186A6EF600138DB8 /* MCQuickOrderTableHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCQuickOrderTableHeader.xib; sourceTree = "<group>"; };
+		04C9733C186A6F1700138DB8 /* MCQuickOrderTableHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCQuickOrderTableHeader.h; sourceTree = "<group>"; };
+		04C9733D186A6F1700138DB8 /* MCQuickOrderTableHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCQuickOrderTableHeader.m; sourceTree = "<group>"; };
 		04D230A5182B357E00D4B4AC /* MCBaseNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCBaseNavViewController.h; sourceTree = "<group>"; };
 		04D230A6182B357E00D4B4AC /* MCBaseNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCBaseNavViewController.m; sourceTree = "<group>"; };
 		04D230B0182B883E00D4B4AC /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -785,6 +790,9 @@
 				04C97335186962F300138DB8 /* MCQuickOrderHeader.h */,
 				04C97336186962F400138DB8 /* MCQuickOrderHeader.m */,
 				04C973381869633100138DB8 /* MCQuickOrderHeader.xib */,
+				04C9733A186A6EF600138DB8 /* MCQuickOrderTableHeader.xib */,
+				04C9733C186A6F1700138DB8 /* MCQuickOrderTableHeader.h */,
+				04C9733D186A6F1700138DB8 /* MCQuickOrderTableHeader.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -943,6 +951,7 @@
 				044BC9AE183083DC00D43115 /* Main.storyboard in Resources */,
 				0437A4901847491A000D427B /* Alixpay.bundle in Resources */,
 				04DAF4D418442C1A009C7720 /* MCOrderConfirmFooter.xib in Resources */,
+				04C9733B186A6EF600138DB8 /* MCQuickOrderTableHeader.xib in Resources */,
 				048445CD183DF42D006F4090 /* MCChangePasswordView.xib in Resources */,
 				04DAF4C01842D9EA009C7720 /* MCOrderConfirmHeader.xib in Resources */,
 				04BFBCF71867D9F10085F39F /* MCTipsHeader.xib in Resources */,
@@ -1010,6 +1019,7 @@
 				0437A4991847491A000D427B /* SBJsonBase.m in Sources */,
 				0437A4961847491A000D427B /* NSObject+SBJSON.m in Sources */,
 				04B990BB18346D060018F84E /* MCCategory.m in Sources */,
+				04C9733E186A6F1700138DB8 /* MCQuickOrderTableHeader.m in Sources */,
 				04DAF4E31845D77D009C7720 /* MCOrderDetailCell.m in Sources */,
 				04F05A1A185EE08700BB25C6 /* AFURLConnectionOperation.m in Sources */,
 				0437A4981847491A000D427B /* SBJSON.m in Sources */,

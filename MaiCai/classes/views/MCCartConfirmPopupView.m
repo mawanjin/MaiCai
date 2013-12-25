@@ -95,7 +95,7 @@
                                           @"id":[[NSNumber alloc]initWithInt:self.vegetable.shop_product_id],
                                           @"quantity":[[NSNumber alloc]initWithInt:self.vegetable.quantity]
                                           }];
-                [[MCTradeManager getInstance]addProductToCartOnlineByUserId:user.userId Products:products];
+                [[MCTradeManager getInstance]addProductToCartOnlineByUserId:user.userId Products:products Recipe:nil];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (self.previousView.popupViewController != nil) {
                         [self.previousView dismissPopupViewControllerAnimated:NO completion:^{
@@ -109,7 +109,7 @@
                                          @"id":[[NSNumber alloc]initWithInt:self.vegetable.shop_product_id],
                                          @"quantity":[[NSNumber alloc]initWithInt:self.vegetable.quantity]
                                          }];
-                [[MCTradeManager getInstance]addProductToCartByUserId:macId Products:products];
+                [[MCTradeManager getInstance]addProductToCartByUserId:macId Products:products Recipe:nil];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (self.previousView.popupViewController != nil) {
                         [self.previousView dismissPopupViewControllerAnimated:NO completion:^{
