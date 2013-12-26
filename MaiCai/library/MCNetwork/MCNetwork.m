@@ -8,6 +8,7 @@
 
 #import "MCNetwork.h"
 #import "NSString+MD5Addition.h"
+#import "MCNetWorkObject.h"
 
 
 @implementation MCNetwork
@@ -24,7 +25,7 @@ static MCNetwork* instance;
 }
 
 
--(NSData*) httpGetSynUrl:(NSString*)httpUrl Params:(NSMutableDictionary*)params
+-(NSData*) httpGetSynUrl:(NSString*)httpUrl Params:(NSMutableDictionary*)params Cache:(BOOL)flag
 {
     NSString *urlAsString = httpUrl;
     int count = 1;
@@ -37,20 +38,18 @@ static MCNetwork* instance;
         count++;
     }
 
-    
-    NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
-    NSTimeInterval a=[dat timeIntervalSince1970]*1000;
-    NSString *currentTime = [NSString stringWithFormat:@"%.0f", a];
     NSString * path = [NSTemporaryDirectory() stringByAppendingPathComponent:[[NSString alloc]initWithFormat:@"%@.txt",[urlAsString stringFromMD5]]];
-    NSError* error;
-    NSData* data = [[NSData alloc]initWithContentsOfFile:path];
+    
+    MCNetWorkObject* data = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
     
     //如何有缓存，并且没有过有效期
-    if(data != nil) {
-        NSDictionary* dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
-        NSString* expires = dic[@"Expires"];
-        if([currentTime longLongValue]<[expires longLongValue]) {
-            return data;
+    if(data != nil || flag == true) {
+        NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+        NSTimeInterval a=[dat timeIntervalSince1970]*1000;
+        NSString *currentTime = [NSString stringWithFormat:@"%.0f", a];
+        if([currentTime longLongValue]<[data.expire longLongValue]) {
+            NSLog(@"从缓存中读取...");
+            return data.data;
         }
     }
     
@@ -74,13 +73,13 @@ static MCNetwork* instance;
         // 取得所有的请求的头
         NSDictionary *dictionary = [response allHeaderFields];
         NSString* expires = dictionary[@"Expires"];
-        dictionary = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingAllowFragments error:&error];
-        NSMutableDictionary* temp = [[NSMutableDictionary alloc]initWithDictionary:dictionary];
-        [temp setValue:expires forKey:@"Expires"];
-        
-        NSData* temp1 = [NSJSONSerialization dataWithJSONObject:temp options:NSJSONReadingAllowFragments error:&error];
-        
-        [temp1 writeToFile:path atomically:YES];
+        if(flag == true) {
+            //存入缓存
+            MCNetWorkObject* object = [[MCNetWorkObject alloc]init];
+            object.expire = expires;
+            object.data = result;
+            [NSKeyedArchiver archiveRootObject:object toFile:path];
+        }
     }
 
     return result;
@@ -115,15 +114,45 @@ static MCNetwork* instance;
 
 -(UIImage*) loadImageFromSource:(NSString*)url
 {
-    //如果有缓存读缓存
+    
     NSString * path = [NSTemporaryDirectory() stringByAppendingPathComponent:[[NSString alloc]initWithFormat:@"%@",[url stringFromMD5]]];
+    
+    MCNetWorkObject* data  = [NSKeyedUnarchiver unarchiveObjectWithFile: path];
+        
+    
+    if(data != Nil) {
+        //如果有缓存读缓存
+        NSData* imgData = data.data;
+        NSLog(@"读取缓存文件");
+        return [UIImage imageWithData:imgData];
+    }
+        
+    //缓存过期 或者 没有缓存文件
     NSError *error=nil;
     NSURL *u=[NSURL URLWithString:url];
     NSURLRequest *request=[[NSURLRequest alloc] initWithURL:u];
-    NSData *imgData=[NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&error];
     
-    //建立缓存
-    [imgData writeToFile:path atomically:YES];
+    NSHTTPURLResponse *response;
+    NSData* imgData=[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    
+    if ([response respondsToSelector:@selector(allHeaderFields)]) {
+        // 取得http状态码
+        NSLog(@"此次请求状态码是%ld",(long)[response statusCode]);
+        if((long)[response statusCode] != 200) {
+            @throw [[NSException alloc]initWithName:@"错误" reason:@"状态码不是200" userInfo:nil];
+        }
+        
+        // 取得所有的请求的头
+        NSDictionary *dictionary = [response allHeaderFields];
+        NSString* expires = dictionary[@"Expires"];
+        
+        MCNetWorkObject* object = [[MCNetWorkObject alloc]init];
+        object.expire = expires;
+        object.data = imgData;
+        //建立缓存
+        [NSKeyedArchiver archiveRootObject:object toFile:path];
+    }
+    
     return [UIImage imageWithData:imgData];
 }
 @end

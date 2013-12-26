@@ -53,7 +53,7 @@ static MCDBManger* instance;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentDirectory = [paths objectAtIndex:0];
     NSString *dbPath = [documentDirectory stringByAppendingPathComponent:@"maicai.sqlite"];
-    NSLog(dbPath);
+    NSLog(@"%@",dbPath);
     return dbPath;
 }
 

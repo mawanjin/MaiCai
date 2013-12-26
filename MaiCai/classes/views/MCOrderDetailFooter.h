@@ -12,4 +12,5 @@
 +(id)initInstance;
 @property (weak, nonatomic) IBOutlet UILabel *orderStatusLabel;
 @property (weak, nonatomic) IBOutlet UILabel *paymentMethodLabel;
+@property (weak, nonatomic) IBOutlet UILabel *shipMethodLabel;
 @end

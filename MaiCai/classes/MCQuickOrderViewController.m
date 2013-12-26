@@ -57,7 +57,7 @@
                 header.nameLabel.text = self.recipe.name;
                 header.descriptionLabel.text = self.recipe.introduction;
                 
-                NSString* source = [[NSString alloc]initWithFormat:@"http://61.172.243.70:1980/test/step1.png"];
+                NSString* source = [[NSString alloc]initWithFormat:@"%@",self.recipe.bigImage];
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     UIImage* image = [[MCNetwork getInstance]loadImageFromSource:source];
                     dispatch_async(dispatch_get_main_queue(), ^{

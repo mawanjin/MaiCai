@@ -11,7 +11,7 @@
 @class HMSegmentedControl;
 
 
-@interface MCCategoryViewController :MCBaseNavViewController<UIScrollViewDelegate,UICollectionViewDelegateFlowLayout,UICollectionViewDelegate,UICollectionViewDataSource>
+@interface MCCategoryViewController :MCBaseViewController<UIScrollViewDelegate,UICollectionViewDelegateFlowLayout,UICollectionViewDelegate,UICollectionViewDataSource>
 @property NSMutableArray* data;
 @property NSMutableArray* sourceData;
 @property (nonatomic, strong) HMSegmentedControl *segmentedControl;

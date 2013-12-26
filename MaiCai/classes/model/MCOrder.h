@@ -25,5 +25,6 @@
 @property NSString* image;
 @property unsigned int quantity;
 @property NSString* paymentMethod;
+@property NSString* shipMethod;
 @property NSMutableArray* products;
 @end

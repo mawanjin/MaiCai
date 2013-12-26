@@ -40,7 +40,7 @@ static MCTradeManager* instance;
                              @"id":id,
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/public/offline/cart/index.do" Params:data];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/public/offline/cart/index.do" Params:data Cache:YES];
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
@@ -105,7 +105,7 @@ static MCTradeManager* instance;
                              @"sign":sign
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/private/cart/index.do" Params:data];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/private/cart/index.do" Params:data Cache:YES];
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
@@ -226,7 +226,7 @@ static MCTradeManager* instance;
                              @"id":id,
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/public/offline/cart/quantity/index.do" Params:data];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/public/offline/cart/quantity/index.do" Params:data Cache:NO];
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     int num = 0;
@@ -248,7 +248,7 @@ static MCTradeManager* instance;
                              @"sign":sign
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/private/cart/quantity/index.do" Params:data];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/private/cart/quantity/index.do" Params:data Cache:NO];
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     int num = 0;
@@ -503,6 +503,7 @@ static MCTradeManager* instance;
     order.image = data_[@"image"];
     order.quantity = [data_[@"quantity"]integerValue];
     order.paymentMethod = data_[@"payment_method"];
+    order.shipMethod = data_[@"ship_method"];
     
     NSArray* products = data_[@"products"];
     NSMutableArray* vegetables = [[NSMutableArray alloc]init];

@@ -227,7 +227,7 @@
         MCMarketIndexQuickOrderCell* cell = (MCMarketIndexQuickOrderCell*)myCell;
         MCRecipe* obj = self.recipes[indexPath.row];
         cell.label.text = obj.name;
-        NSString* source = [[NSString alloc]initWithFormat:@"http://61.172.243.70:1980/test/step%d.png",(indexPath.row+1)];
+        NSString* source = [[NSString alloc]initWithFormat:@"%@",obj.image];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             UIImage* image = [[MCNetwork getInstance]loadImageFromSource:source];
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -242,12 +242,7 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if([collectionView.restorationIdentifier isEqualToString:@"categoryCollectionView"]){
-        MCCategoryViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCCategoryViewController"];
-        vc.segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"蔬菜", @"水果", @"肉类", @"豆制品",@"炒货",@"米面杂粮"]];
-        [vc.segmentedControl setSelectedSegmentIndex:indexPath.row];
-        [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
-            
-        }];
+       
     }else if([collectionView.restorationIdentifier isEqualToString:@"quickOrderCollectionView"]){
        MCRecipe* object = self.recipes[indexPath.row];
         MCQuickOrderViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCQuickOrderViewController"];

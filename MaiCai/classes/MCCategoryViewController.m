@@ -42,6 +42,8 @@
     }
     
     // Segmented control with scrolling
+    self.segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"蔬菜", @"水果", @"肉类", @"豆制品",@"炒货",@"米面杂粮"]];
+    [self.segmentedControl setSelectedSegmentIndex:0];
     self.segmentedControl.segmentEdgeInset = UIEdgeInsetsMake(0, 10, 0, 10);
     self.segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
     self.segmentedControl.font = [UIFont systemFontOfSize:15];
@@ -55,6 +57,8 @@
     [self.segmentedControl setFrame:CGRectMake(0, 40 + yDelta, 320, 40)];
     [self.segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:self.segmentedControl];
+    
+    
     
    //手势滑动控制
     UISwipeGestureRecognizer* swipeGestureRecognizer1 = [[UISwipeGestureRecognizer alloc]

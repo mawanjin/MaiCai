@@ -19,7 +19,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L7K-4o-EzG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1361" y="-1293"/>
+            <point key="canvasLocation" x="-2525" y="-1288"/>
         </scene>
         <!--Mine View Controller - 我的-->
         <scene sceneID="6eY-XF-x9R">
@@ -89,7 +89,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bxB-17-b3K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-806" y="244"/>
+            <point key="canvasLocation" x="-1990" y="124"/>
         </scene>
         <!--Vegetable Market View Controller - 菜市场-->
         <scene sceneID="nzY-FO-iWi">
@@ -232,7 +232,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="菜市场" image="icon_vegetableMarket" id="ARu-ap-jSj"/>
+                    <tabBarItem key="tabBarItem" title="首页" image="icon_vegetableTrade" id="ARu-ap-jSj"/>
                     <navigationItem key="navigationItem" title="菜市场" id="5KV-ga-wFz"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
@@ -246,7 +246,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JgB-OX-kk5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-806" y="-1288"/>
+            <point key="canvasLocation" x="-2002" y="-1288"/>
         </scene>
         <!--Navigation Controller - Item-->
         <scene sceneID="Czc-Tx-Hck">
@@ -262,7 +262,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2vY-Bb-Z83" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1345" y="-532"/>
+            <point key="canvasLocation" x="-2525" y="-580"/>
         </scene>
         <!--Mine Address View Controller - 收货地址-->
         <scene sceneID="4Rt-iE-nuR">
@@ -407,7 +407,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ezy-rt-db2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2191" y="1988"/>
+            <point key="canvasLocation" x="-2883" y="2464"/>
         </scene>
         <!--Navigation Controller - Item-->
         <scene sceneID="Hmv-Pm-TtD">
@@ -423,7 +423,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mbs-6h-ffK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1369" y="244"/>
+            <point key="canvasLocation" x="-2525" y="132"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="IRX-7L-jcm">
@@ -470,7 +470,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1cJ-tc-Yo8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1008" y="1288"/>
+            <point key="canvasLocation" x="-1700" y="1764"/>
         </scene>
         <!--Feedback View Controller - 意见反馈-->
         <scene sceneID="6aS-Hd-n7k">
@@ -516,7 +516,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5kj-rY-dNJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1295" y="1969"/>
+            <point key="canvasLocation" x="-1987" y="2445"/>
         </scene>
         <!--New Mine Address View Controller - 新增收货地址-->
         <scene sceneID="2pp-f5-Hzp">
@@ -599,7 +599,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Ir-9i-97q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1722" y="1969"/>
+            <point key="canvasLocation" x="-2414" y="2445"/>
+        </scene>
+        <!--Navigation Controller - Item-->
+        <scene sceneID="mVF-VL-Ntb">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="8E4-p0-YbT" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="d4p-FI-gh8"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0XZ-ri-qdN">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="qib-R1-lmG" kind="relationship" relationship="rootViewController" id="gTK-QH-vQl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rXb-t5-vVr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2525" y="847"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="3cG-Ig-bzz">
@@ -614,13 +630,14 @@
                     </tabBar>
                     <connections>
                         <segue destination="c5B-2K-WnO" kind="relationship" relationship="viewControllers" id="0Lu-Ib-V3F"/>
+                        <segue destination="8E4-p0-YbT" kind="relationship" relationship="viewControllers" id="GVf-vb-MWz"/>
                         <segue destination="g0L-CL-PZK" kind="relationship" relationship="viewControllers" id="v3v-nT-cJM"/>
                         <segue destination="kDN-Jl-QXq" kind="relationship" relationship="viewControllers" id="LzF-an-6Un"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vne-RF-zno" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2232" y="-493"/>
+            <point key="canvasLocation" x="-3576" y="-25"/>
         </scene>
         <!--Category View Controller - 莘庄菜市场-->
         <scene sceneID="7WD-gH-dMb">
@@ -687,6 +704,7 @@
                             <constraint firstItem="syl-Bh-HfE" firstAttribute="top" secondItem="VUE-GC-8zd" secondAttribute="bottom" id="kih-TM-PrP"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="菜市场" image="icon_vegetableMarket" id="qiA-UI-rg6"/>
                     <navigationItem key="navigationItem" title="莘庄菜市场" id="jsu-Ou-Kre"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
@@ -695,7 +713,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T2j-a4-ito" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2201" y="1288"/>
+            <point key="canvasLocation" x="-1984" y="847"/>
         </scene>
         <!--Vegetable Detail View Controller - Title-->
         <scene sceneID="zOv-Jv-Whq">
@@ -874,7 +892,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4mA-wD-Eiy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1819" y="1288"/>
+            <point key="canvasLocation" x="-2511" y="1764"/>
         </scene>
         <!--Cook Book Detail View Controller - 鱼香肉丝-->
         <scene sceneID="hkC-M3-Knz">
@@ -977,7 +995,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v9h-i1-LZw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1405" y="1288"/>
+            <point key="canvasLocation" x="-2097" y="1764"/>
         </scene>
         <!--Cook Book View Controller - 养身-->
         <scene sceneID="MF9-qQ-74l">
@@ -1048,7 +1066,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K7e-rr-8KL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-811" y="-532"/>
+            <point key="canvasLocation" x="-2002" y="-580"/>
         </scene>
         <!--Login View Controller - 登入-->
         <scene sceneID="yEo-bp-8AR">
@@ -1131,7 +1149,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tZ9-GD-G2p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2198" y="2716"/>
+            <point key="canvasLocation" x="-2890" y="3192"/>
         </scene>
         <!--Order Detail View Controller - 订单详情-->
         <scene sceneID="Dj5-Sk-L8d">
@@ -1464,7 +1482,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ftA-zT-Xbk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1831" y="2718"/>
+            <point key="canvasLocation" x="-2523" y="3194"/>
         </scene>
         <!--Personal Info View Controller - 个人信息-->
         <scene sceneID="KJA-81-iCv">
@@ -1530,7 +1548,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="01g-v8-qyk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1438" y="2718"/>
+            <point key="canvasLocation" x="-2130" y="3194"/>
         </scene>
         <!--Order Confirm View Controller - 确认订单-->
         <scene sceneID="Avf-PQ-QaV">
@@ -1657,7 +1675,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jop-ud-eua" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1051" y="2716"/>
+            <point key="canvasLocation" x="-1743" y="3192"/>
         </scene>
         <!--Mine Order View Controller - 我的订单-->
         <scene sceneID="Vge-Ac-A3d">
@@ -1774,7 +1792,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Qu-KH-4zx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-678" y="2716"/>
+            <point key="canvasLocation" x="-1370" y="3192"/>
         </scene>
         <!--Mine Cart View Controller - 菜篮子-->
         <scene sceneID="ALC-QI-vmV">
@@ -1932,7 +1950,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EQ9-Gq-6Fp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-557" y="1288"/>
+            <point key="canvasLocation" x="-1249" y="1764"/>
         </scene>
         <!--Quick Order View Controller - 一键买菜-->
         <scene sceneID="BIG-tw-KjA">
@@ -2074,7 +2092,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E1j-Yn-XJj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-97" y="1288"/>
+            <point key="canvasLocation" x="-789" y="1764"/>
         </scene>
     </scenes>
     <resources>
@@ -2088,6 +2106,7 @@
         <image name="icon_cookbook" width="30" height="30"/>
         <image name="icon_kitchen" width="30" height="30"/>
         <image name="icon_vegetableMarket" width="30" height="30"/>
+        <image name="icon_vegetableTrade" width="30" height="30"/>
         <image name="label_bg" width="320" height="80"/>
         <image name="mine_address_normal" width="80" height="80"/>
         <image name="phone_call" width="143" height="80"/>

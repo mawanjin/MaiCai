@@ -65,6 +65,7 @@
                 //初始化尾
                 MCOrderDetailFooter* footer = [MCOrderDetailFooter initInstance];
                 footer.paymentMethodLabel.text = [[NSString alloc]initWithFormat:@"支付方式：%@",self.order.paymentMethod];
+                footer.shipMethodLabel.text = [[NSString alloc]initWithFormat:@"配送方式：%@",self.order.shipMethod];
                 footer.orderStatusLabel.text = [[NSString alloc]initWithFormat:@"订单状态：%@",self.order.status];self.order.status;
                 self.tableView.tableFooterView = footer;
                 
@@ -133,7 +134,7 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     MCOrderConfirmSectionHeader* header =  [MCOrderConfirmSectionHeader initInstance];
-    header.shopNameLabel.text = @"测试店铺";
+    header.shopNameLabel.text = self.order.shopName;
     return header;
 }
 

@@ -165,7 +165,7 @@
         address = self.address;
     }
    
-    NSString* pay_no =  [[MCTradeManager getInstance]submitOrder:self.data PaymentMethod:self.paymentMethod Address:address UserId:user.userId TotalPrice:self.previousView.totalPrice];
+    NSString* pay_no =  [[MCTradeManager getInstance]submitOrder:self.data PaymentMethod:self.paymentMethod ShipMethod:self.shipMethod Address:address UserId:user.userId TotalPrice:self.previousView.totalPrice];
     
     if(self.paymentMethod == 0) {
         self.pay_no = pay_no;

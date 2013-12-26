@@ -110,6 +110,7 @@
 		04C973391869633100138DB8 /* MCQuickOrderHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C973381869633100138DB8 /* MCQuickOrderHeader.xib */; };
 		04C9733B186A6EF600138DB8 /* MCQuickOrderTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C9733A186A6EF600138DB8 /* MCQuickOrderTableHeader.xib */; };
 		04C9733E186A6F1700138DB8 /* MCQuickOrderTableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C9733D186A6F1700138DB8 /* MCQuickOrderTableHeader.m */; };
+		04C97341186BF72400138DB8 /* MCNetWorkObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C97340186BF72400138DB8 /* MCNetWorkObject.m */; };
 		04D230A7182B357E00D4B4AC /* MCBaseNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D230A6182B357E00D4B4AC /* MCBaseNavViewController.m */; };
 		04D230D5182B883E00D4B4AC /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D230B1182B883E00D4B4AC /* MBProgressHUD.m */; };
 		04D230DC182B883E00D4B4AC /* MCNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D230C0182B883E00D4B4AC /* MCNetwork.m */; };
@@ -333,6 +334,8 @@
 		04C9733A186A6EF600138DB8 /* MCQuickOrderTableHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCQuickOrderTableHeader.xib; sourceTree = "<group>"; };
 		04C9733C186A6F1700138DB8 /* MCQuickOrderTableHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCQuickOrderTableHeader.h; sourceTree = "<group>"; };
 		04C9733D186A6F1700138DB8 /* MCQuickOrderTableHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCQuickOrderTableHeader.m; sourceTree = "<group>"; };
+		04C9733F186BF72400138DB8 /* MCNetWorkObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNetWorkObject.h; sourceTree = "<group>"; };
+		04C97340186BF72400138DB8 /* MCNetWorkObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCNetWorkObject.m; sourceTree = "<group>"; };
 		04D230A5182B357E00D4B4AC /* MCBaseNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCBaseNavViewController.h; sourceTree = "<group>"; };
 		04D230A6182B357E00D4B4AC /* MCBaseNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCBaseNavViewController.m; sourceTree = "<group>"; };
 		04D230B0182B883E00D4B4AC /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -838,6 +841,8 @@
 			children = (
 				04D230BF182B883E00D4B4AC /* MCNetwork.h */,
 				04D230C0182B883E00D4B4AC /* MCNetwork.m */,
+				04C9733F186BF72400138DB8 /* MCNetWorkObject.h */,
+				04C97340186BF72400138DB8 /* MCNetWorkObject.m */,
 			);
 			path = MCNetwork;
 			sourceTree = "<group>";
@@ -1016,6 +1021,7 @@
 				048445C5183DD08A006F4090 /* UIDevice+IdentifierAddition.m in Sources */,
 				046E99CA18261F6D0005FB53 /* MCMineCartViewController.m in Sources */,
 				04F05A16185EE08700BB25C6 /* AFHTTPRequestOperationManager.m in Sources */,
+				04C97341186BF72400138DB8 /* MCNetWorkObject.m in Sources */,
 				0437A4991847491A000D427B /* SBJsonBase.m in Sources */,
 				0437A4961847491A000D427B /* NSObject+SBJSON.m in Sources */,
 				04B990BB18346D060018F84E /* MCCategory.m in Sources */,

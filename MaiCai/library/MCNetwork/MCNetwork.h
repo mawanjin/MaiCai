@@ -10,7 +10,7 @@
 
 @interface MCNetwork : NSObject
 +(MCNetwork*)getInstance;
--(NSData*) httpGetSynUrl:(NSString*)httpUrl Params:(NSMutableDictionary*)params;
+-(NSData*) httpGetSynUrl:(NSString*)httpUrl Params:(NSMutableDictionary*)params Cache:(BOOL)flag;
 -(NSData*) httpPostSynUrl:(NSString*)httpUrl Params:(NSMutableDictionary*)params;
 -(UIImage*) loadImageFromSource:(NSString*)url;
 @end

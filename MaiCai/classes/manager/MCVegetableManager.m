@@ -42,7 +42,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-    NSLog([[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -63,7 +63,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-    NSLog([[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -81,7 +81,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-    NSLog([[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -105,12 +105,12 @@ static NSMutableDictionary* relationship;
     NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithDictionary:@{
                                                                                    @"id":[[NSString alloc]initWithFormat:@"%d",id]
                                                                                    }];
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/public/recipe/buy.do" Params:params];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/public/recipe/buy.do" Params:params Cache:YES];
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-    NSLog([[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -165,7 +165,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-    NSLog([[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -177,7 +177,7 @@ static NSMutableDictionary* relationship;
 //首页信息
 -(NSMutableDictionary*)getMarketIndexInfo
 {
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/public/index.do" Params:Nil];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/public/index.do" Params:Nil Cache:YES];
     NSError *error;
     NSDictionary* dicResult = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
@@ -252,11 +252,11 @@ static NSMutableDictionary* relationship;
                              @"lng":lng,
                              @"lat":lat
                              };
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/public/market/list.do" Params:params];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/public/market/list.do" Params:params Cache:YES];
     NSError *error;
     NSDictionary* dicResult = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
-    NSLog([[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     
     BOOL flag = [dicResult[@"success"]boolValue];
     if(!flag) {
@@ -300,7 +300,7 @@ static NSMutableDictionary* relationship;
                              @"lat":latitude
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/public/product/index.do" Params:data];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/public/product/index.do" Params:data Cache:YES];
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
@@ -342,7 +342,7 @@ static NSMutableDictionary* relationship;
                              @"id":id
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/public/tenant/list.do" Params:data];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/public/tenant/list.do" Params:data Cache:YES];
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
