@@ -354,14 +354,16 @@ static MCTradeManager* instance;
 }
 
 
--(NSString*)submitOrder:(NSMutableArray*)orders PaymentMethod:(unsigned int)method Address:(MCAddress*)address UserId:(NSString*)userId TotalPrice:(float)totalPrice
+-(NSString*)submitOrder:(NSMutableArray*)orders PaymentMethod:(unsigned int)method ShipMethod:(unsigned int)shipMethod Address:(MCAddress*)address UserId:(NSString*)userId TotalPrice:(float)totalPrice
 {
     NSMutableDictionary* param = [[NSMutableDictionary alloc]init];
     NSMutableArray* tenants = [[NSMutableArray alloc]init];
     param[@"customer_id"] = userId;
     param[@"payment_method"] = [[NSNumber alloc]initWithInt:method];
+    param[@"ship_method"] =  [[NSNumber alloc]initWithInt:shipMethod];
     unsigned int i=0;
     unsigned int j=0;
+    unsigned int z=0;
     for(i=0;i<orders.count;i++) {
         MCShop* shop = orders[i];
         NSMutableDictionary* tenant = [[NSMutableDictionary alloc]init];
@@ -373,6 +375,14 @@ static MCTradeManager* instance;
             NSMutableDictionary* product = [[NSMutableDictionary alloc]init];
             product[@"id"] = [[NSNumber alloc]initWithInt:vegetable.id];
             product[@"quantity"] = [[NSNumber alloc]initWithInt:vegetable.quantity];
+            NSMutableArray* recipes = [[NSMutableArray alloc]init];
+            for(z=0;z<vegetable.recipes.count;z++) {
+                MCRecipe* temp = vegetable.recipes[z];
+                NSMutableDictionary* recipe = [[NSMutableDictionary alloc]init];
+                recipe[@"id"] = [[NSNumber alloc]initWithInt:temp.id];
+                [recipes addObject:recipe];
+            }
+            product[@"recipes"] = recipes;
             [products addObject:product];
         }
         tenant[@"products"] = products;
@@ -392,14 +402,10 @@ static MCTradeManager* instance;
     param[@"total"] = [[NSNumber alloc]initWithFloat:totalPrice];
     
     NSError *error;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:param
-                                                       options:NSJSONReadingAllowFragments
-                                                         error:&error];
-    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     
     NSString* sign = [@"/api/ios/v1/private/order/save.dodhfuewjcuehiudjuwdwyfcs" stringFromMD5];
     NSDictionary* params = @{
-                             @"param":jsonString,
+                             @"param":[param jsonStringWithPrettyPrint:NO],
                              @"sign":sign
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];

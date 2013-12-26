@@ -12,8 +12,11 @@
 @property MCOrderConfirmViewController* parentView;
 @property (weak, nonatomic) IBOutlet UIButton *alipayBtn;
 @property (weak, nonatomic) IBOutlet UIButton *cashpayBtn;
+@property (weak, nonatomic) IBOutlet UIButton *deliveryToHomeBtn;
+@property (weak, nonatomic) IBOutlet UIButton *getBySelfBtn;
 +(id)initInstance;
 - (IBAction)chooseAction:(id)sender;
+- (IBAction)chooseShipMethodAction:(id)sender;
 
 
 @end

@@ -28,6 +28,16 @@
     [view.cashpayBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_normal"] forState:UIControlStateNormal];
     [view.cashpayBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_selected"] forState:UIControlStateSelected];
     
+    
+    [view.getBySelfBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_normal"] forState:UIControlStateNormal];
+    [view.getBySelfBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_selected"] forState:UIControlStateSelected];
+    
+    [view.deliveryToHomeBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_normal"] forState:UIControlStateNormal];
+    [view.deliveryToHomeBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_selected"] forState:UIControlStateSelected];
+    
+    [view.deliveryToHomeBtn setSelected:YES];
+    [view.getBySelfBtn setSelected:NO];
+    
     [view.alipayBtn setSelected:YES];
     [view.cashpayBtn setSelected:NO];
     return view;
@@ -44,6 +54,20 @@
             [self.alipayBtn setSelected:NO];
         }
     }
+}
+
+- (IBAction)chooseShipMethodAction:(id)sender {
+    UIButton* btn = sender;
+    if(!btn.isSelected) {
+        [btn setSelected:YES];
+        self.parentView.shipMethod = [btn.titleLabel.text integerValue];
+        if(btn == self.deliveryToHomeBtn) {
+            [self.getBySelfBtn setSelected:NO];
+        }else{
+            [self.deliveryToHomeBtn setSelected:NO];
+        }
+    }
+
 }
 
 /*

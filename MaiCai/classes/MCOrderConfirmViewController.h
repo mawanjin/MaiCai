@@ -28,6 +28,7 @@
 @property MCOrderConfirmHeader_* header_;
 @property (nonatomic,assign) SEL result;
 @property unsigned int paymentMethod;
+@property unsigned int shipMethod;
 -(NSString*)doRsa:(NSString*)orderInfo;
 -(void)initData;
 - (IBAction)submitOrderAction:(id)sender;
