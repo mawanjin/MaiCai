@@ -113,6 +113,9 @@
 		04C97341186BF72400138DB8 /* MCNetWorkObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C97340186BF72400138DB8 /* MCNetWorkObject.m */; };
 		04C97345186D292E00138DB8 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C97344186D292E00138DB8 /* GCPlaceholderTextView.m */; };
 		04C97348186D565500138DB8 /* MCStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C97347186D565500138DB8 /* MCStep.m */; };
+		04C9734B186D5C4900138DB8 /* MCRecipeIngredientCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C9734A186D5C4900138DB8 /* MCRecipeIngredientCell.m */; };
+		04C9734E186D5C7500138DB8 /* MCRecipeDishDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C9734D186D5C7500138DB8 /* MCRecipeDishDescriptionCell.m */; };
+		04C97354186D6D7E00138DB8 /* MCCookBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C97353186D6D7E00138DB8 /* MCCookBookCell.m */; };
 		04D230A7182B357E00D4B4AC /* MCBaseNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D230A6182B357E00D4B4AC /* MCBaseNavViewController.m */; };
 		04D230D5182B883E00D4B4AC /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D230B1182B883E00D4B4AC /* MBProgressHUD.m */; };
 		04D230DC182B883E00D4B4AC /* MCNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D230C0182B883E00D4B4AC /* MCNetwork.m */; };
@@ -342,6 +345,12 @@
 		04C97344186D292E00138DB8 /* GCPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCPlaceholderTextView.m; sourceTree = "<group>"; };
 		04C97346186D565500138DB8 /* MCStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCStep.h; sourceTree = "<group>"; };
 		04C97347186D565500138DB8 /* MCStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCStep.m; sourceTree = "<group>"; };
+		04C97349186D5C4900138DB8 /* MCRecipeIngredientCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCRecipeIngredientCell.h; sourceTree = "<group>"; };
+		04C9734A186D5C4900138DB8 /* MCRecipeIngredientCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCRecipeIngredientCell.m; sourceTree = "<group>"; };
+		04C9734C186D5C7500138DB8 /* MCRecipeDishDescriptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCRecipeDishDescriptionCell.h; sourceTree = "<group>"; };
+		04C9734D186D5C7500138DB8 /* MCRecipeDishDescriptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCRecipeDishDescriptionCell.m; sourceTree = "<group>"; };
+		04C97352186D6D7E00138DB8 /* MCCookBookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCookBookCell.h; sourceTree = "<group>"; };
+		04C97353186D6D7E00138DB8 /* MCCookBookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCookBookCell.m; sourceTree = "<group>"; };
 		04D230A5182B357E00D4B4AC /* MCBaseNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCBaseNavViewController.h; sourceTree = "<group>"; };
 		04D230A6182B357E00D4B4AC /* MCBaseNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCBaseNavViewController.m; sourceTree = "<group>"; };
 		04D230B0182B883E00D4B4AC /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -804,6 +813,12 @@
 				04C9733A186A6EF600138DB8 /* MCQuickOrderTableHeader.xib */,
 				04C9733C186A6F1700138DB8 /* MCQuickOrderTableHeader.h */,
 				04C9733D186A6F1700138DB8 /* MCQuickOrderTableHeader.m */,
+				04C97349186D5C4900138DB8 /* MCRecipeIngredientCell.h */,
+				04C9734A186D5C4900138DB8 /* MCRecipeIngredientCell.m */,
+				04C9734C186D5C7500138DB8 /* MCRecipeDishDescriptionCell.h */,
+				04C9734D186D5C7500138DB8 /* MCRecipeDishDescriptionCell.m */,
+				04C97352186D6D7E00138DB8 /* MCCookBookCell.h */,
+				04C97353186D6D7E00138DB8 /* MCCookBookCell.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -1020,6 +1035,7 @@
 				0497B8091839EEBE008A6F8B /* FMDatabaseQueue.m in Sources */,
 				04DAF4CD1842FA44009C7720 /* MCOrderConfirmHeader_.m in Sources */,
 				04DAF4BB1841A369009C7720 /* MCOrderConfirmViewController.m in Sources */,
+				04C9734B186D5C4900138DB8 /* MCRecipeIngredientCell.m in Sources */,
 				04DAF4E61845DD9C009C7720 /* MCOrderDetailFooter.m in Sources */,
 				044BC9B118308CB200D43115 /* MCNewMineAddressViewController.m in Sources */,
 				04C9732E186928D200138DB8 /* MCQuickOrderCell.m in Sources */,
@@ -1045,6 +1061,7 @@
 				0437A4961847491A000D427B /* NSObject+SBJSON.m in Sources */,
 				04B990BB18346D060018F84E /* MCCategory.m in Sources */,
 				04C9733E186A6F1700138DB8 /* MCQuickOrderTableHeader.m in Sources */,
+				04C9734E186D5C7500138DB8 /* MCRecipeDishDescriptionCell.m in Sources */,
 				04DAF4E31845D77D009C7720 /* MCOrderDetailCell.m in Sources */,
 				04F05A1A185EE08700BB25C6 /* AFURLConnectionOperation.m in Sources */,
 				0437A4981847491A000D427B /* SBJSON.m in Sources */,
@@ -1076,6 +1093,7 @@
 				0486A0EF1835BAD100FDC854 /* MCTradeManager.m in Sources */,
 				0437A49A1847491A000D427B /* SBJsonParser.m in Sources */,
 				0497B7EF1838C51A008A6F8B /* MCCartHeader.m in Sources */,
+				04C97354186D6D7E00138DB8 /* MCCookBookCell.m in Sources */,
 				04BFBCF51867D9D60085F39F /* MCTipsHeader.m in Sources */,
 				0497B80D1839FD40008A6F8B /* MCUser.m in Sources */,
 				0497B8061839EEBE008A6F8B /* FMDatabase.m in Sources */,

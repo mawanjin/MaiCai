@@ -192,7 +192,7 @@ static NSMutableDictionary* relationship;
     for(int i=0;i<mainIngredients_.count;i++){
         MCVegetable* vegetable = [[MCVegetable alloc]init];
         vegetable.name = mainIngredients_[i][@"name"];
-        vegetable.product_id = [mainIngredients_[i][@"product_id"]integerValue];
+        //vegetable.product_id = [mainIngredients_[i][@"product_id"]integerValue];
         vegetable.dosage = mainIngredients_[i][@"dosage"];
         [mainIngredients addObject:vegetable];
     }
@@ -203,7 +203,7 @@ static NSMutableDictionary* relationship;
     for(int i=0;i<accessoryIngredients_.count;i++){
         MCVegetable* vegetable = [[MCVegetable alloc]init];
         vegetable.name = accessoryIngredients_[i][@"name"];
-        vegetable.product_id = [accessoryIngredients_[i][@"product_id"]integerValue];
+        //vegetable.product_id = [accessoryIngredients_[i][@"product_id"]integerValue];
         vegetable.dosage = accessoryIngredients_[i][@"dosage"];
         [accessoryIngredients addObject:vegetable];
     }

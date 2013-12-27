@@ -10,6 +10,13 @@
 #import "MCCookBookDetailHeader.h"
 #import "MCCookStepCell.h"
 #import "MCNetwork.h"
+#import "MCVegetableManager.h"
+#import "MCRecipeDishDescriptionCell.h"
+#import "MCRecipeIngredientCell.h"
+#import "MCRecipe.h"
+#import "MCVegetable.h"
+#import "MCStep.h"
+#import "Toast+UIView.h"
 
 @implementation MCCookBookDetailViewController
 
@@ -26,8 +33,36 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self.tableView setTableHeaderView:[MCCookBookDetailHeader initInstance]];
     
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        @try {
+            self.recipe = [[MCVegetableManager getInstance]getRecipeDetailById:self.recipe.id];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.navItem setTitle:self.recipe.name];
+                MCCookBookDetailHeader* header = [MCCookBookDetailHeader initInstance];
+                header.label.text = self.recipe.name;
+                [self.tableView setTableHeaderView:header];
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    UIImage* image = [[MCNetwork getInstance]loadImageFromSource:self.recipe.bigImage];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        header.image.image = image;
+                    });
+                });
+            });
+        }
+        @catch (NSException *exception) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.view makeToast:@"无法获取网络资源" duration:2 position:@"center"];
+            });
+        }
+        @finally {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [self.tableView reloadData];
+            });
+        }
+    });
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,10 +75,18 @@
 {
     if(section ==0) {
         return 1;
+    }else if(section == 1){
+        //主料
+        return self.recipe.mainIngredients.count;
+    }else if(section == 2) {
+        //辅料
+        return self.recipe.accessoryIngredients.count;
+    }else if(section == 3) {
+        //步骤
+        return self.recipe.steps.count;
     }else {
-        return 3;
+        return 0;
     }
-    
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -55,8 +98,6 @@
     }else if(section == 2) {
         return @"辅料";
     }else if(section == 3) {
-        return @"调料";
-    }else if(section == 4) {
         return @"烹饪步骤";
     }
     return @"";
@@ -70,10 +111,7 @@
         return 37;
     }else if(indexPath.section == 2) {
         return 37;
-    }else if(indexPath.section == 3) {
-        return 37;
     }
-    
     return 130;
 }
 
@@ -81,18 +119,27 @@
 {
     UITableViewCell* cell = nil;
     if(indexPath.section == 0) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"dishDescriptionCell"];
+        MCRecipeDishDescriptionCell* temp = [tableView dequeueReusableCellWithIdentifier:@"dishDescriptionCell"];
+        temp.descriptionLabel.text = self.recipe.introduction;
+        cell = temp;
     }else if(indexPath.section == 1) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"ingredientCell"];
+        MCRecipeIngredientCell* temp = [tableView dequeueReusableCellWithIdentifier:@"ingredientCell"];
+        MCVegetable* vegetable = self.recipe.mainIngredients[indexPath.row];
+        temp.nameLabel.text = vegetable.name;
+        temp.dosageLabel.text = vegetable.dosage;
+        cell = temp;
     }else if(indexPath.section == 2) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"ingredientCell"];
+        MCRecipeIngredientCell* temp = [tableView dequeueReusableCellWithIdentifier:@"ingredientCell"];
+        MCVegetable* vegetable = self.recipe.accessoryIngredients[indexPath.row];
+        temp.nameLabel.text = vegetable.name;
+        temp.dosageLabel.text = vegetable.dosage;
+        cell = temp;
     }else if(indexPath.section == 3) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"ingredientCell"];
-    }else if(indexPath.section == 4) {
         MCCookStepCell* temp = [tableView dequeueReusableCellWithIdentifier:@"cookStepCell"];
-        NSString* source = [[NSString alloc]initWithFormat:@"http://61.172.243.70:1980/test/step%d.png",(indexPath.row+1)];
+        MCStep* step = self.recipe.steps[indexPath.row];
+        temp.label.text = step.content;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            UIImage* image = [[MCNetwork getInstance]loadImageFromSource:source];
+            UIImage* image = [[MCNetwork getInstance]loadImageFromSource:step.image];
             dispatch_async(dispatch_get_main_queue(), ^{
                 temp.image.image = image;
             });
@@ -103,7 +150,7 @@
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
-    return 5;
+    return 4;
 }
 
 @end

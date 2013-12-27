@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface MCCookBookDetailHeader : UIView
+@property (weak, nonatomic) IBOutlet UIImageView *image;
+@property (weak, nonatomic) IBOutlet UILabel *label;
 +(id)initInstance;
 @end

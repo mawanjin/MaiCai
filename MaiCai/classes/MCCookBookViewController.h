@@ -10,5 +10,6 @@
 #import "MCBaseViewController.h"
 
 @interface MCCookBookViewController : MCBaseViewController<UITableViewDataSource,UITableViewDelegate>
-
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property NSMutableArray* recipes;
 @end

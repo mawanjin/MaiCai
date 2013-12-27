@@ -470,7 +470,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1cJ-tc-Yo8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1700" y="1764"/>
+            <point key="canvasLocation" x="-2040" y="1728"/>
         </scene>
         <!--Feedback View Controller - 意见反馈-->
         <scene sceneID="6aS-Hd-n7k">
@@ -528,7 +528,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5kj-rY-dNJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1987" y="2445"/>
+            <point key="canvasLocation" x="-2040" y="2445"/>
         </scene>
         <!--New Mine Address View Controller - 新增收货地址-->
         <scene sceneID="2pp-f5-Hzp">
@@ -611,7 +611,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Ir-9i-97q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2414" y="2445"/>
+            <point key="canvasLocation" x="-2469" y="2445"/>
         </scene>
         <!--Navigation Controller - Item-->
         <scene sceneID="mVF-VL-Ntb">
@@ -904,7 +904,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4mA-wD-Eiy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2511" y="1764"/>
+            <point key="canvasLocation" x="-2883" y="1728"/>
         </scene>
         <!--Cook Book Detail View Controller - 鱼香肉丝-->
         <scene sceneID="hkC-M3-Knz">
@@ -918,12 +918,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="CcF-Xv-6Mb">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="CcF-Xv-6Mb">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dishDescriptionCell" rowHeight="98" id="VuR-vM-6MP" customClass="dishDescriptionCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dishDescriptionCell" rowHeight="98" id="VuR-vM-6MP" customClass="MCRecipeDishDescriptionCell">
                                         <rect key="frame" x="0.0" y="119" width="320" height="98"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VuR-vM-6MP" id="q0F-I0-Ek5">
@@ -941,8 +941,11 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="descriptionLabel" destination="5Fu-BC-IjU" id="vLR-ZV-yek"/>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ingredientCell" rowHeight="37" id="qH4-os-SDM">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ingredientCell" rowHeight="37" id="qH4-os-SDM" customClass="MCRecipeIngredientCell">
                                         <rect key="frame" x="0.0" y="217" width="320" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qH4-os-SDM" id="K8R-uz-wsN">
@@ -964,6 +967,10 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="dosageLabel" destination="EsR-SF-iKH" id="cwg-lD-pib"/>
+                                            <outlet property="nameLabel" destination="2OQ-3g-hSy" id="5iG-lA-OUz"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cookStepCell" rowHeight="127" id="bcW-ji-ny6" customClass="MCCookStepCell">
                                         <rect key="frame" x="0.0" y="254" width="320" height="127"/>
@@ -972,14 +979,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="126"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="锅烧到六成热时，放入生油，随即倒入肉丝炒散，视断血端锅倒入漏勺，沥去油。锅底留余油，下葱花、姜末、豆瓣酱一起煸出香味后，放笋丝，同时将肉丝入锅炒和，随即将小碗调料倒入锅内，迅速翻炒几下，加味精后勾上薄芡，撒上胡椒粉，浇上麻油起锅装盆。" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="216" translatesAutoresizingMaskIntoConstraints="NO" id="ZFo-jc-1vd">
-                                                    <rect key="frame" x="20" y="3" width="216" height="120"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="锅烧到六成热时，放入生油，随即倒入肉丝炒散，视断血端锅倒入漏勺，沥去油。锅底留余油，下葱花、姜末、豆瓣酱一起煸出香味后，放笋丝，同时将肉丝入锅炒和，随即将小碗调料倒入锅内，迅速翻炒几下，加味精后勾上薄芡，撒上胡椒粉，浇上麻油起锅装盆。" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="204" translatesAutoresizingMaskIntoConstraints="NO" id="ZFo-jc-1vd">
+                                                    <rect key="frame" x="20" y="3" width="204" height="120"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="r_p_changdoujiao" translatesAutoresizingMaskIntoConstraints="NO" id="Ql4-rO-l0k">
-                                                    <rect key="frame" x="244" y="10" width="68" height="71"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ql4-rO-l0k">
+                                                    <rect key="frame" x="232" y="35" width="76" height="55"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
@@ -1002,12 +1009,13 @@
                     <navigationItem key="navigationItem" title="鱼香肉丝" id="YIA-3m-Cm0"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="navItem" destination="YIA-3m-Cm0" id="LPd-RM-ubb"/>
                         <outlet property="tableView" destination="CcF-Xv-6Mb" id="TC2-X5-GJd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v9h-i1-LZw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2097" y="1764"/>
+            <point key="canvasLocation" x="-2469" y="1728"/>
         </scene>
         <!--Cook Book View Controller - 养身-->
         <scene sceneID="MF9-qQ-74l">
@@ -1021,42 +1029,51 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="79" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Ppe-Ix-EiN">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Ppe-Ix-EiN">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cookBookCell" rowHeight="79" id="fcq-VK-BfL">
-                                        <rect key="frame" x="0.0" y="86" width="320" height="79"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cookBookCell" rowHeight="73" id="fcq-VK-BfL" customClass="MCCookBookCell">
+                                        <rect key="frame" x="0.0" y="86" width="320" height="73"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fcq-VK-BfL" id="AA1-ko-1Cx">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="78"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="73"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="r_p_maoshanyao" translatesAutoresizingMaskIntoConstraints="NO" id="2jb-xZ-i1w">
-                                                    <rect key="frame" x="20" y="4" width="70" height="70"/>
+                                                    <rect key="frame" x="5" y="4" width="65" height="65"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="鱼香肉丝" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F37-e3-4Yd">
-                                                    <rect key="frame" x="112" y="4" width="73" height="21"/>
+                                                    <rect key="frame" x="78" y="4" width="185" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.31764706970000001" green="0.73333334920000004" blue="0.27843138579999999" alpha="1" colorSpace="deviceRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="属于自己的一道鱼香肉丝" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XuO-0B-0kZ">
-                                                    <rect key="frame" x="112" y="45" width="188" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="属于自己的一道鱼香肉丝" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="188" translatesAutoresizingMaskIntoConstraints="NO" id="XuO-0B-0kZ">
+                                                    <rect key="frame" x="78" y="29" width="188" height="40"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" red="0.83921575550000005" green="0.83921575550000005" blue="0.83921575550000005" alpha="1" colorSpace="deviceRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="right_arrow_gray" translatesAutoresizingMaskIntoConstraints="NO" id="KTN-qE-kQw">
-                                                    <rect key="frame" x="282" y="22" width="18" height="34"/>
+                                                    <rect key="frame" x="305" y="24" width="15" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dotted_line" translatesAutoresizingMaskIntoConstraints="NO" id="zN7-Fh-6bt">
+                                                    <rect key="frame" x="0.0" y="72" width="320" height="1"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="image" destination="2jb-xZ-i1w" id="x2P-Ca-ZlQ"/>
+                                            <outlet property="introductionLabel" destination="XuO-0B-0kZ" id="mou-81-IzA"/>
+                                            <outlet property="nameLabel" destination="F37-e3-4Yd" id="53o-qq-iBX"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -1075,6 +1092,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="养身" image="icon_cookbook" id="zyU-FS-tTY"/>
                     <navigationItem key="navigationItem" title="养身" id="UL0-no-eWb"/>
+                    <connections>
+                        <outlet property="tableView" destination="Ppe-Ix-EiN" id="wmt-5S-Xw2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K7e-rr-8KL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1161,7 +1181,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tZ9-GD-G2p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2890" y="3192"/>
+            <point key="canvasLocation" x="-2883" y="3194"/>
         </scene>
         <!--Order Detail View Controller - 订单详情-->
         <scene sceneID="Dj5-Sk-L8d">
@@ -1291,7 +1311,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iqf-Oh-lRq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2201" y="3432"/>
+            <point key="canvasLocation" x="-1161" y="2445"/>
         </scene>
         <!--Search View Controller - 搜索-->
         <scene sceneID="cch-5a-9NA">
@@ -1407,7 +1427,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="-1796" y="3433"/>
+            <point key="canvasLocation" x="-1621" y="2437"/>
         </scene>
         <!--Register View Controller - 注册-->
         <scene sceneID="81Z-bd-png">
@@ -1494,7 +1514,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ftA-zT-Xbk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2523" y="3194"/>
+            <point key="canvasLocation" x="-2469" y="3194"/>
         </scene>
         <!--Personal Info View Controller - 个人信息-->
         <scene sceneID="KJA-81-iCv">
@@ -1560,7 +1580,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="01g-v8-qyk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2130" y="3194"/>
+            <point key="canvasLocation" x="-2040" y="3194"/>
         </scene>
         <!--Order Confirm View Controller - 确认订单-->
         <scene sceneID="Avf-PQ-QaV">
@@ -1687,7 +1707,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jop-ud-eua" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1743" y="3192"/>
+            <point key="canvasLocation" x="-1621" y="3204"/>
         </scene>
         <!--Mine Order View Controller - 我的订单-->
         <scene sceneID="Vge-Ac-A3d">
@@ -1804,7 +1824,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Qu-KH-4zx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1370" y="3192"/>
+            <point key="canvasLocation" x="-1161" y="3204"/>
         </scene>
         <!--Mine Cart View Controller - 菜篮子-->
         <scene sceneID="ALC-QI-vmV">
@@ -1962,7 +1982,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EQ9-Gq-6Fp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1249" y="1764"/>
+            <point key="canvasLocation" x="-1621" y="1728"/>
         </scene>
         <!--Quick Order View Controller - 一键买菜-->
         <scene sceneID="BIG-tw-KjA">
@@ -2104,7 +2124,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E1j-Yn-XJj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-789" y="1764"/>
+            <point key="canvasLocation" x="-1161" y="1728"/>
         </scene>
     </scenes>
     <resources>
@@ -2124,7 +2144,6 @@
         <image name="phone_call" width="143" height="80"/>
         <image name="r_p_caijiao" width="150" height="150"/>
         <image name="r_p_caiou" width="150" height="150"/>
-        <image name="r_p_changdoujiao" width="150" height="150"/>
         <image name="r_p_gswwc" width="150" height="150"/>
         <image name="r_p_jinzhengu" width="150" height="150"/>
         <image name="r_p_maoshanyao" width="150" height="150"/>
