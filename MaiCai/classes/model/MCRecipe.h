@@ -20,4 +20,5 @@
 @property BOOL isAccessoryIngredientsAllSelected;
 @property NSMutableArray* mainIngredients;
 @property NSMutableArray* accessoryIngredients;
+@property NSMutableArray* steps;
 @end

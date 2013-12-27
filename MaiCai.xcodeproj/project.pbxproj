@@ -111,6 +111,8 @@
 		04C9733B186A6EF600138DB8 /* MCQuickOrderTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C9733A186A6EF600138DB8 /* MCQuickOrderTableHeader.xib */; };
 		04C9733E186A6F1700138DB8 /* MCQuickOrderTableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C9733D186A6F1700138DB8 /* MCQuickOrderTableHeader.m */; };
 		04C97341186BF72400138DB8 /* MCNetWorkObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C97340186BF72400138DB8 /* MCNetWorkObject.m */; };
+		04C97345186D292E00138DB8 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C97344186D292E00138DB8 /* GCPlaceholderTextView.m */; };
+		04C97348186D565500138DB8 /* MCStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C97347186D565500138DB8 /* MCStep.m */; };
 		04D230A7182B357E00D4B4AC /* MCBaseNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D230A6182B357E00D4B4AC /* MCBaseNavViewController.m */; };
 		04D230D5182B883E00D4B4AC /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D230B1182B883E00D4B4AC /* MBProgressHUD.m */; };
 		04D230DC182B883E00D4B4AC /* MCNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D230C0182B883E00D4B4AC /* MCNetwork.m */; };
@@ -336,6 +338,10 @@
 		04C9733D186A6F1700138DB8 /* MCQuickOrderTableHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCQuickOrderTableHeader.m; sourceTree = "<group>"; };
 		04C9733F186BF72400138DB8 /* MCNetWorkObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNetWorkObject.h; sourceTree = "<group>"; };
 		04C97340186BF72400138DB8 /* MCNetWorkObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCNetWorkObject.m; sourceTree = "<group>"; };
+		04C97343186D292E00138DB8 /* GCPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCPlaceholderTextView.h; sourceTree = "<group>"; };
+		04C97344186D292E00138DB8 /* GCPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCPlaceholderTextView.m; sourceTree = "<group>"; };
+		04C97346186D565500138DB8 /* MCStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCStep.h; sourceTree = "<group>"; };
+		04C97347186D565500138DB8 /* MCStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCStep.m; sourceTree = "<group>"; };
 		04D230A5182B357E00D4B4AC /* MCBaseNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCBaseNavViewController.h; sourceTree = "<group>"; };
 		04D230A6182B357E00D4B4AC /* MCBaseNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCBaseNavViewController.m; sourceTree = "<group>"; };
 		04D230B0182B883E00D4B4AC /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -708,6 +714,8 @@
 				04DAF4D9184584E3009C7720 /* MCOrder.m */,
 				04C9733218692D5400138DB8 /* MCRecipe.h */,
 				04C9733318692D5400138DB8 /* MCRecipe.m */,
+				04C97346186D565500138DB8 /* MCStep.h */,
+				04C97347186D565500138DB8 /* MCStep.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -811,9 +819,19 @@
 			path = category;
 			sourceTree = "<group>";
 		};
+		04C97342186D292E00138DB8 /* GCPlaceholderTextView */ = {
+			isa = PBXGroup;
+			children = (
+				04C97343186D292E00138DB8 /* GCPlaceholderTextView.h */,
+				04C97344186D292E00138DB8 /* GCPlaceholderTextView.m */,
+			);
+			path = GCPlaceholderTextView;
+			sourceTree = "<group>";
+		};
 		04D230AE182B883E00D4B4AC /* library */ = {
 			isa = PBXGroup;
 			children = (
+				04C97342186D292E00138DB8 /* GCPlaceholderTextView */,
 				04F05A01185EE08700BB25C6 /* AFNetworking */,
 				04069916184F6693006F615C /* HMSegmentedControl */,
 				0437A47118474919000D427B /* alipay */,
@@ -997,6 +1015,7 @@
 				048445CC183DF42D006F4090 /* MCChangePasswordView.m in Sources */,
 				044BC9B41830A6C900D43115 /* MCMineAdressCell.m in Sources */,
 				0497B8071839EEBE008A6F8B /* FMDatabaseAdditions.m in Sources */,
+				04C97348186D565500138DB8 /* MCStep.m in Sources */,
 				0423D3991864170500F08F1E /* MCSearchResultCell.m in Sources */,
 				0497B8091839EEBE008A6F8B /* FMDatabaseQueue.m in Sources */,
 				04DAF4CD1842FA44009C7720 /* MCOrderConfirmHeader_.m in Sources */,
@@ -1060,6 +1079,7 @@
 				04BFBCF51867D9D60085F39F /* MCTipsHeader.m in Sources */,
 				0497B80D1839FD40008A6F8B /* MCUser.m in Sources */,
 				0497B8061839EEBE008A6F8B /* FMDatabase.m in Sources */,
+				04C97345186D292E00138DB8 /* GCPlaceholderTextView.m in Sources */,
 				0437A4971847491A000D427B /* NSString+SBJSON.m in Sources */,
 				04C97337186962F400138DB8 /* MCQuickOrderHeader.m in Sources */,
 				047390BD183C51AE003F443D /* Toast+UIView.m in Sources */,

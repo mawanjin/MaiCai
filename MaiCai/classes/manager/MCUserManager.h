@@ -24,4 +24,5 @@
 -(void)addUserAddress:(MCAddress*)address UserId:(NSString*)id;
 -(void)deleteUserAddressById:(NSString*)addressId;
 -(void)updateUserAddress:(MCAddress*)address;
+-(void)feedbackByTel:(NSString*)tel Content:(NSString*)content;
 @end

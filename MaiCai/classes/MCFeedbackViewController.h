@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "MCBaseNavViewController.h"
+@class GCPlaceholderTextView;
 @interface MCFeedbackViewController :MCBaseNavViewController
+@property (weak, nonatomic) IBOutlet  GCPlaceholderTextView* content;
+@property (weak, nonatomic) IBOutlet UITextField *tel;
+- (IBAction)submitBtnAction:(UIButton *)sender;
 
 @end

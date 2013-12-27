@@ -75,14 +75,17 @@ static MCTradeManager* instance;
                     vegetable.quantity = [product[@"quantity"]integerValue];
                     NSArray* recipes_ = product[@"recipes"];
                     NSMutableArray* recipes = [[NSMutableArray alloc]init];
-                    for(z=0;z<recipes_.count;z++) {
-                        NSDictionary* recipe_ = recipes[z];
-                        MCRecipe* recipe = [[MCRecipe alloc]init];
-                        recipe.id = [recipe_[@"id"]integerValue];
-                        recipe.name = recipe_[@"name"];
-                        recipe.image = recipe_[@"image"];
-                        recipe.dosage = recipe_[@"dosage"];
-                        [recipes addObject:recipe];
+                    if(recipes_ != Nil) {
+                        for(z=0;z<recipes_.count;z++) {
+                            NSDictionary* recipe_ = recipes_[z];
+                            MCRecipe* recipe = [[MCRecipe alloc]init];
+                            recipe.id = [recipe_[@"id"]integerValue];
+                            recipe.name = recipe_[@"name"];
+                            recipe.image = recipe_[@"image"];
+                            recipe.dosage = recipe_[@"dosage"];
+                            [recipes addObject:recipe];
+                        }
+
                     }
                     vegetable.recipes = recipes;
                     [vegetables addObject:vegetable];
@@ -93,6 +96,7 @@ static MCTradeManager* instance;
         }
         return finalResult;
     }else {
+        NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
 }

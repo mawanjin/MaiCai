@@ -14,6 +14,7 @@
 #import "MCCategory.h"
 #import "MCContextManager.h"
 #import "MCRecipe.h"
+#import "MCStep.h"
 
 @implementation MCVegetableManager
 static MCVegetableManager* instance;
@@ -150,6 +151,66 @@ static NSMutableDictionary* relationship;
     recipe.accessoryIngredients = accessoryIngredients;
     
     return recipe;
+}
+
+-(MCRecipe*)getRecipeDetailById:(int)id
+{
+    NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithDictionary:@{
+                                                                                   @"id":[[NSString alloc]initWithFormat:@"%d",id]
+                                                                                   }];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/public/recipe/index.do" Params:params Cache:YES];
+    NSError *error;
+    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
+    
+    BOOL flag = [responseData[@"success"]boolValue];
+    NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    if(!flag) {
+        @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
+    }
+    
+    NSDictionary* data = responseData[@"data"];
+    MCRecipe* recipe = [[MCRecipe alloc]init];
+    recipe.id = [data[@"id"]integerValue];
+    recipe.name = data[@"name"];
+    recipe.image = data[@"image"];
+    recipe.bigImage = data[@"big_image"];
+    recipe.introduction = data[@"introduction"];
+    
+    NSArray* steps_ = data[@"items"];
+    NSMutableArray* steps = [[NSMutableArray alloc]init];
+    for(int i=0;i<steps_.count;i++) {
+        MCStep* step = [[MCStep alloc]init];
+        step.image = steps_[i][@"image"];
+        step.content = steps_[i][@"content"];
+        step.sortOrder = [steps_[i][@"sort_order"]integerValue];
+        [steps addObject:step];
+    }
+    recipe.steps = steps;
+    
+    NSArray* mainIngredients_ = data[@"main_ingredients"];
+    NSMutableArray* mainIngredients = [[NSMutableArray alloc]init];
+    for(int i=0;i<mainIngredients_.count;i++){
+        MCVegetable* vegetable = [[MCVegetable alloc]init];
+        vegetable.name = mainIngredients_[i][@"name"];
+        vegetable.product_id = [mainIngredients_[i][@"product_id"]integerValue];
+        vegetable.dosage = mainIngredients_[i][@"dosage"];
+        [mainIngredients addObject:vegetable];
+    }
+    recipe.mainIngredients = mainIngredients;
+    
+    NSArray* accessoryIngredients_ = data[@"accessory_ingredients"];
+    NSMutableArray* accessoryIngredients = [[NSMutableArray alloc]init];
+    for(int i=0;i<accessoryIngredients_.count;i++){
+        MCVegetable* vegetable = [[MCVegetable alloc]init];
+        vegetable.name = accessoryIngredients_[i][@"name"];
+        vegetable.product_id = [accessoryIngredients_[i][@"product_id"]integerValue];
+        vegetable.dosage = accessoryIngredients_[i][@"dosage"];
+        [accessoryIngredients addObject:vegetable];
+    }
+    recipe.accessoryIngredients = accessoryIngredients;
+    
+    return recipe;
+
 }
 
 

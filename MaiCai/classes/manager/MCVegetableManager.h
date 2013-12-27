@@ -22,4 +22,7 @@
 -(NSMutableArray*)getRecipes;
 //这是一键买菜接口
 -(MCRecipe*)getRecipeById:(int)id;
+
+//获取菜谱详情接口
+-(MCRecipe*)getRecipeDetailById:(int)id;
 @end
