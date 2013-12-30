@@ -72,10 +72,11 @@ static NSMutableDictionary* relationship;
 }
 
 
--(NSMutableArray*)getRecipes
+-(NSMutableArray*)getRecipesByPage:(int)page Pagesize:(int)pagesize
 {
     NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithDictionary:@{
-                                                                                  
+                                                                                    @"page":[[NSString alloc]initWithFormat:@"%d",page],
+                                                                                    @"pagesize":        [[NSString alloc]initWithFormat:@"%d",pagesize]
                                                                                    }];
     NSData* result = [[MCNetwork getInstance]httpPostSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/public/recipe/list.do" Params:params];
     NSError *error;

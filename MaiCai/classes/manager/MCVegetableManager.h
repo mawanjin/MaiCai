@@ -19,7 +19,7 @@
 -(NSMutableArray*)getHotWordsByQuantity:(int)quantity;
 -(NSMutableArray*)getSearchResultByKeywords:(NSString*)words Quantity:(int)quantity;
 -(NSMutableArray*)getSuggestResultByKeywords:(NSString*)words Quantity:(int)quantity;
--(NSMutableArray*)getRecipes;
+-(NSMutableArray*)getRecipesByPage:(int)page Pagesize:(int)pagesize;
 //这是一键买菜接口
 -(MCRecipe*)getRecipeById:(int)id;
 

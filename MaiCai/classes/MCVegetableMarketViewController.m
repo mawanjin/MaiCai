@@ -82,7 +82,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
             self.data = [[MCVegetableManager getInstance]getMarketIndexInfo];
-            self.recipes = [[MCVegetableManager getInstance]getRecipes];
+            self.recipes = [[MCVegetableManager getInstance]getRecipesByPage:1 Pagesize:10];
         }
         @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -229,10 +229,15 @@
         cell.label.text = obj.name;
         NSString* source = [[NSString alloc]initWithFormat:@"%@",obj.image];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            UIImage* image = [[MCNetwork getInstance]loadImageFromSource:source];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                cell.image.image = image;
-            });
+            @try {
+                UIImage* image = [[MCNetwork getInstance]loadImageFromSource:source];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    cell.image.image = image;
+                });
+            }
+            @catch (NSException *exception) {
+                
+            }
         });
  
     }

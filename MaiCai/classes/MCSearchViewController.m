@@ -169,9 +169,9 @@ bool flag = false;
                     [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
                         
                     }];
-
                 }
             }else {
+                
             }
         }
     } else {

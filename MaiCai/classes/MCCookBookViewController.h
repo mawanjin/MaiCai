@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "MCBaseViewController.h"
+@class HMSegmentedControl;
 
 @interface MCCookBookViewController : MCBaseViewController<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property NSMutableArray* recipes;
+@property (nonatomic, strong) HMSegmentedControl *segmentedControl;
 @end
