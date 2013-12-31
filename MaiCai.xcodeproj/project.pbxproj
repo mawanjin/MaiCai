@@ -35,6 +35,8 @@
 		044BC9AE183083DC00D43115 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 044BC9AD183083DC00D43115 /* Main.storyboard */; };
 		044BC9B118308CB200D43115 /* MCNewMineAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044BC9B018308CB200D43115 /* MCNewMineAddressViewController.m */; };
 		044BC9B41830A6C900D43115 /* MCMineAdressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 044BC9B31830A6C900D43115 /* MCMineAdressCell.m */; };
+		044FF8AF187154260077CE67 /* MCHealth.m in Sources */ = {isa = PBXBuildFile; fileRef = 044FF8AE187154260077CE67 /* MCHealth.m */; };
+		044FF8B2187160C60077CE67 /* UIImageView+MCAsynLoadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 044FF8B1187160C60077CE67 /* UIImageView+MCAsynLoadImage.m */; };
 		0464C998182F7015009066C3 /* UIViewController+CWPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 0464C997182F7015009066C3 /* UIViewController+CWPopup.m */; };
 		0464C99C182F7074009066C3 /* MCCartConfirmPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0464C99A182F7074009066C3 /* MCCartConfirmPopupView.m */; };
 		0464C99D182F7074009066C3 /* MCCartConfirmPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0464C99B182F7074009066C3 /* MCCartConfirmPopupView.xib */; };
@@ -213,6 +215,10 @@
 		044BC9B018308CB200D43115 /* MCNewMineAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCNewMineAddressViewController.m; sourceTree = "<group>"; };
 		044BC9B21830A6C900D43115 /* MCMineAdressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMineAdressCell.h; sourceTree = "<group>"; };
 		044BC9B31830A6C900D43115 /* MCMineAdressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMineAdressCell.m; sourceTree = "<group>"; };
+		044FF8AD187154260077CE67 /* MCHealth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCHealth.h; sourceTree = "<group>"; };
+		044FF8AE187154260077CE67 /* MCHealth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCHealth.m; sourceTree = "<group>"; };
+		044FF8B0187160C60077CE67 /* UIImageView+MCAsynLoadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+MCAsynLoadImage.h"; sourceTree = "<group>"; };
+		044FF8B1187160C60077CE67 /* UIImageView+MCAsynLoadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+MCAsynLoadImage.m"; sourceTree = "<group>"; };
 		0464C996182F7015009066C3 /* UIViewController+CWPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CWPopup.h"; sourceTree = "<group>"; };
 		0464C997182F7015009066C3 /* UIViewController+CWPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CWPopup.m"; sourceTree = "<group>"; };
 		0464C999182F7074009066C3 /* MCCartConfirmPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCartConfirmPopupView.h; sourceTree = "<group>"; };
@@ -725,6 +731,8 @@
 				04C9733318692D5400138DB8 /* MCRecipe.m */,
 				04C97346186D565500138DB8 /* MCStep.h */,
 				04C97347186D565500138DB8 /* MCStep.m */,
+				044FF8AD187154260077CE67 /* MCHealth.h */,
+				044FF8AE187154260077CE67 /* MCHealth.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -830,6 +838,8 @@
 				04BFBCFE1868111E0085F39F /* NSDictionary+MCJsonString.m */,
 				04BFBD001868116F0085F39F /* NSArray+MCJsonString.h */,
 				04BFBD011868116F0085F39F /* NSArray+MCJsonString.m */,
+				044FF8B0187160C60077CE67 /* UIImageView+MCAsynLoadImage.h */,
+				044FF8B1187160C60077CE67 /* UIImageView+MCAsynLoadImage.m */,
 			);
 			path = category;
 			sourceTree = "<group>";
@@ -1062,6 +1072,7 @@
 				04B990BB18346D060018F84E /* MCCategory.m in Sources */,
 				04C9733E186A6F1700138DB8 /* MCQuickOrderTableHeader.m in Sources */,
 				04C9734E186D5C7500138DB8 /* MCRecipeDishDescriptionCell.m in Sources */,
+				044FF8AF187154260077CE67 /* MCHealth.m in Sources */,
 				04DAF4E31845D77D009C7720 /* MCOrderDetailCell.m in Sources */,
 				04F05A1A185EE08700BB25C6 /* AFURLConnectionOperation.m in Sources */,
 				0437A4981847491A000D427B /* SBJSON.m in Sources */,
@@ -1118,6 +1129,7 @@
 				04C3733E182A1E9500B01341 /* MCLoginViewController.m in Sources */,
 				0497B80A1839EEBE008A6F8B /* FMResultSet.m in Sources */,
 				046E99C818261F6D0005FB53 /* MCCookBookViewController.m in Sources */,
+				044FF8B2187160C60077CE67 /* UIImageView+MCAsynLoadImage.m in Sources */,
 				04DAF4B7183EF853009C7720 /* MCAddressHelperView.m in Sources */,
 				0423D3961863D71300F08F1E /* MCHotWordsCell.m in Sources */,
 				04B990BE183496E10018F84E /* MCContextManager.m in Sources */,

@@ -15,6 +15,7 @@
 #import "MCContextManager.h"
 #import "MCRecipe.h"
 #import "MCStep.h"
+#import "MCHealth.h"
 
 @implementation MCVegetableManager
 static MCVegetableManager* instance;
@@ -78,7 +79,7 @@ static NSMutableDictionary* relationship;
                                                                                     @"page":[[NSString alloc]initWithFormat:@"%d",page],
                                                                                     @"pagesize":        [[NSString alloc]initWithFormat:@"%d",pagesize]
                                                                                    }];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/public/recipe/list.do" Params:params];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/public/recipe/list.do" Params:params Cache:YES];
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
@@ -100,6 +101,35 @@ static NSMutableDictionary* relationship;
         [recipes addObject:recipe];
     }
     return recipes;
+}
+
+-(NSMutableArray*)getHealthListByPage:(int)page Pagesize:(int)pagesize
+{
+    NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithDictionary:@{
+                                                                                   @"page":[[NSString alloc]initWithFormat:@"%d",page],
+                                                                                   @"pagesize":        [[NSString alloc]initWithFormat:@"%d",pagesize]
+                                                                                   }];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/public/healthcare/list.do" Params:params Cache:YES];
+    NSError *error;
+    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
+    
+    BOOL flag = [responseData[@"success"]boolValue];
+    NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    if(!flag) {
+        @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
+    }
+    
+    NSMutableArray* healthList = [[NSMutableArray alloc]init];
+    NSArray* data = responseData[@"data"];
+    for(int i=0;i<data.count;i++) {
+        MCHealth* health = [[MCHealth alloc]init];
+        health.id = [data[i][@"id"]integerValue];
+        health.name = data[i][@"name"];
+        health.image = data[i][@"image"];
+        health.introduction = data[i][@"introduction"];
+        [healthList addObject:health];
+    }
+    return healthList;
 }
 
 -(MCRecipe*)getRecipeById:(int)id

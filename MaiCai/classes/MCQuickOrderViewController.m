@@ -20,6 +20,7 @@
 #import "MCTradeManager.h"
 #import "MCUser.h"
 #import "MCContextManager.h"
+#import "UIImageView+MCAsynLoadImage.h"
 
 @interface MCQuickOrderViewController ()
 
@@ -58,13 +59,7 @@
                 header.descriptionLabel.text = self.recipe.introduction;
                 
                 NSString* source = [[NSString alloc]initWithFormat:@"%@",self.recipe.bigImage];
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    UIImage* image = [[MCNetwork getInstance]loadImageFromSource:source];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        header.image.image = image;
-                    });
-                });
-
+                [header.image loadImageByUrl:source];
                 self.tableView.tableHeaderView = header;
                  [self.tableView reloadData];
             });
@@ -372,5 +367,6 @@
         }
     });
 }
+
 
 @end

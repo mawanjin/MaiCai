@@ -1041,7 +1041,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="73"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="r_p_maoshanyao" translatesAutoresizingMaskIntoConstraints="NO" id="2jb-xZ-i1w">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2jb-xZ-i1w">
                                                     <rect key="frame" x="5" y="4" width="65" height="65"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
@@ -1077,8 +1077,34 @@
                                             <outlet property="nameLabel" destination="F37-e3-4Yd" id="53o-qq-iBX"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="loadMoreCell" rowHeight="43" id="HEj-vl-7WV">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="healthCell" rowHeight="43" id="kbF-h8-k2j">
                                         <rect key="frame" x="0.0" y="159" width="320" height="43"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kbF-h8-k2j" id="Ane-EO-y8L">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LH2-G4-Z1r">
+                                                    <rect key="frame" x="20" y="11" width="123" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="right_arrow_gray" translatesAutoresizingMaskIntoConstraints="NO" id="8OT-zd-Bsc">
+                                                    <rect key="frame" x="296" y="11" width="11" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dotted_line" translatesAutoresizingMaskIntoConstraints="NO" id="ZPD-eV-vBU">
+                                                    <rect key="frame" x="0.0" y="42" width="320" height="1"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="loadMoreCell" rowHeight="43" id="HEj-vl-7WV">
+                                        <rect key="frame" x="0.0" y="202" width="320" height="43"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HEj-vl-7WV" id="jxU-ru-Fa7">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -2171,7 +2197,6 @@
         <image name="r_p_caijiao" width="150" height="150"/>
         <image name="r_p_caiou" width="150" height="150"/>
         <image name="r_p_gswwc" width="150" height="150"/>
-        <image name="r_p_maoshanyao" width="150" height="150"/>
         <image name="r_p_xiangqin" width="150" height="150"/>
         <image name="right_arrow_gray" width="28" height="45"/>
         <image name="vegetable_detail_down_bg" width="640" height="1136"/>

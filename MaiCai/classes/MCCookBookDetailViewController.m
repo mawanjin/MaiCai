@@ -17,6 +17,7 @@
 #import "MCVegetable.h"
 #import "MCStep.h"
 #import "Toast+UIView.h"
+#import "UIImageView+MCAsynLoadImage.h"
 
 @implementation MCCookBookDetailViewController
 
@@ -43,12 +44,7 @@
                 MCCookBookDetailHeader* header = [MCCookBookDetailHeader initInstance];
                 header.label.text = self.recipe.name;
                 [self.tableView setTableHeaderView:header];
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    UIImage* image = [[MCNetwork getInstance]loadImageFromSource:self.recipe.bigImage];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        header.image.image = image;
-                    });
-                });
+                 [header.image loadImageByUrl:self.recipe.bigImage];
             });
         }
         @catch (NSException *exception) {
@@ -138,12 +134,7 @@
         MCCookStepCell* temp = [tableView dequeueReusableCellWithIdentifier:@"cookStepCell"];
         MCStep* step = self.recipe.steps[indexPath.row];
         temp.label.text = step.content;
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            UIImage* image = [[MCNetwork getInstance]loadImageFromSource:step.image];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                temp.image.image = image;
-            });
-        });
+        [temp.image loadImageByUrl:step.image];
         cell = temp;
     }
     return cell;

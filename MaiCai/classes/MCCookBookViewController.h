@@ -13,5 +13,6 @@
 @interface MCCookBookViewController : MCBaseViewController<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property NSMutableArray* recipes;
+@property NSMutableArray* healthList;
 @property (nonatomic, strong) HMSegmentedControl *segmentedControl;
 @end

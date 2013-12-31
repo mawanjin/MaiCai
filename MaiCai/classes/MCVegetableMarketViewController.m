@@ -23,6 +23,7 @@
 #import "MCNetwork.h"
 #import "MCQuickOrderViewController.h"
 #import "MCRecipe.h"
+#import "UIImageView+MCAsynLoadImage.h"
 
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 
@@ -228,18 +229,7 @@
         MCRecipe* obj = self.recipes[indexPath.row];
         cell.label.text = obj.name;
         NSString* source = [[NSString alloc]initWithFormat:@"%@",obj.image];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            @try {
-                UIImage* image = [[MCNetwork getInstance]loadImageFromSource:source];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    cell.image.image = image;
-                });
-            }
-            @catch (NSException *exception) {
-                
-            }
-        });
- 
+        [cell.image loadImageByUrl:source];
     }
     return myCell;
 }

@@ -15,6 +15,7 @@
 #import "MBProgressHUD.h"
 #import "Toast+UIView.h"
 #import "HMSegmentedControl.h"
+#import "UIImageView+MCAsynLoadImage.h"
 
 @interface MCCookBookViewController ()
 
@@ -47,8 +48,10 @@ int pageSize = 10;
     } else {
         yDelta = 0.0f;
     }
-
+    self.recipes = [[NSMutableArray alloc]init];
+    self.healthList = [[NSMutableArray alloc]init];
     
+    //segmentedControl
     self.segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"菜谱", @"百科"]];
     [self.segmentedControl setSelectedSegmentIndex:0];
     self.segmentedControl.segmentEdgeInset = UIEdgeInsetsMake(0, 10, 0, 10);
@@ -62,24 +65,167 @@ int pageSize = 10;
     self.segmentedControl.scrollEnabled = YES;
     self.segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
     [self.segmentedControl setFrame:CGRectMake(0, 40 + yDelta, 320, 40)];
-    //[self.segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+    [self.segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:self.segmentedControl];
+    
+    
+    //手势滑动控制
+    UISwipeGestureRecognizer* swipeGestureRecognizer1 = [[UISwipeGestureRecognizer alloc]
+                                                         initWithTarget:self
+                                                         action:@selector(handleSwipe:)];
+    swipeGestureRecognizer1.direction =
+    UISwipeGestureRecognizerDirectionLeft;
+    swipeGestureRecognizer1.numberOfTouchesRequired = 1;
+    [self.view addGestureRecognizer:swipeGestureRecognizer1];
+    
+    UISwipeGestureRecognizer* swipeGestureRecognizer2 = [[UISwipeGestureRecognizer alloc]
+                                                         initWithTarget:self
+                                                         action:@selector(handleSwipe:)];
+    swipeGestureRecognizer2.direction =
+    UISwipeGestureRecognizerDirectionRight;
+    swipeGestureRecognizer2.numberOfTouchesRequired = 1;
+    [self.view addGestureRecognizer:swipeGestureRecognizer2];
+
     
     
     UIView* view = [[UIView alloc]initWithFrame:self.segmentedControl.frame];
     [view setBackgroundColor:[UIColor clearColor]];
     self.tableView.tableHeaderView = view;
     
+    page = 1;
+    [self getRecipes];
+    
 }
 
--(void)viewDidAppear:(BOOL)animated
+- (void)didReceiveMemoryWarning
 {
-    [super viewDidAppear:animated];
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    if(self.segmentedControl.selectedSegmentIndex == 0) {
+        //菜谱
+        if(indexPath.row == self.recipes.count) {
+            page++;
+            [self getRecipes];
+        }else {
+            MCCookBookDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCCookBookDetailViewController"];
+            vc.recipe = self.recipes[indexPath.row];
+            [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
+            }];
+        }
+    }else {
+        //养身
+        if(indexPath.row == self.healthList.count) {
+            page++;
+            [self getHealthList];
+        }else{
+        
+        }
+        
+    }
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+   
+        if(self.segmentedControl.selectedSegmentIndex == 0) {
+            if(indexPath.row == self.recipes.count){
+                //加载更多
+                MCCookBookCell* cell = [tableView dequeueReusableCellWithIdentifier:@"loadMoreCell"];
+                return cell;
+            }else {
+                //菜谱
+                MCCookBookCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cookBookCell"];
+                MCRecipe* recipe = self.recipes[indexPath.row];
+                [cell.image loadImageByUrl:recipe.image];
+                cell.nameLabel.text = recipe.name;
+                cell.introductionLabel.text = recipe.introduction;
+                return cell;
+            }
+        }else {
+            if(indexPath.row == self.healthList.count){
+                //加载更多
+                MCCookBookCell* cell = [tableView dequeueReusableCellWithIdentifier:@"loadMoreCell"];
+                return cell;
+            }else {
+                //养身
+                UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"healthCell"];
+                return cell;
+            }
+
+        }
+    
+}
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row == self.recipes.count) {
+        return 43;
+    }else {
+        if(self.segmentedControl.selectedSegmentIndex == 0) {
+            //菜谱
+            return 73;
+        }else {
+            //养身
+            return 43;
+        }
+    }
+    
+}
+
+- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
+	NSLog(@"Selected index %i (via UIControlEventValueChanged)", segmentedControl.selectedSegmentIndex);
+    if(segmentedControl.selectedSegmentIndex == 0) {
+        page = 1;
+        [self.recipes removeAllObjects];
+        [self getRecipes];
+    }else {
+        page = 1;
+        [self.healthList removeAllObjects];
+        [self getHealthList];
+    }
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if(self.segmentedControl.selectedSegmentIndex == 0) {
+       return self.recipes.count+1;
+    }else {
+        return self.healthList.count+1;
+    }
+    
+}
+
+- (IBAction)handleSwipe:(UISwipeGestureRecognizer *)sender {
+    if (sender.direction & UISwipeGestureRecognizerDirectionLeft){
+        NSLog(@"Swiped Left.");
+        if(self.segmentedControl.selectedSegmentIndex < 2) {
+            [self.segmentedControl setSelectedSegmentIndex:(self.segmentedControl.selectedSegmentIndex+1) animated:YES];
+            [self segmentedControlChangedValue:self.segmentedControl];
+            
+        }
+    }
+    if (sender.direction & UISwipeGestureRecognizerDirectionRight){
+        NSLog(@"Swiped Right.");
+        if(self.segmentedControl.selectedSegmentIndex >0) {
+            [self.segmentedControl setSelectedSegmentIndex:(self.segmentedControl.selectedSegmentIndex-1) animated:YES];
+            [self segmentedControlChangedValue:self.segmentedControl];
+        }
+    }
+}
+
+-(void)getRecipes{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    page = 1;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
-            self.recipes = [[MCVegetableManager getInstance]getRecipesByPage:page Pagesize:pageSize];
+            NSMutableArray* newData = [[MCVegetableManager getInstance]getRecipesByPage:page Pagesize:pageSize];
+            
+            [self.recipes addObjectsFromArray:newData];
         }
         @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -95,79 +241,30 @@ int pageSize = 10;
     });
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)getHealthList
 {
-    if(indexPath.row == self.recipes.count) {
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            @try {
-                page++;
-                NSMutableArray* newData = [[MCVegetableManager getInstance]getRecipesByPage:page Pagesize:pageSize];
-                
-                [self.recipes addObjectsFromArray:newData];
-            }
-            @catch (NSException *exception) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.view makeToast:@"无法获取网络资源" duration:2 position:@"center"];
-                });
-            }
-            @finally {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [MBProgressHUD hideHUDForView:self.view animated:YES];
-                    [self.tableView reloadData];
-                });
-            }
-        });
-
-    }else {
-        MCCookBookDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCCookBookDetailViewController"];
-        vc.recipe = self.recipes[indexPath.row];
-        [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
-        }];
-    }
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if(indexPath.row == self.recipes.count){
-        //加载更多
-        MCCookBookCell* cell = [tableView dequeueReusableCellWithIdentifier:@"loadMoreCell"];
-        return cell;
-    }else {
-        MCCookBookCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cookBookCell"];
-        MCRecipe* recipe = self.recipes[indexPath.row];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            UIImage* image = [[MCNetwork getInstance]loadImageFromSource:recipe.image];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        @try {
+            NSMutableArray* newData = [[MCVegetableManager getInstance]getHealthListByPage:page Pagesize:pageSize];
+            
+            [self.healthList addObjectsFromArray:newData];
+        }
+        @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                cell.image.image = image;
+                [self.view makeToast:@"无法获取网络资源" duration:2 position:@"center"];
             });
-        });
-        cell.nameLabel.text = recipe.name;
-        cell.introductionLabel.text = recipe.introduction;
-        return cell;
-    }
+        }
+        @finally {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [self.tableView reloadData];
+            });
+        }
+    });
+
 }
 
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if(indexPath.row == self.recipes.count) {
-        return 43;
-    }else {
-        return 73;
-    }
-    
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return self.recipes.count+1;
-}
 
 @end
