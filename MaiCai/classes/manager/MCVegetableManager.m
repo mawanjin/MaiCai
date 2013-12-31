@@ -96,6 +96,7 @@ static NSMutableDictionary* relationship;
         recipe.id = [data[i][@"id"]integerValue];
         recipe.name = data[i][@"name"];
         recipe.image = data[i][@"image"];
+        recipe.bigImage = data[i][@"big_image"];
         recipe.introduction = data[i][@"introduction"];
         recipe.tags = data[i][@"tags"];
         [recipes addObject:recipe];

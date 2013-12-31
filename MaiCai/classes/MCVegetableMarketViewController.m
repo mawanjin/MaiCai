@@ -41,7 +41,7 @@
 {
     [super viewDidLoad];
     
-    UITableView* table = [[UITableView alloc]initWithFrame:CGRectMake(8, 370, 304, 66*3+50) style:UITableViewStylePlain];
+    UITableView* table = [[UITableView alloc]initWithFrame:CGRectMake(8, 315, 304, 66*3+50) style:UITableViewStylePlain];
     self.tableView = table;
     table.delegate = self;
     table.dataSource = self;
@@ -71,9 +71,9 @@
 {
     [super viewDidAppear:animated];
     if(IS_IPHONE_5){
-        self.scrollView.contentSize = CGSizeMake(320, self.newsView.frame.size.height+self.quickOrderCollectionView.frame.size.height+self.categoryCollectionView.frame.size.height+self.tableView.frame.size.height+40);
+        self.scrollView.contentSize = CGSizeMake(320, self.newsView.frame.size.height+self.quickOrderCollectionView.frame.size.height+self.categoryCollectionView.frame.size.height+self.tableView.frame.size.height+70);
     }else{
-        self.scrollView.contentSize = CGSizeMake(320, self.newsView.frame.size.height+self.quickOrderCollectionView.frame.size.height+self.categoryCollectionView.frame.size.height+self.tableView.frame.size.height+140);
+        self.scrollView.contentSize = CGSizeMake(320, self.newsView.frame.size.height+self.quickOrderCollectionView.frame.size.height+self.categoryCollectionView.frame.size.height+self.tableView.frame.size.height+170);
     }
     //注意这里scrollview不能滚动的原因是因为 MBProgressbar与toast需要在scrollview里面创建
     self.scrollView.scrollEnabled = YES;
@@ -83,7 +83,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
             self.data = [[MCVegetableManager getInstance]getMarketIndexInfo];
-            self.recipes = [[MCVegetableManager getInstance]getRecipesByPage:1 Pagesize:10];
+            self.recipes = [[MCVegetableManager getInstance]getRecipesByPage:1 Pagesize:3];
         }
         @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -97,7 +97,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
               [MBProgressHUD hideHUDForView:self.scrollView animated:YES];
                 [self.quickOrderCollectionView reloadData];
-                self.vegetablePricePageControl.numberOfPages = (self.recipes.count%6 ==0)?self.recipes.count/6:(self.recipes.count/6+1);
+                self.vegetablePricePageControl.numberOfPages = (self.recipes.count%1 ==0)?self.recipes.count/1:(self.recipes.count/1+1);
             });
         }
     });

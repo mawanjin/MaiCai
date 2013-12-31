@@ -169,6 +169,9 @@ MCMineFooter* footer;
             cell.image.image = [UIImage imageNamed:@"mine_personal_grey"];
         }
         cell.label.text = @"个人信息";
+        cell.divideLine.hidden = YES;
+    }else{
+        
     }
     return cell;
 }
@@ -195,6 +198,6 @@ MCMineFooter* footer;
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 55;
+    return 45;
 }
 @end

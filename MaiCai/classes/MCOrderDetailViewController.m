@@ -28,7 +28,6 @@
 #import "AlixLibService.h"
 
 
-
 @implementation MCOrderDetailViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -45,16 +44,11 @@
     [super viewDidLoad];
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
-    [self.tableView setShowsHorizontalScrollIndicator:NO];
-    [self.tableView setShowsVerticalScrollIndicator:NO];
-    
-    //safd
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
             self.order = [[MCTradeManager getInstance]getOrderDetailByOrderId:[[NSString alloc]initWithFormat:@"%d",self.order.id]];
             
-            dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_sync(dispatch_get_main_queue(), ^{
                 //初始化头
                 MCOrderDetailHeader* header = [MCOrderDetailHeader initInstance];
                 header.nameLabel.text = [[NSString alloc]initWithFormat:@"收货人：%@", self.order.shipper];
@@ -66,7 +60,7 @@
                 MCOrderDetailFooter* footer = [MCOrderDetailFooter initInstance];
                 footer.paymentMethodLabel.text = [[NSString alloc]initWithFormat:@"支付方式：%@",self.order.paymentMethod];
                 footer.shipMethodLabel.text = [[NSString alloc]initWithFormat:@"配送方式：%@",self.order.shipMethod];
-                footer.orderStatusLabel.text = [[NSString alloc]initWithFormat:@"订单状态：%@",self.order.status];self.order.status;
+                footer.orderStatusLabel.text = [[NSString alloc]initWithFormat:@"订单状态：%@",self.order.status];
                 self.tableView.tableFooterView = footer;
                 
                 self.totalPriceLabel.text = [[NSString alloc]initWithFormat:@"总价：%.02f元",self.order.total];
@@ -84,17 +78,12 @@
             });
         }
         @finally {
-            dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_sync(dispatch_get_main_queue(), ^{
                 [self.tableView reloadData];
                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             });
         }
     });
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -143,20 +132,10 @@
     return 30;
 }
 
--(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-    UIView* footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 20)];
-    
-    UIImageView* imageView = [[UIImageView alloc]initWithFrame:footer.frame];
-    imageView.image = [UIImage imageNamed:@"cart_down"];
-    [footer addSubview:imageView];
-    footer.backgroundColor = [UIColor clearColor];
-    return  footer;
-}
 
--(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 30;
+    return 66;
 }
 
 

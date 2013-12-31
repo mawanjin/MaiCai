@@ -56,11 +56,7 @@
     self.tableView.tableFooterView = footerView;
     
     self.totalPriceLabel.text = self.previousView.totalPriceLabel.text;
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
+    
     MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
     if(user.defaultAddress == nil) {
         self.tableView.tableHeaderView = [MCOrderConfirmHeader_ initInstance];
@@ -86,11 +82,13 @@
             header.addressLabel.text = [[NSString alloc]initWithFormat:@"地址：%@",self.address.address];
             header.parentView = self;
             self.tableView.tableHeaderView = header;
-
+            
         }
     }
-
+    
+   
 }
+
 
 -(void)initData
 {
@@ -343,5 +341,9 @@
     return 0;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 68;
+}
 
 @end

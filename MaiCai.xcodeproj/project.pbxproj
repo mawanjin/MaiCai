@@ -37,6 +37,9 @@
 		044BC9B41830A6C900D43115 /* MCMineAdressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 044BC9B31830A6C900D43115 /* MCMineAdressCell.m */; };
 		044FF8AF187154260077CE67 /* MCHealth.m in Sources */ = {isa = PBXBuildFile; fileRef = 044FF8AE187154260077CE67 /* MCHealth.m */; };
 		044FF8B2187160C60077CE67 /* UIImageView+MCAsynLoadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 044FF8B1187160C60077CE67 /* UIImageView+MCAsynLoadImage.m */; };
+		044FF8B5187257AA0077CE67 /* MCHealthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 044FF8B4187257AA0077CE67 /* MCHealthCell.m */; };
+		044FF8B818725C580077CE67 /* UILabel+MCAutoResize.m in Sources */ = {isa = PBXBuildFile; fileRef = 044FF8B718725C580077CE67 /* UILabel+MCAutoResize.m */; };
+		044FF8BB18725D7B0077CE67 /* MCHealthDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044FF8BA18725D7B0077CE67 /* MCHealthDetailViewController.m */; };
 		0464C998182F7015009066C3 /* UIViewController+CWPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 0464C997182F7015009066C3 /* UIViewController+CWPopup.m */; };
 		0464C99C182F7074009066C3 /* MCCartConfirmPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0464C99A182F7074009066C3 /* MCCartConfirmPopupView.m */; };
 		0464C99D182F7074009066C3 /* MCCartConfirmPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0464C99B182F7074009066C3 /* MCCartConfirmPopupView.xib */; };
@@ -219,6 +222,12 @@
 		044FF8AE187154260077CE67 /* MCHealth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCHealth.m; sourceTree = "<group>"; };
 		044FF8B0187160C60077CE67 /* UIImageView+MCAsynLoadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+MCAsynLoadImage.h"; sourceTree = "<group>"; };
 		044FF8B1187160C60077CE67 /* UIImageView+MCAsynLoadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+MCAsynLoadImage.m"; sourceTree = "<group>"; };
+		044FF8B3187257AA0077CE67 /* MCHealthCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCHealthCell.h; sourceTree = "<group>"; };
+		044FF8B4187257AA0077CE67 /* MCHealthCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCHealthCell.m; sourceTree = "<group>"; };
+		044FF8B618725C580077CE67 /* UILabel+MCAutoResize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+MCAutoResize.h"; sourceTree = "<group>"; };
+		044FF8B718725C580077CE67 /* UILabel+MCAutoResize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+MCAutoResize.m"; sourceTree = "<group>"; };
+		044FF8B918725D7B0077CE67 /* MCHealthDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCHealthDetailViewController.h; sourceTree = "<group>"; };
+		044FF8BA18725D7B0077CE67 /* MCHealthDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCHealthDetailViewController.m; sourceTree = "<group>"; };
 		0464C996182F7015009066C3 /* UIViewController+CWPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CWPopup.h"; sourceTree = "<group>"; };
 		0464C997182F7015009066C3 /* UIViewController+CWPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CWPopup.m"; sourceTree = "<group>"; };
 		0464C999182F7074009066C3 /* MCCartConfirmPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCartConfirmPopupView.h; sourceTree = "<group>"; };
@@ -569,6 +578,8 @@
 				0423D3921862CB6100F08F1E /* MCSearchViewController.m */,
 				04C9732F1869297A00138DB8 /* MCQuickOrderViewController.h */,
 				04C973301869297A00138DB8 /* MCQuickOrderViewController.m */,
+				044FF8B918725D7B0077CE67 /* MCHealthDetailViewController.h */,
+				044FF8BA18725D7B0077CE67 /* MCHealthDetailViewController.m */,
 			);
 			path = classes;
 			sourceTree = "<group>";
@@ -827,6 +838,8 @@
 				04C9734D186D5C7500138DB8 /* MCRecipeDishDescriptionCell.m */,
 				04C97352186D6D7E00138DB8 /* MCCookBookCell.h */,
 				04C97353186D6D7E00138DB8 /* MCCookBookCell.m */,
+				044FF8B3187257AA0077CE67 /* MCHealthCell.h */,
+				044FF8B4187257AA0077CE67 /* MCHealthCell.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -840,6 +853,8 @@
 				04BFBD011868116F0085F39F /* NSArray+MCJsonString.m */,
 				044FF8B0187160C60077CE67 /* UIImageView+MCAsynLoadImage.h */,
 				044FF8B1187160C60077CE67 /* UIImageView+MCAsynLoadImage.m */,
+				044FF8B618725C580077CE67 /* UILabel+MCAutoResize.h */,
+				044FF8B718725C580077CE67 /* UILabel+MCAutoResize.m */,
 			);
 			path = category;
 			sourceTree = "<group>";
@@ -1041,6 +1056,7 @@
 				044BC9B41830A6C900D43115 /* MCMineAdressCell.m in Sources */,
 				0497B8071839EEBE008A6F8B /* FMDatabaseAdditions.m in Sources */,
 				04C97348186D565500138DB8 /* MCStep.m in Sources */,
+				044FF8B818725C580077CE67 /* UILabel+MCAutoResize.m in Sources */,
 				0423D3991864170500F08F1E /* MCSearchResultCell.m in Sources */,
 				0497B8091839EEBE008A6F8B /* FMDatabaseQueue.m in Sources */,
 				04DAF4CD1842FA44009C7720 /* MCOrderConfirmHeader_.m in Sources */,
@@ -1058,6 +1074,7 @@
 				042F252D186044FE006783C2 /* MCMineCell.m in Sources */,
 				04DAF4E01845CA7E009C7720 /* MCOrderDetailViewController.m in Sources */,
 				04F059F8185EA68A00BB25C6 /* MCCookBookDetailViewController.m in Sources */,
+				044FF8B5187257AA0077CE67 /* MCHealthCell.m in Sources */,
 				0464C998182F7015009066C3 /* UIViewController+CWPopup.m in Sources */,
 				0497B816183AFCB1008A6F8B /* MCRegisterViewController.m in Sources */,
 				0486A0F21835CC6200FDC854 /* MCCartCell.m in Sources */,
@@ -1088,6 +1105,7 @@
 				048445D1183DF96D006F4090 /* MCChangeNicknameView.m in Sources */,
 				0423D3931862CB6100F08F1E /* MCSearchViewController.m in Sources */,
 				04DAF4D218442BCA009C7720 /* MCOrderConfirmFooter.m in Sources */,
+				044FF8BB18725D7B0077CE67 /* MCHealthDetailViewController.m in Sources */,
 				04D230A7182B357E00D4B4AC /* MCBaseNavViewController.m in Sources */,
 				04DAF4BE1842D9AF009C7720 /* MCOrderConfirmHeader.m in Sources */,
 				047390B5183C49B6003F443D /* MCPersonalInfoViewController.m in Sources */,

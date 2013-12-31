@@ -16,6 +16,9 @@
 #import "Toast+UIView.h"
 #import "HMSegmentedControl.h"
 #import "UIImageView+MCAsynLoadImage.h"
+#import "MCHealthCell.h"
+#import "MCHealth.h"
+#import "MCHealthDetailViewController.h"
 
 @interface MCCookBookViewController ()
 
@@ -123,7 +126,11 @@ int pageSize = 10;
             page++;
             [self getHealthList];
         }else{
-        
+            MCHealthDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCHealthDetailViewController"];
+            vc.health = self.healthList[indexPath.row];
+            [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
+            }];
+
         }
         
     }
@@ -153,7 +160,9 @@ int pageSize = 10;
                 return cell;
             }else {
                 //养身
-                UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"healthCell"];
+               MCHealth* health = self.healthList[indexPath.row];
+                MCHealthCell* cell = [tableView dequeueReusableCellWithIdentifier:@"healthCell"];
+                cell.label.text = health.name;
                 return cell;
             }
 
