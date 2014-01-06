@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface MCTipsHeader : UIView
+@property (weak, nonatomic) IBOutlet UILabel *iconLabel;
+@property (weak, nonatomic) IBOutlet UILabel *newsLabel;
 +(id)initInstance;
 @end

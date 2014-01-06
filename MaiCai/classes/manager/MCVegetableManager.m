@@ -280,54 +280,49 @@ static NSMutableDictionary* relationship;
     }
     
     NSDictionary*  data = [dicResult objectForKey:@"data"];
-    NSArray* market = [data objectForKey:@"markets"];
-    NSArray* prices = [data objectForKey:@"prices"];
-    NSArray* special_prices = [data objectForKey:@"special_prices"];
+    NSArray* recipes = [data objectForKey:@"recipes"];
+    NSArray* labels = [data objectForKey:@"labels"];
+    NSArray* products = [data objectForKey:@"products"];
     
     unsigned int i;
-    NSMutableArray* marketArray = [[NSMutableArray alloc]init];
-    for(i=0;i<market.count;i++) {
-        NSDictionary* obj = market[i];
-        MCMarket* temp = [[MCMarket alloc]init];
-        temp.name = obj[@"name"];
-        temp.id = [obj[@"id"]integerValue];
-        temp.distance = obj[@"distance"];
-        [marketArray addObject:temp];
+    NSMutableArray* recipesArray = [[NSMutableArray alloc]init];
+    for(i=0;i<recipes.count;i++) {
+        NSDictionary* obj = recipes[i];
+        MCRecipe* recipe = [[MCRecipe alloc]init];
+        recipe.name = obj[@"name"];
+        recipe.id = [obj[@"id"]integerValue];
+        recipe.image = obj[@"image"];
+        [recipesArray addObject:recipe];
     }
     
-    NSMutableArray* pricesArray = [[NSMutableArray alloc]init];
-    for(i=0;i<prices.count;i++) {
-        NSDictionary* obj = prices[i];
+    NSMutableArray* productsArray = [[NSMutableArray alloc]init];
+    for(i=0;i<products.count;i++) {
+        NSDictionary* obj = products[i];
         MCVegetable* temp = [[MCVegetable alloc]init];
         temp.name = obj[@"name"];
         temp.id = [obj[@"id"]integerValue];
         temp.price = [obj[@"price"] floatValue];
         temp.product_id = [obj[@"product_id"]integerValue];
-        
-        temp.shop = [[MCShop alloc]init];
-        temp.shop.id = [obj[@"shop_id"]integerValue];
         temp.unit = obj[@"unit"];
-        [pricesArray addObject:temp];
+        [productsArray addObject:temp];
     }
     
-    NSMutableArray* specialPricesArray = [[NSMutableArray alloc]init];
-    for(i=0;i<special_prices.count;i++) {
-        NSDictionary* obj = special_prices[i];
-        MCVegetable* temp = [[MCVegetable alloc]init];
-        temp.name = obj[@"name"];
-        temp.id = [obj[@"id"]integerValue];
-        temp.price = [obj[@"price"] floatValue];
-        temp.product_id = [obj[@"product_id"]integerValue];
-        temp.shop = [[MCShop alloc]init];
-        temp.shop.id = [obj[@"shop_id"]integerValue];
-        temp.unit = obj[@"unit"];
-        [specialPricesArray addObject:temp];
+    NSMutableArray* labelsArray = [[NSMutableArray alloc]init];
+    for(i=0;i<labels.count;i++) {
+        NSDictionary* obj = labels[i];
+        NSMutableDictionary* temp = [[NSMutableDictionary alloc]init];
+        temp[@"name"] = obj[@"name"];
+        temp[@"id"] = obj[@"id"];
+        temp[@"color"] = obj[@"color"];
+        temp[@"icon"] = obj[@"icon"];
+        [labelsArray addObject:temp];
     }
     
     NSDictionary *resultData = @{
-                                 @"market" :marketArray ,
-                                 @"prices" : pricesArray,
-                                 @"specialPrices" :specialPricesArray
+                                 @"recipes" :recipesArray ,
+                                 @"labels" : labelsArray,
+                                 @"products" :productsArray,
+                                 @"tip": [data objectForKey:@"tip"]
                              };
     
     NSString* lng = [[NSString alloc]initWithFormat:@"%.06f",[dicResult[@"data"][@"lng"] doubleValue]];
