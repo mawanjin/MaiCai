@@ -380,7 +380,7 @@ static NSMutableDictionary* relationship;
 }
 
 
--(NSMutableArray*)getShopVegetablesByProductId:(int)id Longitude:(NSString*)longitude Latitude:(NSString*)latitude
+-(NSMutableDictionary*)getVegetableDetailByProductId:(int)id Longitude:(NSString*)longitude Latitude:(NSString*)latitude
 {
     NSDictionary* params = @{
                              @"id":[[NSString alloc]initWithFormat:@"%d",id],
@@ -398,30 +398,49 @@ static NSMutableDictionary* relationship;
     }
     
     NSDictionary* dicResult = responseData[@"data"];
-    int product_id = [dicResult[@"product_id"]integerValue];
-    NSString* unit = (NSString*)dicResult[@"unit"];
-    NSArray* array = dicResult[@"tenants"];
+    NSMutableDictionary* obj = [[NSMutableDictionary alloc]init];
     
-    NSMutableArray* vegetables = [[NSMutableArray alloc]init];
-    unsigned int i=0;
-    for(i=0;i<array.count;i++) {
-        NSDictionary* obj = array[i];
-        MCVegetable* temp = [[MCVegetable alloc]init];
-        MCShop* shop = [[MCShop alloc]init];
-        shop.id = [obj[@"id"]integerValue];
-        shop.name = obj[@"name"];
-        shop.star = [obj[@"star"]integerValue];
+    obj[@"summary"] =  dicResult[@"summary"];
+    NSArray* tenantsArray = dicResult[@"tenants"];
+    NSMutableArray* tenants = [[NSMutableArray alloc]init];
+    for(int i=0;i<tenantsArray.count;i++) {
+        MCShop* tenant = [[MCShop alloc]init];
+        NSDictionary* tenant_ = tenantsArray[i];
+        tenant.id = [tenant_[@"id"]integerValue];
+        tenant.name = tenant_[@"name"];
+        tenant.image = tenant_[@"image"];
+        tenant.license = tenant_[@"license"];
+        tenant.star = [tenant_[@"star"]integerValue];
         MCMarket* market = [[MCMarket alloc]init];
-        market.name = obj[@"market_name"];
-        shop.market = market;
-        temp.shop = shop;
-        temp.shop_product_id = [obj[@"product_id"]integerValue];
-        temp.product_id = product_id;
-        temp.unit = unit;
-        temp.price = [obj[@"price"]floatValue];
-        [vegetables addObject:temp];
+        market.name = tenant_[@"market_name"];
+        tenant.market = market;
+        NSMutableArray* vegetables = [[NSMutableArray alloc]init];
+        MCVegetable* vegetable = [[MCVegetable alloc]init];
+        vegetable.product_id = [dicResult[@"product_id"]integerValue];
+        vegetable.shop_product_id =[tenant_[@"product_id"]integerValue];
+        vegetable.price = [tenant_[@"price"]floatValue];
+        vegetable.unit = dicResult[@"unit"];
+        vegetable.originalPrice = [tenant_[@"original_price"]floatValue];
+        vegetable.quantity = [tenant_[@"sales_quantity"]integerValue];
+        [vegetables addObject:vegetable];
+        tenant.vegetables = vegetables;
+        [tenants addObject:tenant];
     }
-    return vegetables;
+    obj[@"tenants"] = tenants;
+    
+    NSArray* recipesArray = dicResult[@"recipes"];
+    NSMutableArray* recipes = [[NSMutableArray alloc]init];
+    for(int i=0;i<recipesArray.count;i++) {
+        NSDictionary* recipe_ = recipesArray[i];
+        MCRecipe* recipe = [[MCRecipe alloc]init];
+        recipe.id = [recipe_[@"id"]integerValue];
+        recipe.name = recipe_[@"name"];
+        recipe.image = recipe_[@"image"];
+        recipe.introduction = recipe_[@"introduction"];
+        [recipes addObject:recipe];
+    }
+    obj[@"recipes"] = recipes;
+    return obj;
 }
 
 -(NSMutableDictionary*)getShopVegetablesByShopId:(NSString*)id

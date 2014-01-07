@@ -12,6 +12,9 @@
 		04069921185021D8006F615C /* MCMarketTradeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04069920185021D8006F615C /* MCMarketTradeCell.xib */; };
 		0419D53A18505ECD000F7D51 /* MCVegetableDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0419D53918505ECD000F7D51 /* MCVegetableDetailViewController.m */; };
 		0419D53C18507748000F7D51 /* MCMarketIndexTipCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0419D53B18507748000F7D51 /* MCMarketIndexTipCell.xib */; };
+		041E5A79187BC89200BB0F67 /* MCVegetableDetailRecipeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E5A78187BC89200BB0F67 /* MCVegetableDetailRecipeCell.m */; };
+		041E5A7C187BC8EB00BB0F67 /* MCVegetableDetailDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E5A7B187BC8EB00BB0F67 /* MCVegetableDetailDescriptionCell.m */; };
+		041E5A7F187BC90D00BB0F67 /* MCVegetableDetailShopInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E5A7E187BC90D00BB0F67 /* MCVegetableDetailShopInfoCell.m */; };
 		0423D3931862CB6100F08F1E /* MCSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0423D3921862CB6100F08F1E /* MCSearchViewController.m */; };
 		0423D3961863D71300F08F1E /* MCHotWordsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0423D3951863D71300F08F1E /* MCHotWordsCell.m */; };
 		0423D3991864170500F08F1E /* MCSearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0423D3981864170500F08F1E /* MCSearchResultCell.m */; };
@@ -179,6 +182,12 @@
 		0419D53818505ECD000F7D51 /* MCVegetableDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCVegetableDetailViewController.h; sourceTree = "<group>"; };
 		0419D53918505ECD000F7D51 /* MCVegetableDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCVegetableDetailViewController.m; sourceTree = "<group>"; };
 		0419D53B18507748000F7D51 /* MCMarketIndexTipCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCMarketIndexTipCell.xib; sourceTree = "<group>"; };
+		041E5A77187BC89200BB0F67 /* MCVegetableDetailRecipeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCVegetableDetailRecipeCell.h; sourceTree = "<group>"; };
+		041E5A78187BC89200BB0F67 /* MCVegetableDetailRecipeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCVegetableDetailRecipeCell.m; sourceTree = "<group>"; };
+		041E5A7A187BC8EB00BB0F67 /* MCVegetableDetailDescriptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCVegetableDetailDescriptionCell.h; sourceTree = "<group>"; };
+		041E5A7B187BC8EB00BB0F67 /* MCVegetableDetailDescriptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCVegetableDetailDescriptionCell.m; sourceTree = "<group>"; };
+		041E5A7D187BC90D00BB0F67 /* MCVegetableDetailShopInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCVegetableDetailShopInfoCell.h; sourceTree = "<group>"; };
+		041E5A7E187BC90D00BB0F67 /* MCVegetableDetailShopInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCVegetableDetailShopInfoCell.m; sourceTree = "<group>"; };
 		0423D3911862CB6100F08F1E /* MCSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSearchViewController.h; sourceTree = "<group>"; };
 		0423D3921862CB6100F08F1E /* MCSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSearchViewController.m; sourceTree = "<group>"; };
 		0423D3941863D71300F08F1E /* MCHotWordsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCHotWordsCell.h; sourceTree = "<group>"; };
@@ -848,6 +857,12 @@
 				04BFBCF31867D9D60085F39F /* MCTipsHeader.h */,
 				04BFBCF41867D9D60085F39F /* MCTipsHeader.m */,
 				04BFBCF61867D9F10085F39F /* MCTipsHeader.xib */,
+				041E5A7A187BC8EB00BB0F67 /* MCVegetableDetailDescriptionCell.h */,
+				041E5A7B187BC8EB00BB0F67 /* MCVegetableDetailDescriptionCell.m */,
+				041E5A77187BC89200BB0F67 /* MCVegetableDetailRecipeCell.h */,
+				041E5A78187BC89200BB0F67 /* MCVegetableDetailRecipeCell.m */,
+				041E5A7D187BC90D00BB0F67 /* MCVegetableDetailShopInfoCell.h */,
+				041E5A7E187BC90D00BB0F67 /* MCVegetableDetailShopInfoCell.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -1075,6 +1090,7 @@
 				04DAF4E61845DD9C009C7720 /* MCOrderDetailFooter.m in Sources */,
 				044BC9B118308CB200D43115 /* MCNewMineAddressViewController.m in Sources */,
 				04C9732E186928D200138DB8 /* MCQuickOrderCell.m in Sources */,
+				041E5A7F187BC90D00BB0F67 /* MCVegetableDetailShopInfoCell.m in Sources */,
 				0497B8101839FF1D008A6F8B /* MCDBManger.m in Sources */,
 				04B98D8B18331D680018F84E /* MCShop.m in Sources */,
 				04F05A20185FE5F100BB25C6 /* MCCookStepCell.m in Sources */,
@@ -1109,8 +1125,10 @@
 				0497B813183A012B008A6F8B /* MCUserManager.m in Sources */,
 				04F05A15185EE08700BB25C6 /* AFHTTPRequestOperation.m in Sources */,
 				04C9733418692D5400138DB8 /* MCRecipe.m in Sources */,
+				041E5A7C187BC8EB00BB0F67 /* MCVegetableDetailDescriptionCell.m in Sources */,
 				0406991C18500C50006F615C /* MCMarketTradeCell.m in Sources */,
 				0489951F181A115100E1B156 /* MCAppDelegate.m in Sources */,
+				041E5A79187BC89200BB0F67 /* MCVegetableDetailRecipeCell.m in Sources */,
 				046E99C718261F6D0005FB53 /* MCBaseViewController.m in Sources */,
 				04DAF4D718457FE4009C7720 /* MCMineOrderViewController.m in Sources */,
 				048445D1183DF96D006F4090 /* MCChangeNicknameView.m in Sources */,

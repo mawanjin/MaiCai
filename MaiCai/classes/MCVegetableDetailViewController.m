@@ -14,9 +14,14 @@
 #import "MCContextManager.h"
 #import "Toast+UIView.h"
 #import "MCShop.h"
+#import "MCVegetableDetailDescriptionCell.h"
+#import "MCVegetableDetailRecipeCell.h"
+#import "MCVegetableDetailShopInfoCell.h"
+#import "UIImageView+MCAsynLoadImage.h"
+#import "MCRecipe.h"
 
 @interface MCVegetableDetailViewController ()
-
+@property NSDictionary* data;
 @end
 
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
@@ -41,7 +46,7 @@
     NSString* product_id =[[NSString alloc]initWithFormat:@"%d",self.vegetable.product_id];
     NSString* image = [[MCVegetableManager getInstance]getRelationshipBetweenProductAndImage][product_id];
     self.imageIcon.image = [UIImage imageNamed:image];
-    self.discoutPriceLabel.hidden = YES;
+    //self.discoutPriceLabel.hidden = YES;
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -52,10 +57,9 @@
     
     self.navItem.title = self.vegetable.name;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
-            self.vegetable = [[MCVegetableManager getInstance]getShopVegetablesByProductId:self.vegetable.id Longitude: lng Latitude:lat][0];
+            self.data = [[MCVegetableManager getInstance]getVegetableDetailByProductId:self.vegetable.id Longitude: lng Latitude:lat];
         }
         @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -64,9 +68,12 @@
         }@finally {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
-                
-                self.priceLabel.text = [[NSString alloc]initWithFormat:@"市场价：%.02f/%@",self.vegetable.price,self.vegetable.unit];
+                NSMutableArray* tenants = self.data[@"tenants"];
+                MCShop* shop = tenants[0];
+                 self.vegetable = shop.vegetables[0];
+                self.priceLabel.text = [[NSString alloc]initWithFormat:@"现价：%.02f元/%@",self.vegetable.price,self.vegetable.unit];
                 self.shopLabel.text = self.vegetable.shop.name;
+                [self.tableView reloadData];
                 if(IS_IPHONE_5){
                     
                 }else{
@@ -87,31 +94,91 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 30;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0;
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if(section == 0) {
+        return @"介绍";
+    }else if(section == 1) {
+        return @"店铺信息";
+    }else {
+        return @"相关菜谱";
+    }
+}
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [tableView dequeueReusableCellWithIdentifier:@"vegetableDetailCell"];
+    if(indexPath.section == 0) {
+       MCVegetableDetailDescriptionCell* cell =  [tableView dequeueReusableCellWithIdentifier:@"vegetableDetailDescriptionCell"];
+        cell.descriptionLabel.text = self.data[@"summary"];
+        return cell;
+    }else if(indexPath.section == 1) {
+        MCVegetableDetailShopInfoCell* cell = [tableView dequeueReusableCellWithIdentifier:@"vegetableDetailShopInfoCell"];
+        MCShop* shop = self.data[@"tenants"][0];
+        cell.shopNameLabel.text = shop.name;
+        [cell.shopImage loadImageByUrl:shop.image];
+        [cell.licenseImage loadImageByUrl:shop.license];
+        return cell;
+    }else{
+        MCVegetableDetailRecipeCell* cell = [tableView dequeueReusableCellWithIdentifier:@"vegetableDetailRecipeCell"];
+        NSMutableArray* recipes = self.data[@"recipes"];
+        MCRecipe* recipe = recipes[indexPath.row];
+        [cell.icon loadImageByUrl:recipe.image];
+        cell.name.text = recipe.name;
+        cell.description.text = recipe.introduction;
+        if(indexPath.row == (recipes.count-1)) {
+            cell.divideLine.hidden = YES;
+        }
+        return cell;
+    }
+}
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.section == 0) {
+        //商品介绍
+        return 84;
+    }else if(indexPath.section == 1) {
+        //店铺信息
+        return 110;
+    }else {
+        //菜谱
+        return 68;
+    }
 }
 
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    if(section == 0) {
+        //商品介绍
+        return 1;
+    }else if(section == 1) {
+        //店铺信息
+        return 1;
+    }else {
+        //菜谱
+        return ((NSMutableArray*)self.data[@"recipes"]).count;
+    }
 }
 
-- (IBAction)segementChooseAction:(id)sender {
-    //处理显示
-    UIButton* btn = (UIButton*)sender;
-    [self.cookBookBtn setBackgroundColor:[UIColor clearColor]];
-    [self.healthBtn setBackgroundColor:[UIColor clearColor]];
-    if(btn == self.cookBookBtn) {
-        [self.healthBtn setBackgroundImage:[UIImage imageNamed:@"label_bg"] forState:UIControlStateNormal];
-        [self.cookBookBtn setBackgroundImage:Nil forState:UIControlStateNormal];
-    }else{
-        [self.cookBookBtn setBackgroundImage:[UIImage imageNamed:@"label_bg"] forState:UIControlStateNormal];
-        [self.healthBtn setBackgroundImage:Nil forState:UIControlStateNormal];
-    }
-    
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 3;
 }
+
+
 
 - (IBAction)phoneCallAction:(id)sender {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://10010"]];//打电话

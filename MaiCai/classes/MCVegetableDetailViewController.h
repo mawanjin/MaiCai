@@ -11,8 +11,7 @@
 @class MCVegetable;
 
 @interface MCVegetableDetailViewController : MCBaseNavViewController<UITableViewDataSource,UITableViewDelegate>
-@property (weak, nonatomic) IBOutlet UIButton *healthBtn;
-@property (weak, nonatomic) IBOutlet UIButton *cookBookBtn;
+
 @property MCVegetable* vegetable;
 @property (weak, nonatomic) IBOutlet UIImageView *imageIcon;
 @property (weak, nonatomic) IBOutlet UILabel *discoutPriceLabel;
@@ -21,7 +20,6 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *shopLabel;
 
-- (IBAction)segementChooseAction:(id)sender;
 
 - (IBAction)phoneCallAction:(id)sender;
 - (IBAction)addProductToCartAction:(id)sender;

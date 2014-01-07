@@ -40,7 +40,7 @@ static MCTradeManager* instance;
                              @"id":id,
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/public/offline/cart/index.do" Params:data Cache:YES];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/public/offline/cart/index.do" Params:data Cache:NO];
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
@@ -75,7 +75,7 @@ static MCTradeManager* instance;
                     vegetable.quantity = [product[@"quantity"]integerValue];
                     NSArray* recipes_ = product[@"recipes"];
                     NSMutableArray* recipes = [[NSMutableArray alloc]init];
-                    if(recipes_ != Nil) {
+                    if((NSNull*)recipes_ != [NSNull null]) {
                         for(z=0;z<recipes_.count;z++) {
                             NSDictionary* recipe_ = recipes_[z];
                             MCRecipe* recipe = [[MCRecipe alloc]init];
@@ -85,7 +85,6 @@ static MCTradeManager* instance;
                             recipe.dosage = recipe_[@"dosage"];
                             [recipes addObject:recipe];
                         }
-
                     }
                     vegetable.recipes = recipes;
                     [vegetables addObject:vegetable];
@@ -109,7 +108,7 @@ static MCTradeManager* instance;
                              @"sign":sign
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/private/cart/index.do" Params:data Cache:YES];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/private/cart/index.do" Params:data Cache:NO];
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
@@ -141,6 +140,22 @@ static MCTradeManager* instance;
                     vegetable.price = [product[@"price"]floatValue];
                     vegetable.unit = product[@"unit"];
                     vegetable.quantity = [product[@"quantity"]integerValue];
+                    
+                    NSArray* recipes_ = product[@"recipes"];
+                    NSMutableArray* recipes = [[NSMutableArray alloc]init];
+                    if((NSNull*)recipes_ != [NSNull null]) {
+                        for(int z=0;z<recipes_.count;z++) {
+                            NSDictionary* recipe_ = recipes_[z];
+                            MCRecipe* recipe = [[MCRecipe alloc]init];
+                            recipe.id = [recipe_[@"id"]integerValue];
+                            recipe.name = recipe_[@"name"];
+                            recipe.image = recipe_[@"image"];
+                            recipe.dosage = recipe_[@"dosage"];
+                            [recipes addObject:recipe];
+                        }
+                    }
+                    vegetable.recipes = recipes;
+                    
                     [vegetables addObject:vegetable];
                 }
                 temp.vegetables = vegetables;

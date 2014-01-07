@@ -15,5 +15,7 @@
 @property unsigned int star;
 @property MCMarket* market;
 @property NSMutableArray* vegetables;
+@property NSString* image;
+@property NSString* license;
 @property BOOL isSelected;
 @end
