@@ -89,9 +89,9 @@ NSMutableArray* products;
                 [self.scrollView addSubview:table];
                 
                 if(IS_IPHONE_5){
-                    self.scrollView.contentSize = CGSizeMake(320, self.newsView.frame.size.height+self.quickOrderCollectionView.frame.size.height+self.categoryCollectionView.frame.size.height+self.tableView.frame.size.height+70);
+                    self.scrollView.contentSize = CGSizeMake(320, self.newsView.frame.size.height+self.quickOrderCollectionView.frame.size.height+self.categoryCollectionView.frame.size.height+self.tableView.frame.size.height+130);
                 }else{
-                    self.scrollView.contentSize = CGSizeMake(320, self.newsView.frame.size.height+self.quickOrderCollectionView.frame.size.height+self.categoryCollectionView.frame.size.height+self.tableView.frame.size.height+170);
+                    self.scrollView.contentSize = CGSizeMake(320, self.newsView.frame.size.height+self.quickOrderCollectionView.frame.size.height+self.categoryCollectionView.frame.size.height+self.tableView.frame.size.height+210);
                 }
                 //注意这里scrollview不能滚动的原因是因为 MBProgressbar与toast需要在scrollview里面创建
                 self.scrollView.scrollEnabled = YES;

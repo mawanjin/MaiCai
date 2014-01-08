@@ -15,4 +15,5 @@
 @property NSString* bigImage;
 @property NSString* introduction;
 @property NSMutableArray* items;
+@property NSMutableArray* products;
 @end

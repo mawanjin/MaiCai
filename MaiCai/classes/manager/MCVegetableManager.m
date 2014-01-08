@@ -480,6 +480,48 @@ static NSMutableDictionary* relationship;
     return finalResult;
 }
 
+-(MCHealth*)getHealthDetailById:(int)id
+{
+    NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithDictionary:@{
+                                                                                   @"id":[[NSString alloc]initWithFormat:@"%d",id]
+                                                                                   }];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/public/healthcare/index.do" Params:params Cache:YES];
+    NSError *error;
+    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
+    
+    BOOL flag = [responseData[@"success"]boolValue];
+    NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    if(!flag) {
+        @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
+    }
+    
+    NSDictionary* data = responseData[@"data"];
+    MCHealth* health = [[MCHealth alloc]init];
+    
+    health.id = [data[@"id"]integerValue];
+    health.name = data[@"name"];
+    health.bigImage = data[@"big_image"];
+    health.introduction = data[@"introduction"];
+    health.items = data[@"items"];
+    NSMutableArray* products = [[NSMutableArray alloc]init];
+    NSMutableArray* products_ = data[@"products"];
+    
+    for(int i=0;i<products_.count;i++) {
+        NSDictionary* product_ = products_[i];
+        MCVegetable* product = [[MCVegetable alloc]init];
+        product.id = [product_[@"id"]integerValue];
+        product.name = product_[@"name"];
+        product.product_id = [product_[@"product_id"]integerValue];
+        product.price = [product_[@"price"] floatValue];
+        product.originalPrice = [product_[@"original_price"] floatValue];
+        product.unit = product_[@"unit"];
+        [products addObject:product];
+    }
+    health.products = products;
+    
+    return health;
+}
+
 
 
 -(NSMutableDictionary*)getRelationshipBetweenProductAndImage

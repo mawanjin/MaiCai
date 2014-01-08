@@ -35,13 +35,14 @@
                                                            [UIColor whiteColor], NSForegroundColorAttributeName, nil]];
     
     //设置tabbar背景
-
-    [self.tabBarController.tabBar setBackgroundColor:[UIColor colorWithRed:0.89f green:0.89f blue:0.89f alpha:1.00f]];
-    [self.tabBarController.tabBar setTintColor:[UIColor colorWithRed:0.36f green:0.74f blue:0.16f alpha:1.00f]];
+    
+//    [self.tabBarController.tabBar setBackgroundColor:[UIColor colorWithRed:0.89f green:0.89f blue:0.89f alpha:1.00f]];
+    [self.tabBarController.tabBar setTintColor:[UIColor whiteColor]];
     
     self.view.backgroundColor = [UIColor colorWithRed:0.95f green:0.95f blue:0.95f alpha:1.00f];
     
-    //self.tabBarController.tabBar.barStyle = UIBarStyleBlackOpaque;
+    self.tabBarController.tabBar.barStyle = UIBarStyleBlack;
+    self.tabBarController.tabBar.translucent = NO;
     
 }
 

@@ -82,7 +82,7 @@
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="我的" image="icon_kitchen" id="LVQ-2N-vvW"/>
+                    <tabBarItem key="tabBarItem" title="我的" image="icon_mine" id="LVQ-2N-vvW"/>
                     <navigationItem key="navigationItem" title="我的" id="fQB-6D-hZg"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
@@ -234,7 +234,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="首页" image="icon_vegetableTrade" id="ARu-ap-jSj"/>
+                    <tabBarItem key="tabBarItem" title="首页" image="icon_index" id="ARu-ap-jSj"/>
                     <navigationItem key="navigationItem" title="健康买菜" id="5KV-ga-wFz"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
@@ -250,16 +250,16 @@
             </objects>
             <point key="canvasLocation" x="-2002" y="-1288"/>
         </scene>
-        <!--Navigation Controller - 养身-->
+        <!--Navigation Controller - Item-->
         <scene sceneID="Czc-Tx-Hck">
             <objects>
                 <navigationController definesPresentationContext="YES" id="g0L-CL-PZK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="养身" image="icon_cookbook" id="WyZ-zZ-X3Q"/>
+                    <tabBarItem key="tabBarItem" title="Item" id="WyZ-zZ-X3Q"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="WxW-vC-o6G">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="pfq-0u-o67" kind="relationship" relationship="rootViewController" id="lrY-cg-Jv5"/>
+                        <segue destination="pfq-0u-o67" kind="relationship" relationship="rootViewController" id="ajL-Hm-5HG"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2vY-Bb-Z83" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -718,7 +718,7 @@
                             <constraint firstItem="syl-Bh-HfE" firstAttribute="top" secondItem="VUE-GC-8zd" secondAttribute="bottom" id="kih-TM-PrP"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="菜市场" image="icon_vegetableMarket" id="qiA-UI-rg6"/>
+                    <tabBarItem key="tabBarItem" title="菜市场" image="icon_market" id="qiA-UI-rg6"/>
                     <navigationItem key="navigationItem" title="莘庄菜市场" id="jsu-Ou-Kre"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
@@ -740,10 +740,19 @@
                     <view key="view" contentMode="scaleToFill" id="ylD-LI-su3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m8p-eu-sux">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="养身" id="GXO-Ul-JlU"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="scrollView" destination="m8p-eu-sux" id="PP6-IG-Qdv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VWd-if-cpn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1156,7 +1165,7 @@
                             <constraint firstItem="Ppe-Ix-EiN" firstAttribute="top" secondItem="sc7-r1-BKE" secondAttribute="top" id="k2Y-xE-YRM"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="养身" image="icon_cookbook" id="zyU-FS-tTY"/>
+                    <tabBarItem key="tabBarItem" title="养身" image="icon_health" id="zyU-FS-tTY"/>
                     <navigationItem key="navigationItem" title="养身" id="UL0-no-eWb"/>
                     <connections>
                         <outlet property="tableView" destination="Ppe-Ix-EiN" id="wmt-5S-Xw2"/>
@@ -2201,10 +2210,10 @@
         <image name="cart_choose_btn_normal" width="40" height="40"/>
         <image name="check" width="34" height="24"/>
         <image name="dotted_line" width="640" height="1"/>
-        <image name="icon_cookbook" width="30" height="30"/>
-        <image name="icon_kitchen" width="30" height="30"/>
-        <image name="icon_vegetableMarket" width="30" height="30"/>
-        <image name="icon_vegetableTrade" width="30" height="30"/>
+        <image name="icon_health" width="24" height="24"/>
+        <image name="icon_index" width="24" height="24"/>
+        <image name="icon_market" width="24" height="24"/>
+        <image name="icon_mine" width="24" height="24"/>
         <image name="mine_address_normal" width="80" height="80"/>
         <image name="mountain_image" width="480" height="140"/>
         <image name="r_p_caijiao" width="150" height="150"/>

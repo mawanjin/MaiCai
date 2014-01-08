@@ -218,10 +218,15 @@ bool flag = false;
 -(void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
     if(!flag) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            self.suggestData = [[MCVegetableManager getInstance]getSuggestResultByKeywords:searchText Quantity:10];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.searchDisplayController.searchResultsTableView reloadData];
-            });
+            if(searchText == Nil|| [searchText isEqualToString:@""]) {
+            
+            }else {
+                self.suggestData = [[MCVegetableManager getInstance]getSuggestResultByKeywords:searchText Quantity:10];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.searchDisplayController.searchResultsTableView reloadData];
+                });
+            }
+           
             
         });
     }else {

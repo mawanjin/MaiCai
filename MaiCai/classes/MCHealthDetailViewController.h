@@ -12,4 +12,5 @@
 
 @interface MCHealthDetailViewController : MCBaseNavViewController
 @property MCHealth* health;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @end

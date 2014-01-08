@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @class MCRecipe;
+@class MCHealth;
 
 @interface MCVegetableManager : NSObject
 +(MCVegetableManager*)getInstance;
@@ -26,4 +27,6 @@
 
 //获取菜谱详情接口
 -(MCRecipe*)getRecipeDetailById:(int)id;
+
+-(MCHealth*)getHealthDetailById:(int)id;
 @end
