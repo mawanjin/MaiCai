@@ -61,7 +61,7 @@
                 NSString* source = [[NSString alloc]initWithFormat:@"%@",self.recipe.bigImage];
                 [header.image loadImageByUrl:source];
                 self.tableView.tableHeaderView = header;
-                 [self.tableView reloadData];
+                [self.tableView reloadData];
             });
         }
     });

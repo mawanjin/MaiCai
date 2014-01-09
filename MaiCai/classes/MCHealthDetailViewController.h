@@ -10,7 +10,8 @@
 #import "MCBaseNavViewController.h"
 @class MCHealth;
 
-@interface MCHealthDetailViewController : MCBaseNavViewController
+@interface MCHealthDetailViewController : MCBaseNavViewController<UICollectionViewDataSource,UICollectionViewDelegate>
 @property MCHealth* health;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+- (IBAction)clickAction:(id)sender;
 @end

@@ -38,7 +38,9 @@
                         <color key="backgroundColor" red="0.67450982329999998" green="0.67450982329999998" blue="0.67450982329999998" alpha="1" colorSpace="deviceRGB"/>
                     </imageView>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="descriptionLabel" destination="dCe-Uv-meJ" id="tYw-Ec-I0a"/>
                 <outlet property="divideLine" destination="Coe-RD-MHh" id="lbQ-AO-mkV"/>

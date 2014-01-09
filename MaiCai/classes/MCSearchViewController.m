@@ -14,6 +14,10 @@
 #import "MCVegetableDetailViewController.h"
 #import "MCVegetable.h"
 #import "MBProgressHUD.h"
+#import "MCCookBookDetailViewController.h"
+#import "MCRecipe.h"
+#import "MCHealthDetailViewController.h"
+#import "MCHealth.h"
 
 @interface MCSearchViewController ()
 
@@ -168,6 +172,20 @@ bool flag = false;
                     vc.vegetable = temp;
                     [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
                         
+                    }];
+                }else if ([obj[@"type"]integerValue] == 1) {
+                    MCCookBookDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCCookBookDetailViewController"];
+                    MCRecipe* recipe = [[MCRecipe alloc]init];
+                    recipe.id = [obj[@"id"]integerValue];
+                    vc.recipe = recipe;
+                    [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
+                    }];
+                }else if([obj[@"type"]integerValue] == 0) {
+                    MCHealthDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCHealthDetailViewController"];
+                    MCHealth* health = [[MCHealth alloc]init];
+                    health.id = [obj[@"id"]integerValue];
+                    vc.health = health;
+                    [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
                     }];
                 }
             }else {

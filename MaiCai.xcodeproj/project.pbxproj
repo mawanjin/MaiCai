@@ -15,6 +15,8 @@
 		041E5A79187BC89200BB0F67 /* MCVegetableDetailRecipeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E5A78187BC89200BB0F67 /* MCVegetableDetailRecipeCell.m */; };
 		041E5A7C187BC8EB00BB0F67 /* MCVegetableDetailDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E5A7B187BC8EB00BB0F67 /* MCVegetableDetailDescriptionCell.m */; };
 		041E5A7F187BC90D00BB0F67 /* MCVegetableDetailShopInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E5A7E187BC90D00BB0F67 /* MCVegetableDetailShopInfoCell.m */; };
+		041E5A85187D2F8F00BB0F67 /* MCHealthDetailProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E5A84187D2F8F00BB0F67 /* MCHealthDetailProductCell.m */; };
+		041E5A87187D2FB400BB0F67 /* MCHealthDetailProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041E5A86187D2FB400BB0F67 /* MCHealthDetailProductCell.xib */; };
 		0423D3931862CB6100F08F1E /* MCSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0423D3921862CB6100F08F1E /* MCSearchViewController.m */; };
 		0423D3961863D71300F08F1E /* MCHotWordsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0423D3951863D71300F08F1E /* MCHotWordsCell.m */; };
 		0423D3991864170500F08F1E /* MCSearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0423D3981864170500F08F1E /* MCSearchResultCell.m */; };
@@ -188,6 +190,9 @@
 		041E5A7B187BC8EB00BB0F67 /* MCVegetableDetailDescriptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCVegetableDetailDescriptionCell.m; sourceTree = "<group>"; };
 		041E5A7D187BC90D00BB0F67 /* MCVegetableDetailShopInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCVegetableDetailShopInfoCell.h; sourceTree = "<group>"; };
 		041E5A7E187BC90D00BB0F67 /* MCVegetableDetailShopInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCVegetableDetailShopInfoCell.m; sourceTree = "<group>"; };
+		041E5A83187D2F8F00BB0F67 /* MCHealthDetailProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCHealthDetailProductCell.h; sourceTree = "<group>"; };
+		041E5A84187D2F8F00BB0F67 /* MCHealthDetailProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCHealthDetailProductCell.m; sourceTree = "<group>"; };
+		041E5A86187D2FB400BB0F67 /* MCHealthDetailProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCHealthDetailProductCell.xib; sourceTree = "<group>"; };
 		0423D3911862CB6100F08F1E /* MCSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSearchViewController.h; sourceTree = "<group>"; };
 		0423D3921862CB6100F08F1E /* MCSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSearchViewController.m; sourceTree = "<group>"; };
 		0423D3941863D71300F08F1E /* MCHotWordsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCHotWordsCell.h; sourceTree = "<group>"; };
@@ -863,6 +868,9 @@
 				041E5A78187BC89200BB0F67 /* MCVegetableDetailRecipeCell.m */,
 				041E5A7D187BC90D00BB0F67 /* MCVegetableDetailShopInfoCell.h */,
 				041E5A7E187BC90D00BB0F67 /* MCVegetableDetailShopInfoCell.m */,
+				041E5A83187D2F8F00BB0F67 /* MCHealthDetailProductCell.h */,
+				041E5A84187D2F8F00BB0F67 /* MCHealthDetailProductCell.m */,
+				041E5A86187D2FB400BB0F67 /* MCHealthDetailProductCell.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -1036,6 +1044,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				041E5A87187D2FB400BB0F67 /* MCHealthDetailProductCell.xib in Resources */,
 				044BC9AE183083DC00D43115 /* Main.storyboard in Resources */,
 				0437A4901847491A000D427B /* Alixpay.bundle in Resources */,
 				04DAF4D418442C1A009C7720 /* MCOrderConfirmFooter.xib in Resources */,
@@ -1177,6 +1186,7 @@
 				04C3733E182A1E9500B01341 /* MCLoginViewController.m in Sources */,
 				0497B80A1839EEBE008A6F8B /* FMResultSet.m in Sources */,
 				046E99C818261F6D0005FB53 /* MCCookBookViewController.m in Sources */,
+				041E5A85187D2F8F00BB0F67 /* MCHealthDetailProductCell.m in Sources */,
 				044FF8B2187160C60077CE67 /* UIImageView+MCAsynLoadImage.m in Sources */,
 				04DAF4B7183EF853009C7720 /* MCAddressHelperView.m in Sources */,
 				0423D3961863D71300F08F1E /* MCHotWordsCell.m in Sources */,

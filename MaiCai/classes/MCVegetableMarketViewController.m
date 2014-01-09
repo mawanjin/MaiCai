@@ -80,10 +80,11 @@ NSMutableArray* products;
             products = self.data[@"products"];
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                UITableView* table = [[UITableView alloc]initWithFrame:CGRectMake(8, 348, 304, 66*products.count+50) style:UITableViewStylePlain];
+                UITableView* table = [[UITableView alloc]initWithFrame:CGRectMake(8, 328, 304, 66*products.count+50) style:UITableViewStylePlain];
                 self.tableView = table;
                 table.delegate = self;
                 table.dataSource = self;
+                self.tableView.backgroundColor = [UIColor clearColor];
                 [table registerNib:[UINib nibWithNibName:@"MCMarketIndexTipCell" bundle:nil] forCellReuseIdentifier:@"tipCell"];
                 table.separatorStyle = UITableViewCellSeparatorStyleNone;
                 [self.scrollView addSubview:table];
@@ -109,10 +110,8 @@ NSMutableArray* products;
         @finally {
             dispatch_async(dispatch_get_main_queue(), ^{
               [MBProgressHUD hideHUDForView:self.scrollView animated:YES];
-                
-                
-
                 [self.quickOrderCollectionView reloadData];
+                [self.categoryCollectionView reloadData];
                 self.vegetablePricePageControl.numberOfPages = (recipes.count%1 ==0)?recipes.count/1:(recipes.count/1+1);
             });
         }
@@ -168,7 +167,7 @@ NSMutableArray* products;
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 46;
+    return 34;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
