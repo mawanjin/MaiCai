@@ -22,11 +22,13 @@
 -(NSMutableArray*)getSuggestResultByKeywords:(NSString*)words Quantity:(int)quantity;
 -(NSMutableArray*)getRecipesByPage:(int)page Pagesize:(int)pagesize;
 -(NSMutableArray*)getHealthListByPage:(int)page Pagesize:(int)pagesize;
+-(NSMutableArray*)getCollectionListByPage:(int)page Pagesize:(int)pagesize Recipe:(BOOL)flag UserId:(int)userId;
 //这是一键买菜接口
 -(MCRecipe*)getRecipeById:(int)id;
-
 //获取菜谱详情接口
 -(MCRecipe*)getRecipeDetailById:(int)id;
-
+//获取养身详情
 -(MCHealth*)getHealthDetailById:(int)id;
+//获取标签详情
+-(NSDictionary*)getLabelDetailById:(int)id;
 @end

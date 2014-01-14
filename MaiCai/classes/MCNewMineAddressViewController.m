@@ -76,7 +76,7 @@
                 [[MCUserManager getInstance]addUserAddress:mcaddress UserId:user.userId];
             }else{
                 mcaddress.id = self.obj.id;
-                [[MCUserManager getInstance]updateUserAddress:mcaddress];
+                [[MCUserManager getInstance]updateUserAddress:mcaddress UserId:user.userId];
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                

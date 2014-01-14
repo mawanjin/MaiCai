@@ -17,6 +17,10 @@
 		041E5A7F187BC90D00BB0F67 /* MCVegetableDetailShopInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E5A7E187BC90D00BB0F67 /* MCVegetableDetailShopInfoCell.m */; };
 		041E5A85187D2F8F00BB0F67 /* MCHealthDetailProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E5A84187D2F8F00BB0F67 /* MCHealthDetailProductCell.m */; };
 		041E5A87187D2FB400BB0F67 /* MCHealthDetailProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041E5A86187D2FB400BB0F67 /* MCHealthDetailProductCell.xib */; };
+		041E5A8A187F8E3500BB0F67 /* MCLabelDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E5A89187F8E3500BB0F67 /* MCLabelDetailViewController.m */; };
+		041E5A8D187FC2E600BB0F67 /* MCLabelDetailHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E5A8C187FC2E600BB0F67 /* MCLabelDetailHeader.m */; };
+		041E5A8F187FC31700BB0F67 /* MCLabelDetailHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041E5A8E187FC31700BB0F67 /* MCLabelDetailHeader.xib */; };
+		041E5A921883777B00BB0F67 /* MCMineCollectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041E5A911883777B00BB0F67 /* MCMineCollectViewController.m */; };
 		0423D3931862CB6100F08F1E /* MCSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0423D3921862CB6100F08F1E /* MCSearchViewController.m */; };
 		0423D3961863D71300F08F1E /* MCHotWordsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0423D3951863D71300F08F1E /* MCHotWordsCell.m */; };
 		0423D3991864170500F08F1E /* MCSearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0423D3981864170500F08F1E /* MCSearchResultCell.m */; };
@@ -193,6 +197,13 @@
 		041E5A83187D2F8F00BB0F67 /* MCHealthDetailProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCHealthDetailProductCell.h; sourceTree = "<group>"; };
 		041E5A84187D2F8F00BB0F67 /* MCHealthDetailProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCHealthDetailProductCell.m; sourceTree = "<group>"; };
 		041E5A86187D2FB400BB0F67 /* MCHealthDetailProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCHealthDetailProductCell.xib; sourceTree = "<group>"; };
+		041E5A88187F8E3500BB0F67 /* MCLabelDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCLabelDetailViewController.h; sourceTree = "<group>"; };
+		041E5A89187F8E3500BB0F67 /* MCLabelDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCLabelDetailViewController.m; sourceTree = "<group>"; };
+		041E5A8B187FC2E600BB0F67 /* MCLabelDetailHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCLabelDetailHeader.h; sourceTree = "<group>"; };
+		041E5A8C187FC2E600BB0F67 /* MCLabelDetailHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCLabelDetailHeader.m; sourceTree = "<group>"; };
+		041E5A8E187FC31700BB0F67 /* MCLabelDetailHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCLabelDetailHeader.xib; sourceTree = "<group>"; };
+		041E5A901883777B00BB0F67 /* MCMineCollectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMineCollectViewController.h; sourceTree = "<group>"; };
+		041E5A911883777B00BB0F67 /* MCMineCollectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMineCollectViewController.m; sourceTree = "<group>"; };
 		0423D3911862CB6100F08F1E /* MCSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSearchViewController.h; sourceTree = "<group>"; };
 		0423D3921862CB6100F08F1E /* MCSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSearchViewController.m; sourceTree = "<group>"; };
 		0423D3941863D71300F08F1E /* MCHotWordsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCHotWordsCell.h; sourceTree = "<group>"; };
@@ -600,6 +611,10 @@
 				04C973301869297A00138DB8 /* MCQuickOrderViewController.m */,
 				044FF8B918725D7B0077CE67 /* MCHealthDetailViewController.h */,
 				044FF8BA18725D7B0077CE67 /* MCHealthDetailViewController.m */,
+				041E5A88187F8E3500BB0F67 /* MCLabelDetailViewController.h */,
+				041E5A89187F8E3500BB0F67 /* MCLabelDetailViewController.m */,
+				041E5A901883777B00BB0F67 /* MCMineCollectViewController.h */,
+				041E5A911883777B00BB0F67 /* MCMineCollectViewController.m */,
 			);
 			path = classes;
 			sourceTree = "<group>";
@@ -871,6 +886,9 @@
 				041E5A83187D2F8F00BB0F67 /* MCHealthDetailProductCell.h */,
 				041E5A84187D2F8F00BB0F67 /* MCHealthDetailProductCell.m */,
 				041E5A86187D2FB400BB0F67 /* MCHealthDetailProductCell.xib */,
+				041E5A8B187FC2E600BB0F67 /* MCLabelDetailHeader.h */,
+				041E5A8C187FC2E600BB0F67 /* MCLabelDetailHeader.m */,
+				041E5A8E187FC31700BB0F67 /* MCLabelDetailHeader.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -1057,6 +1075,7 @@
 				04F05A00185ECF4C00BB25C6 /* MCCookBookDetailHeader.xib in Resources */,
 				04BEB3121859685800A5D39F /* MCOrderDetailHeader.xib in Resources */,
 				0497B7F11838C531008A6F8B /* MCCartHeader.xib in Resources */,
+				041E5A8F187FC31700BB0F67 /* MCLabelDetailHeader.xib in Resources */,
 				0419D53C18507748000F7D51 /* MCMarketIndexTipCell.xib in Resources */,
 				04069921185021D8006F615C /* MCMarketTradeCell.xib in Resources */,
 				0489952A181A115100E1B156 /* Images.xcassets in Resources */,
@@ -1098,6 +1117,7 @@
 				04C9734B186D5C4900138DB8 /* MCRecipeIngredientCell.m in Sources */,
 				04DAF4E61845DD9C009C7720 /* MCOrderDetailFooter.m in Sources */,
 				044BC9B118308CB200D43115 /* MCNewMineAddressViewController.m in Sources */,
+				041E5A8D187FC2E600BB0F67 /* MCLabelDetailHeader.m in Sources */,
 				04C9732E186928D200138DB8 /* MCQuickOrderCell.m in Sources */,
 				041E5A7F187BC90D00BB0F67 /* MCVegetableDetailShopInfoCell.m in Sources */,
 				0497B8101839FF1D008A6F8B /* MCDBManger.m in Sources */,
@@ -1113,6 +1133,7 @@
 				0464C998182F7015009066C3 /* UIViewController+CWPopup.m in Sources */,
 				0497B816183AFCB1008A6F8B /* MCRegisterViewController.m in Sources */,
 				0486A0F21835CC6200FDC854 /* MCCartCell.m in Sources */,
+				041E5A921883777B00BB0F67 /* MCMineCollectViewController.m in Sources */,
 				046E99C918261F6D0005FB53 /* MCMineViewController.m in Sources */,
 				0497B8081839EEBE008A6F8B /* FMDatabasePool.m in Sources */,
 				048445C5183DD08A006F4090 /* UIDevice+IdentifierAddition.m in Sources */,
@@ -1122,6 +1143,7 @@
 				04C97341186BF72400138DB8 /* MCNetWorkObject.m in Sources */,
 				0437A4991847491A000D427B /* SBJsonBase.m in Sources */,
 				0437A4961847491A000D427B /* NSObject+SBJSON.m in Sources */,
+				041E5A8A187F8E3500BB0F67 /* MCLabelDetailViewController.m in Sources */,
 				04B990BB18346D060018F84E /* MCCategory.m in Sources */,
 				04C9733E186A6F1700138DB8 /* MCQuickOrderTableHeader.m in Sources */,
 				04C9734E186D5C7500138DB8 /* MCRecipeDishDescriptionCell.m in Sources */,

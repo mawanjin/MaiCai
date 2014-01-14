@@ -28,7 +28,7 @@
 #import "AlixPayOrder.h"
 #import "AlixLibService.h"
 
-
+#define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 @implementation MCOrderConfirmViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -49,7 +49,6 @@
     self.paymentMethod = 0;
     
     self.result = @selector(paymentResult:);
-    
    
     MCOrderConfirmFooter* footerView = [MCOrderConfirmFooter initInstance];
     footerView.parentView = self;
@@ -82,11 +81,21 @@
             header.addressLabel.text = [[NSString alloc]initWithFormat:@"地址：%@",self.address.address];
             header.parentView = self;
             self.tableView.tableHeaderView = header;
-            
         }
     }
-    
-   
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    if(IS_IPHONE_5){
+         self.scrollView.frame = CGRectMake(0, 65, 320, 458);
+        self.scrollView.contentSize = CGSizeMake(320,self.tableView.frame.size.height);
+    }else{
+        self.scrollView.frame = CGRectMake(0, 65, 320, 370);
+        self.scrollView.contentSize = CGSizeMake(320,self.tableView.frame.size.height);
+    }
+    //注意这里scrollview不能滚动的原因是因为 MBProgressbar与toast需要在scrollview里面创建
+    self.scrollView.scrollEnabled = YES;
 }
 
 
@@ -162,8 +171,9 @@
     }else {
         address = self.address;
     }
-   
-    NSString* pay_no =  [[MCTradeManager getInstance]submitOrder:self.data PaymentMethod:self.paymentMethod ShipMethod:self.shipMethod Address:address UserId:user.userId TotalPrice:self.previousView.totalPrice];
+    MCOrderConfirmFooter* footer = (MCOrderConfirmFooter*)self.tableView.tableFooterView;
+    
+    NSString* pay_no =  [[MCTradeManager getInstance]submitOrder:self.data PaymentMethod:self.paymentMethod ShipMethod:self.shipMethod Address:address UserId:user.userId TotalPrice:self.previousView.totalPrice Review:footer.reviewTextField.text];
     
     if(self.paymentMethod == 0) {
         self.pay_no = pay_no;

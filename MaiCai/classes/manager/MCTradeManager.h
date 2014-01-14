@@ -38,7 +38,7 @@ typedef enum
 -(void)deleteProductsInCartOnlineByUserId:(NSString*)id ProductIds:(NSMutableArray*)productIds;
 -(void)changeProductNumInCartOnlineByUserId:(NSString*)id ProductId:(int)productId Quantity:(int)quantity;
 
--(NSString*)submitOrder:(NSMutableArray*)orders PaymentMethod:(unsigned int)method ShipMethod:(unsigned int)shipMethod Address:(MCAddress*)address UserId:(NSString*)userId TotalPrice:(float)totalPrice;
+-(NSString*)submitOrder:(NSMutableArray*)orders PaymentMethod:(unsigned int)method ShipMethod:(unsigned int)shipMethod Address:(MCAddress*)address UserId:(NSString*)userId TotalPrice:(float)totalPrice Review:(NSString*)review;
 
 -(NSMutableArray*)getOrdersByUserId:(NSString*)userId Status:(NSString*)status;
 -(MCOrder*)getOrderDetailByOrderId:(NSString*)orderId;

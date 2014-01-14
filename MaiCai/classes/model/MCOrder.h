@@ -27,4 +27,5 @@
 @property NSString* paymentMethod;
 @property NSString* shipMethod;
 @property NSMutableArray* products;
+@property NSString* message;
 @end

@@ -67,7 +67,11 @@
             [self.deliveryToHomeBtn setSelected:NO];
         }
     }
+}
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    return [textField resignFirstResponder];
 }
 
 /*

@@ -522,6 +522,93 @@ static NSMutableDictionary* relationship;
     return health;
 }
 
+-(NSMutableArray*)getCollectionListByPage:(int)page Pagesize:(int)pagesize Recipe:(BOOL)flag UserId:(int)userId
+{
+    
+    NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithDictionary:@{
+                                                                                   @"page":[[NSString alloc]initWithFormat:@"%d",page],
+                                                                                   @"pagesize":        [[NSString alloc]initWithFormat:@"%d",pagesize],
+                                                                                   @"customer_id":
+                                                                                       [[NSString alloc]initWithFormat:@"%d",userId],
+                                                                                   @"recipe":(flag==true)?@"true":@"false"
+                                                                                   }];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/public/favorite/list.do" Params:params Cache:YES];
+    NSError *error;
+    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
+    
+    BOOL flag_ = [responseData[@"success"]boolValue];
+    NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    if(!flag_) {
+        @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
+    }
+    
+    if(flag == false) {
+        NSMutableArray* healthList = [[NSMutableArray alloc]init];
+        NSArray* data = responseData[@"data"];
+        for(int i=0;i<data.count;i++) {
+            MCHealth* health = [[MCHealth alloc]init];
+            health.id = [data[i][@"id"]integerValue];
+            health.name = data[i][@"name"];
+            health.image = data[i][@"image"];
+            health.introduction = data[i][@"introduction"];
+            [healthList addObject:health];
+        }
+        return healthList;
+    }else {
+        NSMutableArray* recipes = [[NSMutableArray alloc]init];
+        NSArray* data = responseData[@"data"];
+        for(int i=0;i<data.count;i++) {
+            MCRecipe* recipe = [[MCRecipe alloc]init];
+            recipe.id = [data[i][@"id"]integerValue];
+            recipe.name = data[i][@"name"];
+            recipe.image = data[i][@"image"];
+            recipe.introduction = data[i][@"introduction"];
+            [recipes addObject:recipe];
+        }
+        return recipes;
+    }
+}
+
+-(NSDictionary*)getLabelDetailById:(int)id
+{
+    NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithDictionary:@{
+                                                                                   @"id":[[NSString alloc]initWithFormat:@"%d",id]
+                                                                                   }];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/public/label/index.do" Params:params Cache:YES];
+    NSError *error;
+    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
+    
+    BOOL flag = [responseData[@"success"]boolValue];
+    NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    if(!flag) {
+        @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
+    }
+    
+    NSDictionary* data = responseData[@"data"];
+    NSMutableDictionary* finalResult = [[NSMutableDictionary alloc]init];
+    
+    finalResult[@"id"] = data[@"id"];
+    finalResult[@"name"] = data[@"name"];
+    finalResult[@"description"] = data[@"description"];
+    finalResult[@"image"] = data[@"image"];
+    
+    NSMutableArray* products = [[NSMutableArray alloc]init];
+    NSArray* products_ = data[@"products"];
+    for(int i=0;i<products_.count;i++) {
+        MCVegetable* product = [[MCVegetable alloc]init];
+        NSDictionary* product_ = products_[i];
+        product.id = [product_[@"id"]integerValue];
+        product.name = product_[@"name"];
+        product.product_id = [product_[@"product_id"]integerValue];
+        product.price = [product_[@"price"]floatValue];
+        product.originalPrice = [product_[@"original_price"]floatValue];
+        product.unit = product_[@"unit"];
+        [products addObject:product];
+    }
+    finalResult[@"products"] = products;
+    return finalResult;
+}
+
 
 
 -(NSMutableDictionary*)getRelationshipBetweenProductAndImage

@@ -12,6 +12,8 @@
 #import "MCNewMineAddressViewController.h"
 #import "MCAddress.h"
 #import "Toast+UIView.h"
+#import "MCContextManager.h"
+#import "MCUser.h"
 
 @implementation MCMineAdressCell
 
@@ -48,15 +50,19 @@
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
-        @try {
-            [[MCUserManager getInstance]deleteUserAddressById:[[NSString alloc]initWithFormat:@"%d",self.addressId]];
-            [self.parentView.data removeObject:self.parentView.data[self.index.row]];
-            [self.parentView.tableView reloadData];
-        }
-        @catch (NSException *exception) {
-            [self.parentView.view makeToast:@"操作失败" duration:2 position:@"center"];
-        }
-
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            @try {
+                MCUser* user = [[MCContextManager getInstance]getDataByKey:MC_USER];
+                [[MCUserManager getInstance]deleteUserAddressById:[[NSString alloc]initWithFormat:@"%d",self.addressId]UserId:user.userId];
+                [self.parentView.data removeObject:self.parentView.data[self.index.row]];
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                      [self.parentView.tableView reloadData];
+                 });
+            }
+            @catch (NSException *exception) {
+                [self.parentView.view makeToast:@"操作失败" duration:2 position:@"center"];
+            }
+        });
     }else{
         return;
     }

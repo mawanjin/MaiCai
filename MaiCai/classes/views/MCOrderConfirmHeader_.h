@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *nameLabel;
 @property (weak, nonatomic) IBOutlet UITextField *mobileLabel;
 @property (weak, nonatomic) IBOutlet UITextField *addressLabel;
+
 @property UIViewController* parentView;
 - (IBAction)helperAction:(UIButton *)sender;
 +(id)initInstance;

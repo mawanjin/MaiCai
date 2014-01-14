@@ -22,7 +22,7 @@
 -(void)changePassword:(NSString*)oldPassword NewPassword:(NSString*)newPassword;
 -(NSMutableArray*)getUserAddressByUserId:(NSString*)id;
 -(void)addUserAddress:(MCAddress*)address UserId:(NSString*)id;
--(void)deleteUserAddressById:(NSString*)addressId;
--(void)updateUserAddress:(MCAddress*)address;
+-(void)deleteUserAddressById:(NSString*)addressId UserId:(NSString*)userId;
+-(void)updateUserAddress:(MCAddress*)address UserId:(NSString*)userId;
 -(void)feedbackByTel:(NSString*)tel Content:(NSString*)content;
 @end

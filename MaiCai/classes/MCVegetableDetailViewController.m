@@ -19,6 +19,7 @@
 #import "MCVegetableDetailShopInfoCell.h"
 #import "UIImageView+MCAsynLoadImage.h"
 #import "MCRecipe.h"
+#import "MCCookBookDetailViewController.h"
 
 @interface MCVegetableDetailViewController ()
 @property NSDictionary* data;
@@ -47,11 +48,7 @@
     NSString* image = [[MCVegetableManager getInstance]getRelationshipBetweenProductAndImage][product_id];
     self.imageIcon.image = [UIImage imageNamed:image];
     //self.discoutPriceLabel.hidden = YES;
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
+    
     NSString* lng = ((NSDictionary*)[[MCContextManager getInstance]getDataByKey:MC_CONTEXT_POSITION])[@"lng"];
     NSString* lat = ((NSDictionary*)[[MCContextManager getInstance]getDataByKey:MC_CONTEXT_POSITION])[@"lat"];
     
@@ -70,7 +67,7 @@
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
                 NSMutableArray* tenants = self.data[@"tenants"];
                 MCShop* shop = tenants[0];
-                 self.vegetable = shop.vegetables[0];
+                self.vegetable = shop.vegetables[0];
                 self.priceLabel.text = [[NSString alloc]initWithFormat:@"现价：%.02f元/%@",self.vegetable.price,self.vegetable.unit];
                 self.shopLabel.text = self.vegetable.shop.name;
                 [self.tableView reloadData];
@@ -79,13 +76,12 @@
                 }else{
                     self.tableView.frame = CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width,self.tableView.frame.size.height-90);
                 }
-
+                
             });
         }
     });
-    
-    }
 
+}
 
 
 - (void)didReceiveMemoryWarning
@@ -113,6 +109,18 @@
         return @"店铺信息";
     }else {
         return @"相关菜谱";
+    }
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.section !=0 && indexPath.section!=1) {
+        MCCookBookDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCCookBookDetailViewController"];
+        NSMutableArray* recipes = self.data[@"recipes"];
+        MCRecipe* recipe = recipes[indexPath.row];
+        vc.recipe = recipe;
+        [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
+        }];
     }
 }
 

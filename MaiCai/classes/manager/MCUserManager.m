@@ -231,10 +231,10 @@ static MCUserManager* instance;
 }
 
 
--(void)deleteUserAddressById:(NSString*)addressId
+-(void)deleteUserAddressById:(NSString*)addressId UserId:(NSString*)userId;
 {
     NSString* sign = [@"/api/ios/v1/private/address/delete.dodhfuewjcuehiudjuwdwyfcs" stringFromMD5];
-    NSString* param = [[NSString alloc]initWithFormat:@"{\"ids\":[%@]}",addressId];
+    NSString* param = [[NSString alloc]initWithFormat:@"{\"ids\":[%@],\"name\":\"%@\"}",addressId,userId];
     NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithDictionary:@{
                                                                                    @"param":param,
                                                                                    @"sign":sign
@@ -250,10 +250,10 @@ static MCUserManager* instance;
     }
 }
 
--(void)updateUserAddress:(MCAddress*)address 
+-(void)updateUserAddress:(MCAddress*)address UserId:(NSString*)userId;
 {
     NSString* sign = [@"/api/ios/v1/private/address/update.dodhfuewjcuehiudjuwdwyfcs" stringFromMD5];
-    NSString* param = [[NSString alloc]initWithFormat:@"{\"id\":\"%d\",\"shipper\":\"%@\",\"tel\":\"%@\",\"address\":\"%@\"}",address.id,address.shipper,address.mobile,address.address];
+    NSString* param = [[NSString alloc]initWithFormat:@"{\"id\":\"%d\",\"customer_id\":\"%@\",\"shipper\":\"%@\",\"tel\":\"%@\",\"address\":\"%@\"}",address.id,userId,address.shipper,address.mobile,address.address];
     NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithDictionary:@{
                                                                                    @"param":param,
                                                                                    @"sign":sign

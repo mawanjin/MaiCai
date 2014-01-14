@@ -61,6 +61,8 @@
                 footer.paymentMethodLabel.text = [[NSString alloc]initWithFormat:@"支付方式：%@",self.order.paymentMethod];
                 footer.shipMethodLabel.text = [[NSString alloc]initWithFormat:@"配送方式：%@",self.order.shipMethod];
                 footer.orderStatusLabel.text = [[NSString alloc]initWithFormat:@"订单状态：%@",self.order.status];
+                footer.messageLabel.text = [[NSString alloc]initWithFormat:@"留言：%@",self.order.message];
+
                 self.tableView.tableFooterView = footer;
                 
                 self.totalPriceLabel.text = [[NSString alloc]initWithFormat:@"总价：%.02f元",self.order.total];

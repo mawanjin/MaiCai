@@ -330,7 +330,7 @@ static MCTradeManager* instance;
             [productIdsStr appendString:@","];
         }
     }
-    NSString* param = [[NSString alloc]initWithFormat:@"{\"id\":\"%@\",\"product_ids\":[%@]}",id,productIdsStr];
+    NSString* param = [[NSString alloc]initWithFormat:@"{\"customer_id\":\"%@\",\"product_ids\":[%@]}",id,productIdsStr];
     
     NSDictionary* params = @{
                              @"param":param
@@ -374,6 +374,7 @@ static MCTradeManager* instance;
 
 
 -(NSString*)submitOrder:(NSMutableArray*)orders PaymentMethod:(unsigned int)method ShipMethod:(unsigned int)shipMethod Address:(MCAddress*)address UserId:(NSString*)userId TotalPrice:(float)totalPrice
+                 Review:(NSString*)review
 {
     NSMutableDictionary* param = [[NSMutableDictionary alloc]init];
     NSMutableArray* tenants = [[NSMutableArray alloc]init];
@@ -418,6 +419,7 @@ static MCTradeManager* instance;
     address_[@"tel"] = address.mobile;
     address_[@"address"] = address.address;
     param[@"address"] = address_;
+    param[@"message"] = review;
     param[@"total"] = [[NSNumber alloc]initWithFloat:totalPrice];
     
     NSError *error;
@@ -523,6 +525,7 @@ static MCTradeManager* instance;
     order.quantity = [data_[@"quantity"]integerValue];
     order.paymentMethod = data_[@"payment_method"];
     order.shipMethod = data_[@"ship_method"];
+    order.message = data_[@"message"];
     
     NSArray* products = data_[@"products"];
     NSMutableArray* vegetables = [[NSMutableArray alloc]init];

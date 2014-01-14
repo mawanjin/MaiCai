@@ -26,6 +26,7 @@
 #import "UIImageView+MCAsynLoadImage.h"
 #import "UIColor+ColorWithHex.h"
 #import "MCMarketIndexTipCell.h"
+#import "MCLabelDetailViewController.h"
 
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 @implementation MCVegetableMarketViewController
@@ -140,6 +141,7 @@ NSMutableArray* products;
     if(indexPath.row == (products.count-1)) {
         cell.divideLine.hidden = YES;
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -157,6 +159,16 @@ NSMutableArray* products;
 //{
 //    return @"热们菜谱";
 //}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MCVegetable* vegetable = products[indexPath.row];
+    MCVegetableDetailViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCVegetableDetailViewController"];
+    vc.vegetable = vegetable;
+    [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
+        
+    }];
+}
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -251,7 +263,13 @@ NSMutableArray* products;
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if([collectionView.restorationIdentifier isEqualToString:@"categoryCollectionView"]){
-       
+        MCLabelDetailViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCLabelDetailViewController"];
+        NSDictionary* obj = labels[indexPath.row];
+        vc.labelId = [obj[@"id"]integerValue];
+        [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
+            
+        }];
+
     }else if([collectionView.restorationIdentifier isEqualToString:@"quickOrderCollectionView"]){
        MCRecipe* object = recipes[indexPath.row];
         MCQuickOrderViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCQuickOrderViewController"];

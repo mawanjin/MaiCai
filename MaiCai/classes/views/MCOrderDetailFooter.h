@@ -13,4 +13,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *orderStatusLabel;
 @property (weak, nonatomic) IBOutlet UILabel *paymentMethodLabel;
 @property (weak, nonatomic) IBOutlet UILabel *shipMethodLabel;
+@property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 @end

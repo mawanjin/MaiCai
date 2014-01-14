@@ -94,6 +94,17 @@ MCMineFooter* footer;
 
     }else if(indexPath.row == 2) {
         
+        BOOL isLoged = [[MCContextManager getInstance]isLogged];
+        if(isLoged) {
+            UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
+                                                          bundle:nil];
+            MCMineAddressViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCMineCollectViewController"];
+            
+            [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:Nil];
+        }else{
+            
+        }
+        
     }else if(indexPath.row == 3) {
         BOOL isLoged = [[MCContextManager getInstance]isLogged];
         if(isLoged) {
@@ -149,7 +160,7 @@ MCMineFooter* footer;
         }else {
             cell.image.image = [UIImage imageNamed:@"mine_cookbook_grey"];
         }
-        cell.label.text = @"我的菜单";
+        cell.label.text = @"我的收藏";
     }else if(indexPath.row == 3) {
         BOOL isLoged = [[MCContextManager getInstance]isLogged];
         if(isLoged) {
