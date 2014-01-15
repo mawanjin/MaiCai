@@ -448,7 +448,7 @@ static MCTradeManager* instance;
 
 -(NSMutableArray*)getOrdersByUserId:(NSString*)userId Status:(NSString*)status
 {
-    NSString* param = [[NSString alloc]initWithFormat:@"{\"customer_id\":%@,\"statuses\":%@}",userId,status];
+    NSString* param = [[NSString alloc]initWithFormat:@"{\"customer_id\":\"%@\",\"statuses\":%@}",userId,status];
     NSString* sign = [@"/api/ios/v1/private/order/index.dodhfuewjcuehiudjuwdwyfcs" stringFromMD5];
     NSDictionary* params = @{
                              @"param":param,

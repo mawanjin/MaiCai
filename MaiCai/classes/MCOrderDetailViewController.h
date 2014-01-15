@@ -12,6 +12,7 @@
 
 @interface MCOrderDetailViewController : MCBaseNavViewController<UITableViewDataSource,UITableViewDelegate>
 @property MCOrder* order;
+@property NSString* pay_no;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *totalPriceLabel;
 @property (weak, nonatomic) IBOutlet UIButton *payBtn;

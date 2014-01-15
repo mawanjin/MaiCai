@@ -110,33 +110,33 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QRO-4S-MmS">
-                                        <rect key="frame" x="8" y="6" width="305" height="150"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="313" height="150"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="quickOrderCollectionView" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2gh-1Y-prt">
-                                                <rect key="frame" x="1" y="0.0" width="304" height="150"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="8DM-IY-ped">
-                                                    <size key="itemSize" width="304" height="150"/>
+                                                    <size key="itemSize" width="320" height="150"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="quickOrderCollectionCell" id="8H9-Zm-C5Z" customClass="MCMarketIndexQuickOrderCell">
-                                                        <rect key="frame" x="0.0" y="0.0" width="304" height="150"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                            <rect key="frame" x="0.0" y="0.0" width="304" height="150"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jln-8H-E3b">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="304" height="150"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 </imageView>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rX9-p1-IaB">
-                                                                    <rect key="frame" x="0.0" y="127" width="304" height="25"/>
+                                                                    <rect key="frame" x="0.0" y="127" width="320" height="25"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -159,7 +159,7 @@
                                                 </connections>
                                             </collectionView>
                                             <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="wuz-ET-c9n">
-                                                <rect key="frame" x="260" y="120" width="39" height="37"/>
+                                                <rect key="frame" x="268" y="120" width="39" height="37"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="pageIndicatorTintColor" red="0.70588237050000002" green="0.70588237050000002" blue="0.70588237050000002" alpha="1" colorSpace="deviceRGB"/>
                                                 <color key="currentPageIndicatorTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -168,11 +168,11 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V9L-M1-VCo">
-                                        <rect key="frame" x="8" y="155" width="305" height="175"/>
+                                        <rect key="frame" x="0.0" y="150" width="320" height="175"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="categoryCollectionView" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="U5Z-dd-neI">
-                                                <rect key="frame" x="0.0" y="33" width="305" height="142"/>
+                                                <rect key="frame" x="0.0" y="33" width="320" height="142"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="5" id="x0h-Ex-U6g">
@@ -216,7 +216,7 @@
                                                 </connections>
                                             </collectionView>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="    大家都在关注" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yio-S0-497">
-                                                <rect key="frame" x="0.0" y="0.0" width="305" height="33"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="33"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.87843143940000001" green="0.87843143940000001" blue="0.87843143940000001" alpha="1" colorSpace="deviceRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>

@@ -81,7 +81,7 @@ NSMutableArray* products;
             products = self.data[@"products"];
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                UITableView* table = [[UITableView alloc]initWithFrame:CGRectMake(8, 328, 304, 66*products.count+50) style:UITableViewStylePlain];
+                UITableView* table = [[UITableView alloc]initWithFrame:CGRectMake(0, 325, 320, 66*products.count+50) style:UITableViewStylePlain];
                 self.tableView = table;
                 table.delegate = self;
                 table.dataSource = self;

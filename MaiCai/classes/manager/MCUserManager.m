@@ -234,7 +234,7 @@ static MCUserManager* instance;
 -(void)deleteUserAddressById:(NSString*)addressId UserId:(NSString*)userId;
 {
     NSString* sign = [@"/api/ios/v1/private/address/delete.dodhfuewjcuehiudjuwdwyfcs" stringFromMD5];
-    NSString* param = [[NSString alloc]initWithFormat:@"{\"ids\":[%@],\"name\":\"%@\"}",addressId,userId];
+    NSString* param = [[NSString alloc]initWithFormat:@"{\"ids\":[%@],\"customer_id\":\"%@\"}",addressId,userId];
     NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithDictionary:@{
                                                                                    @"param":param,
                                                                                    @"sign":sign

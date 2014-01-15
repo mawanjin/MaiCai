@@ -57,6 +57,7 @@
                 MCQuickOrderTableHeader* header = [MCQuickOrderTableHeader initInstance];
                 header.nameLabel.text = self.recipe.name;
                 header.descriptionLabel.text = self.recipe.introduction;
+                header.parentView = self;
                 
                 NSString* source = [[NSString alloc]initWithFormat:@"%@",self.recipe.bigImage];
                 [header.image loadImageByUrl:source];

@@ -56,6 +56,10 @@
     
     self.totalPriceLabel.text = self.previousView.totalPriceLabel.text;
     
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
     MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
     if(user.defaultAddress == nil) {
         self.tableView.tableHeaderView = [MCOrderConfirmHeader_ initInstance];
@@ -83,10 +87,7 @@
             self.tableView.tableHeaderView = header;
         }
     }
-}
 
--(void)viewDidAppear:(BOOL)animated
-{
     if(IS_IPHONE_5){
          self.scrollView.frame = CGRectMake(0, 65, 320, 458);
         self.scrollView.contentSize = CGSizeMake(320,self.tableView.frame.size.height);

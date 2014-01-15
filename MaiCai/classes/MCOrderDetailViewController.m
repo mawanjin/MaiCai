@@ -145,8 +145,8 @@
 - (IBAction)payBtnAction:(id)sender {
     NSString* orderIds = [[NSString alloc]initWithFormat:@"%d",self.order.id];
     NSString* userId = ((MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER]).userId;
-    NSString* pay_no = [[MCTradeManager getInstance]getPaymentNoByUserId:userId OrderIds:orderIds Amount:self.order.total];
-     [[MCContextManager getInstance]addKey:MC_PAY_NO Data:pay_no];
+    self.pay_no = [[MCTradeManager getInstance]getPaymentNoByUserId:userId OrderIds:orderIds Amount:self.order.total];
+     [[MCContextManager getInstance]addKey:MC_PAY_NO Data:self.pay_no];
     NSString *partner = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"Partner"];
     NSString *seller = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"Seller"];
     NSString* privateKey = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"RSA private key"];
@@ -157,7 +157,7 @@
     order.partner = partner;
     order.seller = seller;
     
-    order.tradeNO = pay_no; //订单ID（由商家自行制定）
+    order.tradeNO = self.pay_no; //订单ID（由商家自行制定）
     order.productName = [[NSString alloc]initWithFormat:@"总共需要花费%.2f元",self.order.total]; //商品标题
     order.productDescription = @"商品描述"; //商品描述
     order.amount = [NSString stringWithFormat:@"%.2f",self.order.total]; //商品价格
@@ -210,12 +210,44 @@
         }
         else
         {
-            //交易失败
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                @try {
+                    [[MCTradeManager getInstance]cancelPaymentByPaymentNo:self.pay_no];
+                }
+                @catch (NSException *exception) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.view makeToast:@"无法获取网络资源" duration:2 position:@"center"];
+                    });
+                }
+                @finally {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self backBtnAction];
+                        [self.view makeToast:@"交易失败" duration:2 position:@"center"];
+                    });
+                }
+            });
+
         }
     }
     else
     {
-        //失败
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            @try {
+                [[MCTradeManager getInstance]cancelPaymentByPaymentNo:self.pay_no];
+            }
+            @catch (NSException *exception) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.view makeToast:@"无法获取网络资源" duration:2 position:@"center"];
+                });
+            }
+            @finally {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self backBtnAction];
+                    [self.view makeToast:@"交易失败" duration:2 position:@"center"];
+                });
+            }
+        });
+
     }
 }
 

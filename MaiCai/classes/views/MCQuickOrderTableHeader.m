@@ -7,6 +7,8 @@
 //
 
 #import "MCQuickOrderTableHeader.h"
+#import "MCCookBookDetailViewController.h"
+#import "MCQuickOrderViewController.h"
 
 @implementation MCQuickOrderTableHeader
 
@@ -27,6 +29,17 @@
     // Drawing code
 }
 */
+
+- (IBAction)clickAction:(UIButton *)sender {
+    if([self.parentView isKindOfClass:[MCQuickOrderViewController class]]) {
+        MCQuickOrderViewController* controller = (MCQuickOrderViewController*)self.parentView;
+        MCCookBookDetailViewController *vc = [controller.storyboard instantiateViewControllerWithIdentifier:@"MCCookBookDetailViewController"];
+        vc.recipe = controller.recipe;
+        [self.parentView presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
+        }];
+
+    }
+}
 
 +(id)initInstance
 {
