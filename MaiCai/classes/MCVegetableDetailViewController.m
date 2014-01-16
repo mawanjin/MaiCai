@@ -53,6 +53,9 @@
     NSString* lat = ((NSDictionary*)[[MCContextManager getInstance]getDataByKey:MC_CONTEXT_POSITION])[@"lat"];
     
     self.navItem.title = self.vegetable.name;
+    UIBarButtonItem* item = [[UIBarButtonItem alloc]initWithTitle:@"联系客服" style:UIBarButtonItemStylePlain target:self action:@selector(phoneCallAction:)];
+    item.tintColor = [UIColor whiteColor];
+    self.navItem.rightBarButtonItem = item;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
@@ -70,6 +73,7 @@
                 self.vegetable = shop.vegetables[0];
                 self.priceLabel.text = [[NSString alloc]initWithFormat:@"现价：%.02f元/%@",self.vegetable.price,self.vegetable.unit];
                 self.shopLabel.text = self.vegetable.shop.name;
+                
                 [self.tableView reloadData];
                 if(IS_IPHONE_5){
                     

@@ -25,7 +25,7 @@
 	// Do any additional setup after loading the view.
     UIBarButtonItem* item = [[UIBarButtonItem alloc]
                              init];
-    UIButton* backBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 15, 20)];
+    UIButton* backBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 12, 20)];
     [backBtn setBackgroundImage:[UIImage imageNamed:@"back_btn.png"] forState:UIControlStateNormal];
     [backBtn addTarget:self action:@selector(backBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [item setCustomView:backBtn];

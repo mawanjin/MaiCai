@@ -169,6 +169,7 @@ bool flag = false;
                     MCVegetable* temp = [[MCVegetable alloc]init];
                     temp.id = [obj[@"id"]integerValue];
                     temp.product_id = [obj[@"image"]integerValue];
+                    temp.name = obj[@"name"];
                     vc.vegetable = temp;
                     [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
                         

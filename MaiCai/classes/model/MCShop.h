@@ -18,4 +18,5 @@
 @property NSString* image;
 @property NSString* license;
 @property BOOL isSelected;
+
 @end

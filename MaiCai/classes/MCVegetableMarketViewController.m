@@ -266,6 +266,7 @@ NSMutableArray* products;
         MCLabelDetailViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCLabelDetailViewController"];
         NSDictionary* obj = labels[indexPath.row];
         vc.labelId = [obj[@"id"]integerValue];
+        vc.title = obj[@"name"];
         [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
             
         }];

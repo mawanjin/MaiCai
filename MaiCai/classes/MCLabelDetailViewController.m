@@ -39,6 +39,7 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"MCHealthDetailProductCell" bundle:nil]  forCellWithReuseIdentifier:@"productCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"MCLabelDetailHeader" bundle:nil]  forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"MCLabelDetailHeader"];
     [self.collectionView setCollectionViewLayout:[self flowLayout]];
+    self.navigationItem.title = self.title;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
              self.data = [[MCVegetableManager getInstance]getLabelDetailById:self.labelId];
@@ -73,7 +74,7 @@
     flowLayout.sectionInset = UIEdgeInsetsMake(5.0f, 20.0f, 5.0f, 20.0f);
     
     /* Set the reference size for the header and the footer views */
-    flowLayout.headerReferenceSize = CGSizeMake(300.0f, 114.0f);
+    flowLayout.headerReferenceSize = CGSizeMake(320.0f, 134.0f);
     return flowLayout;
 }
 

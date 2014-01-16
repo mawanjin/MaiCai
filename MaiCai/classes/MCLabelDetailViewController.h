@@ -12,6 +12,7 @@
 @interface MCLabelDetailViewController :MCBaseNavViewController<UICollectionViewDataSource,UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property unsigned int labelId;
+@property NSString* title;
 @property NSDictionary* data;
 
 - (IBAction)clickAction:(id)sender;
