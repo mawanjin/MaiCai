@@ -17,9 +17,8 @@
 #import "MCVegetable.h"
 #import "MCVegetableManager.h"
 #import "MCOrderDetailFooter.h"
-#import "MBProgressHUD.h"
-#import "Toast+UIView.h"
 #import "MCUser.h"
+#import "MCAppDelegate.h"
 
 #import "DataSigner.h"
 #import "AlixPayResult.h"
@@ -76,7 +75,7 @@
         }
         @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.view makeToast:@"无法获取网络资源" duration:2 position:@"center"];
+                [self showMsgHint:MC_ERROR_MSG_0001];
             });
         }
         @finally {
@@ -146,10 +145,12 @@
     NSString* orderIds = [[NSString alloc]initWithFormat:@"%d",self.order.id];
     NSString* userId = ((MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER]).userId;
     self.pay_no = [[MCTradeManager getInstance]getPaymentNoByUserId:userId OrderIds:orderIds Amount:self.order.total];
-     [[MCContextManager getInstance]addKey:MC_PAY_NO Data:self.pay_no];
+    MCAppDelegate* delegate = (MCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    delegate.controller = self;
+    
     NSString *partner = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"Partner"];
     NSString *seller = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"Seller"];
-    NSString* privateKey = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"RSA private key"];
+    //NSString* privateKey = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"RSA private key"];
     
     NSString *appScheme = @"MaiCaiAlipay";
     
@@ -204,8 +205,9 @@
 			if ([verifier verifyString:result.resultString withSign:result.signString])
             {
                 //验证签名成功，交易结果无篡改
+                [self.previousView showMsgHint:@"交易成功"];
                 [self backBtnAction];
-                [self.view makeToast:@"交易成功" duration:2 position:@"center"];
+               
 			}
         }
         else
@@ -216,13 +218,14 @@
                 }
                 @catch (NSException *exception) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.view makeToast:@"无法获取网络资源" duration:2 position:@"center"];
+                        [self.previousView showMsgHint:MC_ERROR_MSG_0001];
                     });
                 }
                 @finally {
                     dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.previousView showMsgHint:@"交易失败"];
                         [self backBtnAction];
-                        [self.view makeToast:@"交易失败" duration:2 position:@"center"];
+                        
                     });
                 }
             });
@@ -237,13 +240,13 @@
             }
             @catch (NSException *exception) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.view makeToast:@"无法获取网络资源" duration:2 position:@"center"];
+                    [self.previousView showMsgHint:MC_ERROR_MSG_0001];
                 });
             }
             @finally {
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.previousView showMsgHint:@"交易失败"];
                     [self backBtnAction];
-                    [self.view makeToast:@"交易失败" duration:2 position:@"center"];
                 });
             }
         });

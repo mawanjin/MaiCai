@@ -10,8 +10,6 @@
 #import "MCUserManager.h"
 #import "MCUser.h"
 #import "MCContextManager.h"
-#import "MBProgressHUD.h"
-#import "Toast+UIView.h"
 #import "UIViewController+CWPopup.h"
 #import "MCChangePasswordView.h"
 #import "MCChangeNicknameView.h"
@@ -47,7 +45,7 @@
         }
         @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.view makeToast:@"无法连接网络资源" duration:2 position:@"center"];
+                [self showMsgHint:MC_ERROR_MSG_0001];
             });
         }
         @finally {

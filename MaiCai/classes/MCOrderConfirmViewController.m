@@ -20,7 +20,8 @@
 #import "MCOrderConfirmFooter.h"
 #import "MCTradeManager.h"
 #import "MCAddress.h"
-#import "Toast+UIView.h"
+#import "MCAppDelegate.h"
+
 
 #import "DataSigner.h"
 #import "AlixPayResult.h"
@@ -53,8 +54,10 @@
     MCOrderConfirmFooter* footerView = [MCOrderConfirmFooter initInstance];
     footerView.parentView = self;
     self.tableView.tableFooterView = footerView;
+    if([self.previousView isKindOfClass:[MCMineCartViewController class]]) {
+        self.totalPriceLabel.text = ((MCMineCartViewController*)self.previousView).totalPriceLabel.text;
+    }
     
-    self.totalPriceLabel.text = self.previousView.totalPriceLabel.text;
     
 }
 
@@ -63,7 +66,7 @@
     MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
     if(user.defaultAddress == nil) {
         self.tableView.tableHeaderView = [MCOrderConfirmHeader_ initInstance];
-        self.header_ = self.tableView.tableHeaderView;
+        self.header_ = (MCOrderConfirmHeader_*)self.tableView.tableHeaderView;
         self.header_.parentView = self;
     }else {
         if(self.address == nil) {
@@ -102,7 +105,10 @@
 
 -(void)initData
 {
-    NSMutableArray* shops = self.previousView.data;
+    NSMutableArray* shops;
+    if([self.previousView isKindOfClass:[MCMineCartViewController class]]) {
+        shops = ((MCMineCartViewController*)self.previousView).data;
+    }
     unsigned int i=0;
     unsigned int j=0;
     NSMutableArray* copyShops = [[NSMutableArray alloc]init];
@@ -152,19 +158,19 @@
         
         if(address.shipper == nil || [address.shipper stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length == 0)
         {
-            [self.view makeToast:@"请填写收货人" duration:2 position:@"center"];
+            [self showMsgHint:MC_ERROR_MSG_0002];
             return;
         }
         
         if(address.mobile == nil || [address.mobile stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length == 0)
         {
-            [self.view makeToast:@"请填写联系电话" duration:2 position:@"center"];
+            [self showMsgHint:MC_ERROR_MSG_0003];
             return;
         }
         
         if(address.address == nil || [address.address stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length == 0)
         {
-            [self.view makeToast:@"请填写地址" duration:2 position:@"center"];
+            [self showMsgHint:MC_ERROR_MSG_0004];
             return;
         }
         
@@ -174,14 +180,17 @@
     }
     MCOrderConfirmFooter* footer = (MCOrderConfirmFooter*)self.tableView.tableFooterView;
     
-    NSString* pay_no =  [[MCTradeManager getInstance]submitOrder:self.data PaymentMethod:self.paymentMethod ShipMethod:self.shipMethod Address:address UserId:user.userId TotalPrice:self.previousView.totalPrice Review:footer.reviewTextField.text];
+    float totalPrice = 0.0f;
+    if([self.previousView isKindOfClass:[MCMineCartViewController class]]) {
+        totalPrice = ((MCMineCartViewController*)self.previousView).totalPrice;
+    }
+    NSString* pay_no =  [[MCTradeManager getInstance]submitOrder:self.data PaymentMethod:self.paymentMethod ShipMethod:self.shipMethod Address:address UserId:user.userId TotalPrice:totalPrice Review:footer.reviewTextField.text];
     
     if(self.paymentMethod == 0) {
         self.pay_no = pay_no;
-        [[MCContextManager getInstance]addKey:MC_PAY_NO Data:pay_no];
         NSString *partner = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"Partner"];
         NSString *seller = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"Seller"];
-        NSString* privateKey = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"RSA private key"];
+        //NSString* privateKey = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"RSA private key"];
         
         NSString *appScheme = @"MaiCaiAlipay";
         
@@ -190,9 +199,9 @@
         order.seller = seller;
         
         order.tradeNO = pay_no; //订单ID（由商家自行制定）
-        order.productName = [[NSString alloc]initWithFormat:@"总共需要花费%.2f元",self.previousView.totalPrice]; //商品标题
+        order.productName = [[NSString alloc]initWithFormat:@"总共需要花费%.2f元",totalPrice]; //商品标题
         order.productDescription = @"商品描述"; //商品描述
-        order.amount = [NSString stringWithFormat:@"%.2f",self.previousView.totalPrice]; //商品价格
+        order.amount = [NSString stringWithFormat:@"%.2f",totalPrice]; //商品价格
         order.notifyURL = [@"http://star-faith.com:8083/maicai/api/ios/v1/public/alipay/notify.do" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]; //回调URL
         NSString* signedStr = [self doRsa:[order description]];
         
@@ -201,11 +210,14 @@
         NSString *orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
                                  [order description], signedStr, @"RSA"];
         
+        MCAppDelegate* delegate = (MCAppDelegate *)[[UIApplication sharedApplication] delegate];
+        delegate.controller = self;
         [AlixLibService payOrder:orderString AndScheme:appScheme seletor:self.result target:self];
     }else{
-        [self.previousView.view makeToast:@"已生成订单，请等待收货" duration:2 position:@"center"];
+         [self.previousView showMsgHint:@"已生成订单，请等待收货"];
+        [self backBtnAction];
     }
-    [self backBtnAction];
+    
 }
 
 -(void)paymentResultDelegate:(NSString *)result
@@ -228,16 +240,18 @@
 			 */
             
             //交易成功
-            NSString* key = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"RSA public key"];//签约帐户后获取到的支付宝公钥
-			id<DataVerifier> verifier;
-            verifier = CreateRSADataVerifier(key);
-            
-			if ([verifier verifyString:result.resultString withSign:result.signString])
-            {
-                //验证签名成功，交易结果无篡改
-                [self backBtnAction];
-                [self.previousView.view makeToast:@"交易成功" duration:2 position:@"center"];
-			}
+//            NSString* key = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"RSA public key"];//签约帐户后获取到的支付宝公钥
+//			id<DataVerifier> verifier;
+//            verifier = CreateRSADataVerifier(key);
+//            
+//			if ([verifier verifyString:result.resultString withSign:result.signString])
+//            {
+//                //验证签名成功，交易结果无篡改
+//                [self backBtnAction:^{
+//                    [self.previousView showMsgHint:@"交易成功"];
+//                }];
+//                
+//			}
         }
         else
         {
@@ -247,13 +261,16 @@
                 }
                 @catch (NSException *exception) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.previousView.view makeToast:@"无法获取网络资源" duration:2 position:@"center"];
+                        [self.previousView showMsgHint:MC_ERROR_MSG_0001];
+                        [self backBtnAction];
+                        
                     });
                 }
                 @finally {
                     dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.previousView showMsgHint:@"交易失败"];
                         [self backBtnAction];
-                        [self.previousView.view makeToast:@"交易失败" duration:2 position:@"center"];
+                        
                     });
                 }
             });
@@ -267,13 +284,15 @@
             }
             @catch (NSException *exception) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.previousView.view makeToast:@"无法获取网络资源" duration:2 position:@"center"];
+                    [self.previousView showMsgHint:MC_ERROR_MSG_0001];
+                    [self backBtnAction];
                 });
             }
             @finally {
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.previousView showMsgHint:@"交易失败"];
                     [self backBtnAction];
-                    [self.previousView.view makeToast:@"交易失败" duration:2 position:@"center"];
+                    
                 });
             }
         });

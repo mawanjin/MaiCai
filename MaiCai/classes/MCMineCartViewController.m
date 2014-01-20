@@ -14,12 +14,10 @@
 #import "MCCartCell.h"
 #import "MCCartChangeNumView.h"
 #import "UIViewController+CWPopup.h"
-#import "Toast+UIView.h"
 #import "MCCartHeader.h"
 #import "MCContextManager.h"
 #import "MCLoginViewController.h"
 #import "MCUser.h"
-#import "MBProgressHUD.h"
 #import "MCOrderConfirmViewController.h"
 
 
@@ -55,7 +53,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
             if ([[MCContextManager getInstance]isLogged]) {
-                MCUser* user = [[MCContextManager getInstance]getDataByKey:MC_USER];
+                MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
                 self.data = [[MCTradeManager getInstance]getCartProductsOnlineByUserId:user.userId];
             }else {
                 NSString* macId = (NSString*)[[MCContextManager getInstance]getDataByKey:MC_MAC_ID];
@@ -68,10 +66,7 @@
         }
         @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.view makeToast:@"无法获取网络数据！"
-                            duration:3.0
-                            position:@"center"
-                               title:@"提示"];
+                [self showMsgHint:MC_ERROR_MSG_0001];
             });
             
         }@finally {
@@ -199,7 +194,7 @@
         NSMutableArray* array = [[NSMutableArray alloc]init];
         [array addObject:[[NSNumber alloc]initWithInt:vegetable.id]];
         if ([[MCContextManager getInstance]isLogged]) {
-            MCUser* user = [[MCContextManager getInstance]getDataByKey:MC_USER];
+            MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 @try {
@@ -214,7 +209,7 @@
                 }
                 @catch (NSException *exception) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.view makeToast:@"获取网络资源失败" duration:2 position:@"center"];
+                        [self showMsgHint:MC_ERROR_MSG_0001];
                     });
                     
                 }
@@ -239,7 +234,7 @@
                      });
                 }@catch (NSException *exception) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.view makeToast:@"获取网络资源失败" duration:2 position:@"center"];
+                        [self showMsgHint:MC_ERROR_MSG_0001];
                     });
                 }
                 @finally {

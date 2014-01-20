@@ -12,8 +12,6 @@
 #import "MCCookBookCell.h"
 #import "MCNetwork.h"
 #import "MCRecipe.h"
-#import "MBProgressHUD.h"
-#import "Toast+UIView.h"
 #import "HMSegmentedControl.h"
 #import "UIImageView+MCAsynLoadImage.h"
 #import "MCHealthCell.h"
@@ -238,7 +236,7 @@ int pageSize = 10;
         }
         @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.view makeToast:@"无法获取网络资源" duration:2 position:@"center"];
+                [self showMsgHint:MC_ERROR_MSG_0001]; 
             });
         }
         @finally {
@@ -262,7 +260,7 @@ int pageSize = 10;
         }
         @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.view makeToast:@"无法获取网络资源" duration:2 position:@"center"];
+                [self showMsgHint:MC_ERROR_MSG_0001];
             });
         }
         @finally {

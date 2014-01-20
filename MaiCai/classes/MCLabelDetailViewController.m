@@ -16,7 +16,7 @@
 #import "MCUser.h"
 #import "MCContextManager.h"
 #import "MCTradeManager.h"
-#import "Toast+UIView.h"
+
 
 @interface MCLabelDetailViewController ()
 
@@ -140,7 +140,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
             if ([[MCContextManager getInstance]isLogged]) {
-                MCUser* user = [[MCContextManager getInstance]getDataByKey:MC_USER];
+                MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
                 NSMutableArray* choosedProducts = [[NSMutableArray alloc]init];
                 NSArray* products = self.data[@"products"];
                 for(int i=0;i<products.count;i++) {
@@ -182,7 +182,7 @@
         @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSLog(@"%@",exception);
-                [self.view makeToast:@"无法连接网络" duration:2 position:@"center"];
+                [self showMsgHint:MC_ERROR_MSG_0001];
             });
         }@finally {
             dispatch_async(dispatch_get_main_queue(), ^{

@@ -10,6 +10,10 @@
 #import "MCAppDelegate.h"
 
 
+NSString* const MC_ERROR_MSG_0001 = @"操作失败...";
+NSString* const MC_ERROR_MSG_0002 = @"请填写收货人姓名";
+NSString* const MC_ERROR_MSG_0003 = @"请填写收货人联系电话";
+NSString* const MC_ERROR_MSG_0004 = @"请填写收货人地址";
 
 @implementation MCBaseViewController
 
@@ -60,18 +64,15 @@
 }
 
 
--(BOOL)netWorkIsReachable {
-    MCAppDelegate* appDlg = [[UIApplication sharedApplication]delegate];
-    if(appDlg.isReachable)
-    {
-        NSLog(@"网络已连接");//执行网络正常时的代码
-    }
-    else
-    {
-        NSLog(@"网络连接异常");//执行网络异常时的代码
-    }
-    return appDlg.isReachable;
+-(void)showMsgHint:(NSString*)msg
+{
+    [self.view makeToast:msg duration:2 position:@"center"];
 }
+
+
+
+
+
 
 
 @end

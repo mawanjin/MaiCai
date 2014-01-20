@@ -10,8 +10,6 @@
 #import "MCUserManager.h"
 #import "MCUser.h"
 #import "MCRegisterViewController.h"
-#import "MBProgressHUD.h"
-#import "Toast+UIView.h"
 
 @implementation MCLoginViewController
 

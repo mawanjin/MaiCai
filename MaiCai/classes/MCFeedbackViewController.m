@@ -7,7 +7,6 @@
 //
 
 #import "MCFeedbackViewController.h"
-#import "Toast+UIView.h"
 #import "MCUserManager.h"
 #import "MBProgressHUD.h"
 #import "GCPlaceholderTextView.h"
@@ -47,12 +46,12 @@
     NSString* tel = [self.tel.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     if([content isEqual:@""]){
-        [self.view makeToast:@"请提供你的建议" duration:2 position:@"center"];
+        [self showMsgHint:@"请提供您的宝贵意见"];
         return;
     }
     
     if([tel isEqual:@""]) {
-        [self.view makeToast:@"请提供你的联系方式" duration:2 position:@"center"];
+        [self showMsgHint:@"请提供你的联系方式"];
         return;
     }
     
@@ -61,12 +60,12 @@
         @try {
             [[MCUserManager getInstance]feedbackByTel:tel Content:content];
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.view makeToast:@"提交成功" duration:2 position:@"center"];
+                [self showMsgHint:@"提交成功"];
             });
         }
         @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.view makeToast:@"提交失败" duration:2 position:@"center"];
+                [self showMsgHint:MC_ERROR_MSG_0001];
             });
         }
         @finally {

@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "MBProgressHUD.h"
+#import "Toast+UIView.h"
+
+extern NSString* const MC_ERROR_MSG_0001;
+extern NSString* const MC_ERROR_MSG_0002;
+extern NSString* const MC_ERROR_MSG_0003;
+extern NSString* const MC_ERROR_MSG_0004;
 
 @interface MCBaseViewController : UIViewController
--(BOOL)netWorkIsReachable;
+-(void)showMsgHint:(NSString*)msg;
 @end

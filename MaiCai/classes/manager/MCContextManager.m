@@ -8,10 +8,11 @@
 
 #import "MCContextManager.h"
 
-const NSString* MC_CONTEXT_POSITION = @"position";
-const NSString* MC_USER = @"user";
-const NSString* MC_MAC_ID = @"macId";
-const NSString* MC_PAY_NO = @"payNo";
+NSString* const MC_CONTEXT_POSITION = @"position";
+NSString* const MC_USER = @"user";
+NSString* const MC_MAC_ID = @"macId";
+NSString* const MC_PAY_NO = @"payNo";
+
 
 @implementation MCContextManager
 static MCContextManager* instance;

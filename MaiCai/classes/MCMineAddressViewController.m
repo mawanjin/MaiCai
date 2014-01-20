@@ -13,8 +13,6 @@
 #import "MCUserManager.h"
 #import "MCContextManager.h"
 #import "MCUser.h"
-#import "Toast+UIView.h"
-#import "MBProgressHUD.h"
 #import "MCOrderConfirmViewController.h"
 
 @implementation MCMineAddressViewController
@@ -50,7 +48,7 @@
         }
         @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.view makeToast:@"无法获取网络资源" duration:2 position:@"center"];
+                [self showMsgHint:MC_ERROR_MSG_0001];
             });
         }
         @finally {

@@ -7,10 +7,8 @@
 //
 
 #import "MCQuickOrderViewController.h"
-#import "MBProgressHUD.h"
 #import "MCVegetableManager.h"
 #import "MCRecipe.h"
-#import "Toast+UIView.h"
 #import "MCQuickOrderCell.h"
 #import "MCVegetable.h"
 #import "MCQuickOrderHeader.h"
@@ -48,7 +46,7 @@
         }
         @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.view makeToast:@"无法获取网络资源" duration:2 position:@"center"];
+                [self showMsgHint:MC_ERROR_MSG_0001];
             });
         }
         @finally {
@@ -280,7 +278,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
             if ([[MCContextManager getInstance]isLogged]) {
-                MCUser* user = [[MCContextManager getInstance]getDataByKey:MC_USER];
+                MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
                 NSMutableArray* products = [[NSMutableArray alloc]init];
                 for(int i=0;i<self.recipe.mainIngredients.count;i++) {
                     MCVegetable* vegetable = self.recipe.mainIngredients[i];
@@ -359,7 +357,7 @@
         @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSLog(@"%@",exception);
-                [self.view makeToast:@"无法连接网络" duration:2 position:@"center"];
+                [self showMsgHint:MC_ERROR_MSG_0001];
             });
         }@finally {
             dispatch_async(dispatch_get_main_queue(), ^{

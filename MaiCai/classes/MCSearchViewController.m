@@ -13,7 +13,6 @@
 #import "MCNetwork.h"
 #import "MCVegetableDetailViewController.h"
 #import "MCVegetable.h"
-#import "MBProgressHUD.h"
 #import "MCCookBookDetailViewController.h"
 #import "MCRecipe.h"
 #import "MCHealthDetailViewController.h"
@@ -50,7 +49,7 @@ bool flag = false;
     
     UIBarButtonItem* item = [[UIBarButtonItem alloc]
                              init];
-    UIButton* backBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 15, 20)];
+    UIButton* backBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 12, 20)];
     [backBtn setBackgroundImage:[UIImage imageNamed:@"back_btn.png"] forState:UIControlStateNormal];
     [backBtn addTarget:self action:@selector(backBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [item setCustomView:backBtn];

@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *nickname;
 @property (weak, nonatomic) IBOutlet UITextField *password;
 @property (weak, nonatomic) IBOutlet UITextField *passwordAgain;
-@property UIViewController* previousView;
+@property MCBaseViewController* previousView;
 
 - (IBAction)registerBtn:(UIButton *)sender;
 @end

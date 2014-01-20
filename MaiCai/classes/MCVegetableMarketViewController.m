@@ -11,7 +11,6 @@
 #import "MCVegetableManager.h"
 #import "MCMarket.h"
 #import <QuartzCore/QuartzCore.h>
-#import "Toast+UIView.h"
 #import "MCMarketIndexNewsCell.h"
 #import "MCMarketIndexCategoryCell.h"
 #import "MCMarketIndexQuickOrderCell.h"
@@ -102,10 +101,7 @@ NSMutableArray* products;
         }
         @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.scrollView makeToast:@"无法获取网络数据！"
-                            duration:2.0
-                            position:@"center"
-                               title:@"提示"];
+                [self showMsgHint:MC_ERROR_MSG_0001];
             });
         }
         @finally {

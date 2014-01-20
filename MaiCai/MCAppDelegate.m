@@ -16,6 +16,9 @@
 #import "AlixPayResult.h"
 #import "DataVerifier.h"
 #import "MCTradeManager.h"
+#import "MCBaseNavViewController.h"
+#import "MCOrderConfirmViewController.h"
+#import "MCOrderDetailViewController.h"
 
 @implementation MCAppDelegate
 
@@ -102,16 +105,25 @@
         {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 @try {
-                    [[MCTradeManager getInstance]cancelPaymentByPaymentNo:(NSString*)[[MCContextManager getInstance]getDataByKey:MC_PAY_NO]];
+                    if([self.controller isKindOfClass: [MCOrderConfirmViewController class] ]) {
+                        MCOrderConfirmViewController* controller = (MCOrderConfirmViewController*)self.controller;
+                        [[MCTradeManager getInstance]cancelPaymentByPaymentNo:controller.pay_no];
+                    }else if([self.controller isKindOfClass:[MCOrderDetailViewController class]]) {
+                        MCOrderDetailViewController* controller = (MCOrderDetailViewController*)self.controller;
+                         [[MCTradeManager getInstance]cancelPaymentByPaymentNo:controller.pay_no];
+                    }
+                    
                 }
                 @catch (NSException *exception) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        
+                        [self.controller showMsgHint:MC_ERROR_MSG_0001];
+                        [self.controller backBtnAction];
                     });
                 }
                 @finally {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        
+                        [self.controller.previousView showMsgHint:@"交易失败"];
+                        [self.controller backBtnAction];
                     });
                 }
             });
@@ -122,16 +134,27 @@
     {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             @try {
-               [[MCTradeManager getInstance]cancelPaymentByPaymentNo:(NSString*)[[MCContextManager getInstance]getDataByKey:MC_PAY_NO]];
+                if([self.controller isKindOfClass: [MCOrderConfirmViewController class] ]) {
+                    MCOrderConfirmViewController* controller = (MCOrderConfirmViewController*)self.controller;
+                    [[MCTradeManager getInstance]cancelPaymentByPaymentNo:controller.pay_no];
+                }else if([self.controller isKindOfClass:[MCOrderDetailViewController class]]) {
+                    MCOrderDetailViewController* controller = (MCOrderDetailViewController*)self.controller;
+                    [[MCTradeManager getInstance]cancelPaymentByPaymentNo:controller.pay_no];
+                }
             }
             @catch (NSException *exception) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.controller showMsgHint:MC_ERROR_MSG_0001];
+                        [self.controller backBtnAction];
+                    });
+
                 });
             }
             @finally {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    
+                    [self.controller.previousView showMsgHint:@"交易失败"];
+                    [self.controller backBtnAction];
                 });
             }
         });

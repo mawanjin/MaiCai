@@ -7,13 +7,11 @@
 //
 
 #import "MCNewMineAddressViewController.h"
-#import "Toast+UIView.h"
 #import "MCUserManager.h"
 #import "MCAddress.h"
 #import "MCUser.h"
 #import "MCContextManager.h"
 #import "MCAddressHelperView.h"
-#import "MBProgressHUD.h"
 #import "MCMineAddressViewController.h"
 
 @implementation MCNewMineAddressViewController
@@ -50,17 +48,17 @@
     NSString* address = [self.address.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     if(receiver==Nil || receiver.length == 0) {
-        [self.view makeToast:@"请填写收货人姓名" duration:2 position:@"center"];
+        [self showMsgHint:MC_ERROR_MSG_0002];
         return;
     }
     
     if(mobile==Nil || mobile.length == 0) {
-        [self.view makeToast:@"请填写联系电话" duration:2 position:@"center"];
+        [self showMsgHint:MC_ERROR_MSG_0003];
         return;
     }
     
     if(address==Nil || address.length == 0) {
-        [self.view makeToast:@"请填写收货人地址" duration:2 position:@"center"];
+        [self showMsgHint:MC_ERROR_MSG_0004];
         return;
     }
     
@@ -68,7 +66,7 @@
     mcaddress.shipper = receiver;
     mcaddress.mobile = mobile;
     mcaddress.address = address;
-    MCUser* user = [[MCContextManager getInstance]getDataByKey:MC_USER];
+    MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
@@ -86,7 +84,7 @@
         }
         @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.view makeToast:@"操作失败" duration:2 position:@"center"];
+                [self showMsgHint:MC_ERROR_MSG_0001];
             });
         }@finally {
             dispatch_async(dispatch_get_main_queue(), ^{

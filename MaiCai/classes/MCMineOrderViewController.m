@@ -14,8 +14,7 @@
 #import "MCOrder.h"
 #import "MCVegetableManager.h"
 #import "MCOrderDetailViewController.h"
-#import "MBProgressHUD.h"
-#import "Toast+UIView.h"
+
 @implementation MCMineOrderViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -85,7 +84,7 @@
         }
         @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.view makeToast:@"无法获取网络资源" duration:2 position:@"center"];
+                [self showMsgHint:MC_ERROR_MSG_0001];
             });
         }
         @finally {
@@ -124,7 +123,7 @@
         }
         @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.view makeToast:@"无法获取网络资源" duration:2 position:@"center"];
+                [self showMsgHint:MC_ERROR_MSG_0001];
             });
         }
         @finally {
@@ -143,7 +142,7 @@
         NSLog(@"Swiped Left.");
         if(self.segmentedControl.selectedSegmentIndex < 2) {
             [self.segmentedControl setSelectedSegmentIndex:(self.segmentedControl.selectedSegmentIndex+1) animated:YES];
-            [self segmentChanged:self.segmentedControl];
+            [self segmentChanged:(UISegmentedControl*)self.segmentedControl];
             
         }
     }
@@ -151,7 +150,7 @@
         NSLog(@"Swiped Right.");
         if(self.segmentedControl.selectedSegmentIndex >0) {
             [self.segmentedControl setSelectedSegmentIndex:(self.segmentedControl.selectedSegmentIndex-1) animated:YES];
-            [self segmentChanged:self.segmentedControl];
+            [self segmentChanged:(UISegmentedControl*)self.segmentedControl];
         }
     }
     
@@ -167,6 +166,7 @@
                                                   bundle:nil];
     MCOrderDetailViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCOrderDetailViewController"];
     vc.order = self.data[indexPath.row];
+    vc.previousView = self;
     [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:Nil];
 }
 

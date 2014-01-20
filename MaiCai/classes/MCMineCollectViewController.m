@@ -12,8 +12,6 @@
 #import "MCCookBookCell.h"
 #import "MCNetwork.h"
 #import "MCRecipe.h"
-#import "MBProgressHUD.h"
-#import "Toast+UIView.h"
 #import "HMSegmentedControl.h"
 #import "UIImageView+MCAsynLoadImage.h"
 #import "MCHealthCell.h"
@@ -227,13 +225,13 @@ int pageSize_ = 10;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
-            MCUser* user = [[MCContextManager getInstance]getDataByKey:MC_USER];
+            MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
             NSMutableArray* newData = [[MCVegetableManager getInstance]getCollectionListByPage:page_ Pagesize:pageSize_ Recipe:true UserId:user.id];
             [self.recipes addObjectsFromArray:newData];
         }
         @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.view makeToast:@"无法获取网络资源" duration:2 position:@"center"];
+                [self showMsgHint:MC_ERROR_MSG_0001];
             });
         }
         @finally {
@@ -251,14 +249,14 @@ int pageSize_ = 10;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
-            MCUser* user = [[MCContextManager getInstance]getDataByKey:MC_USER];
+            MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
             NSMutableArray* newData = [[MCVegetableManager getInstance]getCollectionListByPage:page_ Pagesize:pageSize_ Recipe:false UserId:user.id];
             
             [self.healthList addObjectsFromArray:newData];
         }
         @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.view makeToast:@"无法获取网络资源" duration:2 position:@"center"];
+                [self showMsgHint:MC_ERROR_MSG_0001];
             });
         }
         @finally {

@@ -10,8 +10,6 @@
 #import "MCVegetable.h"
 #import "MCVegetableManager.h"
 #import "MCCategory.h"
-#import "MBProgressHUD.h"
-#import "Toast+UIView.h"
 #import "HMSegmentedControl.h"
 #import "MCMarketTradeCell.h"
 #import "MCVegetableDetailViewController.h"
@@ -107,10 +105,7 @@
         }
         @catch (NSException *exception) {
              dispatch_async(dispatch_get_main_queue(), ^{
-                 [self.view makeToast:@"无法获取网络数据！"
-                             duration:2.0
-                             position:@"center"
-                                title:@"提示"];
+                 [self showMsgHint:MC_ERROR_MSG_0001];
              });
         }
         @finally {

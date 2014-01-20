@@ -8,13 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "MCBaseNavViewController.h"
-@class MCMineCartViewController;
 @class MCOrderConfirmHeader_;
 @class MCAddress;
 
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 @interface MCOrderConfirmViewController :MCBaseNavViewController<UITableViewDataSource,UITableViewDelegate>
-@property MCMineCartViewController* previousView;
+
 @property (weak, nonatomic) IBOutlet UIButton *paymentBtn;
 
 @property MCAddress* address;
