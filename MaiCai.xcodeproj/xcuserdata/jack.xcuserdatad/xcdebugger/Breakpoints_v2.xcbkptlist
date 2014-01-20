@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MaiCai/classes/MCQuickOrderViewController.m"
-            timestampString = "411377624.643747"
+            timestampString = "411890256.209162"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "197"
-            endingLineNumber = "197"
+            startingLineNumber = "195"
+            endingLineNumber = "195"
             landmarkName = "-calculateTotalPrice"
             landmarkType = "5">
          </BreakpointContent>
