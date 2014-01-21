@@ -164,6 +164,7 @@ static NSMutableDictionary* relationship;
         vegetable.dosage = mainIngredients_[i][@"dosage"];
         vegetable.price = [mainIngredients_[i][@"price"]floatValue];
         vegetable.unit = mainIngredients_[i][@"unit"];
+        vegetable.quantity = 1;
         [mainIngredients addObject:vegetable];
     }
     recipe.mainIngredients = mainIngredients;
@@ -178,6 +179,7 @@ static NSMutableDictionary* relationship;
         vegetable.dosage = accessoryIngredients_[i][@"dosage"];
         vegetable.price = [accessoryIngredients_[i][@"price"]floatValue];
         vegetable.unit = accessoryIngredients_[i][@"unit"];
+        vegetable.quantity = 1;
         [accessoryIngredients addObject:vegetable];
     }
     recipe.accessoryIngredients = accessoryIngredients;

@@ -260,6 +260,7 @@ NSMutableArray* products;
 {
     if([collectionView.restorationIdentifier isEqualToString:@"categoryCollectionView"]){
         MCLabelDetailViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCLabelDetailViewController"];
+        vc.previousView = self;
         NSDictionary* obj = labels[indexPath.row];
         vc.labelId = [obj[@"id"]integerValue];
         vc.title = obj[@"name"];
@@ -271,11 +272,15 @@ NSMutableArray* products;
        MCRecipe* object = recipes[indexPath.row];
         MCQuickOrderViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCQuickOrderViewController"];
         vc.recipe = object;
+        vc.previousView = self;
         [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
-            
         }];
-
     }
+}
+
+-(void)showMsgHint:(NSString *)msg
+{
+    [self.scrollView makeToast:msg duration:2 position:@"center"];
 }
 
 //-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath

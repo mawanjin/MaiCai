@@ -16,6 +16,7 @@
 #import "MCUser.h"
 #import "MCContextManager.h"
 #import "MCTradeManager.h"
+#import "MCVegetableMarketViewController.h"
 
 
 @interface MCLabelDetailViewController ()
@@ -156,6 +157,7 @@
                 }
                 [[MCTradeManager getInstance]addProductToCartOnlineByUserId:user.userId Products:choosedProducts Recipe:Nil];
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.previousView showMsgHint:@"加入购物车成功..."];
                     //结束后需要做些什么
                 });
             }else {
@@ -176,6 +178,7 @@
                 [[MCTradeManager getInstance]addProductToCartByUserId:macId Products:choosedProducts Recipe:nil];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     //结束后需要做些什么
+                    [self.previousView showMsgHint:@"加入购物车成功"];
                 });
             }
         }

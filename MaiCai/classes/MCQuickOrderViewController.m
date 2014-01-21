@@ -39,6 +39,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
@@ -61,6 +63,7 @@
                 [header.image loadImageByUrl:source];
                 self.tableView.tableHeaderView = header;
                 [self.tableView reloadData];
+                [self totalChooseAction:Nil];
             });
         }
     });
@@ -355,6 +358,7 @@
                 [[MCTradeManager getInstance]addProductToCartByUserId:macId Products:products Recipe:recipe];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     //结束后需要做些什么
+                    [self.previousView showMsgHint:@"加入购物车成功..."];
                 });
             }
         }
@@ -366,6 +370,7 @@
         }@finally {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                [self backBtnAction];
             });
         }
     });

@@ -2308,7 +2308,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1w-Wa-ssC">
-                                                    <rect key="frame" x="6" y="18" width="25" height="26"/>
+                                                    <rect key="frame" x="6" y="15" width="30" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" backgroundImage="cart_choose_btn_normal">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -2464,7 +2464,7 @@
         <image name="address_delete_icon" width="22" height="25"/>
         <image name="address_edit_icon" width="29" height="29"/>
         <image name="c_chaohuo" width="80" height="80"/>
-        <image name="cart_choose_btn_normal" width="40" height="40"/>
+        <image name="cart_choose_btn_normal" width="60" height="60"/>
         <image name="check" width="34" height="24"/>
         <image name="divide_line" width="20" height="1"/>
         <image name="dotted_line" width="640" height="1"/>

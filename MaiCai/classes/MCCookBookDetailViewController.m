@@ -16,6 +16,7 @@
 #import "MCRecipe.h"
 #import "MCVegetable.h"
 #import "MCStep.h"
+#import "MCQuickOrderViewController.h"
 #import "UIImageView+MCAsynLoadImage.h"
 
 @implementation MCCookBookDetailViewController
@@ -33,6 +34,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    UIBarButtonItem* item = [[UIBarButtonItem alloc]initWithTitle:@"一键买菜" style:UIBarButtonItemStylePlain target:self action:@selector(quickOrderAction)];
+    item.tintColor = [UIColor whiteColor];
+    self.navItem.rightBarButtonItem = item;
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -58,6 +63,15 @@
             });
         }
     });
+}
+
+-(void)quickOrderAction{
+    MCQuickOrderViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCQuickOrderViewController"];
+    vc.recipe = self.recipe;
+    vc.previousView = self;
+    [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
+    }];
+
 }
 
 - (void)didReceiveMemoryWarning
