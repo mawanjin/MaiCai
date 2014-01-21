@@ -52,7 +52,7 @@
     if (buttonIndex == 1) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             @try {
-                MCUser* user = [[MCContextManager getInstance]getDataByKey:MC_USER];
+                MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
                 [[MCUserManager getInstance]deleteUserAddressById:[[NSString alloc]initWithFormat:@"%d",self.addressId]UserId:user.userId];
                 [self.parentView.data removeObject:self.parentView.data[self.index.row]];
                  dispatch_async(dispatch_get_main_queue(), ^{

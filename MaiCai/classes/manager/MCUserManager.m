@@ -101,7 +101,7 @@ static MCUserManager* instance;
     }
 
     NSDictionary* address_ = ((NSDictionary*)responseData[@"data"])[@"address"];
-    if(address_ !=nil && address_ != [NSNull null] &&[address_ count]>0) {
+    if(address_ !=nil && address_ != (NSDictionary*)[NSNull null] && [address_ count]>0) {
         MCAddress* address = [[MCAddress alloc]init];
         address.id = [address_[@"id"]integerValue];
         address.name = address_[@"name"];

@@ -24,7 +24,7 @@
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
                                                   bundle:nil];
     MCMineAddressViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCMineAddressViewController"];
-    vc.previousView = self.parentView;
+    vc.previousView = (MCBaseViewController*)self.parentView;
     [self.parentView presentViewController:[[UINavigationController alloc]initWithRootViewController:vc]animated:NO completion:^{
                            
     }];

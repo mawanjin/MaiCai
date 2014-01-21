@@ -119,7 +119,7 @@
             if ([[MCContextManager getInstance]isLogged]) {
                 if([self.previousView isKindOfClass:[MCMineCartViewController class]]) {
                     //如果是MCMineCartViewController
-                    MCUser* user = [[MCContextManager getInstance]getDataByKey:MC_USER];
+                    MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
                     [[MCTradeManager getInstance]changeProductNumInCartOnlineByUserId:user.userId ProductId:self.vegetable.id Quantity:self.vegetable.quantity];
                     ((MCMineCartViewController*)self.previousView).data = [[MCTradeManager getInstance]getCartProductsOnlineByUserId:user.userId];
                 }else if([self.previousView isKindOfClass:[MCQuickOrderViewController class]]) {

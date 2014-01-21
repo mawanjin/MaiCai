@@ -89,7 +89,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
             if ([[MCContextManager getInstance]isLogged]) {
-                MCUser* user = [[MCContextManager getInstance]getDataByKey:MC_USER];
+                MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
                 
                 NSArray* products =@[@{
                                           @"id":[[NSNumber alloc]initWithInt:self.vegetable.shop_product_id],

@@ -340,7 +340,8 @@ static NSMutableDictionary* relationship;
                              @"lng":lng,
                              @"lat":lat
                              };
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/public/market/list.do" Params:params Cache:YES];
+    
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/public/market/list.do" Params:[[NSMutableDictionary alloc]initWithDictionary:params] Cache:YES];
     NSError *error;
     NSDictionary* dicResult = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     

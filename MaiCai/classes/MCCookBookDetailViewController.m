@@ -132,14 +132,14 @@
     }else if(indexPath.section == 3) {
         MCCookStepCell* temp = [tableView dequeueReusableCellWithIdentifier:@"cookStepCell"];
         MCStep* step = self.recipe.steps[indexPath.row];
-        temp.label.text = step.content;
+        temp.label.text = [[NSString alloc]initWithFormat:@"%d、%@",indexPath.row+1,step.content ];
         [temp.image loadImageByUrl:step.image];
         cell = temp;
     }
     return cell;
 }
 
-- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
+-(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
     return 4;
 }
 

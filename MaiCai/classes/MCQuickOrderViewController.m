@@ -98,43 +98,47 @@
     cell.indexPath = indexPath;
     if(indexPath.section == 0) {
         //主料
-        MCVegetable* vegetable = self.recipe.mainIngredients[indexPath.row];
-        
-        cell.quantityLabel.text = [[NSString alloc]initWithFormat:@"用量：%@",vegetable.dosage];
-       cell.nameLabel.text = [[NSString alloc]initWithFormat:@"%@x%d",vegetable.name,vegetable.quantity];
-        cell.priceLabel.text = [[NSString alloc]initWithFormat:@"单价为%.2f元/%@",vegetable.price,vegetable.unit];
-        NSMutableDictionary* relation = [[MCVegetableManager getInstance]getRelationshipBetweenProductAndImage];
-        NSString* imageName = relation[[[NSString alloc]initWithFormat:@"%d",vegetable.product_id]];
-        [cell.imageIcon setImage:[UIImage imageNamed:imageName]];
-        cell.subTotalPriceLabel.text = [[NSString alloc]initWithFormat:@"小计%.2f元",vegetable.price*vegetable.quantity];
-        if(vegetable.isSelected) {
-            [cell.chooseBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_selected"] forState:UIControlStateNormal];
-        }else {
-            [cell.chooseBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_normal"] forState:UIControlStateNormal];
-        }
-
-        if(indexPath.row == (self.recipe.mainIngredients.count-1)) {
-            cell.line.hidden = YES;
+        if(self.recipe.mainIngredients.count>0) {
+            MCVegetable* vegetable = self.recipe.mainIngredients[indexPath.row];
+            
+            cell.quantityLabel.text = [[NSString alloc]initWithFormat:@"用量：%@",vegetable.dosage];
+            cell.nameLabel.text = [[NSString alloc]initWithFormat:@"%@x%d",vegetable.name,vegetable.quantity];
+            cell.priceLabel.text = [[NSString alloc]initWithFormat:@"单价为%.2f元/%@",vegetable.price,vegetable.unit];
+            NSMutableDictionary* relation = [[MCVegetableManager getInstance]getRelationshipBetweenProductAndImage];
+            NSString* imageName = relation[[[NSString alloc]initWithFormat:@"%d",vegetable.product_id]];
+            [cell.imageIcon setImage:[UIImage imageNamed:imageName]];
+            cell.subTotalPriceLabel.text = [[NSString alloc]initWithFormat:@"小计%.2f元",vegetable.price*vegetable.quantity];
+            if(vegetable.isSelected) {
+                [cell.chooseBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_selected"] forState:UIControlStateNormal];
+            }else {
+                [cell.chooseBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_normal"] forState:UIControlStateNormal];
+            }
+            
+            if(indexPath.row == (self.recipe.mainIngredients.count-1)) {
+                cell.line.hidden = YES;
+            }
         }
     }else {
         //辅料
-         MCVegetable* vegetable = self.recipe.accessoryIngredients[indexPath.row];
-        cell.quantityLabel.text = [[NSString alloc]initWithFormat:@"用量：%@",vegetable.dosage];
-        cell.nameLabel.text = [[NSString alloc]initWithFormat:@"%@x%d",vegetable.name,vegetable.quantity];
-        cell.priceLabel.text = [[NSString alloc]initWithFormat:@"单价为%.2f元/%@",vegetable.price,vegetable.unit];
-        NSMutableDictionary* relation = [[MCVegetableManager getInstance]getRelationshipBetweenProductAndImage];
-        NSString* imageName = relation[[[NSString alloc]initWithFormat:@"%d",vegetable.product_id]];
-        [cell.imageIcon setImage:[UIImage imageNamed:imageName]];
-        cell.subTotalPriceLabel.text = [[NSString alloc]initWithFormat:@"小计%.2f元",vegetable.price*vegetable.quantity];
-        
-        if(vegetable.isSelected) {
-            [cell.chooseBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_selected"] forState:UIControlStateNormal];
-        }else {
-            [cell.chooseBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_normal"] forState:UIControlStateNormal];
-        }
-        
-        if(indexPath.row == (self.recipe.accessoryIngredients.count-1)) {
-            cell.line.hidden = YES;
+        if(self.recipe.accessoryIngredients.count>0){
+             MCVegetable* vegetable = self.recipe.accessoryIngredients[indexPath.row];
+            cell.quantityLabel.text = [[NSString alloc]initWithFormat:@"用量：%@",vegetable.dosage];
+            cell.nameLabel.text = [[NSString alloc]initWithFormat:@"%@x%d",vegetable.name,vegetable.quantity];
+            cell.priceLabel.text = [[NSString alloc]initWithFormat:@"单价为%.2f元/%@",vegetable.price,vegetable.unit];
+            NSMutableDictionary* relation = [[MCVegetableManager getInstance]getRelationshipBetweenProductAndImage];
+            NSString* imageName = relation[[[NSString alloc]initWithFormat:@"%d",vegetable.product_id]];
+            [cell.imageIcon setImage:[UIImage imageNamed:imageName]];
+            cell.subTotalPriceLabel.text = [[NSString alloc]initWithFormat:@"小计%.2f元",vegetable.price*vegetable.quantity];
+            
+            if(vegetable.isSelected) {
+                [cell.chooseBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_selected"] forState:UIControlStateNormal];
+            }else {
+                [cell.chooseBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_normal"] forState:UIControlStateNormal];
+            }
+            
+            if(indexPath.row == (self.recipe.accessoryIngredients.count-1)) {
+                cell.line.hidden = YES;
+            }
         }
 
     }
