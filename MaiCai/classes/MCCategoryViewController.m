@@ -13,6 +13,7 @@
 #import "HMSegmentedControl.h"
 #import "MCMarketTradeCell.h"
 #import "MCVegetableDetailViewController.h"
+#import "UIImageView+MCAsynLoadImage.h"
 
 @implementation MCCategoryViewController
 
@@ -145,10 +146,7 @@
     myCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"gridCell" forIndexPath:indexPath];
     MCCategory* category = self.sourceData[self.segmentedControl.selectedSegmentIndex];
     MCVegetable* vegetable = category.vegetables[indexPath.row];
-    NSDictionary* dic = [[MCVegetableManager getInstance]getRelationshipBetweenProductAndImage];
-     NSString* product_id =[[NSString alloc]initWithFormat:@"%d",vegetable.product_id];
-    NSString* imageName = dic[product_id];
-    [myCell.imageIcon setImage:[UIImage imageNamed:imageName]];
+    [myCell.imageIcon loadImageByUrl:vegetable.image];
     myCell.nameLabel.text = vegetable.name;
     return myCell;
 }

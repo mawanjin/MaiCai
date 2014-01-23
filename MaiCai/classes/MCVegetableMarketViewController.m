@@ -127,10 +127,8 @@ NSMutableArray* products;
 {
     MCMarketIndexTipCell* cell = [tableView dequeueReusableCellWithIdentifier:@"tipCell"];
     MCVegetable* vegetable = products[indexPath.row];
-    NSDictionary* dic = [[MCVegetableManager getInstance]getRelationshipBetweenProductAndImage];
-    NSString* product_id =[[NSString alloc]initWithFormat:@"%d",vegetable.product_id];
-    NSString* imageName = dic[product_id];
-    [cell.icon setImage:[UIImage imageNamed:imageName]];
+    //NSDictionary* dic = [[MCVegetableManager getInstance]getRelationshipBetweenProductAndImage];
+    [cell.icon loadImageByUrl:vegetable.image];
     
     cell.nameLabel.text = vegetable.name;
     cell.descriptionLabel.text = [[NSString alloc]initWithFormat:@"市场价：%.02f元/%@",vegetable.price,vegetable.unit];

@@ -14,6 +14,7 @@
 #import "MCOrder.h"
 #import "MCVegetableManager.h"
 #import "MCOrderDetailViewController.h"
+#import "UIImageView+MCAsynLoadImage.h"
 
 @implementation MCMineOrderViewController
 
@@ -182,10 +183,7 @@
 {
     MCOrderCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"orderCell"];
     MCOrder* order = self.data[indexPath.row];
-       NSMutableDictionary* relation = [[MCVegetableManager getInstance]getRelationshipBetweenProductAndImage];
-    NSString* imageName = relation[[[NSString alloc]initWithFormat:@"%@",order.image]];
-    [cell.imageIcon setImage:[UIImage imageNamed:imageName]];
-    
+    [cell.imageIcon loadImageByUrl:order.image];
     
     cell.shopNameLabel.text = order.shopName;
     cell.createTimeLabel.text = order.dateAdded;

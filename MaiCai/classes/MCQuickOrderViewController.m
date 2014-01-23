@@ -107,9 +107,7 @@
             cell.quantityLabel.text = [[NSString alloc]initWithFormat:@"用量：%@",vegetable.dosage];
             cell.nameLabel.text = [[NSString alloc]initWithFormat:@"%@x%d",vegetable.name,vegetable.quantity];
             cell.priceLabel.text = [[NSString alloc]initWithFormat:@"单价为%.2f元/%@",vegetable.price,vegetable.unit];
-            NSMutableDictionary* relation = [[MCVegetableManager getInstance]getRelationshipBetweenProductAndImage];
-            NSString* imageName = relation[[[NSString alloc]initWithFormat:@"%d",vegetable.product_id]];
-            [cell.imageIcon setImage:[UIImage imageNamed:imageName]];
+            [cell.imageIcon loadImageByUrl:vegetable.image];
             cell.subTotalPriceLabel.text = [[NSString alloc]initWithFormat:@"小计%.2f元",vegetable.price*vegetable.quantity];
             if(vegetable.isSelected) {
                 [cell.chooseBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_selected"] forState:UIControlStateNormal];
@@ -128,9 +126,7 @@
             cell.quantityLabel.text = [[NSString alloc]initWithFormat:@"用量：%@",vegetable.dosage];
             cell.nameLabel.text = [[NSString alloc]initWithFormat:@"%@x%d",vegetable.name,vegetable.quantity];
             cell.priceLabel.text = [[NSString alloc]initWithFormat:@"单价为%.2f元/%@",vegetable.price,vegetable.unit];
-            NSMutableDictionary* relation = [[MCVegetableManager getInstance]getRelationshipBetweenProductAndImage];
-            NSString* imageName = relation[[[NSString alloc]initWithFormat:@"%d",vegetable.product_id]];
-            [cell.imageIcon setImage:[UIImage imageNamed:imageName]];
+            [cell.imageIcon loadImageByUrl:vegetable.image];
             cell.subTotalPriceLabel.text = [[NSString alloc]initWithFormat:@"小计%.2f元",vegetable.price*vegetable.quantity];
             
             if(vegetable.isSelected) {

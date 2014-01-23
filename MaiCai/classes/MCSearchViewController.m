@@ -17,6 +17,7 @@
 #import "MCRecipe.h"
 #import "MCHealthDetailViewController.h"
 #import "MCHealth.h"
+#import "UIImageView+MCAsynLoadImage.h"
 
 @interface MCSearchViewController ()
 
@@ -117,20 +118,7 @@ bool flag = false;
             if(indexPath.row != self.filterData.count) {
                 NSDictionary* obj = self.filterData[indexPath.row];
                 MCSearchResultCell* resultCell = [self.tableView dequeueReusableCellWithIdentifier:@"searchResultCell"];
-                if([obj[@"type"]integerValue] == 2) {
-                    NSDictionary* dic = [[MCVegetableManager getInstance]getRelationshipBetweenProductAndImage];
-                    NSString* product_id =[[NSString alloc]initWithFormat:@"%d",[obj[@"image"]integerValue]];
-                    NSString* imageName = dic[product_id];
-                    resultCell.image.image = [UIImage imageNamed:imageName];
-                }else {
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                        UIImage* image = [[MCNetwork getInstance]loadImageFromSource:obj[@"image"]];
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            resultCell.image.image = image;
-                        });
-                    });
-                }
-                
+                [resultCell.image loadImageByUrl:obj[@"image"]];
                 resultCell.label.text = obj[@"name"];
                 cell = resultCell;
 

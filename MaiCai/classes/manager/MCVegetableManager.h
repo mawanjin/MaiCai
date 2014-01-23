@@ -14,7 +14,6 @@
 +(MCVegetableManager*)getInstance;
 -(NSMutableDictionary*)getMarketIndexInfo;
 -(NSMutableArray*)getMarketProducts;
--(NSMutableDictionary*)getRelationshipBetweenProductAndImage;
 -(NSMutableDictionary*)getVegetableDetailByProductId:(int)id Longitude:(NSString*)longitude Latitude:(NSString*)latitude;
 -(NSMutableDictionary*)getShopVegetablesByShopId:(NSString*)id;
 -(NSMutableArray*)getHotWordsByQuantity:(int)quantity;

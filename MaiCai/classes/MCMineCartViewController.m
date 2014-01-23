@@ -19,6 +19,7 @@
 #import "MCLoginViewController.h"
 #import "MCUser.h"
 #import "MCOrderConfirmViewController.h"
+#import "UIImageView+MCAsynLoadImage.h"
 
 
 @implementation MCMineCartViewController
@@ -157,9 +158,7 @@
     MCShop* shop = self.data[indexPath.section];
     NSMutableArray* vegetables = shop.vegetables;
     MCVegetable* vegetable = vegetables[indexPath.row];
-    NSMutableDictionary* relation = [[MCVegetableManager getInstance]getRelationshipBetweenProductAndImage];
-    NSString* imageName = relation[[[NSString alloc]initWithFormat:@"%d",vegetable.product_id]];
-    [cell.imageIcon setImage:[UIImage imageNamed:imageName]];
+    [cell.imageIcon loadImageByUrl:vegetable.image];
     cell.nameLabel.text = vegetable.name;
     cell.quantityLabel.text = [[NSString alloc]initWithFormat:@"数量：%d",vegetable.quantity];
     cell.priceLabel.text = [[NSString alloc]initWithFormat:@"单价：%0.02f元/%@",vegetable.price,vegetable.unit];

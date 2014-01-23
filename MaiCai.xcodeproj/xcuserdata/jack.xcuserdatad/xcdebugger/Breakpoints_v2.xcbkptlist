@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MaiCai/classes/MCQuickOrderViewController.m"
-            timestampString = "411980660.975273"
+            timestampString = "412135833.107077"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MaiCai/classes/manager/MCVegetableManager.m"
-            timestampString = "411980599.299611"
+            timestampString = "412135833.107077"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "246"
-            endingLineNumber = "246"
+            startingLineNumber = "248"
+            endingLineNumber = "248"
             landmarkName = "@implementation MCVegetableManager"
             landmarkType = "3">
          </BreakpointContent>

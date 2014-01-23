@@ -19,6 +19,7 @@
 #import "MCOrderDetailFooter.h"
 #import "MCUser.h"
 #import "MCAppDelegate.h"
+#import "UIImageView+MCAsynLoadImage.h"
 
 #import "DataSigner.h"
 #import "AlixPayResult.h"
@@ -108,9 +109,7 @@
 
     cell.priceLabel.text = [[NSString alloc]initWithFormat:@"单价：%.02f元",vegetable.price];
     cell.totalPriceLabel.text = [[NSString alloc]initWithFormat:@"小计：%.02f元",vegetable.price*vegetable.quantity];
-    NSMutableDictionary* relation = [[MCVegetableManager getInstance]getRelationshipBetweenProductAndImage];
-    NSString* imageName = relation[[[NSString alloc]initWithFormat:@"%d",vegetable.product_id]];
-    [cell.imageIcon setImage:[UIImage imageNamed:imageName]];
+    [cell.imageIcon loadImageByUrl:vegetable.image];
     return cell;
 }
 

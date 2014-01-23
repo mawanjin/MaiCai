@@ -164,6 +164,7 @@ static NSMutableDictionary* relationship;
         vegetable.dosage = mainIngredients_[i][@"dosage"];
         vegetable.price = [mainIngredients_[i][@"price"]floatValue];
         vegetable.unit = mainIngredients_[i][@"unit"];
+        vegetable.image = mainIngredients_[i][@"image"];
         vegetable.quantity = 1;
         [mainIngredients addObject:vegetable];
     }
@@ -179,6 +180,7 @@ static NSMutableDictionary* relationship;
         vegetable.dosage = accessoryIngredients_[i][@"dosage"];
         vegetable.price = [accessoryIngredients_[i][@"price"]floatValue];
         vegetable.unit = accessoryIngredients_[i][@"unit"];
+        vegetable.image = accessoryIngredients_[i][@"image"];
         vegetable.quantity = 1;
         [accessoryIngredients addObject:vegetable];
     }
@@ -305,6 +307,7 @@ static NSMutableDictionary* relationship;
         temp.id = [obj[@"id"]integerValue];
         temp.price = [obj[@"price"] floatValue];
         temp.product_id = [obj[@"product_id"]integerValue];
+        temp.image = obj[@"image"];
         temp.unit = obj[@"unit"];
         [productsArray addObject:temp];
     }
@@ -372,6 +375,7 @@ static NSMutableDictionary* relationship;
             temp1.id = [obj1[@"id"]integerValue];
             temp1.name = obj1[@"name"];
             temp1.product_id = [obj1[@"product_id"]integerValue];
+            temp1.image = obj1[@"image"];
             temp1.price = [obj1[@"price"]floatValue];
             temp1.unit = obj1[@"unit"];
             [vegetables addObject:temp1];
@@ -425,6 +429,7 @@ static NSMutableDictionary* relationship;
         vegetable.unit = dicResult[@"unit"];
         vegetable.originalPrice = [tenant_[@"original_price"]floatValue];
         vegetable.quantity = [tenant_[@"sales_quantity"]integerValue];
+        vegetable.image = obj[@"image"];
         [vegetables addObject:vegetable];
         tenant.vegetables = vegetables;
         [tenants addObject:tenant];
@@ -611,74 +616,6 @@ static NSMutableDictionary* relationship;
     finalResult[@"products"] = products;
     return finalResult;
 }
-
-
-
--(NSMutableDictionary*)getRelationshipBetweenProductAndImage
-{
-    @synchronized (self){
-        if(relationship == nil) {
-            NSDictionary *resultData = @{
-                                         @"21" :@"r_p_xiuzhengu" ,
-                                         @"22" :@"r_p_qiezi" ,
-                                         @"23" :@"r_p_xxxg" ,
-                                         @"24" :@"r_p_chaotianjiao" ,
-                                         @"25" :@"r_p_gswwc" ,
-                                         @"26" :@"r_p_jinzhengu" ,
-                                         @"27" :@"r_p_dasuanzi" ,
-                                         @"28" :@"r_p_bdhg" ,
-                                         @"29" :@"r_p_xiangqin" ,
-                                         @"30" :@"r_p_xiangcong" ,
-                                         @"31" :@"r_p_yangcong" ,
-                                         @"32" :@"r_p_suantai" ,
-                                         @"33" :@"r_p_donggua" ,
-                                         @"34" :@"r_p_maoyutou"  ,
-                                         @"35" :@"r_p_helandou" ,
-                                         @"36" :@"r_p_xiaonangua" ,
-                                         @"37" :@"r_p_xiaobaicai" ,
-                                         @"38" :@"r_p_zajiao" ,
-                                         @"39" :@"r_p_sijidou" ,
-                                         @"40" :@"r_p_biandou" ,
-                                         @"41" :@"r_p_caijiao" ,
-                                         @"42" :@"r_p_jiaobai" ,
-                                         @"43" :@"r_p_baocai" ,
-                                         @"44" :@"r_p_zishu" ,
-                                         @"45" :@"r_p_xinbaogu" ,
-                                         @"46" :@"r_p_jimaocai" ,
-                                         @"47" :@"r_p_xihongshi"  ,
-                                         @"48" :@"r_p_jiucai" ,
-                                         @"49" :@"r_p_xihulu" ,
-                                         @"50" :@"r_p_tudou" ,
-                                         @"51" :@"r_p_dabaicai" ,
-                                         @"52" :@"r_p_shengjiang" ,
-                                         @"53" :@"r_p_baihe" ,
-                                         @"54" :@"r_p_ziganlan" ,
-                                         @"55" :@"r_p_changdoujiao" ,
-                                         @"56" :@"r_p_xilanhua" ,
-                                         @"57" :@"r_p_jiuhuang" ,
-                                         @"58" :@"r_p_dacong" ,
-                                         @"59" :@"r_p_hongshu" ,
-                                         @"60" :@"r_p_huluobu"  ,
-                                         @"61" :@"r_p_bailuobu" ,
-                                         @"62" :@"r_p_bpylb" ,
-                                         @"63" :@"r_p_hpylb" ,
-                                         @"64" :@"r_p_huacai" ,
-                                         @"65" :@"r_p_yjhc" ,
-                                         @"66" :@"r_p_maodou" ,
-                                         @"67" :@"r_p_caiou" ,
-                                         @"68" :@"r_p_huawangcai" ,
-                                         @"69" :@"r_p_guangshanyao" ,
-                                         @"70" :@"r_p_maoshanyao" ,
-                                         @"71" :@"r_p_tgsy"
-                                         };
-            
-            relationship = [[NSMutableDictionary alloc]initWithDictionary:resultData];
-        }
-        
-    }
-    return relationship;
-}
-
 
 
 @end

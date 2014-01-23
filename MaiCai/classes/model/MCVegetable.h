@@ -14,6 +14,7 @@
 @property  unsigned int id;
 @property  NSString* name;
 @property  unsigned int product_id;
+@property  NSString* image;
 @property  unsigned int shop_product_id;
 @property  float price;
 @property  float originalPrice;

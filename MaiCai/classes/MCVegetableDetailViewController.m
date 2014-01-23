@@ -41,11 +41,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    
-    NSString* product_id =[[NSString alloc]initWithFormat:@"%d",self.vegetable.product_id];
-    NSString* image = [[MCVegetableManager getInstance]getRelationshipBetweenProductAndImage][product_id];
-    self.imageIcon.image = [UIImage imageNamed:image];
     //self.discoutPriceLabel.hidden = YES;
     
     NSString* lng = ((NSDictionary*)[[MCContextManager getInstance]getDataByKey:MC_CONTEXT_POSITION])[@"lng"];
@@ -70,6 +65,7 @@
                 NSMutableArray* tenants = self.data[@"tenants"];
                 MCShop* shop = tenants[0];
                 self.vegetable = shop.vegetables[0];
+                [self.imageIcon loadImageByUrl:self.vegetable.image];
                 self.priceLabel.text = [[NSString alloc]initWithFormat:@"现价：%.02f元/%@",self.vegetable.price,self.vegetable.unit];
                 self.shopLabel.text = self.vegetable.shop.name;
                 

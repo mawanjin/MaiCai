@@ -21,6 +21,7 @@
 #import "MCTradeManager.h"
 #import "MCAddress.h"
 #import "MCAppDelegate.h"
+#import "UIImageView+MCAsynLoadImage.h"
 
 
 #import "DataSigner.h"
@@ -134,6 +135,7 @@
                 copyVegetable.unit = vegetable.unit;
                 copyVegetable.quantity = vegetable.quantity;
                 copyVegetable.isSelected = vegetable.isSelected;
+                copyVegetable.image = vegetable.image;
                 [copyVegetables addObject:copyVegetable];
             }
         }
@@ -319,9 +321,7 @@
     MCOrderConfirmCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"orderConfirmCell"];
     MCShop* shop = self.data[indexPath.section];
     MCVegetable* vegetable = shop.vegetables[indexPath.row];
-    NSMutableDictionary* relation = [[MCVegetableManager getInstance]getRelationshipBetweenProductAndImage];
-    NSString* imageName = relation[[[NSString alloc]initWithFormat:@"%d",vegetable.product_id]];
-    cell.imageIcon.image = [UIImage imageNamed:imageName];
+    [cell.imageIcon loadImageByUrl:vegetable.image];
     cell.nameLabel.text = [[NSString alloc]initWithFormat:@"%@",vegetable.name];
     cell.quantityLabel.text = [[NSString alloc]initWithFormat:@"数量：%d",vegetable.quantity];
     cell.unitLabel.text = [[NSString alloc]initWithFormat:@"单价：%.02f元/%@",vegetable.price,vegetable.unit];

@@ -73,6 +73,7 @@ static MCTradeManager* instance;
                     vegetable.price = [product[@"price"]floatValue];
                     vegetable.unit = product[@"unit"];
                     vegetable.quantity = [product[@"quantity"]integerValue];
+                    vegetable.image = product[@"image"];
                     NSArray* recipes_ = product[@"recipes"];
                     NSMutableArray* recipes = [[NSMutableArray alloc]init];
                     if((NSNull*)recipes_ != [NSNull null]) {
@@ -140,6 +141,7 @@ static MCTradeManager* instance;
                     vegetable.price = [product[@"price"]floatValue];
                     vegetable.unit = product[@"unit"];
                     vegetable.quantity = [product[@"quantity"]integerValue];
+                    vegetable.image = product[@"image"];
                     
                     NSArray* recipes_ = product[@"recipes"];
                     NSMutableArray* recipes = [[NSMutableArray alloc]init];
@@ -538,6 +540,7 @@ static MCTradeManager* instance;
         vegetable.product_id = [product[@"product_id"]integerValue];
         vegetable.quantity = [product[@"quantity"]integerValue];
         vegetable.price = [product[@"price"]floatValue];
+        vegetable.image = product[@"image"];
         [vegetables addObject:vegetable];
     }
     
