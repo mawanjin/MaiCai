@@ -32,31 +32,6 @@
 {
     [super viewDidLoad];
    
-    CGFloat yDelta;
-    
-    if ([[[UIDevice currentDevice] systemVersion] compare:@"7.0" options:NSNumericSearch] != NSOrderedAscending) {
-        yDelta = 20.0f;
-    } else {
-        yDelta = 0.0f;
-    }
-    
-    // Segmented control with scrolling
-    self.segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"蔬菜", @"水果", @"肉类", @"豆制品",@"炒货",@"米面杂粮"]];
-    [self.segmentedControl setSelectedSegmentIndex:0];
-    self.segmentedControl.segmentEdgeInset = UIEdgeInsetsMake(0, 10, 0, 10);
-    self.segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
-    self.segmentedControl.font = [UIFont systemFontOfSize:15];
-    self.segmentedControl.selectionIndicatorHeight = 2;
-    self.segmentedControl.selectionIndicatorColor = [UIColor colorWithRed:0.41f green:0.75f blue:0.27f alpha:1.00f];
-    self.segmentedControl.selectedTextColor = [UIColor colorWithRed:0.41f green:0.75f blue:0.27f alpha:1.00f];
-    self.segmentedControl.textColor = [UIColor grayColor];
-    self.segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
-    self.segmentedControl.scrollEnabled = YES;
-    self.segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
-    [self.segmentedControl setFrame:CGRectMake(0, 40 + yDelta, 320, 40)];
-    [self.segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-    [self.view addSubview:self.segmentedControl];
-    
     
     
    //手势滑动控制
@@ -100,6 +75,37 @@
         @try {
             self.sourceData = [[MCVegetableManager getInstance]getMarketProducts];
             dispatch_async(dispatch_get_main_queue(), ^{
+                CGFloat yDelta;
+                
+                if ([[[UIDevice currentDevice] systemVersion] compare:@"7.0" options:NSNumericSearch] != NSOrderedAscending) {
+                    yDelta = 20.0f;
+                } else {
+                    yDelta = 0.0f;
+                }
+                
+                // Segmented control with scrolling
+                NSMutableArray* categories = [[NSMutableArray alloc]init];
+                for(int i=0;i<self.sourceData.count;i++) {
+                    MCCategory* category = self.sourceData[i];
+                    [categories addObject:category.name];
+                }
+                
+                self.segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:categories];
+                [self.segmentedControl setSelectedSegmentIndex:0];
+                self.segmentedControl.segmentEdgeInset = UIEdgeInsetsMake(0, 10, 0, 10);
+                self.segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
+                self.segmentedControl.font = [UIFont systemFontOfSize:15];
+                self.segmentedControl.selectionIndicatorHeight = 2;
+                self.segmentedControl.selectionIndicatorColor = [UIColor colorWithRed:0.41f green:0.75f blue:0.27f alpha:1.00f];
+                self.segmentedControl.selectedTextColor = [UIColor colorWithRed:0.41f green:0.75f blue:0.27f alpha:1.00f];
+                self.segmentedControl.textColor = [UIColor grayColor];
+                self.segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
+                self.segmentedControl.scrollEnabled = YES;
+                self.segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
+                [self.segmentedControl setFrame:CGRectMake(0, 40 + yDelta, 320, 40)];
+                [self.segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+                [self.view addSubview:self.segmentedControl];
+                
                 [self.collectionView reloadData];
             });
 
@@ -172,7 +178,7 @@
     
     if (sender.direction & UISwipeGestureRecognizerDirectionLeft){
         NSLog(@"Swiped Left.");
-        if(self.segmentedControl.selectedSegmentIndex < 5) {
+        if(self.segmentedControl.selectedSegmentIndex < (self.sourceData.count-1)) {
             [self.segmentedControl setSelectedSegmentIndex:(self.segmentedControl.selectedSegmentIndex+1) animated:YES];
             [self segmentedControlChangedValue:self.segmentedControl];
             

@@ -9,6 +9,7 @@
 #import "MCNetwork.h"
 #import "NSString+MD5Addition.h"
 #import "MCNetWorkObject.h"
+#import "MCFileOperation.h"
 
 
 @implementation MCNetwork
@@ -29,16 +30,18 @@ static MCNetwork* instance;
 {
     NSString *urlAsString = httpUrl;
     int count = 1;
-    for (NSString* key in [params allKeys]){
-        NSString* value = [params objectForKey:key];
-        if(count == 1)
-            urlAsString = [urlAsString stringByAppendingFormat:@"?%@=%@",key,value];
-        else
-            urlAsString = [urlAsString stringByAppendingFormat:@"&%@=%@",key,value];
-        count++;
+    if(params != nil) {
+        for (NSString* key in [params allKeys]){
+            NSString* value = [params objectForKey:key];
+            if(count == 1)
+                urlAsString = [urlAsString stringByAppendingFormat:@"?%@=%@",key,value];
+            else
+                urlAsString = [urlAsString stringByAppendingFormat:@"&%@=%@",key,value];
+            count++;
+        }
     }
-
-    NSString * path = [NSTemporaryDirectory() stringByAppendingPathComponent:[[NSString alloc]initWithFormat:@"%@.txt",[urlAsString stringFromMD5]]];
+    
+    NSString * path = [[[MCFileOperation getInstance]getDocumentPath] stringByAppendingPathComponent:[[NSString alloc]initWithFormat:@"%@.txt",[urlAsString stringFromMD5]]];
     
     MCNetWorkObject* data = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
     
@@ -97,28 +100,38 @@ static MCNetwork* instance;
     
     NSString *body = @"";
     int count = 1;
-    for (NSString* key in [params allKeys]){
-        NSString* value = [params objectForKey:key];
-        if(count == 1)
-            body = [body stringByAppendingFormat:@"%@=%@",key,value];
-        else
-            body = [body stringByAppendingFormat:@"&%@=%@",key,value];
-        count++;
+    
+    if(params != nil) {
+        for (NSString* key in [params allKeys]){
+            NSString* value = [params objectForKey:key];
+            if(count == 1)
+                body = [body stringByAppendingFormat:@"%@=%@",key,value];
+            else
+                body = [body stringByAppendingFormat:@"&%@=%@",key,value];
+            count++;
+        }
     }
     
     [urlRequest setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
    
-    NSData *response = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:nil error:nil];
-    return  response;
+    NSHTTPURLResponse *response;
+    NSData *result = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:nil];
+    
+    if ([response respondsToSelector:@selector(allHeaderFields)]) {
+        // 取得http状态码
+        NSLog(@"此次请求状态码是%ld",(long)[response statusCode]);
+        if((long)[response statusCode] != 200) {
+            @throw [[NSException alloc]initWithName:@"错误" reason:@"状态码不是200" userInfo:nil];
+        }
+    }
+    return  result;
 }
 
 -(UIImage*) loadImageFromSource:(NSString*)url
 {
-    
-    NSString * path = [NSTemporaryDirectory() stringByAppendingPathComponent:[[NSString alloc]initWithFormat:@"%@",[url stringFromMD5]]];
+    NSString * path = [[[MCFileOperation getInstance]getCachePath] stringByAppendingPathComponent:[[NSString alloc]initWithFormat:@"%@",[url stringFromMD5]]];
     
     MCNetWorkObject* data  = [NSKeyedUnarchiver unarchiveObjectWithFile: path];
-        
     
     if(data != Nil) {
         //如果有缓存读缓存
@@ -154,5 +167,25 @@ static MCNetwork* instance;
     }
     
     return [UIImage imageWithData:imgData];
+}
+
+/*计算缓存整体缓存大小*/
+- (NSString *)sizeCache{
+    MCFileOperation* operation = [MCFileOperation getInstance];
+    long docSize = [operation fileSizeForDir:[operation getDocumentPath]];
+    long ImageCacheSize = [operation fileSizeForDir:[operation getCachePath]];
+    
+    long totalSize = docSize + ImageCacheSize;
+    const unsigned int bytes = 1024*1024 ;   //字节数，如果想获取KB就1024，MB就1024*1024
+    NSString *string = [NSString stringWithFormat:@"%.2f",(1.0 *totalSize/bytes)];
+    NSLog(@"docSize:%ld,ImageCacheSize:%ld",docSize,ImageCacheSize);
+    return string;
+}
+
+-(void)clearCache
+{
+    MCFileOperation* operation = [MCFileOperation getInstance];
+    [operation emptyFolder:[operation getDocumentPath]];
+    [operation emptyFolder:[operation getCachePath]];
 }
 @end

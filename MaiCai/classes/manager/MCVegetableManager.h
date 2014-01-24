@@ -22,6 +22,7 @@
 -(NSMutableArray*)getRecipesByPage:(int)page Pagesize:(int)pagesize;
 -(NSMutableArray*)getHealthListByPage:(int)page Pagesize:(int)pagesize;
 -(NSMutableArray*)getCollectionListByPage:(int)page Pagesize:(int)pagesize Recipe:(BOOL)flag UserId:(int)userId;
+-(NSMutableArray*)getProductCategories;
 //这是一键买菜接口
 -(MCRecipe*)getRecipeById:(int)id;
 //获取菜谱详情接口

@@ -617,5 +617,21 @@ static NSMutableDictionary* relationship;
     return finalResult;
 }
 
+-(NSMutableArray*)getProductCategories
+{
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/public/product/category.do" Params:NULL Cache:YES];
+    NSError *error;
+    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
+    
+    BOOL flag = [responseData[@"success"]boolValue];
+    NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    if(!flag) {
+        @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
+    }
+    
+    NSMutableArray* data = responseData[@"data"];
+    return data;
+}
+
 
 @end

@@ -16,6 +16,7 @@
 #import "MCMineOrderViewController.h"
 #import "MCMineCell.h"
 #import "MCMineFooter.h"
+#import "MCNetwork.h"
 
 @implementation MCMineViewController
 MCMineFooter* footer;
@@ -136,7 +137,20 @@ MCMineFooter* footer;
             
         }
         
+    }else if(indexPath.row == 6) {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+             [[MCNetwork getInstance]clearCache];
+              dispatch_async(dispatch_get_main_queue(), ^{
+                  [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                  [self showMsgHint:@"清空缓存成功..."];
+                  [self.tableView reloadData];
+              });
+        });
+       
+        
     }
+
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -181,6 +195,10 @@ MCMineFooter* footer;
         }
         cell.label.text = @"个人信息";
         cell.divideLine.hidden = YES;
+    }else if(indexPath.row == 6) {
+        cell.image.image = [UIImage imageNamed:@"mine_personal_normal"];
+        cell.label.text = [[NSString alloc]initWithFormat:@"清除缓存(%@MB)",[[MCNetwork getInstance] sizeCache]];
+        cell.divideLine.hidden = YES;
     }else{
         
     }
@@ -189,7 +207,7 @@ MCMineFooter* footer;
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return 7;
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
