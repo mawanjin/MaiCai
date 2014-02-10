@@ -6,9 +6,9 @@
 //  Copyright (c) 2013年 JoinSoft. All rights reserved.
 //
 
-#import "MCTipsHeader.h"
+#import "MCMarketIndexTipsHeader.h"
 
-@implementation MCTipsHeader
+@implementation MCMarketIndexTipsHeader
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -21,7 +21,7 @@
 
 +(id)initInstance
 {
-    return [[[NSBundle mainBundle]loadNibNamed:@"MCTipsHeader" owner:self
+    return [[[NSBundle mainBundle]loadNibNamed:@"MCMarketIndexTipsHeader" owner:self
                                 options:Nil]lastObject];
 }
 

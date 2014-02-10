@@ -18,7 +18,7 @@
 #import "MCVegetableDetailViewController.h"
 #import "HMSegmentedControl.h"
 #import "MCSearchViewController.h"
-#import "MCTipsHeader.h"
+#import "MCMarketIndexTipsHeader.h"
 #import "MCNetwork.h"
 #import "MCQuickOrderViewController.h"
 #import "MCRecipe.h"
@@ -63,7 +63,7 @@ NSMutableArray* products;
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    
+    [self.tableView removeFromSuperview];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -166,7 +166,7 @@ NSMutableArray* products;
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    MCTipsHeader* view = [MCTipsHeader initInstance];
+    MCMarketIndexTipsHeader* view = [MCMarketIndexTipsHeader initInstance];
     view.newsLabel.text = self.data[@"tip"];
     return view;
 }

@@ -94,7 +94,8 @@ bool flag = false;
         if(!flag) {
             return self.suggestData.count;
         }else {
-            return self.filterData.count+1;
+            //return self.filterData.count+1;
+            return self.filterData.count;
         }
     } else {
         return self.hotWords.count;

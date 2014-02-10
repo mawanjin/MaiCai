@@ -111,7 +111,12 @@ int pageSize = 10;
         //菜谱
         if(indexPath.row == self.recipes.count) {
             page++;
+            //UITableViewCell *loadMoreCell=[tableView cellForRowAtIndexPath:indexPath];
+            //loadMoreCell.textLabel.text=@"正在读取更信息 …";
+            
             [self getRecipes];
+            
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
         }else {
             MCCookBookDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCCookBookDetailViewController"];
             vc.recipe = self.recipes[indexPath.row];
@@ -123,6 +128,7 @@ int pageSize = 10;
         if(indexPath.row == self.healthList.count) {
             page++;
             [self getHealthList];
+             [tableView deselectRowAtIndexPath:indexPath animated:YES];
         }else{
             MCHealthDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCHealthDetailViewController"];
             vc.health = self.healthList[indexPath.row];
@@ -141,6 +147,7 @@ int pageSize = 10;
             if(indexPath.row == self.recipes.count){
                 //加载更多
                 MCCookBookCell* cell = [tableView dequeueReusableCellWithIdentifier:@"loadMoreCell"];
+                
                 return cell;
             }else {
                 //菜谱
@@ -190,10 +197,12 @@ int pageSize = 10;
     if(segmentedControl.selectedSegmentIndex == 0) {
         page = 1;
         [self.recipes removeAllObjects];
+        [self.tableView reloadData];
         [self getRecipes];
     }else {
         page = 1;
         [self.healthList removeAllObjects];
+        [self.tableView reloadData];
         [self getHealthList];
     }
 }
@@ -233,6 +242,16 @@ int pageSize = 10;
             NSMutableArray* newData = [[MCVegetableManager getInstance]getRecipesByPage:page Pagesize:pageSize];
             
             [self.recipes addObjectsFromArray:newData];
+            NSMutableArray *insertIndexPaths = [NSMutableArray arrayWithCapacity:10];
+            for (int ind = 0; ind < [newData count]; ind++) {
+                NSIndexPath    *newPath =  [NSIndexPath indexPathForRow:[self.recipes indexOfObject:[newData objectAtIndex:ind]] inSection:0];
+                [insertIndexPaths addObject:newPath];
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView insertRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationFade];
+            });
+
         }
         @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -242,7 +261,6 @@ int pageSize = 10;
         @finally {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
-                [self.tableView reloadData];
             });
         }
     });
@@ -257,6 +275,15 @@ int pageSize = 10;
             NSMutableArray* newData = [[MCVegetableManager getInstance]getHealthListByPage:page Pagesize:pageSize];
             
             [self.healthList addObjectsFromArray:newData];
+            NSMutableArray *insertIndexPaths = [NSMutableArray arrayWithCapacity:10];
+            for (int ind = 0; ind < [newData count]; ind++) {
+                NSIndexPath    *newPath =  [NSIndexPath indexPathForRow:[self.healthList indexOfObject:[newData objectAtIndex:ind]] inSection:0];
+                [insertIndexPaths addObject:newPath];
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView insertRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationFade];
+            });
         }
         @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -266,12 +293,14 @@ int pageSize = 10;
         @finally {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
-                [self.tableView reloadData];
+                                //重新调用UITableView的方法, 来生成行.
+                
             });
         }
     });
 
 }
+
 
 
 @end

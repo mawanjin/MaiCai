@@ -194,7 +194,6 @@ MCMineFooter* footer;
             cell.image.image = [UIImage imageNamed:@"mine_personal_grey"];
         }
         cell.label.text = @"个人信息";
-        cell.divideLine.hidden = YES;
     }else if(indexPath.row == 6) {
         cell.image.image = [UIImage imageNamed:@"mine_personal_normal"];
         cell.label.text = [[NSString alloc]initWithFormat:@"清除缓存(%@MB)",[[MCNetwork getInstance] sizeCache]];
