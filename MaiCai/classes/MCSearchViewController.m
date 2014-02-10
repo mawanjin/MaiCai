@@ -18,6 +18,7 @@
 #import "MCHealthDetailViewController.h"
 #import "MCHealth.h"
 #import "UIImageView+MCAsynLoadImage.h"
+#import "SVProgressHUD.h"
 
 @interface MCSearchViewController ()
 
@@ -56,12 +57,12 @@ bool flag = false;
     [item setCustomView:backBtn];
     self.navigationItem.leftBarButtonItem= item;
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [SVProgressHUD show];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         self.hotWords = [[MCVegetableManager getInstance]getHotWordsByQuantity:10];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [SVProgressHUD dismiss];
         });
     });
     [self.searchDisplayController.searchResultsTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -237,12 +238,12 @@ bool flag = false;
             
         });
     }else {
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [SVProgressHUD show];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             self.filterData = [[MCVegetableManager getInstance]getSearchResultByKeywords:searchText Quantity:10];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.searchDisplayController.searchResultsTableView reloadData];
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [SVProgressHUD dismiss];
             });
         });
     }

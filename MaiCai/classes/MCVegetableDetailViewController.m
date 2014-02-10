@@ -50,7 +50,7 @@
     UIBarButtonItem* item = [[UIBarButtonItem alloc]initWithTitle:@"联系客服" style:UIBarButtonItemStylePlain target:self action:@selector(phoneCallAction:)];
     item.tintColor = [UIColor whiteColor];
     self.navItem.rightBarButtonItem = item;
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showProgressHUD];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
             self.data = [[MCVegetableManager getInstance]getVegetableDetailByProductId:self.vegetable.id Longitude: lng Latitude:lat];
@@ -61,7 +61,7 @@
             });
         }@finally {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [self hideProgressHUD];
                 NSMutableArray* tenants = self.data[@"tenants"];
                 MCShop* shop = tenants[0];
                 self.vegetable = shop.vegetables[0];

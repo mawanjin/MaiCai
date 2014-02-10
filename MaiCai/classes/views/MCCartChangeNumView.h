@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "UIViewController+CWPopup.h"
+#import "MCBaseViewController.h"
 @class MCVegetable;
 
 
-@interface MCCartChangeNumView :UIViewController
+@interface MCCartChangeNumView :MCBaseViewController
 - (IBAction)cancelBtnAction:(UIButton *)sender;
 @property  UIViewController* previousView;
 @property  NSIndexPath* indexPath;

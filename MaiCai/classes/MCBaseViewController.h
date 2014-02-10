@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MBProgressHUD.h"
 #import "Toast+UIView.h"
 
 extern NSString* const MC_ERROR_MSG_0001;
@@ -17,4 +16,6 @@ extern NSString* const MC_ERROR_MSG_0004;
 
 @interface MCBaseViewController : UIViewController
 -(void)showMsgHint:(NSString*)msg;
+-(void)showProgressHUD;
+-(void)hideProgressHUD;
 @end

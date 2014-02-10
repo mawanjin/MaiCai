@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import  "MCBaseNavViewController.h"
+#import  "MCBaseTabViewController.h"
 @class HMSegmentedControl;
 
 
-@interface MCCategoryViewController :MCBaseViewController<UIScrollViewDelegate,UICollectionViewDelegateFlowLayout,UICollectionViewDelegate,UICollectionViewDataSource>
+@interface MCCategoryViewController :MCBaseTabViewController<UIScrollViewDelegate,UICollectionViewDelegateFlowLayout,UICollectionViewDelegate,UICollectionViewDataSource>
 @property NSMutableArray* data;
 @property NSMutableArray* sourceData;
 @property (nonatomic, strong) HMSegmentedControl *segmentedControl;

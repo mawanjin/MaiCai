@@ -42,7 +42,7 @@
     MCUser* user = [[MCUser alloc]init];
     user.userId = userId;
     user.password = password;
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showProgressHUD];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
             [[MCUserManager getInstance]login:user];
@@ -56,7 +56,7 @@
             });
         }@finally {
             dispatch_sync(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                [self hideProgressHUD];
             });
         }
     });

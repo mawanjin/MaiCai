@@ -39,7 +39,7 @@
     item.tintColor = [UIColor whiteColor];
     self.navItem.rightBarButtonItem = item;
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showProgressHUD];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
             self.recipe = [[MCVegetableManager getInstance]getRecipeDetailById:self.recipe.id];
@@ -58,7 +58,7 @@
         }
         @finally {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [self hideProgressHUD];
                 [self.tableView reloadData];
             });
         }

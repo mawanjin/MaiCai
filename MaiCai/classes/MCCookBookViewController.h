@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MCBaseViewController.h"
+#import "MCBaseTabViewController.h"
 @class HMSegmentedControl;
 
-@interface MCCookBookViewController : MCBaseViewController<UITableViewDataSource,UITableViewDelegate>
+@interface MCCookBookViewController : MCBaseTabViewController<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property NSMutableArray* recipes;
 @property NSMutableArray* healthList;

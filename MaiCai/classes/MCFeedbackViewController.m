@@ -8,7 +8,6 @@
 
 #import "MCFeedbackViewController.h"
 #import "MCUserManager.h"
-#import "MBProgressHUD.h"
 #import "GCPlaceholderTextView.h"
 
 @interface MCFeedbackViewController ()
@@ -55,7 +54,7 @@
         return;
     }
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showProgressHUD];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
             [[MCUserManager getInstance]feedbackByTel:tel Content:content];
@@ -70,7 +69,7 @@
         }
         @finally {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [self hideProgressHUD];
             });
         }
     });

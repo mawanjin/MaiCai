@@ -111,8 +111,7 @@ int pageSize = 10;
         //菜谱
         if(indexPath.row == self.recipes.count) {
             page++;
-            //UITableViewCell *loadMoreCell=[tableView cellForRowAtIndexPath:indexPath];
-            //loadMoreCell.textLabel.text=@"正在读取更信息 …";
+           // UITableViewCell *loadMoreCell=[tableView cellForRowAtIndexPath:indexPath];
             
             [self getRecipes];
             
@@ -236,7 +235,7 @@ int pageSize = 10;
 }
 
 -(void)getRecipes{
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showProgressHUD];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
             NSMutableArray* newData = [[MCVegetableManager getInstance]getRecipesByPage:page Pagesize:pageSize];
@@ -260,7 +259,7 @@ int pageSize = 10;
         }
         @finally {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [self hideProgressHUD];
             });
         }
     });
@@ -269,7 +268,7 @@ int pageSize = 10;
 
 -(void)getHealthList
 {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showProgressHUD];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
             NSMutableArray* newData = [[MCVegetableManager getInstance]getHealthListByPage:page Pagesize:pageSize];
@@ -292,7 +291,7 @@ int pageSize = 10;
         }
         @finally {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [self hideProgressHUD];
                                 //重新调用UITableView的方法, 来生成行.
                 
             });

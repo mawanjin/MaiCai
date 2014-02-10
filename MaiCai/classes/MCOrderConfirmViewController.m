@@ -216,7 +216,7 @@
         delegate.controller = self;
         [AlixLibService payOrder:orderString AndScheme:appScheme seletor:self.result target:self];
     }else{
-         [self.previousView showMsgHint:@"已生成订单，请等待收货"];
+        [self.previousView showMsgHint:@"已生成订单，请等待收货"];
         [self backBtnAction];
     }
     

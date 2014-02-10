@@ -21,6 +21,7 @@
 #import "MCAppDelegate.h"
 #import "UIImageView+MCAsynLoadImage.h"
 
+
 #import "DataSigner.h"
 #import "AlixPayResult.h"
 #import "DataVerifier.h"
@@ -43,7 +44,7 @@
 {
     [super viewDidLoad];
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showProgressHUD];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
             self.order = [[MCTradeManager getInstance]getOrderDetailByOrderId:[[NSString alloc]initWithFormat:@"%d",self.order.id]];
@@ -82,7 +83,7 @@
         @finally {
             dispatch_sync(dispatch_get_main_queue(), ^{
                 [self.tableView reloadData];
-                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                [self hideProgressHUD];
             });
         }
     });

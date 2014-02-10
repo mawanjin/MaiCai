@@ -26,6 +26,7 @@
 #import "UIColor+ColorWithHex.h"
 #import "MCMarketIndexTipCell.h"
 #import "MCLabelDetailViewController.h"
+#import "SVProgressHUD.h"
 
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 @implementation MCVegetableMarketViewController
@@ -70,7 +71,7 @@ NSMutableArray* products;
 {
     [super viewDidAppear:animated];
     
-    [MBProgressHUD showHUDAddedTo:self.scrollView animated:YES];
+    [self showProgressHUD];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
@@ -106,7 +107,7 @@ NSMutableArray* products;
         }
         @finally {
             dispatch_async(dispatch_get_main_queue(), ^{
-              [MBProgressHUD hideHUDForView:self.scrollView animated:YES];
+              [self hideProgressHUD];
                 [self.quickOrderCollectionView reloadData];
                 [self.categoryCollectionView reloadData];
                 self.vegetablePricePageControl.numberOfPages = (recipes.count%1 ==0)?recipes.count/1:(recipes.count/1+1);
@@ -278,7 +279,7 @@ NSMutableArray* products;
 
 -(void)showMsgHint:(NSString *)msg
 {
-    [self.scrollView makeToast:msg duration:2 position:@"center"];
+    [self.scrollView makeToast:msg duration:1 position:@"center"];
 }
 
 //-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath

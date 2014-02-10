@@ -14,6 +14,7 @@
 #import "MCAddressHelperView.h"
 #import "MCMineAddressViewController.h"
 
+
 @implementation MCNewMineAddressViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -67,7 +68,7 @@
     mcaddress.mobile = mobile;
     mcaddress.address = address;
     MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showProgressHUD];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
             if (self.obj == nil) {
@@ -88,7 +89,7 @@
             });
         }@finally {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [self hideProgressHUD];
             });
         }
     });

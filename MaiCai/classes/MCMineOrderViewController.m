@@ -74,7 +74,7 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showProgressHUD];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
@@ -93,7 +93,7 @@
                 [self.segmentedControl setSelectedSegmentIndex:0];
                 [self.segmentedControl addTarget:self action:@selector(segmentChanged:) forControlEvents:UIControlEventValueChanged];
                 [self.tableView reloadData];
-                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                [self hideProgressHUD];
             });
         }
     });
@@ -103,7 +103,7 @@
 
 - (void) segmentChanged:(UISegmentedControl *)paramSender{
     NSInteger index = [paramSender selectedSegmentIndex];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showProgressHUD];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
@@ -129,7 +129,7 @@
         }
         @finally {
             dispatch_async(dispatch_get_main_queue(), ^{
-               [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+               [self hideProgressHUD];
                [self.tableView reloadData];
             });
         }

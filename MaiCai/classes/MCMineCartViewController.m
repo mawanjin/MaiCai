@@ -49,7 +49,7 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showProgressHUD];
     [self resetCart];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
@@ -72,7 +72,7 @@
             
         }@finally {
            dispatch_async(dispatch_get_main_queue(), ^{
-             [MBProgressHUD hideHUDForView:self.view animated:YES];
+             [self hideProgressHUD];
            });
         }
 
@@ -194,7 +194,7 @@
         [array addObject:[[NSNumber alloc]initWithInt:vegetable.id]];
         if ([[MCContextManager getInstance]isLogged]) {
             MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [self showProgressHUD];
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 @try {
                     [[MCTradeManager getInstance]deleteProductsInCartOnlineByUserId:user.userId ProductIds:array];
@@ -214,13 +214,13 @@
                 }
                 @finally {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [MBProgressHUD hideHUDForView:self.view animated:YES];
+                        [self hideProgressHUD];
                     });
                 }
             });
         }else {
             NSString* macId = (NSString*)[[MCContextManager getInstance]getDataByKey:MC_MAC_ID];
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [self showProgressHUD];
              dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                  @try {
                      [[MCTradeManager getInstance]deleteProductsInCartByUserId:macId ProductIds:array];
@@ -238,7 +238,7 @@
                 }
                 @finally {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [MBProgressHUD hideHUDForView:self.view animated:YES];
+                        [self hideProgressHUD];
                     });
                 }
             });

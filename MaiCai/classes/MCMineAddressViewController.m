@@ -40,7 +40,7 @@
 {
     //获取地址数据
     MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showProgressHUD];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
@@ -53,7 +53,7 @@
         }
         @finally {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                [self hideProgressHUD];
                 [self.tableView reloadData];
             });
         }

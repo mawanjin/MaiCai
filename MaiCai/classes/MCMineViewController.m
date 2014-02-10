@@ -18,6 +18,7 @@
 #import "MCMineFooter.h"
 #import "MCNetwork.h"
 
+
 @implementation MCMineViewController
 MCMineFooter* footer;
 
@@ -138,11 +139,11 @@ MCMineFooter* footer;
         }
         
     }else if(indexPath.row == 6) {
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [self showProgressHUD];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
              [[MCNetwork getInstance]clearCache];
               dispatch_async(dispatch_get_main_queue(), ^{
-                  [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                  [self hideProgressHUD];
                   [self showMsgHint:@"清空缓存成功..."];
                   [self.tableView reloadData];
               });

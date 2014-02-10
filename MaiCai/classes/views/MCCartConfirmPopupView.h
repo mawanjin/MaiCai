@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "UIViewController+CWPopup.h"
+#import "MCBaseViewController.h"
 @class MCVegetable;
 
-@interface MCCartConfirmPopupView :UIViewController
+@interface MCCartConfirmPopupView :MCBaseViewController
 - (IBAction)cancelBtnAction:(UIButton *)sender;
 @property  UIViewController* previousView;
 @property  NSInteger index;

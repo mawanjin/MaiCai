@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MCBaseViewController.h"
+#import "MCBaseTabViewController.h"
 @class MCMineFooter;
-@interface MCMineViewController : MCBaseViewController<UITableViewDelegate,UITableViewDataSource>
+@interface MCMineViewController : MCBaseTabViewController<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIButton *quitBtn;
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 @property (weak, nonatomic) IBOutlet UILabel *quitAndLoginLabel;

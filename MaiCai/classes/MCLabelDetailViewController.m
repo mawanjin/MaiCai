@@ -137,7 +137,7 @@
 
 //一键买菜
 - (IBAction)clickAction:(id)sender {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showProgressHUD];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
             if ([[MCContextManager getInstance]isLogged]) {
@@ -189,7 +189,7 @@
             });
         }@finally {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                [self hideProgressHUD];
                 [self backBtnAction];
             });
         }

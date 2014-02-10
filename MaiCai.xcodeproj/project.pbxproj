@@ -71,6 +71,9 @@
 		0472EBDB189211F800A40C9D /* MCNetWorkObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0472EBD3189211F800A40C9D /* MCNetWorkObject.m */; };
 		047390B5183C49B6003F443D /* MCPersonalInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047390B4183C49B6003F443D /* MCPersonalInfoViewController.m */; };
 		047390BD183C51AE003F443D /* Toast+UIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047390BC183C51AE003F443D /* Toast+UIView.m */; };
+		047F63C218A8E60900F4D5DA /* MCBaseTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F63C118A8E60900F4D5DA /* MCBaseTabViewController.m */; };
+		047F63C818A8E67200F4D5DA /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 047F63C518A8E67200F4D5DA /* SVProgressHUD.bundle */; };
+		047F63C918A8E67200F4D5DA /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F63C718A8E67200F4D5DA /* SVProgressHUD.m */; };
 		048445C5183DD08A006F4090 /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 048445C4183DD08A006F4090 /* UIDevice+IdentifierAddition.m */; };
 		048445C8183DD100006F4090 /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 048445C7183DD100006F4090 /* NSString+MD5Addition.m */; };
 		048445CC183DF42D006F4090 /* MCChangePasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 048445CA183DF42D006F4090 /* MCChangePasswordView.m */; };
@@ -135,7 +138,6 @@
 		04C9734E186D5C7500138DB8 /* MCRecipeDishDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C9734D186D5C7500138DB8 /* MCRecipeDishDescriptionCell.m */; };
 		04C97354186D6D7E00138DB8 /* MCCookBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C97353186D6D7E00138DB8 /* MCCookBookCell.m */; };
 		04D230A7182B357E00D4B4AC /* MCBaseNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D230A6182B357E00D4B4AC /* MCBaseNavViewController.m */; };
-		04D230D5182B883E00D4B4AC /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D230B1182B883E00D4B4AC /* MBProgressHUD.m */; };
 		04DAF4B7183EF853009C7720 /* MCAddressHelperView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DAF4B5183EF853009C7720 /* MCAddressHelperView.m */; };
 		04DAF4B8183EF853009C7720 /* MCAddressHelperView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DAF4B6183EF853009C7720 /* MCAddressHelperView.xib */; };
 		04DAF4BB1841A369009C7720 /* MCOrderConfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DAF4BA1841A369009C7720 /* MCOrderConfirmViewController.m */; };
@@ -299,6 +301,12 @@
 		047390B4183C49B6003F443D /* MCPersonalInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPersonalInfoViewController.m; sourceTree = "<group>"; };
 		047390BB183C51AE003F443D /* Toast+UIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Toast+UIView.h"; sourceTree = "<group>"; };
 		047390BC183C51AE003F443D /* Toast+UIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Toast+UIView.m"; sourceTree = "<group>"; };
+		047F63C018A8E60900F4D5DA /* MCBaseTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCBaseTabViewController.h; sourceTree = "<group>"; };
+		047F63C118A8E60900F4D5DA /* MCBaseTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCBaseTabViewController.m; sourceTree = "<group>"; };
+		047F63C418A8E67200F4D5DA /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		047F63C518A8E67200F4D5DA /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		047F63C618A8E67200F4D5DA /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		047F63C718A8E67200F4D5DA /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		048445C3183DD08A006F4090 /* UIDevice+IdentifierAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+IdentifierAddition.h"; sourceTree = "<group>"; };
 		048445C4183DD08A006F4090 /* UIDevice+IdentifierAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+IdentifierAddition.m"; sourceTree = "<group>"; };
 		048445C6183DD100006F4090 /* NSString+MD5Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5Addition.h"; sourceTree = "<group>"; };
@@ -404,8 +412,6 @@
 		04C97353186D6D7E00138DB8 /* MCCookBookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCookBookCell.m; sourceTree = "<group>"; };
 		04D230A5182B357E00D4B4AC /* MCBaseNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCBaseNavViewController.h; sourceTree = "<group>"; };
 		04D230A6182B357E00D4B4AC /* MCBaseNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCBaseNavViewController.m; sourceTree = "<group>"; };
-		04D230B0182B883E00D4B4AC /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		04D230B1182B883E00D4B4AC /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		04DAF4B4183EF853009C7720 /* MCAddressHelperView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAddressHelperView.h; sourceTree = "<group>"; };
 		04DAF4B5183EF853009C7720 /* MCAddressHelperView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCAddressHelperView.m; sourceTree = "<group>"; };
 		04DAF4B6183EF853009C7720 /* MCAddressHelperView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCAddressHelperView.xib; sourceTree = "<group>"; };
@@ -568,55 +574,57 @@
 		046E99BA18261F6D0005FB53 /* classes */ = {
 			isa = PBXGroup;
 			children = (
-				04B98D8018331D680018F84E /* model */,
-				04BDEEE3182CD12A004E1C84 /* views */,
 				046E99D11827298C0005FB53 /* manager */,
-				046E99BB18261F6D0005FB53 /* MCBaseViewController.h */,
-				046E99BC18261F6D0005FB53 /* MCBaseViewController.m */,
-				046E99BD18261F6D0005FB53 /* MCCookBookViewController.h */,
-				046E99BE18261F6D0005FB53 /* MCCookBookViewController.m */,
-				046E99BF18261F6D0005FB53 /* MCMineViewController.h */,
-				046E99C018261F6D0005FB53 /* MCMineViewController.m */,
-				046E99C118261F6D0005FB53 /* MCMineCartViewController.h */,
-				046E99C218261F6D0005FB53 /* MCMineCartViewController.m */,
-				046E99C318261F6D0005FB53 /* MCVegetableMarketViewController.h */,
-				046E99C418261F6D0005FB53 /* MCVegetableMarketViewController.m */,
-				046E99C518261F6D0005FB53 /* MCCategoryViewController.h */,
-				046E99C618261F6D0005FB53 /* MCCategoryViewController.m */,
-				04C3733D182A1E9500B01341 /* MCLoginViewController.m */,
-				04C3733C182A1E9500B01341 /* MCLoginViewController.h */,
 				04D230A5182B357E00D4B4AC /* MCBaseNavViewController.h */,
 				04D230A6182B357E00D4B4AC /* MCBaseNavViewController.m */,
-				044BC9AA1830687800D43115 /* MCMineAddressViewController.h */,
-				044BC9AB1830687800D43115 /* MCMineAddressViewController.m */,
-				044BC9AF18308CB200D43115 /* MCNewMineAddressViewController.h */,
-				044BC9B018308CB200D43115 /* MCNewMineAddressViewController.m */,
-				0497B814183AFCB1008A6F8B /* MCRegisterViewController.h */,
-				0497B815183AFCB1008A6F8B /* MCRegisterViewController.m */,
-				047390B3183C49B6003F443D /* MCPersonalInfoViewController.h */,
-				047390B4183C49B6003F443D /* MCPersonalInfoViewController.m */,
-				04DAF4B91841A369009C7720 /* MCOrderConfirmViewController.h */,
-				04DAF4BA1841A369009C7720 /* MCOrderConfirmViewController.m */,
-				04DAF4D518457FE4009C7720 /* MCMineOrderViewController.h */,
-				04DAF4D618457FE4009C7720 /* MCMineOrderViewController.m */,
-				04DAF4DE1845CA7E009C7720 /* MCOrderDetailViewController.h */,
-				04DAF4DF1845CA7E009C7720 /* MCOrderDetailViewController.m */,
-				0419D53818505ECD000F7D51 /* MCVegetableDetailViewController.h */,
-				0419D53918505ECD000F7D51 /* MCVegetableDetailViewController.m */,
+				047F63C018A8E60900F4D5DA /* MCBaseTabViewController.h */,
+				047F63C118A8E60900F4D5DA /* MCBaseTabViewController.m */,
+				046E99BB18261F6D0005FB53 /* MCBaseViewController.h */,
+				046E99BC18261F6D0005FB53 /* MCBaseViewController.m */,
+				046E99C518261F6D0005FB53 /* MCCategoryViewController.h */,
+				046E99C618261F6D0005FB53 /* MCCategoryViewController.m */,
 				04F059F6185EA68A00BB25C6 /* MCCookBookDetailViewController.h */,
 				04F059F7185EA68A00BB25C6 /* MCCookBookDetailViewController.m */,
+				046E99BD18261F6D0005FB53 /* MCCookBookViewController.h */,
+				046E99BE18261F6D0005FB53 /* MCCookBookViewController.m */,
 				042F253318616A64006783C2 /* MCFeedbackViewController.h */,
 				042F253418616A64006783C2 /* MCFeedbackViewController.m */,
-				0423D3911862CB6100F08F1E /* MCSearchViewController.h */,
-				0423D3921862CB6100F08F1E /* MCSearchViewController.m */,
-				04C9732F1869297A00138DB8 /* MCQuickOrderViewController.h */,
-				04C973301869297A00138DB8 /* MCQuickOrderViewController.m */,
 				044FF8B918725D7B0077CE67 /* MCHealthDetailViewController.h */,
 				044FF8BA18725D7B0077CE67 /* MCHealthDetailViewController.m */,
 				041E5A88187F8E3500BB0F67 /* MCLabelDetailViewController.h */,
 				041E5A89187F8E3500BB0F67 /* MCLabelDetailViewController.m */,
+				04C3733C182A1E9500B01341 /* MCLoginViewController.h */,
+				04C3733D182A1E9500B01341 /* MCLoginViewController.m */,
+				044BC9AA1830687800D43115 /* MCMineAddressViewController.h */,
+				044BC9AB1830687800D43115 /* MCMineAddressViewController.m */,
+				046E99C118261F6D0005FB53 /* MCMineCartViewController.h */,
+				046E99C218261F6D0005FB53 /* MCMineCartViewController.m */,
 				041E5A901883777B00BB0F67 /* MCMineCollectViewController.h */,
 				041E5A911883777B00BB0F67 /* MCMineCollectViewController.m */,
+				04DAF4D518457FE4009C7720 /* MCMineOrderViewController.h */,
+				04DAF4D618457FE4009C7720 /* MCMineOrderViewController.m */,
+				046E99BF18261F6D0005FB53 /* MCMineViewController.h */,
+				046E99C018261F6D0005FB53 /* MCMineViewController.m */,
+				044BC9AF18308CB200D43115 /* MCNewMineAddressViewController.h */,
+				044BC9B018308CB200D43115 /* MCNewMineAddressViewController.m */,
+				04DAF4B91841A369009C7720 /* MCOrderConfirmViewController.h */,
+				04DAF4BA1841A369009C7720 /* MCOrderConfirmViewController.m */,
+				04DAF4DE1845CA7E009C7720 /* MCOrderDetailViewController.h */,
+				04DAF4DF1845CA7E009C7720 /* MCOrderDetailViewController.m */,
+				047390B3183C49B6003F443D /* MCPersonalInfoViewController.h */,
+				047390B4183C49B6003F443D /* MCPersonalInfoViewController.m */,
+				04C9732F1869297A00138DB8 /* MCQuickOrderViewController.h */,
+				04C973301869297A00138DB8 /* MCQuickOrderViewController.m */,
+				0497B814183AFCB1008A6F8B /* MCRegisterViewController.h */,
+				0497B815183AFCB1008A6F8B /* MCRegisterViewController.m */,
+				0423D3911862CB6100F08F1E /* MCSearchViewController.h */,
+				0423D3921862CB6100F08F1E /* MCSearchViewController.m */,
+				0419D53818505ECD000F7D51 /* MCVegetableDetailViewController.h */,
+				0419D53918505ECD000F7D51 /* MCVegetableDetailViewController.m */,
+				046E99C318261F6D0005FB53 /* MCVegetableMarketViewController.h */,
+				046E99C418261F6D0005FB53 /* MCVegetableMarketViewController.m */,
+				04B98D8018331D680018F84E /* model */,
+				04BDEEE3182CD12A004E1C84 /* views */,
 			);
 			path = classes;
 			sourceTree = "<group>";
@@ -692,6 +700,17 @@
 				047390BC183C51AE003F443D /* Toast+UIView.m */,
 			);
 			path = Toast;
+			sourceTree = "<group>";
+		};
+		047F63C318A8E67200F4D5DA /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				047F63C418A8E67200F4D5DA /* SVProgressHUD-Prefix.pch */,
+				047F63C518A8E67200F4D5DA /* SVProgressHUD.bundle */,
+				047F63C618A8E67200F4D5DA /* SVProgressHUD.h */,
+				047F63C718A8E67200F4D5DA /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
 			sourceTree = "<group>";
 		};
 		048445C2183DD08A006F4090 /* TSDeviceId */ = {
@@ -954,6 +973,7 @@
 		04D230AE182B883E00D4B4AC /* library */ = {
 			isa = PBXGroup;
 			children = (
+				047F63C318A8E67200F4D5DA /* SVProgressHUD */,
 				0472EBC0189211F700A40C9D /* MCObjectCUtilities */,
 				04C97342186D292E00138DB8 /* GCPlaceholderTextView */,
 				04F05A01185EE08700BB25C6 /* AFNetworking */,
@@ -963,18 +983,8 @@
 				047390BA183C51AE003F443D /* Toast */,
 				0497B7FB1839EEBE008A6F8B /* FMDB */,
 				0464C995182F7015009066C3 /* CWPopup */,
-				04D230AF182B883E00D4B4AC /* MBProgressHUD */,
 			);
 			path = library;
-			sourceTree = "<group>";
-		};
-		04D230AF182B883E00D4B4AC /* MBProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				04D230B0182B883E00D4B4AC /* MBProgressHUD.h */,
-				04D230B1182B883E00D4B4AC /* MBProgressHUD.m */,
-			);
-			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		04F05A01185EE08700BB25C6 /* AFNetworking */ = {
@@ -1104,6 +1114,7 @@
 				042F25321861400A006783C2 /* MCMineFooter.xib in Resources */,
 				0497B7EC18386541008A6F8B /* MCCartChangeNumView.xib in Resources */,
 				04DAF4C71842E330009C7720 /* MCOrderConfirmSectionHeader.xib in Resources */,
+				047F63C818A8E67200F4D5DA /* SVProgressHUD.bundle in Resources */,
 				04899519181A115100E1B156 /* InfoPlist.strings in Resources */,
 				048445D2183DF96D006F4090 /* MCChangeNicknameView.xib in Resources */,
 				04DAF4E81845DDC7009C7720 /* MCOrderDetailFooter.xib in Resources */,
@@ -1165,6 +1176,7 @@
 				0437A4991847491A000D427B /* SBJsonBase.m in Sources */,
 				0437A4961847491A000D427B /* NSObject+SBJSON.m in Sources */,
 				041E5A8A187F8E3500BB0F67 /* MCLabelDetailViewController.m in Sources */,
+				047F63C218A8E60900F4D5DA /* MCBaseTabViewController.m in Sources */,
 				04B990BB18346D060018F84E /* MCCategory.m in Sources */,
 				04C9733E186A6F1700138DB8 /* MCQuickOrderTableHeader.m in Sources */,
 				04C9734E186D5C7500138DB8 /* MCRecipeDishDescriptionCell.m in Sources */,
@@ -1198,6 +1210,7 @@
 				046E99CB18261F6D0005FB53 /* MCVegetableMarketViewController.m in Sources */,
 				04F05A19185EE08700BB25C6 /* AFSecurityPolicy.m in Sources */,
 				0472EBD9189211F800A40C9D /* MCFileOperation.m in Sources */,
+				047F63C918A8E67200F4D5DA /* SVProgressHUD.m in Sources */,
 				0437A4931847491A000D427B /* AlixPayOrder.m in Sources */,
 				0437A49B1847491A000D427B /* SBJsonWriter.m in Sources */,
 				0489951B181A115100E1B156 /* main.m in Sources */,
@@ -1243,7 +1256,6 @@
 				04F059FE185ECF1100BB25C6 /* MCCookBookDetailHeader.m in Sources */,
 				042F253518616A64006783C2 /* MCFeedbackViewController.m in Sources */,
 				04DAF4DA184584E3009C7720 /* MCOrder.m in Sources */,
-				04D230D5182B883E00D4B4AC /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

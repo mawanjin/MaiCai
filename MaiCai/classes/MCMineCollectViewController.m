@@ -222,7 +222,7 @@ int pageSize_ = 10;
 }
 
 -(void)getRecipes{
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showProgressHUD];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
             MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
@@ -236,7 +236,7 @@ int pageSize_ = 10;
         }
         @finally {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [self hideProgressHUD];
                 [self.tableView reloadData];
             });
         }
@@ -246,7 +246,7 @@ int pageSize_ = 10;
 
 -(void)getHealthList
 {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showProgressHUD];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
             MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
@@ -261,7 +261,7 @@ int pageSize_ = 10;
         }
         @finally {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [self hideProgressHUD];
                 [self.tableView reloadData];
             });
         }

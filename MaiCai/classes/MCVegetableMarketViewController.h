@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MCBaseViewController.h"
+#import "MCBaseTabViewController.h"
 
 
-@interface MCVegetableMarketViewController : MCBaseViewController<UICollectionViewDelegateFlowLayout,UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface MCVegetableMarketViewController : MCBaseTabViewController<UICollectionViewDelegateFlowLayout,UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>
 @property NSMutableDictionary* data;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *newsCollectionView;
