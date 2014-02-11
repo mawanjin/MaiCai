@@ -57,7 +57,7 @@ NSString* const MC_ERROR_MSG_0004 = @"请填写收货人地址";
 
 -(void)showProgressHUD
 {
-    [SVProgressHUD showWithStatus:@"努力加载中..." maskType: SVProgressHUDMaskTypeGradient];
+    [SVProgressHUD showWithStatus:@"努力加载中..." maskType: SVProgressHUDMaskTypeClear];
 }
 
 -(void)hideProgressHUD

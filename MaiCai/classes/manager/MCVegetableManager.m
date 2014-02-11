@@ -408,6 +408,7 @@ static NSMutableDictionary* relationship;
     NSMutableDictionary* obj = [[NSMutableDictionary alloc]init];
     
     obj[@"summary"] =  dicResult[@"summary"];
+    obj[@"image"] = dicResult[@"image"];
     NSArray* tenantsArray = dicResult[@"tenants"];
     NSMutableArray* tenants = [[NSMutableArray alloc]init];
     for(int i=0;i<tenantsArray.count;i++) {
