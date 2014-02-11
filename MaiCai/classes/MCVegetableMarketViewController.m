@@ -30,12 +30,14 @@
 
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 @implementation MCVegetableMarketViewController
+{
+   @private
+        NSMutableArray* recipes;
+        NSMutableArray* labels;
+        NSMutableArray* products;
+}
 
-NSMutableArray* recipes;
-NSMutableArray* labels;
-NSMutableArray* products;
-
-
+#pragma mark- base
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -52,14 +54,6 @@ NSMutableArray* products;
     [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchBtnAction)];
     self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
 
-}
-
-
--(void)searchBtnAction{
-    MCSearchViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCSearchViewController"];
-    [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
-        
-    }];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -97,7 +91,7 @@ NSMutableArray* products;
                 }
                 //注意这里scrollview不能滚动的原因是因为 MBProgressbar与toast需要在scrollview里面创建
                 self.scrollView.scrollEnabled = YES;
-
+                
             });
         }
         @catch (NSException *exception) {
@@ -107,7 +101,7 @@ NSMutableArray* products;
         }
         @finally {
             dispatch_async(dispatch_get_main_queue(), ^{
-              [self hideProgressHUD];
+                [self hideProgressHUD];
                 [self.quickOrderCollectionView reloadData];
                 [self.categoryCollectionView reloadData];
                 self.vegetablePricePageControl.numberOfPages = (recipes.count%1 ==0)?recipes.count/1:(recipes.count/1+1);
@@ -122,7 +116,12 @@ NSMutableArray* products;
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - tableview
+
+
+
+
+
+#pragma mark - TableView
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -187,7 +186,7 @@ NSMutableArray* products;
 }
 
 
-#pragma mark - uicollectionview
+#pragma mark - UICollectionView
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
@@ -277,9 +276,18 @@ NSMutableArray* products;
     }
 }
 
+#pragma mark- others
 -(void)showMsgHint:(NSString *)msg
 {
     [self.scrollView makeToast:msg duration:1 position:@"center"];
+}
+
+
+-(void)searchBtnAction{
+    MCSearchViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCSearchViewController"];
+    [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
+        
+    }];
 }
 
 //-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath

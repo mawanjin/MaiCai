@@ -17,7 +17,7 @@ NSString* const MC_ERROR_MSG_0003 = @"请填写收货人联系电话";
 NSString* const MC_ERROR_MSG_0004 = @"请填写收货人地址";
 
 @implementation MCBaseViewController
-
+#pragma mark- base
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -46,7 +46,7 @@ NSString* const MC_ERROR_MSG_0004 = @"请填写收货人地址";
     // Dispose of any resources that can be recreated.
 }
 
-
+#pragma mark- others
 -(void)showMsgHint:(NSString*)msg;
 {
     

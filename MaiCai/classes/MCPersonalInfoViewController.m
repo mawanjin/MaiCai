@@ -20,6 +20,7 @@
 
 @implementation MCPersonalInfoViewController
 
+#pragma mark- base
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -65,6 +66,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark- others
 - (IBAction)changePasswordAction:(id)sender {
     MCChangePasswordView *popup = [[MCChangePasswordView alloc] initWithNibName:@"MCChangePasswordView" bundle:nil];
      popup.previousView = self;

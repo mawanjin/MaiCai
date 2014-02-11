@@ -9,7 +9,7 @@
 #import "MCBaseNavViewController.h"
 
 @implementation MCBaseNavViewController
-
+#pragma mark- base
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -49,6 +49,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark- others
 -(void)backBtnAction
 {
     [self dismissViewControllerAnimated:NO completion:nil];

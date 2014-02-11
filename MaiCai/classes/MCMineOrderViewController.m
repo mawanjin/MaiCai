@@ -18,6 +18,7 @@
 
 @implementation MCMineOrderViewController
 
+#pragma mark- base
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -100,7 +101,13 @@
 
 }
 
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
+#pragma mark- others
 - (void) segmentChanged:(UISegmentedControl *)paramSender{
     NSInteger index = [paramSender selectedSegmentIndex];
     [self showProgressHUD];
@@ -154,13 +161,10 @@
             [self segmentChanged:(UISegmentedControl*)self.segmentedControl];
         }
     }
-    
-    
-    
 }
 
 
-
+#pragma mark- tableview
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
@@ -171,13 +175,6 @@
     [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:Nil];
 }
 
-
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -28,6 +28,7 @@
 
 @implementation MCVegetableDetailViewController
 
+#pragma mark- base
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -90,6 +91,7 @@
 }
 
 
+#pragma mark- tableview
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 30;
@@ -186,7 +188,7 @@
 }
 
 
-
+#pragma mark- others
 - (IBAction)phoneCallAction:(id)sender {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://10010"]];//打电话
 }

@@ -23,7 +23,7 @@
 
 
 @implementation MCMineCartViewController
-
+#pragma mark- base
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -42,10 +42,7 @@
     [self.navigationController.navigationItem.rightBarButtonItem setCustomView:button];
 }
 
--(void)deleteAction
-{
-    
-}
+
 
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -79,21 +76,13 @@
     });
 }
 
-
--(void)resetCart
-{
-    self.isTotalChoosed = NO;
-    [self dispLayTotalChoosedBtn];
-    self.totalPriceLabel.text =[[NSString alloc]initWithFormat:@"总价：0.00元"];
-    self.totalPrice = 0.0f;
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark- tableview
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     MCShop* shop  = self.data[section];
@@ -251,6 +240,19 @@
     return @"删除";
 }
 
+#pragma mark- others
+-(void)deleteAction
+{
+    
+}
+
+-(void)resetCart
+{
+    self.isTotalChoosed = NO;
+    [self dispLayTotalChoosedBtn];
+    self.totalPriceLabel.text =[[NSString alloc]initWithFormat:@"总价：0.00元"];
+    self.totalPrice = 0.0f;
+}
 
 -(void)calculateTotalPrice
 {

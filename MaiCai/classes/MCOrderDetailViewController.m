@@ -31,6 +31,7 @@
 
 @implementation MCOrderDetailViewController
 
+#pragma mark- base
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -95,6 +96,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark- tableview
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
@@ -140,7 +142,7 @@
 }
 
 
-
+#pragma mark- others
 - (IBAction)payBtnAction:(id)sender {
     NSString* orderIds = [[NSString alloc]initWithFormat:@"%d",self.order.id];
     NSString* userId = ((MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER]).userId;

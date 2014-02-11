@@ -25,6 +25,7 @@
 
 @implementation MCLabelDetailViewController
 
+#pragma mark- base
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -136,6 +137,7 @@
 }
 
 //一键买菜
+#pragma mark- others
 - (IBAction)clickAction:(id)sender {
     [self showProgressHUD];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

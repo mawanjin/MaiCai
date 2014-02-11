@@ -24,6 +24,7 @@
 
 @implementation MCHealthDetailViewController
 
+#pragma mark- base
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -84,6 +85,13 @@
     });
 }
 
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - uicollectionview
 - (UICollectionViewFlowLayout *) flowLayout{
     UICollectionViewFlowLayout *flowLayout =
     [[UICollectionViewFlowLayout alloc] init];
@@ -95,7 +103,7 @@
     return flowLayout;
 }
 
-#pragma mark - uicollectionview
+
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
@@ -143,13 +151,7 @@
     [collectionView reloadData];
 }
 
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
+#pragma mark- others
 //一键买菜
 - (IBAction)clickAction:(id)sender {
     [self showProgressHUD];

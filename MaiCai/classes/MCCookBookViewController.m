@@ -23,15 +23,20 @@
 @end
 
 @implementation MCCookBookViewController
-int page = 1;
-int pageSize = 10;
+{
+    @private
+        int page;
+        int pageSize;
+}
 
 
+#pragma mark- base
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
     }
     return self;
 }
@@ -41,6 +46,9 @@ int pageSize = 10;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"养身";
+    
+    page = 1;
+    pageSize = 10;
     
     CGFloat yDelta;
     
@@ -104,6 +112,7 @@ int pageSize = 10;
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark- tableview
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -191,6 +200,17 @@ int pageSize = 10;
     
 }
 
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if(self.segmentedControl.selectedSegmentIndex == 0) {
+        return self.recipes.count+1;
+    }else {
+        return self.healthList.count+1;
+    }
+    
+}
+
+#pragma mark- others
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
 	NSLog(@"Selected index %i (via UIControlEventValueChanged)", segmentedControl.selectedSegmentIndex);
     if(segmentedControl.selectedSegmentIndex == 0) {
@@ -206,15 +226,7 @@ int pageSize = 10;
     }
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    if(self.segmentedControl.selectedSegmentIndex == 0) {
-       return self.recipes.count+1;
-    }else {
-        return self.healthList.count+1;
-    }
-    
-}
+
 
 - (IBAction)handleSwipe:(UISwipeGestureRecognizer *)sender {
     if (sender.direction & UISwipeGestureRecognizerDirectionLeft){

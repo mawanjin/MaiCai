@@ -15,7 +15,7 @@
 @end
 
 @implementation MCFeedbackViewController
-
+#pragma mark- base
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -39,6 +39,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark- others
 - (IBAction)submitBtnAction:(UIButton *)sender {
     NSString* content = [self.content.text  stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     

@@ -17,6 +17,7 @@
 
 @implementation MCMineAddressViewController
 
+#pragma mark- base
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -66,6 +67,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark- tableview
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.data.count;
@@ -115,7 +117,7 @@
     }
 }
 
-
+#pragma mark- others
 -(void)addBtnAction
 {
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"

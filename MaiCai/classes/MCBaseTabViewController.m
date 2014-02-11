@@ -13,7 +13,7 @@
 @end
 
 @implementation MCBaseTabViewController
-
+#pragma mark- base
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -44,10 +44,8 @@
     
     //view背景
     self.view.backgroundColor = [UIColor colorWithRed:0.95f green:0.95f blue:0.95f alpha:1.00f];
-    
-    
-
 }
+
 
 - (void)didReceiveMemoryWarning
 {

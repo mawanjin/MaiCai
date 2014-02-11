@@ -26,6 +26,7 @@
 
 @implementation MCQuickOrderViewController
 
+#pragma mark- base
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -83,6 +84,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark- tableview
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if(section == 0){
@@ -193,6 +195,7 @@
     [self presentPopupViewController:popup animated:YES completion:nil];
 }
 
+#pragma mark- others
 -(void)calculateTotalPrice
 {
     float totalPrice = 0.0f;

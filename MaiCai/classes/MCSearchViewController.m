@@ -25,9 +25,12 @@
 @end
 
 @implementation MCSearchViewController
+{
+    @private
+        bool flag;
+}
 
-bool flag = false;
-
+#pragma mark- base
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -40,7 +43,6 @@ bool flag = false;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
     //设置Navigation Bar背景图片
     UINavigationBar *navBar = self.navigationController.navigationBar;
     [navBar setBarTintColor:[UIColor colorWithRed:0.33f green:0.71f blue:0.06f alpha:1.00f]];
@@ -48,7 +50,7 @@ bool flag = false;
     //navbar字体
     [navBar setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
                                      [UIColor whiteColor], NSForegroundColorAttributeName, nil]];
-    
+    flag = false;
     UIBarButtonItem* item = [[UIBarButtonItem alloc]
                              init];
     UIButton* backBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 12, 20)];
@@ -73,11 +75,6 @@ bool flag = false;
     [super viewDidAppear:animated];
 }
 
-
--(void)backBtnAction
-{
-    [self dismissViewControllerAnimated:NO completion:nil];
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -273,6 +270,12 @@ bool flag = false;
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     flag = false;
+}
+
+#pragma mark - others
+-(void)backBtnAction
+{
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 @end

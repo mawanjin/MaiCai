@@ -17,6 +17,7 @@
 
 @implementation MCCategoryViewController
 
+#pragma mark- base
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 
 {
@@ -53,13 +54,6 @@
     
     
 }
-
-
-- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
-	NSLog(@"Selected index %i (via UIControlEventValueChanged)", segmentedControl.selectedSegmentIndex);
-    [self.collectionView reloadData];
-}
-
 
 -(void)viewWillDisappear:(BOOL)animated
 {
@@ -126,6 +120,7 @@
 }
 
 
+#pragma mark- uicollectionview
 -(NSInteger)numberOfSectionsInCollectionView:
 (UICollectionView *)collectionView
 {
@@ -170,9 +165,7 @@
 }
 
 
-
-
-
+#pragma mark- others
 - (IBAction)handleSwipe:(UISwipeGestureRecognizer *)sender {
     
     
@@ -191,8 +184,10 @@
             [self segmentedControlChangedValue:self.segmentedControl];
         }
     }
-    
-    
+}
 
+- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
+	NSLog(@"Selected index %i (via UIControlEventValueChanged)", segmentedControl.selectedSegmentIndex);
+    [self.collectionView reloadData];
 }
 @end

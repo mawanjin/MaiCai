@@ -13,6 +13,7 @@
 
 @implementation MCLoginViewController
 
+#pragma mark- base
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -35,6 +36,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark- others
 - (IBAction)loginBtnAction:(UIButton *)sender {
     NSString* userId = self.usernameTextField.text;
     NSString* password = self.passwordTextField.text;

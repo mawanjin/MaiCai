@@ -20,8 +20,12 @@
 
 
 @implementation MCMineViewController
-MCMineFooter* footer;
+{
+    @private
+        MCMineFooter* footer;
+}
 
+#pragma mark- base
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -42,15 +46,6 @@ MCMineFooter* footer;
 }
 
 
--(void)minePersonalInfoBtnAction
-{
-    
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
-                                                  bundle:nil];
-    MCPersonalInfoViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCPersonalInfoViewController"];
-    
-    [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:Nil];
-}
 
 
 
@@ -74,6 +69,7 @@ MCMineFooter* footer;
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark- tableview
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.row == 0) {
@@ -229,4 +225,16 @@ MCMineFooter* footer;
 {
     return 45;
 }
+
+#pragma mark- others
+-(void)minePersonalInfoBtnAction
+{
+    
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
+                                                  bundle:nil];
+    MCPersonalInfoViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCPersonalInfoViewController"];
+    
+    [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:Nil];
+}
+
 @end

@@ -25,14 +25,20 @@
 @end
 
 @implementation MCMineCollectViewController
-int page_ = 1;
-int pageSize_ = 10;
+{
+    @private
+        int page;
+        int pageSize;
+}
 
+#pragma mark- base
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        page=1;
+        pageSize=10;
     }
     return self;
 }
@@ -95,17 +101,24 @@ int pageSize_ = 10;
     [view setBackgroundColor:[UIColor clearColor]];
     self.tableView.tableHeaderView = view;
     
-    page_ = 1;
+    page = 1;
     [self getRecipes];
 }
 
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark- tableview
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     if(self.segmentedControl.selectedSegmentIndex == 0) {
         //菜谱
         if(indexPath.row == self.recipes.count) {
-            page_++;
+            page++;
             [self getRecipes];
         }else {
             MCCookBookDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCCookBookDetailViewController"];
@@ -116,7 +129,7 @@ int pageSize_ = 10;
     }else {
         //养身
         if(indexPath.row == self.healthList.count) {
-            page_++;
+            page++;
             [self getHealthList];
         }else{
             MCHealthDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCHealthDetailViewController"];
@@ -183,11 +196,11 @@ int pageSize_ = 10;
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
 	NSLog(@"Selected index %i (via UIControlEventValueChanged)", segmentedControl.selectedSegmentIndex);
     if(segmentedControl.selectedSegmentIndex == 0) {
-        page_ = 1;
+        page = 1;
         [self.recipes removeAllObjects];
         [self getRecipes];
     }else {
-        page_ = 1;
+        page = 1;
         [self.healthList removeAllObjects];
         [self getHealthList];
     }
@@ -203,6 +216,7 @@ int pageSize_ = 10;
     
 }
 
+#pragma mark- others
 - (IBAction)handleSwipe:(UISwipeGestureRecognizer *)sender {
     if (sender.direction & UISwipeGestureRecognizerDirectionLeft){
         NSLog(@"Swiped Left.");
@@ -226,7 +240,7 @@ int pageSize_ = 10;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
             MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
-            NSMutableArray* newData = [[MCVegetableManager getInstance]getCollectionListByPage:page_ Pagesize:pageSize_ Recipe:true UserId:user.id];
+            NSMutableArray* newData = [[MCVegetableManager getInstance]getCollectionListByPage:page Pagesize:pageSize Recipe:true UserId:user.id];
             [self.recipes addObjectsFromArray:newData];
         }
         @catch (NSException *exception) {
@@ -250,7 +264,7 @@ int pageSize_ = 10;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
             MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
-            NSMutableArray* newData = [[MCVegetableManager getInstance]getCollectionListByPage:page_ Pagesize:pageSize_ Recipe:false UserId:user.id];
+            NSMutableArray* newData = [[MCVegetableManager getInstance]getCollectionListByPage:page Pagesize:pageSize Recipe:false UserId:user.id];
             
             [self.healthList addObjectsFromArray:newData];
         }
@@ -270,10 +284,6 @@ int pageSize_ = 10;
 }
 
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 @end
