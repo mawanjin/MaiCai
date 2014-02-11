@@ -25,4 +25,7 @@
 -(void)deleteUserAddressById:(NSString*)addressId UserId:(NSString*)userId;
 -(void)updateUserAddress:(MCAddress*)address UserId:(NSString*)userId;
 -(void)feedbackByTel:(NSString*)tel Content:(NSString*)content;
+-(void)saveLoginStatusByUser:(MCUser*)user;
+-(MCUser*)getLoginStatus;
+-(void)clearLoginStatus;
 @end

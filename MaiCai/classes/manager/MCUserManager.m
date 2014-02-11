@@ -14,6 +14,7 @@
 #import "MCContextManager.h"
 #import "MCAddress.h"
 #import "NSString+MD5Addition.h"
+#import "MCFileOperation.h"
 
 @implementation MCUserManager
 static MCUserManager* instance;
@@ -113,6 +114,8 @@ static MCUserManager* instance;
     
     [[MCContextManager getInstance] addKey:MC_USER Data:user];
     [[MCContextManager getInstance] setLogged:YES];
+    
+    [[MCUserManager getInstance]saveLoginStatusByUser:user];
 }
 
 -(MCUser*)getUserInfo:(NSString*)id
@@ -286,4 +289,22 @@ static MCUserManager* instance;
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
 }
+
+-(void)saveLoginStatusByUser:(MCUser*)user
+{
+    NSString * path = [[[MCFileOperation getInstance]getDocumentPath] stringByAppendingPathComponent:[[NSString alloc]initWithFormat:@"%@.txt",[@"UserLoginStatus" stringFromMD5]]];
+
+    [NSKeyedArchiver archiveRootObject:user toFile:path];
+}
+
+-(MCUser*)getLoginStatus{
+    NSString * path = [[[MCFileOperation getInstance]getDocumentPath] stringByAppendingPathComponent:[[NSString alloc]initWithFormat:@"%@.txt",[@"UserLoginStatus" stringFromMD5]]];
+    return [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+}
+
+-(void)clearLoginStatus{
+    NSString * path = [[[MCFileOperation getInstance]getDocumentPath] stringByAppendingPathComponent:[[NSString alloc]initWithFormat:@"%@.txt",[@"UserLoginStatus" stringFromMD5]]];
+    [[MCFileOperation getInstance]deleteFolderOrFile:path];
+}
+
 @end

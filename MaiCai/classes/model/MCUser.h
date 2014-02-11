@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 @class MCAddress;
 
-@interface MCUser : NSObject
+@interface MCUser : NSObject<NSCoding>
 @property int id;
 @property NSString* userId;
 @property NSString* password;

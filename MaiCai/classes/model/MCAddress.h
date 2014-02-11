@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MCAddress : NSObject
+@interface MCAddress : NSObject<NSCoding>
 @property unsigned int id;
 @property NSString* mobile;
 @property NSString* address;

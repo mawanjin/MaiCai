@@ -9,5 +9,22 @@
 #import "MCAddress.h"
 
 @implementation MCAddress
+-(void) encodeWithCoder:(NSCoder *)encoder
+{
+    [encoder encodeObject:[[NSString alloc]initWithFormat:@"%d",self.id] forKey:@"id"];
+    [encoder encodeObject:self.mobile forKey:@"mobile"];
+    [encoder encodeObject:self.address forKey:@"address"];
+    [encoder encodeObject:self.name forKey:@"name"];
+    [encoder encodeObject:self.shipper forKey:@"shipper"];
+}
 
+-(id) initWithCoder:(NSCoder *)decoder
+{
+    self.id = [[decoder decodeObjectForKey:@"id"]integerValue];
+    self.mobile = [decoder decodeObjectForKey:@"mobile"];
+    self.address = [decoder decodeObjectForKey:@"address"];
+    self.name = [decoder decodeObjectForKey:@"name"];
+    self.shipper = [decoder decodeObjectForKey:@"shipper"];
+    return self;
+}
 @end

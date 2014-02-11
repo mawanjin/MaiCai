@@ -9,6 +9,7 @@
 #import "MCMineFooter.h"
 #import "MCContextManager.h"
 #import "MCLoginViewController.h"
+#import "MCUserManager.h"
 
 @implementation MCMineFooter
 
@@ -55,8 +56,10 @@
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
+        [[MCUserManager getInstance]clearLoginStatus];
         [[MCContextManager getInstance]setLogged:NO];
         [self.parentView viewWillAppear:YES];
+        
     }else{
         return;
     }

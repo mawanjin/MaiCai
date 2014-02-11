@@ -7,7 +7,6 @@
 //
 
 #import "MCAppDelegate.h"
-#import "MCDBManger.h"
 #import "MCUserManager.h"
 #import "MCContextManager.h"
 #import "MCUser.h"
@@ -29,11 +28,12 @@
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
     
-    MCDBManger* dbManger = [MCDBManger getInstance];
-    [dbManger createTable];
+    //MCDBManger* dbManger = [MCDBManger getInstance];
+    //[dbManger createTable];
     
     MCUserManager* userManager = [MCUserManager getInstance];
-    MCUser* user = [userManager getDefaultUser];
+    //MCUser* user = [userManager getDefaultUser];
+    MCUser* user = [userManager getLoginStatus];
     if(user!=nil) {
         [[MCContextManager getInstance] addKey:MC_USER Data:user];
         [[MCContextManager getInstance] setLogged:YES];
@@ -43,7 +43,6 @@
         [[MCContextManager getInstance] addKey:MC_MAC_ID Data:udid];
         [[MCContextManager getInstance] setLogged:NO];
     }
-    
     
     return YES;
 }
