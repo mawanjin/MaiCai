@@ -8,6 +8,7 @@
 
 #import "MCDBManger.h"
 #import "FMDatabase.h"
+#import "DDLogConfig.h"
 
 @implementation MCDBManger
 static MCDBManger* instance;
@@ -26,7 +27,7 @@ static MCDBManger* instance;
 {
     FMDatabase* db = [FMDatabase databaseWithPath:[instance getSqliteFilePath]];
     if (![db open]) {
-        NSLog(@"Could not open db.");
+        DDLogError(@"Could not open db.");
         return Nil ;
     }
     return db;
@@ -36,7 +37,7 @@ static MCDBManger* instance;
 {
     FMDatabase* db = [self getDB];
     if (![db open]) {
-        NSLog(@"Could not open db.");
+        DDLogError(@"Could not open db.");
         return ;
     }
     NSString* mc_user = @"create table if not exists mc_user (id integer primary key autoincrement,user_id varchar(50),password varchar(100),name varchar(100),image varchar(100))";
@@ -53,7 +54,7 @@ static MCDBManger* instance;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentDirectory = [paths objectAtIndex:0];
     NSString *dbPath = [documentDirectory stringByAppendingPathComponent:@"maicai.sqlite"];
-    NSLog(@"%@",dbPath);
+    DDLogError(@"%@",dbPath);
     return dbPath;
 }
 

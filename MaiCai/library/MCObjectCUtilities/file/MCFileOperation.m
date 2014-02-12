@@ -7,6 +7,7 @@
 //
 
 #import "MCFileOperation.h"
+#import "DDLogConfig.h"
 
 @implementation MCFileOperation
 static MCFileOperation* instance;
@@ -32,7 +33,7 @@ static MCFileOperation* instance;
                     withIntermediateDirectories:YES
                                      attributes:nil
                                           error:&error] == NO){
-        NSLog(@"Failed to create folder %@. Error = %@",
+        DDLogError(@"Failed to create folder %@. Error = %@",
               paramPath,
               error);
     }
@@ -44,7 +45,7 @@ static MCFileOperation* instance;
                            atomically:YES
                              encoding:NSUTF8StringEncoding
                                 error:&error] == NO){
-            NSLog(@"Failed to save file to %@. Error = %@", path, error);
+            DDLogError(@"Failed to save file to %@. Error = %@", path, error);
         }
     
 }
@@ -68,13 +69,13 @@ static MCFileOperation* instance;
                                   stringByAppendingPathComponent:fileName];
             if ([self.fileManager removeItemAtPath:filePath
                                              error:&error] == NO){
-                NSLog(@"Failed to remove item at path %@. Error = %@",
+                DDLogError(@"Failed to remove item at path %@. Error = %@",
                       fileName,
                       error);
             }
         }
     } else {
-        NSLog(@"Failed to enumerate path %@. Error = %@", paramPath, error);
+        DDLogError(@"Failed to enumerate path %@. Error = %@", paramPath, error);
     }
 }
 
@@ -83,7 +84,7 @@ static MCFileOperation* instance;
 - (void) deleteFolderOrFile:(NSString *)paramPath{
     NSError *error = nil;
     if ([self.fileManager removeItemAtPath:paramPath error:&error] == NO){
-        NSLog(@"Failed to remove path %@. Error = %@", paramPath, error);
+        DDLogError(@"Failed to remove path %@. Error = %@", paramPath, error);
     }
 }
 

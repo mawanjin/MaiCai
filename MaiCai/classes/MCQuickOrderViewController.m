@@ -19,6 +19,7 @@
 #import "MCUser.h"
 #import "MCContextManager.h"
 #import "UIImageView+MCAsynLoadImage.h"
+#import "DDLogConfig.h"
 
 @interface MCQuickOrderViewController ()
 
@@ -363,7 +364,7 @@
         }
         @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                NSLog(@"%@",exception);
+                DDLogError(@"%@",exception);
                 [self showMsgHint:MC_ERROR_MSG_0001];
             });
         }@finally {

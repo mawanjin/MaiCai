@@ -10,6 +10,7 @@
 #import "MCPersonalInfoViewController.h"
 #import "Toast+UIView.h"
 #import "MCUserManager.h"
+#import "DDLogConfig.h"
 
 @implementation MCChangeNicknameView
 
@@ -60,7 +61,7 @@
                 [self.previousView.nickNameLabel setText:[[NSString alloc]initWithFormat:@"我的昵称：%@",nickname]];
                 if (self.previousView.popupViewController != nil) {
                     [self.previousView dismissPopupViewControllerAnimated:YES completion:^{
-                        NSLog(@"popup view dismissed");
+                        DDLogVerbose(@"popup view dismissed");
                     }];
                 }
             });
@@ -71,7 +72,7 @@
 - (IBAction)cancelBtnAction:(id)sender {
     if (self.previousView.popupViewController != nil) {
         [self.previousView dismissPopupViewControllerAnimated:YES completion:^{
-            NSLog(@"popup view dismissed");
+            DDLogVerbose(@"popup view dismissed");
         }];
     }
 }

@@ -694,7 +694,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="104"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="r_p_gswwc" translatesAutoresizingMaskIntoConstraints="NO" id="vHI-pB-bEP">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vHI-pB-bEP">
                                                     <rect key="frame" x="8" y="0.0" width="80" height="80"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
@@ -772,7 +772,7 @@
                                             <action selector="addProductToCartAction:" destination="feV-1m-mZF" eventType="touchUpInside" id="Vha-z6-tfN"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="r_p_caiou" translatesAutoresizingMaskIntoConstraints="NO" id="Hfg-wW-SOV">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hfg-wW-SOV">
                                         <rect key="frame" x="6" y="24" width="72" height="72"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
@@ -876,7 +876,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="0.80654097576530615" green="0.80654097576530615" blue="0.80654097576530615" alpha="1" colorSpace="calibratedRGB"/>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="r_p_caijiao" translatesAutoresizingMaskIntoConstraints="NO" id="vpZ-jp-gdy">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vpZ-jp-gdy">
                                                     <rect key="frame" x="13" y="11" width="50" height="50"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
@@ -2018,7 +2018,7 @@
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="r_p_xiangqin" translatesAutoresizingMaskIntoConstraints="NO" id="Fyv-X4-XXu">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fyv-X4-XXu">
                                                     <rect key="frame" x="14" y="17" width="70" height="70"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -2488,10 +2488,7 @@
         <image name="icon_mine" width="24" height="24"/>
         <image name="mine_address_normal" width="80" height="80"/>
         <image name="mountain_image" width="480" height="140"/>
-        <image name="r_p_caijiao" width="150" height="150"/>
         <image name="r_p_caiou" width="150" height="150"/>
-        <image name="r_p_gswwc" width="150" height="150"/>
-        <image name="r_p_xiangqin" width="150" height="150"/>
         <image name="right_arrow_gray" width="28" height="45"/>
     </resources>
     <color key="tintColor" red="0.30980392156862746" green="0.22352941176470587" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>

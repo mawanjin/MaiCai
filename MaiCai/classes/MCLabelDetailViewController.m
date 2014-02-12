@@ -17,6 +17,7 @@
 #import "MCContextManager.h"
 #import "MCTradeManager.h"
 #import "MCVegetableMarketViewController.h"
+#import "DDLogConfig.h"
 
 
 @interface MCLabelDetailViewController ()
@@ -186,7 +187,7 @@
         }
         @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                NSLog(@"%@",exception);
+                DDLogError(@"%@",exception);
                 [self showMsgHint:MC_ERROR_MSG_0001];
             });
         }@finally {

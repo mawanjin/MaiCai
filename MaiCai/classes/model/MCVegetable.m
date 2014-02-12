@@ -6,8 +6,25 @@
 //  Copyright (c) 2013年 JoinSoft. All rights reserved.
 //
 
+
+
 #import "MCVegetable.h"
+#import "DDLogConfig.h"
+
+
 
 @implementation MCVegetable
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        DDLogWarn(@"mcvegetable init");
+    }
+    return self;
+}
 
+- (void)dealloc
+{
+    DDLogDebug(@"mcvegetable dealloc");
+}
 @end

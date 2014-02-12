@@ -16,6 +16,7 @@
 #import "MCRecipe.h"
 #import "MCStep.h"
 #import "MCHealth.h"
+#import "DDLogConfig.h"
 
 @implementation MCVegetableManager
 static MCVegetableManager* instance;
@@ -44,7 +45,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-    NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -65,7 +66,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-    NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -84,7 +85,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-    NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -115,7 +116,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-    NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -143,7 +144,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-    NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -199,7 +200,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-    NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -262,7 +263,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-    NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -279,6 +280,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* dicResult = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [dicResult[@"success"]boolValue];
+     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -350,9 +352,8 @@ static NSMutableDictionary* relationship;
     NSError *error;
     NSDictionary* dicResult = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
-    NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    
     BOOL flag = [dicResult[@"success"]boolValue];
+     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -400,6 +401,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
+     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -463,6 +465,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
+     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -499,7 +502,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-    NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -546,7 +549,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag_ = [responseData[@"success"]boolValue];
-    NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag_) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -588,7 +591,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-    NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -625,7 +628,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-    NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }

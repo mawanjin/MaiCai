@@ -10,6 +10,7 @@
 #import "NSString+MD5Addition.h"
 #import "MCNetWorkObject.h"
 #import "MCFileOperation.h"
+#import "DDLogConfig.h"
 
 
 @implementation MCNetwork
@@ -51,7 +52,7 @@ static MCNetwork* instance;
         NSTimeInterval a=[dat timeIntervalSince1970]*1000;
         NSString *currentTime = [NSString stringWithFormat:@"%.0f", a];
         if([currentTime longLongValue]<[data.expire longLongValue]) {
-            NSLog(@"从缓存中读取...");
+            DDLogVerbose(@"从缓存中读取...");
             return data.data;
         }
     }
@@ -68,7 +69,7 @@ static MCNetwork* instance;
     
     if ([response respondsToSelector:@selector(allHeaderFields)]) {
         // 取得http状态码
-         NSLog(@"此次请求状态码是%ld",(long)[response statusCode]);
+         DDLogVerbose(@"此次请求状态码是%ld",(long)[response statusCode]);
         if((long)[response statusCode] != 200) {
             @throw [[NSException alloc]initWithName:@"错误" reason:@"状态码不是200" userInfo:nil];
         }
@@ -119,7 +120,7 @@ static MCNetwork* instance;
     
     if ([response respondsToSelector:@selector(allHeaderFields)]) {
         // 取得http状态码
-        NSLog(@"此次请求状态码是%ld",(long)[response statusCode]);
+        DDLogVerbose(@"此次请求状态码是%ld",(long)[response statusCode]);
         if((long)[response statusCode] != 200) {
             @throw [[NSException alloc]initWithName:@"错误" reason:@"状态码不是200" userInfo:nil];
         }
@@ -136,7 +137,7 @@ static MCNetwork* instance;
     if(data != Nil) {
         //如果有缓存读缓存
         NSData* imgData = data.data;
-        NSLog(@"读取缓存文件");
+        DDLogVerbose(@"读取缓存文件");
         return [UIImage imageWithData:imgData];
     }
         
@@ -150,7 +151,7 @@ static MCNetwork* instance;
     
     if ([response respondsToSelector:@selector(allHeaderFields)]) {
         // 取得http状态码
-        NSLog(@"此次请求状态码是%ld",(long)[response statusCode]);
+        DDLogVerbose(@"此次请求状态码是%ld",(long)[response statusCode]);
         if((long)[response statusCode] != 200) {
             @throw [[NSException alloc]initWithName:@"错误" reason:@"状态码不是200" userInfo:nil];
         }
@@ -178,7 +179,7 @@ static MCNetwork* instance;
     long totalSize = docSize + ImageCacheSize;
     const unsigned int bytes = 1024*1024 ;   //字节数，如果想获取KB就1024，MB就1024*1024
     NSString *string = [NSString stringWithFormat:@"%.2f",(1.0 *totalSize/bytes)];
-    NSLog(@"docSize:%ld,ImageCacheSize:%ld",docSize,ImageCacheSize);
+    DDLogVerbose(@"docSize:%ld,ImageCacheSize:%ld",docSize,ImageCacheSize);
     return string;
 }
 

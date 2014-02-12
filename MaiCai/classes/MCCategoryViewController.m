@@ -14,6 +14,7 @@
 #import "MCMarketTradeCell.h"
 #import "MCVegetableDetailViewController.h"
 #import "UIImageView+MCAsynLoadImage.h"
+#import "DDLogConfig.h"
 
 @implementation MCCategoryViewController
 
@@ -170,7 +171,7 @@
     
     
     if (sender.direction & UISwipeGestureRecognizerDirectionLeft){
-        NSLog(@"Swiped Left.");
+        DDLogVerbose(@"Swiped Left.");
         if(self.segmentedControl.selectedSegmentIndex < (self.sourceData.count-1)) {
             [self.segmentedControl setSelectedSegmentIndex:(self.segmentedControl.selectedSegmentIndex+1) animated:YES];
             [self segmentedControlChangedValue:self.segmentedControl];
@@ -178,7 +179,7 @@
         }
     }
     if (sender.direction & UISwipeGestureRecognizerDirectionRight){
-        NSLog(@"Swiped Right.");
+        DDLogVerbose(@"Swiped Right.");
         if(self.segmentedControl.selectedSegmentIndex >0) {
             [self.segmentedControl setSelectedSegmentIndex:(self.segmentedControl.selectedSegmentIndex-1) animated:YES];
             [self segmentedControlChangedValue:self.segmentedControl];
@@ -187,7 +188,7 @@
 }
 
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
-	NSLog(@"Selected index %i (via UIControlEventValueChanged)", segmentedControl.selectedSegmentIndex);
+	DDLogVerbose(@"Selected index %i (via UIControlEventValueChanged)", segmentedControl.selectedSegmentIndex);
     [self.collectionView reloadData];
 }
 @end

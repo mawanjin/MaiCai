@@ -15,6 +15,7 @@
 #import "MCAddress.h"
 #import "NSString+MD5Addition.h"
 #import "MCFileOperation.h"
+#import "DDLogConfig.h"
 
 @implementation MCUserManager
 static MCUserManager* instance;
@@ -74,8 +75,8 @@ static MCUserManager* instance;
     NSData* result = [[MCNetwork getInstance]httpPostSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/private/customer/register.do" Params:data];
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-    
     BOOL flag = [responseData[@"success"]boolValue];
+     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -94,9 +95,8 @@ static MCUserManager* instance;
     NSData* result = [[MCNetwork getInstance]httpPostSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/private/customer/login.do" Params:data];
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-    
-    
     BOOL flag = [responseData[@"success"]boolValue];
+     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -131,6 +131,7 @@ static MCUserManager* instance;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
+     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -155,7 +156,7 @@ static MCUserManager* instance;
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
-    
+     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }    
@@ -176,7 +177,7 @@ static MCUserManager* instance;
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
      BOOL flag = [responseData[@"success"]boolValue];
-    
+     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -193,6 +194,7 @@ static MCUserManager* instance;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
+     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -226,7 +228,7 @@ static MCUserManager* instance;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-     NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -247,7 +249,7 @@ static MCUserManager* instance;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-    NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -266,7 +268,7 @@ static MCUserManager* instance;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-    NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -282,9 +284,8 @@ static MCUserManager* instance;
     NSData* result = [[MCNetwork getInstance]httpPostSynUrl: @"http://star-faith.com:8083/maicai/mobile/client/feedback.do" Params:params];
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-    
     BOOL flag = [responseData[@"success"]boolValue];
-    NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }

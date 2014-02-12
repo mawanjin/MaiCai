@@ -53,6 +53,9 @@
 		0467B7F6184EBCA2005A72F0 /* MCMarketIndexNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0467B7F5184EBCA2005A72F0 /* MCMarketIndexNewsCell.m */; };
 		0467B7F9184ED066005A72F0 /* MCMarketIndexCategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0467B7F8184ED066005A72F0 /* MCMarketIndexCategoryCell.m */; };
 		0467B7FC184ED7AB005A72F0 /* MCMarketIndexQuickOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0467B7FB184ED7AB005A72F0 /* MCMarketIndexQuickOrderCell.m */; };
+		046962AB18AB1A4E00A58918 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 046962A318AB1A4E00A58918 /* DDASLLogger.m */; };
+		046962AD18AB1A4E00A58918 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 046962A818AB1A4E00A58918 /* DDLog.m */; };
+		046962AE18AB1A4E00A58918 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 046962AA18AB1A4E00A58918 /* DDTTYLogger.m */; };
 		046D48FC187A5333000E07DA /* MCMarketIndexTipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046D48FB187A5333000E07DA /* MCMarketIndexTipCell.m */; };
 		046E99C718261F6D0005FB53 /* MCBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E99BC18261F6D0005FB53 /* MCBaseViewController.m */; };
 		046E99C818261F6D0005FB53 /* MCCookBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E99BE18261F6D0005FB53 /* MCCookBookViewController.m */; };
@@ -256,6 +259,14 @@
 		0467B7F8184ED066005A72F0 /* MCMarketIndexCategoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMarketIndexCategoryCell.m; sourceTree = "<group>"; };
 		0467B7FA184ED7AB005A72F0 /* MCMarketIndexQuickOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMarketIndexQuickOrderCell.h; sourceTree = "<group>"; };
 		0467B7FB184ED7AB005A72F0 /* MCMarketIndexQuickOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMarketIndexQuickOrderCell.m; sourceTree = "<group>"; };
+		046962A218AB1A4E00A58918 /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
+		046962A318AB1A4E00A58918 /* DDASLLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDASLLogger.m; sourceTree = "<group>"; };
+		046962A618AB1A4E00A58918 /* DDLog+LOGV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DDLog+LOGV.h"; sourceTree = "<group>"; };
+		046962A718AB1A4E00A58918 /* DDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLog.h; sourceTree = "<group>"; };
+		046962A818AB1A4E00A58918 /* DDLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDLog.m; sourceTree = "<group>"; };
+		046962A918AB1A4E00A58918 /* DDTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTTYLogger.h; sourceTree = "<group>"; };
+		046962AA18AB1A4E00A58918 /* DDTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTTYLogger.m; sourceTree = "<group>"; };
+		046962AF18AB36FC00A58918 /* DDLogConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLogConfig.h; sourceTree = "<group>"; };
 		046D48FA187A5333000E07DA /* MCMarketIndexTipCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMarketIndexTipCell.h; sourceTree = "<group>"; };
 		046D48FB187A5333000E07DA /* MCMarketIndexTipCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMarketIndexTipCell.m; sourceTree = "<group>"; };
 		046E99BB18261F6D0005FB53 /* MCBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCBaseViewController.h; sourceTree = "<group>"; };
@@ -541,6 +552,21 @@
 				0464C997182F7015009066C3 /* UIViewController+CWPopup.m */,
 			);
 			path = CWPopup;
+			sourceTree = "<group>";
+		};
+		046962A118AB1A4E00A58918 /* Lumberjack */ = {
+			isa = PBXGroup;
+			children = (
+				046962A218AB1A4E00A58918 /* DDASLLogger.h */,
+				046962A318AB1A4E00A58918 /* DDASLLogger.m */,
+				046962A618AB1A4E00A58918 /* DDLog+LOGV.h */,
+				046962A718AB1A4E00A58918 /* DDLog.h */,
+				046962A818AB1A4E00A58918 /* DDLog.m */,
+				046962A918AB1A4E00A58918 /* DDTTYLogger.h */,
+				046962AA18AB1A4E00A58918 /* DDTTYLogger.m */,
+				046962AF18AB36FC00A58918 /* DDLogConfig.h */,
+			);
+			path = Lumberjack;
 			sourceTree = "<group>";
 		};
 		046E99BA18261F6D0005FB53 /* classes */ = {
@@ -945,6 +971,7 @@
 		04D230AE182B883E00D4B4AC /* library */ = {
 			isa = PBXGroup;
 			children = (
+				046962A118AB1A4E00A58918 /* Lumberjack */,
 				047F63C318A8E67200F4D5DA /* SVProgressHUD */,
 				0472EBC0189211F700A40C9D /* MCObjectCUtilities */,
 				04C97342186D292E00138DB8 /* GCPlaceholderTextView */,
@@ -1093,9 +1120,11 @@
 				04C9734B186D5C4900138DB8 /* MCRecipeIngredientCell.m in Sources */,
 				04DAF4E61845DD9C009C7720 /* MCOrderDetailFooter.m in Sources */,
 				044BC9B118308CB200D43115 /* MCNewMineAddressViewController.m in Sources */,
+				046962AB18AB1A4E00A58918 /* DDASLLogger.m in Sources */,
 				0472EBD6189211F800A40C9D /* UIColor+ColorWithHex.m in Sources */,
 				041E5A8D187FC2E600BB0F67 /* MCLabelDetailHeader.m in Sources */,
 				04C9732E186928D200138DB8 /* MCQuickOrderCell.m in Sources */,
+				046962AE18AB1A4E00A58918 /* DDTTYLogger.m in Sources */,
 				041E5A7F187BC90D00BB0F67 /* MCVegetableDetailShopInfoCell.m in Sources */,
 				0497B8101839FF1D008A6F8B /* MCDBManger.m in Sources */,
 				04B98D8B18331D680018F84E /* MCShop.m in Sources */,
@@ -1170,6 +1199,7 @@
 				04C973311869297A00138DB8 /* MCQuickOrderViewController.m in Sources */,
 				0437A4941847491A000D427B /* AlixPayResult.m in Sources */,
 				0467B7FC184ED7AB005A72F0 /* MCMarketIndexQuickOrderCell.m in Sources */,
+				046962AD18AB1A4E00A58918 /* DDLog.m in Sources */,
 				044BC9AC1830687800D43115 /* MCMineAddressViewController.m in Sources */,
 				04DAF4DD1845921B009C7720 /* MCOrderCell.m in Sources */,
 				0472EBD5189211F800A40C9D /* NSDictionary+MCJsonString.m in Sources */,

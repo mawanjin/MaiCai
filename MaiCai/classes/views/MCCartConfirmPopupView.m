@@ -12,6 +12,7 @@
 #import "MCContextManager.h"
 #import "MCUser.h"
 #import "Toast+UIView.h"
+#import "DDLogConfig.h"
 
 
 
@@ -48,7 +49,7 @@
 - (IBAction)cancelBtnAction:(UIButton *)sender {
     if (self.previousView.popupViewController != nil) {
         [self.previousView dismissPopupViewControllerAnimated:YES completion:^{
-            NSLog(@"popup view dismissed");
+            DDLogVerbose(@"popup view dismissed");
         }];
     }
 }

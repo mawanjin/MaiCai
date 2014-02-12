@@ -19,6 +19,7 @@
 #import "NSDictionary+MCJsonString.h"
 #import "NSArray+MCJsonString.h"
 #import "MCRecipe.h"
+#import "DDLogConfig.h"
 
 @implementation MCTradeManager
 
@@ -43,7 +44,8 @@ static MCTradeManager* instance;
     NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/public/offline/cart/index.do" Params:data Cache:NO];
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-    BOOL flag = [responseData[@"success"]boolValue];
+   BOOL flag = [responseData[@"success"]boolValue];
+     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag){
         NSDictionary* obj = responseData[@"data"];
          NSMutableArray* finalResult = [[NSMutableArray alloc]init];
@@ -96,7 +98,7 @@ static MCTradeManager* instance;
         }
         return finalResult;
     }else {
-        NSLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+       
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
 }
@@ -113,6 +115,7 @@ static MCTradeManager* instance;
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
+    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag){
         NSDictionary* obj = responseData[@"data"];
         NSMutableArray* finalResult = [[NSMutableArray alloc]init];
@@ -197,6 +200,7 @@ static MCTradeManager* instance;
 
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
+    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -234,8 +238,8 @@ static MCTradeManager* instance;
     NSError* error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
+    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
-        
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
 }
@@ -253,6 +257,7 @@ static MCTradeManager* instance;
     int num = 0;
     
     BOOL flag = [responseData[@"success"]boolValue];
+    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }else {
@@ -275,6 +280,7 @@ static MCTradeManager* instance;
     int num = 0;
     
     BOOL flag = [responseData[@"success"]boolValue];
+    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }else {
@@ -298,6 +304,7 @@ static MCTradeManager* instance;
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
+    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -316,6 +323,7 @@ static MCTradeManager* instance;
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
+    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -342,6 +350,7 @@ static MCTradeManager* instance;
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
+    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -369,6 +378,7 @@ static MCTradeManager* instance;
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
+    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -435,6 +445,7 @@ static MCTradeManager* instance;
     NSData* result = [[MCNetwork getInstance]httpPostSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/private/order/save.do" Params:data];
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
+    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -459,12 +470,13 @@ static MCTradeManager* instance;
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
     NSData* result = [[MCNetwork getInstance]httpPostSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/private/order/index.do" Params:data];
     NSString* content = [[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding];
-    NSLog(@"%@",content);
+    
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
+    DDLogVerbose(@"%@",content);
     if(!flag) {
-        @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
+        @throw [NSException exceptionWithName:@"接口错误" reason:content userInfo:nil];
            }
     NSArray* data_ = responseData[@"data"];
     NSMutableArray* orders = [[NSMutableArray alloc]init];
@@ -504,6 +516,7 @@ static MCTradeManager* instance;
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
+    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -563,6 +576,7 @@ static MCTradeManager* instance;
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
+    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }
@@ -582,6 +596,7 @@ static MCTradeManager* instance;
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
+    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
     }

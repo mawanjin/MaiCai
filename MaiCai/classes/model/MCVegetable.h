@@ -18,7 +18,7 @@
 @property  unsigned int shop_product_id;
 @property  float price;
 @property  float originalPrice;
-@property  MCShop* shop;
+@property  MCShop* __weak shop;
 @property  NSString* unit;
 @property  NSString* dosage;
 @property  NSMutableArray* recipes;

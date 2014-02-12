@@ -18,12 +18,17 @@
 #import "MCBaseNavViewController.h"
 #import "MCOrderConfirmViewController.h"
 #import "MCOrderDetailViewController.h"
+#import "DDLog.h"
+#import "DDASLLogger.h"
+#import "DDTTYLogger.h"
 
 @implementation MCAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    //两秒以后加载程序，能让用户更加仔细的看清楚，启动画面
     [NSThread sleepForTimeInterval:2.0];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
@@ -39,10 +44,12 @@
         [[MCContextManager getInstance] setLogged:YES];
     }else {
         NSString *udid = [[UIDevice currentDevice] uniqueAdvertisingIdentifier];
-        NSLog(@"udid---%@-----",udid);
         [[MCContextManager getInstance] addKey:MC_MAC_ID Data:udid];
         [[MCContextManager getInstance] setLogged:NO];
     }
+    
+    [DDLog addLogger:[DDASLLogger sharedInstance]];
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
     
     return YES;
 }
