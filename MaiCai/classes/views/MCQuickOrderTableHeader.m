@@ -35,6 +35,7 @@
         MCQuickOrderViewController* controller = (MCQuickOrderViewController*)self.parentView;
         MCCookBookDetailViewController *vc = [controller.storyboard instantiateViewControllerWithIdentifier:@"MCCookBookDetailViewController"];
         vc.recipe = controller.recipe;
+        vc.hidesBottomBarWhenPushed = YES;
         [self.parentView.navigationController pushViewController:vc animated:YES];
 
     }

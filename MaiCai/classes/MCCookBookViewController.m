@@ -129,6 +129,7 @@
         }else {
             MCCookBookDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCCookBookDetailViewController"];
             vc.recipe = self.recipes[indexPath.row];
+            vc.hidesBottomBarWhenPushed = YES;
            [self.navigationController pushViewController:vc animated:YES];
         }
     }else {
@@ -140,6 +141,7 @@
         }else{
             MCHealthDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCHealthDetailViewController"];
             vc.health = self.healthList[indexPath.row];
+            vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
 
         }
@@ -258,8 +260,9 @@
                 [insertIndexPaths addObject:newPath];
             }
             
-            dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_sync(dispatch_get_main_queue(), ^{
                 [self.tableView insertRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationFade];
+                [self.tableView reloadData];
             });
 
         }

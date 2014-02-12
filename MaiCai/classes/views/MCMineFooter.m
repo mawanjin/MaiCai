@@ -47,6 +47,7 @@
         UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
                                                       bundle:nil];
         MCLoginViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCLoginViewController"];
+        vc.hidesBottomBarWhenPushed = YES;
         [self.parentView.navigationController pushViewController:vc animated:YES];
     }
    

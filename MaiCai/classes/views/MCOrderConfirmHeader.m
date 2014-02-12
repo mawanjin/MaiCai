@@ -25,6 +25,7 @@
                                                   bundle:nil];
     MCMineAddressViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCMineAddressViewController"];
     vc.previousView = (MCBaseViewController*)self.parentView;
+    vc.hidesBottomBarWhenPushed = YES;
     [self.parentView.navigationController pushViewController:vc animated:YES];
 
 }

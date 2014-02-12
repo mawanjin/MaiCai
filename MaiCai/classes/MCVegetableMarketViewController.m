@@ -156,6 +156,7 @@
     MCVegetable* vegetable = products[indexPath.row];
     MCVegetableDetailViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCVegetableDetailViewController"];
     vc.vegetable = vegetable;
+    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -257,6 +258,7 @@
         NSDictionary* obj = labels[indexPath.row];
         vc.labelId = [obj[@"id"]integerValue];
         vc.title = obj[@"name"];
+        vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
 
     }else if([collectionView.restorationIdentifier isEqualToString:@"quickOrderCollectionView"]){
@@ -264,6 +266,7 @@
         MCQuickOrderViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCQuickOrderViewController"];
         vc.recipe = object;
         vc.previousView = self;
+        vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
@@ -277,6 +280,7 @@
 
 -(void)searchBtnAction{
     MCSearchViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCSearchViewController"];
+    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

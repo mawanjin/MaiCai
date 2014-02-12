@@ -318,12 +318,14 @@
                                                       bundle:nil];
         MCOrderConfirmViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCOrderConfirmViewController"];
         vc.previousView = self;
+        vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     
     }else{
         UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
                                                     bundle:nil];
         MCLoginViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCLoginViewController"];
+        vc.hidesBottomBarWhenPushed = YES;
        [self.navigationController pushViewController:vc animated:YES];
     }
 }

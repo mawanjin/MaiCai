@@ -173,6 +173,7 @@
     MCOrderDetailViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCOrderDetailViewController"];
     vc.order = self.data[indexPath.row];
     vc.previousView = self;
+    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -76,6 +76,7 @@
         UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
                                                       bundle:nil];
         MCMineCartViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCMineCartViewController"];
+        vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc  animated:YES];
     }else if(indexPath.row == 1) {
         BOOL isLoged = [[MCContextManager getInstance]isLogged];
@@ -83,7 +84,7 @@
             UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
                                                           bundle:nil];
             MCMineOrderViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCMineOrderViewController"];
-            
+            vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc  animated:YES];
         }else{
             
@@ -96,7 +97,7 @@
             UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
                                                           bundle:nil];
             MCMineAddressViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCMineCollectViewController"];
-            
+            vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc  animated:YES];
         }else{
             
@@ -108,7 +109,7 @@
             UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
                                                           bundle:nil];
             MCMineAddressViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCMineAddressViewController"];
-            
+            vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc  animated:YES];
         }else{
             
@@ -118,7 +119,7 @@
         UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
                                                       bundle:nil];
         MCPersonalInfoViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCFeedbackViewController"];
-        
+        vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc  animated:YES];
 
     }else if(indexPath.row == 5) {
@@ -127,7 +128,7 @@
             UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
                                                           bundle:nil];
             MCPersonalInfoViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCPersonalInfoViewController"];
-            
+            vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc  animated:YES];
         }else{
             
@@ -232,7 +233,7 @@
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
                                                   bundle:nil];
     MCPersonalInfoViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCPersonalInfoViewController"];
-    
+    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc  animated:YES];
 }
 

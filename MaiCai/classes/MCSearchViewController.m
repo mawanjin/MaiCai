@@ -160,18 +160,21 @@
                     temp.product_id = [obj[@"image"]integerValue];
                     temp.name = obj[@"name"];
                     vc.vegetable = temp;
+                    vc.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:vc animated:YES];
                 }else if ([obj[@"type"]integerValue] == 1) {
                     MCCookBookDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCCookBookDetailViewController"];
                     MCRecipe* recipe = [[MCRecipe alloc]init];
                     recipe.id = [obj[@"id"]integerValue];
                     vc.recipe = recipe;
+                    vc.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:vc animated:YES];
                 }else if([obj[@"type"]integerValue] == 0) {
                     MCHealthDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCHealthDetailViewController"];
                     MCHealth* health = [[MCHealth alloc]init];
                     health.id = [obj[@"id"]integerValue];
                     vc.health = health;
+                    vc.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:vc animated:YES];
                 }
             }else {

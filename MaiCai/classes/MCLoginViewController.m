@@ -73,6 +73,7 @@
                                                   bundle:nil];
     MCRegisterViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCRegisterViewController"];
     vc.previousView = self;
+    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

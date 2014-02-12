@@ -44,6 +44,8 @@
     [backBtn addTarget:self action:@selector(backBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [item setCustomView:backBtn];
     self.navigationItem.leftBarButtonItem= item;
+    
+    
 }
 
 - (void)didReceiveMemoryWarning

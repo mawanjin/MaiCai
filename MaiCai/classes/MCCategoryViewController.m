@@ -160,6 +160,7 @@
     MCVegetable* vegetable = category.vegetables[indexPath.row];
     MCVegetableDetailViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCVegetableDetailViewController"];
     vc.vegetable = vegetable;
+    vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

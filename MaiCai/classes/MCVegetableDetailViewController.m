@@ -120,6 +120,7 @@
         NSMutableArray* recipes = self.data[@"recipes"];
         MCRecipe* recipe = recipes[indexPath.row];
         vc.recipe = recipe;
+        vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

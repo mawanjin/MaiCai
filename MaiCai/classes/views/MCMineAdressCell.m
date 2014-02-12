@@ -40,6 +40,7 @@
     vc.navigationItem.title = @"修改收货地址";
     MCAddress* obj = self.parentView.data[self.index.row];
     vc.obj = obj;
+    vc.hidesBottomBarWhenPushed = YES;
     [self.parentView.navigationController pushViewController:vc animated:YES];
 }
 

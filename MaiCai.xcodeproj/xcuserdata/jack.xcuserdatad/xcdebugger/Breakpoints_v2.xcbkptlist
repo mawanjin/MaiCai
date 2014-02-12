@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MaiCai/classes/views/MCQuickOrderTableHeader.m"
-            timestampString = "413885604.09389"
+            timestampString = "413888361.341583"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
             landmarkName = "@implementation MCQuickOrderTableHeader"
             landmarkType = "3">
          </BreakpointContent>
