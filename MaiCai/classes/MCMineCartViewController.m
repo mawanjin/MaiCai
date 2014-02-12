@@ -20,6 +20,7 @@
 #import "MCUser.h"
 #import "MCOrderConfirmViewController.h"
 #import "UIImageView+MCAsynLoadImage.h"
+#import "DDLogConfig.h"
 
 
 @implementation MCMineCartViewController
@@ -75,6 +76,12 @@
 
     });
 }
+
+-(void)viewDidDisappear:(BOOL)animated
+{
+    self.data = nil;
+}
+
 
 - (void)didReceiveMemoryWarning
 {

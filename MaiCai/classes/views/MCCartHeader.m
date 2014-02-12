@@ -71,4 +71,5 @@
     [self.parentView dispLayTotalChoosedBtn];
 
 }
+
 @end

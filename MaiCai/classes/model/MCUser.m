@@ -8,8 +8,23 @@
 //
 
 #import "MCUser.h"
+#import "DDLogConfig.h"
 
 @implementation MCUser
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        DDLogDebug(@"mcuser init");
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    DDLogDebug(@"mcuser dealloc");
+}
 
 -(void) encodeWithCoder:(NSCoder *)encoder
 {

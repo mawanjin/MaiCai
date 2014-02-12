@@ -7,7 +7,20 @@
 //
 
 #import "MCHealth.h"
+#import "DDLogConfig.h"
 
 @implementation MCHealth
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        DDLogDebug(@"mchealth init");
+    }
+    return self;
+}
 
+- (void)dealloc
+{
+    DDLogDebug(@"mchealth dealloc");
+}
 @end

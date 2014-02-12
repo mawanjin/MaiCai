@@ -7,8 +7,25 @@
 //
 
 #import "MCAddress.h"
+#import "DDLogConfig.h"
+
 
 @implementation MCAddress
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        DDLogDebug(@"mcaddress init");
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    DDLogDebug(@"mcaddress dealloc");
+}
+
 -(void) encodeWithCoder:(NSCoder *)encoder
 {
     [encoder encodeObject:[[NSString alloc]initWithFormat:@"%d",self.id] forKey:@"id"];

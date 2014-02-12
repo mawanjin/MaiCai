@@ -11,7 +11,7 @@
 
 
 @interface MCVegetableMarketViewController : MCBaseTabViewController<UICollectionViewDelegateFlowLayout,UICollectionViewDelegate,UICollectionViewDataSource,UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate>
-@property NSMutableDictionary* data;
+
 
 @property (weak, nonatomic) IBOutlet UICollectionView *newsCollectionView;
 @property (weak, nonatomic) IBOutlet UICollectionView *categoryCollectionView;

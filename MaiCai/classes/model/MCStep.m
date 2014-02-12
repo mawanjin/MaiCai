@@ -7,7 +7,20 @@
 //
 
 #import "MCStep.h"
+#import "DDLogConfig.h"
 
 @implementation MCStep
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        DDLogDebug(@"mcstep init");
+    }
+    return self;
+}
 
+- (void)dealloc
+{
+    DDLogDebug(@"mcstep dealloc");
+}
 @end

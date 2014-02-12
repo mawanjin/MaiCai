@@ -7,7 +7,22 @@
 //
 
 #import "MCShop.h"
+#import "DDLogConfig.h"
 
 @implementation MCShop
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        DDLogDebug(@"mcshop init");
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    DDLogDebug(@"mcshop dealloc");
+}
 
 @end

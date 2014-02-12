@@ -32,9 +32,10 @@
 @implementation MCVegetableMarketViewController
 {
    @private
-        NSMutableArray* recipes;
-        NSMutableArray* labels;
-        NSMutableArray* products;
+        NSMutableArray*  recipes;
+        NSMutableArray*  labels;
+        NSMutableArray*  products;
+        NSMutableDictionary* data;
 }
 
 #pragma mark- base
@@ -69,10 +70,10 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
-            self.data = [[MCVegetableManager getInstance]getMarketIndexInfo];
-            recipes = self.data[@"recipes"];
-            labels = self.data[@"labels"];
-            products = self.data[@"products"];
+            data = [[MCVegetableManager getInstance]getMarketIndexInfo];
+            recipes = data[@"recipes"];
+            labels = data[@"labels"];
+            products = data[@"products"];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 UITableView* table = [[UITableView alloc]initWithFrame:CGRectMake(0, 325, 320, 66*products.count+50) style:UITableViewStylePlain];
@@ -115,10 +116,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
-
-
 
 
 #pragma mark - TableView
@@ -167,7 +164,7 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     MCMarketIndexTipsHeader* view = [MCMarketIndexTipsHeader initInstance];
-    view.newsLabel.text = self.data[@"tip"];
+    view.newsLabel.text = data[@"tip"];
     return view;
 }
 

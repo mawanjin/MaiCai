@@ -10,12 +10,12 @@
 @class MCMineCartViewController;
 
 @interface MCCartHeader : UIView
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel __weak *titleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *chooseBtn;
 @property int section;
-@property UITableView* tableView;
-@property NSMutableArray* shops;
-@property MCMineCartViewController* parentView;
+@property UITableView* __weak tableView;
+@property NSMutableArray* __weak shops;
+@property MCMineCartViewController* __weak parentView;
 +(id)initMCCartHeader;
 - (IBAction)chooseBtnClickAction:(UIButton *)sender;
 

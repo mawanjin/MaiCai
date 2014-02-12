@@ -7,7 +7,22 @@
 //
 
 #import "MCOrder.h"
+#import "DDLogConfig.h"
 
 @implementation MCOrder
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        DDLogDebug(@"mcorder init");
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    DDLogDebug(@"mcorder dealloc");
+}
 
 @end

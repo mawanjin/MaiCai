@@ -41,6 +41,6 @@
         </view>
     </objects>
     <resources>
-        <image name="cart_choose_btn_normal" width="40" height="40"/>
+        <image name="cart_choose_btn_normal" width="60" height="60"/>
     </resources>
 </document>
