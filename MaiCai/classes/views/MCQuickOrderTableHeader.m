@@ -35,8 +35,7 @@
         MCQuickOrderViewController* controller = (MCQuickOrderViewController*)self.parentView;
         MCCookBookDetailViewController *vc = [controller.storyboard instantiateViewControllerWithIdentifier:@"MCCookBookDetailViewController"];
         vc.recipe = controller.recipe;
-        [self.parentView presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
-        }];
+        [self.parentView.navigationController pushViewController:vc animated:YES];
 
     }
 }

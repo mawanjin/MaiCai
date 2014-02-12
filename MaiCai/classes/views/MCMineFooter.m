@@ -47,9 +47,7 @@
         UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
                                                       bundle:nil];
         MCLoginViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCLoginViewController"];
-        [self.parentView presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
-            
-        }];
+        [self.parentView.navigationController pushViewController:vc animated:YES];
     }
    
 }

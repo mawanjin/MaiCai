@@ -1626,7 +1626,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="r_p_caiou" translatesAutoresizingMaskIntoConstraints="NO" id="F3e-Am-Hoc">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F3e-Am-Hoc">
                                             <rect key="frame" x="20" y="2" width="59" height="59"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </imageView>
@@ -2488,7 +2488,6 @@
         <image name="icon_mine" width="24" height="24"/>
         <image name="mine_address_normal" width="80" height="80"/>
         <image name="mountain_image" width="480" height="140"/>
-        <image name="r_p_caiou" width="150" height="150"/>
         <image name="right_arrow_gray" width="28" height="45"/>
     </resources>
     <color key="tintColor" red="0.30980392156862746" green="0.22352941176470587" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>

@@ -73,10 +73,7 @@
                                                   bundle:nil];
     MCRegisterViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCRegisterViewController"];
     vc.previousView = self;
-    [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc]
-                       animated:NO completion:^{
-        
-    }];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

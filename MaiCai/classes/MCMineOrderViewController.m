@@ -173,7 +173,7 @@
     MCOrderDetailViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCOrderDetailViewController"];
     vc.order = self.data[indexPath.row];
     vc.previousView = self;
-    [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:Nil];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

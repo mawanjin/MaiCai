@@ -76,8 +76,7 @@
         UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
                                                       bundle:nil];
         MCMineCartViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCMineCartViewController"];
-        
-        [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:Nil];
+        [self.navigationController pushViewController:vc  animated:YES];
     }else if(indexPath.row == 1) {
         BOOL isLoged = [[MCContextManager getInstance]isLogged];
         if(isLoged) {
@@ -85,7 +84,7 @@
                                                           bundle:nil];
             MCMineOrderViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCMineOrderViewController"];
             
-            [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:Nil];
+            [self.navigationController pushViewController:vc  animated:YES];
         }else{
             
         }
@@ -98,7 +97,7 @@
                                                           bundle:nil];
             MCMineAddressViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCMineCollectViewController"];
             
-            [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:Nil];
+            [self.navigationController pushViewController:vc  animated:YES];
         }else{
             
         }
@@ -110,7 +109,7 @@
                                                           bundle:nil];
             MCMineAddressViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCMineAddressViewController"];
             
-            [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:Nil];
+            [self.navigationController pushViewController:vc  animated:YES];
         }else{
             
         }
@@ -120,7 +119,7 @@
                                                       bundle:nil];
         MCPersonalInfoViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCFeedbackViewController"];
         
-        [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:Nil];
+        [self.navigationController pushViewController:vc  animated:YES];
 
     }else if(indexPath.row == 5) {
         BOOL isLoged = [[MCContextManager getInstance]isLogged];
@@ -129,7 +128,7 @@
                                                           bundle:nil];
             MCPersonalInfoViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCPersonalInfoViewController"];
             
-            [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:Nil];
+            [self.navigationController pushViewController:vc  animated:YES];
         }else{
             
         }
@@ -234,7 +233,7 @@
                                                   bundle:nil];
     MCPersonalInfoViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCPersonalInfoViewController"];
     
-    [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:Nil];
+    [self.navigationController pushViewController:vc  animated:YES];
 }
 
 @end

@@ -124,7 +124,7 @@
                                                   bundle:nil];
     MCNewMineAddressViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCNewMineAddressViewController"];
    
-    [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc]animated:YES completion:Nil];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

@@ -160,9 +160,7 @@
     MCVegetable* vegetable = category.vegetables[indexPath.row];
     MCVegetableDetailViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCVegetableDetailViewController"];
     vc.vegetable = vegetable;
-    [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
-        
-    }];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

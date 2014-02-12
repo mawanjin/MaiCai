@@ -53,6 +53,9 @@
     flag = false;
     UIBarButtonItem* item = [[UIBarButtonItem alloc]
                              init];
+    
+    //使用自定义的返回按钮
+    [self.navigationItem setHidesBackButton:YES animated:NO];
     UIButton* backBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 12, 20)];
     [backBtn setBackgroundImage:[UIImage imageNamed:@"back_btn.png"] forState:UIControlStateNormal];
     [backBtn addTarget:self action:@selector(backBtnAction) forControlEvents:UIControlEventTouchUpInside];
@@ -157,23 +160,19 @@
                     temp.product_id = [obj[@"image"]integerValue];
                     temp.name = obj[@"name"];
                     vc.vegetable = temp;
-                    [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
-                        
-                    }];
+                    [self.navigationController pushViewController:vc animated:YES];
                 }else if ([obj[@"type"]integerValue] == 1) {
                     MCCookBookDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCCookBookDetailViewController"];
                     MCRecipe* recipe = [[MCRecipe alloc]init];
                     recipe.id = [obj[@"id"]integerValue];
                     vc.recipe = recipe;
-                    [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
-                    }];
+                    [self.navigationController pushViewController:vc animated:YES];
                 }else if([obj[@"type"]integerValue] == 0) {
                     MCHealthDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCHealthDetailViewController"];
                     MCHealth* health = [[MCHealth alloc]init];
                     health.id = [obj[@"id"]integerValue];
                     vc.health = health;
-                    [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
-                    }];
+                    [self.navigationController pushViewController:vc animated:YES];
                 }
             }else {
                 
@@ -275,7 +274,7 @@
 #pragma mark - others
 -(void)backBtnAction
 {
-    [self dismissViewControllerAnimated:NO completion:nil];
+   [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

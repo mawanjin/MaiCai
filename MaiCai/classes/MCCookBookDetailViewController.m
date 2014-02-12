@@ -77,8 +77,7 @@
     MCQuickOrderViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCQuickOrderViewController"];
     vc.recipe = self.recipe;
     vc.previousView = self;
-    [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
-    }];
+    [self.navigationController pushViewController:vc animated:YES];
 
 }
 

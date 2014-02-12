@@ -120,8 +120,7 @@
         NSMutableArray* recipes = self.data[@"recipes"];
         MCRecipe* recipe = recipes[indexPath.row];
         vc.recipe = recipe;
-        [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
-        }];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

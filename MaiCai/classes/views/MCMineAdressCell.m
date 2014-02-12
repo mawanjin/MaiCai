@@ -40,7 +40,7 @@
     vc.navigationItem.title = @"修改收货地址";
     MCAddress* obj = self.parentView.data[self.index.row];
     vc.obj = obj;
-    [self.parentView presentViewController:[[UINavigationController alloc]initWithRootViewController:vc]animated:NO completion:Nil];
+    [self.parentView.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)deleteBtnAction:(id)sender {

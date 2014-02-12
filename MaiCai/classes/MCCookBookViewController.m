@@ -129,8 +129,7 @@
         }else {
             MCCookBookDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCCookBookDetailViewController"];
             vc.recipe = self.recipes[indexPath.row];
-            [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
-            }];
+           [self.navigationController pushViewController:vc animated:YES];
         }
     }else {
         //养身
@@ -141,8 +140,7 @@
         }else{
             MCHealthDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCHealthDetailViewController"];
             vc.health = self.healthList[indexPath.row];
-            [self presentViewController:[[UINavigationController alloc]initWithRootViewController:vc] animated:NO completion:^{
-            }];
+            [self.navigationController pushViewController:vc animated:YES];
 
         }
         
@@ -254,7 +252,7 @@
             NSMutableArray* newData = [[MCVegetableManager getInstance]getRecipesByPage:page Pagesize:pageSize];
             
             [self.recipes addObjectsFromArray:newData];
-            NSMutableArray *insertIndexPaths = [NSMutableArray arrayWithCapacity:10];
+            NSMutableArray *insertIndexPaths = [NSMutableArray arrayWithCapacity:pageSize];
             for (int ind = 0; ind < [newData count]; ind++) {
                 NSIndexPath    *newPath =  [NSIndexPath indexPathForRow:[self.recipes indexOfObject:[newData objectAtIndex:ind]] inSection:0];
                 [insertIndexPaths addObject:newPath];
@@ -287,7 +285,7 @@
             NSMutableArray* newData = [[MCVegetableManager getInstance]getHealthListByPage:page Pagesize:pageSize];
             
             [self.healthList addObjectsFromArray:newData];
-            NSMutableArray *insertIndexPaths = [NSMutableArray arrayWithCapacity:10];
+            NSMutableArray *insertIndexPaths = [NSMutableArray arrayWithCapacity:pageSize];
             for (int ind = 0; ind < [newData count]; ind++) {
                 NSIndexPath    *newPath =  [NSIndexPath indexPathForRow:[self.healthList indexOfObject:[newData objectAtIndex:ind]] inSection:0];
                 [insertIndexPaths addObject:newPath];

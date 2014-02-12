@@ -25,9 +25,7 @@
                                                   bundle:nil];
     MCMineAddressViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCMineAddressViewController"];
     vc.previousView = (MCBaseViewController*)self.parentView;
-    [self.parentView presentViewController:[[UINavigationController alloc]initWithRootViewController:vc]animated:NO completion:^{
-                           
-    }];
+    [self.parentView.navigationController pushViewController:vc animated:YES];
 
 }
 

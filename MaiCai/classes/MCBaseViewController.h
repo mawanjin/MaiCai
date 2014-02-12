@@ -18,4 +18,6 @@ extern NSString* const MC_ERROR_MSG_0004;
 -(void)showMsgHint:(NSString*)msg;
 -(void)showProgressHUD;
 -(void)hideProgressHUD;
+- (void)hideTabBar;
+- (void)showTabBar;
 @end
