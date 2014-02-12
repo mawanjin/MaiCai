@@ -217,12 +217,12 @@
     if(segmentedControl.selectedSegmentIndex == 0) {
         page = 1;
         [self.recipes removeAllObjects];
-        [self.tableView reloadData];
+        //[self.tableView reloadData];
         [self getRecipes];
     }else {
         page = 1;
         [self.healthList removeAllObjects];
-        [self.tableView reloadData];
+        //[self.tableView reloadData];
         [self getHealthList];
     }
 }
@@ -254,14 +254,7 @@
             NSMutableArray* newData = [[MCVegetableManager getInstance]getRecipesByPage:page Pagesize:pageSize];
             
             [self.recipes addObjectsFromArray:newData];
-            NSMutableArray *insertIndexPaths = [NSMutableArray arrayWithCapacity:pageSize];
-            for (int ind = 0; ind < [newData count]; ind++) {
-                NSIndexPath    *newPath =  [NSIndexPath indexPathForRow:[self.recipes indexOfObject:[newData objectAtIndex:ind]] inSection:0];
-                [insertIndexPaths addObject:newPath];
-            }
-            
             dispatch_sync(dispatch_get_main_queue(), ^{
-                [self.tableView insertRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationFade];
                 [self.tableView reloadData];
             });
 
@@ -288,14 +281,8 @@
             NSMutableArray* newData = [[MCVegetableManager getInstance]getHealthListByPage:page Pagesize:pageSize];
             
             [self.healthList addObjectsFromArray:newData];
-            NSMutableArray *insertIndexPaths = [NSMutableArray arrayWithCapacity:pageSize];
-            for (int ind = 0; ind < [newData count]; ind++) {
-                NSIndexPath    *newPath =  [NSIndexPath indexPathForRow:[self.healthList indexOfObject:[newData objectAtIndex:ind]] inSection:0];
-                [insertIndexPaths addObject:newPath];
-            }
-            
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView insertRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationFade];
+                [self.tableView reloadData];
             });
         }
         @catch (NSException *exception) {
