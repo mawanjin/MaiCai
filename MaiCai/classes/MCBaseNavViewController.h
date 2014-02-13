@@ -9,6 +9,5 @@
 #import "MCBaseViewController.h"
 
 @interface MCBaseNavViewController : MCBaseViewController
-@property MCBaseViewController* previousView;
 -(void)backBtnAction;
 @end

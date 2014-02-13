@@ -327,10 +327,16 @@
         UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
                                                       bundle:nil];
         MCOrderConfirmViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCOrderConfirmViewController"];
-        vc.previousView = self;
+        
+        vc.data = self.data;
+        vc.totalPrice = self.totalPrice;
+        
+        [vc setShowMsg:^(NSString *msg) {
+            [self showMsgHint:msg];
+        }];
+        
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
-    
     }else{
         UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
                                                     bundle:nil];

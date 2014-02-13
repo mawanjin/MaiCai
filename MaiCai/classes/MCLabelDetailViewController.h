@@ -14,6 +14,6 @@
 @property unsigned int labelId;
 @property NSString* title;
 @property NSDictionary* data;
-
+@property (strong,nonatomic) void(^showMsg)(NSString* msg);
 - (IBAction)clickAction:(id)sender;
 @end

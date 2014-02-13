@@ -16,6 +16,8 @@
 @property BOOL isTotalChoosed;
 @property (weak, nonatomic) IBOutlet UIButton *totalChooseBtn;
 @property (weak, nonatomic) IBOutlet UILabel *totalPriceLabel;
+@property (strong,nonatomic)void(^showMsg)(NSString* msg);
+
 -(void)calculateTotalPrice;
 -(void)dispLayTotalChoosedBtn;
 - (IBAction)totalChooseAction:(id)sender;

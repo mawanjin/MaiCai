@@ -39,7 +39,10 @@
             //[[MCContextManager getInstance] addKey:MC_USER Data:user];
             //[[MCContextManager getInstance]setLogged:YES];
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.delegate showHintMessage:@"注册成功,请登入"];
+                if (self.showMsg) {
+                    self.showMsg(@"注册成功，请登入");
+                    self.showMsg = Nil;
+                }
                 [self backBtnAction];
             });
         }

@@ -15,24 +15,27 @@
 @interface MCOrderConfirmViewController :MCBaseNavViewController<UITableViewDataSource,UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *paymentBtn;
+@property (weak, nonatomic) IBOutlet UILabel *totalPriceLabel;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (nonatomic,assign) SEL result;
+
+@property unsigned int paymentMethod;
+@property unsigned int shipMethod;
 
 @property MCAddress* address;
 //address列表的第几个
 @property int index;
-
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property NSMutableArray* data;
 @property NSString* pay_no;
-@property (weak, nonatomic) IBOutlet UILabel *totalPriceLabel;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property MCOrderConfirmHeader_* header_;
-@property (nonatomic,assign) SEL result;
-@property unsigned int paymentMethod;
-@property unsigned int shipMethod;
 @property NSString* review;
 
 
+@property NSMutableArray* data;
+@property float totalPrice;
+@property (nonatomic,strong)void(^showMsg)(NSString* msg);
+
+
 -(NSString*)doRsa:(NSString*)orderInfo;
--(void)initData;
 - (IBAction)submitOrderAction:(id)sender;
 @end

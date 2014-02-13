@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MCRecipe : NSObject
+@interface MCRecipe : NSObject<NSCoding>
 @property int id;
 @property NSString* name;
 @property NSString* image;

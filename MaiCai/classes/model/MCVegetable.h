@@ -10,7 +10,7 @@
 @class MCShop;
 @class MCRecipe;
 
-@interface MCVegetable : NSObject
+@interface MCVegetable : NSObject<NSCoding>
 @property  unsigned int id;
 @property  NSString* name;
 @property  unsigned int product_id;

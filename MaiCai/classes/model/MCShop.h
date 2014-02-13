@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 @class MCMarket;
 
-@interface MCShop : NSObject
+@interface MCShop : NSObject<NSCoding>
 @property unsigned int id;
 @property NSString* name;
 @property unsigned int star;

@@ -12,5 +12,6 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property NSIndexPath* currentChoose ;
 @property NSMutableArray* data;
+@property UIViewController* previousView;
 -(void)addBtnAction;
 @end

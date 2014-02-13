@@ -70,11 +70,8 @@
     
     
     self.tableView.tableFooterView = footerView;
-    if([self.previousView isKindOfClass:[MCMineCartViewController class]]) {
-        self.totalPriceLabel.text = ((MCMineCartViewController*)self.previousView).totalPriceLabel.text;
-    }
     
-    
+    self.totalPriceLabel.text = [[NSString alloc]initWithFormat:@"总价：%.02f元",self.totalPrice];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -127,10 +124,7 @@
 #pragma mark- others
 -(void)initData
 {
-    NSMutableArray* shops;
-    if([self.previousView isKindOfClass:[MCMineCartViewController class]]) {
-        shops = ((MCMineCartViewController*)self.previousView).data;
-    }
+    NSMutableArray* shops = self.data;
     unsigned int i=0;
     unsigned int j=0;
     NSMutableArray* copyShops = [[NSMutableArray alloc]init];
@@ -204,9 +198,7 @@
     MCOrderConfirmFooter* footer = (MCOrderConfirmFooter*)self.tableView.tableFooterView;
     
     float totalPrice = 0.0f;
-    if([self.previousView isKindOfClass:[MCMineCartViewController class]]) {
-        totalPrice = ((MCMineCartViewController*)self.previousView).totalPrice;
-    }
+    totalPrice = self.totalPrice;
     NSString* pay_no =  [[MCTradeManager getInstance]submitOrder:self.data PaymentMethod:self.paymentMethod ShipMethod:self.shipMethod Address:address UserId:user.userId TotalPrice:totalPrice Review:footer.reviewTextField.text];
     
     if(self.paymentMethod == 0) {
@@ -234,10 +226,23 @@
                                  [order description], signedStr, @"RSA"];
         
         MCAppDelegate* delegate = (MCAppDelegate *)[[UIApplication sharedApplication] delegate];
-        delegate.controller = self;
+        [delegate setPay_no:pay_no];
+        [delegate setAlipayEndAction:^{
+            self.showMsg(@"交易失败");
+            [self backBtnAction];
+
+        }];
+        
+        [delegate setAlipayErrorAction:^{
+            self.showMsg(MC_ERROR_MSG_0001);
+            [self backBtnAction];
+        }];
         [AlixLibService payOrder:orderString AndScheme:appScheme seletor:self.result target:self];
     }else{
-        [self.previousView showMsgHint:@"已生成订单，请等待收货"];
+        if(self.showMsg) {
+            self.showMsg(@"已生成订单，请等待收货");
+            self.showMsg = nil;
+        }
         [self backBtnAction];
     }
     
@@ -284,14 +289,22 @@
                 }
                 @catch (NSException *exception) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.previousView showMsgHint:MC_ERROR_MSG_0001];
+                        if(self.showMsg){
+                            self.showMsg(MC_ERROR_MSG_0001);
+                            self.showMsg = nil;
+                        }
+                        
                         [self backBtnAction];
                         
                     });
                 }
                 @finally {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.previousView showMsgHint:@"交易失败"];
+                        if (self.showMsg) {
+                            self.showMsg(@"交易失败");
+                            self.showMsg = nil;
+                        }
+                        
                         [self backBtnAction];
                         
                     });
@@ -307,13 +320,20 @@
             }
             @catch (NSException *exception) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.previousView showMsgHint:MC_ERROR_MSG_0001];
+                    if(self.showMsg){
+                        self.showMsg(MC_ERROR_MSG_0001);
+                        self.showMsg = nil;
+                    }
                     [self backBtnAction];
                 });
             }
             @finally {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.previousView showMsgHint:@"交易失败"];
+                    if (self.showMsg) {
+                        self.showMsg(@"交易失败");
+                        self.showMsg = nil;
+                    }
+
                     [self backBtnAction];
                     
                 });
@@ -374,6 +394,7 @@
     popup.previousView = self;
     [self presentPopupViewController:popup animated:YES completion:nil];
 }
+
 
 
 #pragma mark- tableview

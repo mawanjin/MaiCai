@@ -15,5 +15,7 @@
 @property (strong, nonatomic) UIWindow *window;
 @property BOOL isReachable;
 @property (strong, nonatomic) PayViewController *payViewController;
-@property MCBaseNavViewController* controller;
+@property (strong,atomic) NSString* pay_no;
+@property (strong,nonatomic) void(^alipayEndAction)();
+@property (strong,nonatomic) void(^alipayErrorAction)();
 @end

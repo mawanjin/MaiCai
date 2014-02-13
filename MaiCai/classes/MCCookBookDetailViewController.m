@@ -76,7 +76,10 @@
 -(void)quickOrderAction{
     MCQuickOrderViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCQuickOrderViewController"];
     vc.recipe = self.recipe;
-    vc.previousView = self;
+    //vc.previousView = self;
+    [vc setShowMsg:^(NSString * msg) {
+        [self showMsgHint:msg];
+    }];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 

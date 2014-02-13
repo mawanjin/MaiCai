@@ -9,16 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "MCBaseNavViewController.h"
 
-@protocol MCRegisterViewControllerDelegate
--(void)showHintMessage:(NSString*)message;
-@end
-
 @interface MCRegisterViewController : MCBaseNavViewController
 @property (weak, nonatomic) IBOutlet UITextField *username;
 @property (weak, nonatomic) IBOutlet UITextField *nickname;
 @property (weak, nonatomic) IBOutlet UITextField *password;
 @property (weak, nonatomic) IBOutlet UITextField *passwordAgain;
-@property (weak,nonatomic) id<MCRegisterViewControllerDelegate> delegate;
+@property (nonatomic,strong) void(^showMsg)(NSString* msg);
 
 - (IBAction)registerBtn:(UIButton *)sender;
 @end

@@ -254,7 +254,9 @@
 {
     if([collectionView.restorationIdentifier isEqualToString:@"categoryCollectionView"]){
         MCLabelDetailViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCLabelDetailViewController"];
-        vc.previousView = self;
+        [vc setShowMsg:^(NSString *msg) {
+            [self showMsgHint:msg];
+        }];
         NSDictionary* obj = labels[indexPath.row];
         vc.labelId = [obj[@"id"]integerValue];
         vc.title = obj[@"name"];
@@ -265,7 +267,9 @@
        MCRecipe* object = recipes[indexPath.row];
         MCQuickOrderViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCQuickOrderViewController"];
         vc.recipe = object;
-        vc.previousView = self;
+        [vc setShowMsg:^(NSString *msg) {
+            [self showMsgHint:msg];
+        }];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }

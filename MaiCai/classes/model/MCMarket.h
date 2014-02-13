@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MCMarket : NSObject
+@interface MCMarket : NSObject<NSCoding>
 @property  NSString* name;
 @property  NSString* distance;
 @property unsigned int id;

@@ -16,7 +16,6 @@
 #import "DataVerifier.h"
 #import "MCTradeManager.h"
 #import "MCBaseNavViewController.h"
-#import "MCOrderConfirmViewController.h"
 #import "MCOrderDetailViewController.h"
 #import "DDLog.h"
 #import "DDASLLogger.h"
@@ -111,25 +110,23 @@
         {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 @try {
-                    if([self.controller isKindOfClass: [MCOrderConfirmViewController class] ]) {
-                        MCOrderConfirmViewController* controller = (MCOrderConfirmViewController*)self.controller;
-                        [[MCTradeManager getInstance]cancelPaymentByPaymentNo:controller.pay_no];
-                    }else if([self.controller isKindOfClass:[MCOrderDetailViewController class]]) {
-                        MCOrderDetailViewController* controller = (MCOrderDetailViewController*)self.controller;
-                         [[MCTradeManager getInstance]cancelPaymentByPaymentNo:controller.pay_no];
-                    }
-                    
+                    [[MCTradeManager getInstance]cancelPaymentByPaymentNo:self.pay_no];
                 }
                 @catch (NSException *exception) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.controller showMsgHint:MC_ERROR_MSG_0001];
-                        [self.controller backBtnAction];
+                        if(self.alipayErrorAction) {
+                            self.alipayErrorAction();
+                            self.alipayErrorAction = nil;
+                        }
                     });
                 }
                 @finally {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.controller.previousView showMsgHint:@"交易失败"];
-                        [self.controller backBtnAction];
+                        self.pay_no = nil;
+                        if(self.alipayEndAction) {
+                            self.alipayEndAction();
+                            self.alipayEndAction = nil;
+                        }
                     });
                 }
             });
@@ -140,27 +137,26 @@
     {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             @try {
-                if([self.controller isKindOfClass: [MCOrderConfirmViewController class] ]) {
-                    MCOrderConfirmViewController* controller = (MCOrderConfirmViewController*)self.controller;
-                    [[MCTradeManager getInstance]cancelPaymentByPaymentNo:controller.pay_no];
-                }else if([self.controller isKindOfClass:[MCOrderDetailViewController class]]) {
-                    MCOrderDetailViewController* controller = (MCOrderDetailViewController*)self.controller;
-                    [[MCTradeManager getInstance]cancelPaymentByPaymentNo:controller.pay_no];
-                }
+                [[MCTradeManager getInstance]cancelPaymentByPaymentNo:self.pay_no];
             }
             @catch (NSException *exception) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.controller showMsgHint:MC_ERROR_MSG_0001];
-                        [self.controller backBtnAction];
+                        if(self.alipayErrorAction) {
+                            self.alipayErrorAction();
+                            self.alipayErrorAction = nil;
+                        }
                     });
 
                 });
             }
             @finally {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.controller.previousView showMsgHint:@"交易失败"];
-                    [self.controller backBtnAction];
+                    self.pay_no = nil;
+                    if(self.alipayEndAction) {
+                        self.alipayEndAction();
+                        self.alipayEndAction = nil;
+                    }
                 });
             }
         });

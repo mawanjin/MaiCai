@@ -25,4 +25,21 @@
     DDLogDebug(@"mcmarket dealloc");
 }
 
+
+-(void) encodeWithCoder:(NSCoder *)encoder
+{
+    [encoder encodeObject:[[NSString alloc]initWithFormat:@"%d",self.id] forKey:@"id"];
+    [encoder encodeObject:self.distance forKey:@"distance"];
+    [encoder encodeObject:self.name forKey:@"name"];
+}
+
+-(id) initWithCoder:(NSCoder *)decoder
+{
+    self.id = [[decoder decodeObjectForKey:@"id"]integerValue];
+    self.name = [decoder decodeObjectForKey:@"name"];
+    self.distance = [decoder decodeObjectForKey:@"distance"];
+    return self;
+}
+
+
 @end

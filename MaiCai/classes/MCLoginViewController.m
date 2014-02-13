@@ -72,7 +72,9 @@
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
                                                   bundle:nil];
     MCRegisterViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCRegisterViewController"];
-    vc.delegate = self;
+    [vc setShowMsg:^(NSString * msg) {
+        [self showMsgHint:msg];
+    }];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -83,9 +85,8 @@
 }
 
 
--(void)showHintMessage:(NSString *)message
+-(void)receiveMessage:(id)message
 {
-    
     [self.view makeToast:message duration:2 position:@"center"];
 }
 @end

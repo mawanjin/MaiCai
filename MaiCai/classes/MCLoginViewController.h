@@ -12,7 +12,7 @@
 
 
 
-@interface MCLoginViewController : MCBaseNavViewController<MCRegisterViewControllerDelegate>
+@interface MCLoginViewController : MCBaseNavViewController
 
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;

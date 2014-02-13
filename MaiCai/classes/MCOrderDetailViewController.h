@@ -16,5 +16,6 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *totalPriceLabel;
 @property (weak, nonatomic) IBOutlet UIButton *payBtn;
+@property (strong,nonatomic) void(^showMsg)(NSString* msg);
 - (IBAction)payBtnAction:(id)sender;
 @end

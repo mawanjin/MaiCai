@@ -149,7 +149,17 @@
     NSString* userId = ((MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER]).userId;
     self.pay_no = [[MCTradeManager getInstance]getPaymentNoByUserId:userId OrderIds:orderIds Amount:self.order.total];
     MCAppDelegate* delegate = (MCAppDelegate *)[[UIApplication sharedApplication] delegate];
-    delegate.controller = self;
+    [delegate setPay_no:self.pay_no];
+    
+    [delegate setAlipayEndAction:^{
+        self.showMsg(@"交易失败");
+        [self backBtnAction];
+    }];
+    
+    [delegate setAlipayErrorAction:^{
+        self.showMsg(MC_ERROR_MSG_0001);
+        [self backBtnAction];
+    }];
     
     NSString *partner = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"Partner"];
     NSString *seller = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"Seller"];
@@ -208,7 +218,10 @@
 			if ([verifier verifyString:result.resultString withSign:result.signString])
             {
                 //验证签名成功，交易结果无篡改
-                [self.previousView showMsgHint:@"交易成功"];
+                if(self.showMsg){
+                    self.showMsg(@"交易成功");
+                    self.showMsg = nil;
+                }
                 [self backBtnAction];
                
 			}
@@ -221,12 +234,18 @@
                 }
                 @catch (NSException *exception) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.previousView showMsgHint:MC_ERROR_MSG_0001];
+                        if(self.showMsg){
+                            self.showMsg(MC_ERROR_MSG_0001);
+                            self.showMsg = nil;
+                        }
                     });
                 }
                 @finally {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.previousView showMsgHint:@"交易失败"];
+                        if(self.showMsg){
+                            self.showMsg(@"交易失败");
+                            self.showMsg = nil;
+                        }
                         [self backBtnAction];
                         
                     });
@@ -243,12 +262,18 @@
             }
             @catch (NSException *exception) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.previousView showMsgHint:MC_ERROR_MSG_0001];
+                    if(self.showMsg){
+                        self.showMsg(MC_ERROR_MSG_0001);
+                        self.showMsg = nil;
+                    }
                 });
             }
             @finally {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.previousView showMsgHint:@"交易失败"];
+                    if(self.showMsg){
+                        self.showMsg(@"交易失败");
+                        self.showMsg = nil;
+                    }
                     [self backBtnAction];
                 });
             }

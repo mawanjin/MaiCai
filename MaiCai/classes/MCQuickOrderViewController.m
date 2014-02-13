@@ -321,6 +321,10 @@
                 [[MCTradeManager getInstance]addProductToCartOnlineByUserId:user.userId Products:products Recipe:recipe];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     //结束后需要做些什么
+                    if(self.showMsg) {
+                        self.showMsg(@"加入菜篮成功");
+                        self.showMsg = nil;
+                    }
                 });
             }else {
                 NSString* macId = (NSString*)[[MCContextManager getInstance]getDataByKey:MC_MAC_ID];
@@ -359,7 +363,10 @@
                 [[MCTradeManager getInstance]addProductToCartByUserId:macId Products:products Recipe:recipe];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     //结束后需要做些什么
-                    [self.previousView showMsgHint:@"加入购物车成功..."];
+                    if(self.showMsg) {
+                        self.showMsg(@"加入菜篮成功");
+                        self.showMsg = nil;
+                    }
                 });
             }
         }
