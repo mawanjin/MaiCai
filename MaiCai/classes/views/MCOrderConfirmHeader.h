@@ -7,15 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MCButton.h"
 
 @interface MCOrderConfirmHeader : UIView
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *mobileLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
-
-@property UIViewController* parentView;
-
-- (IBAction)changeAddressAction:(UIButton *)sender;
-
+@property (weak, nonatomic) IBOutlet MCButton *button;
 +(id)initInstance;
 @end

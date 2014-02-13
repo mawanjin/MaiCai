@@ -29,11 +29,7 @@
 }
 */
 
-- (IBAction)helperAction:(UIButton *)sender {
-    MCAddressHelperView *popup = [[MCAddressHelperView alloc] initWithNibName:@"MCAddressHelperView" bundle:nil];
-    popup.previousView = self.parentView;
-    [self.parentView presentPopupViewController:popup animated:YES completion:nil];
-}
+
 
 +(id)initInstance
 {

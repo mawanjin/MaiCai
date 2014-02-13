@@ -9,6 +9,7 @@
 #import "MCBaseViewController.h"
 #import "MCAppDelegate.h"
 #import "SVProgressHUD.h"
+#import "DDLogConfig.h"
 
 
 NSString* const MC_ERROR_MSG_0001 = @"操作失败...";
@@ -44,6 +45,11 @@ NSString* const MC_ERROR_MSG_0004 = @"请填写收货人地址";
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+    DDLogDebug(@"%@ dealloc",[self class]);
 }
 
 #pragma mark- others

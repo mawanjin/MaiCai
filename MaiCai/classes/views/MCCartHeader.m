@@ -37,39 +37,5 @@
     MCCartHeader* obj = objs[0];
     return obj;
 }
-- (IBAction)chooseBtnClickAction:(UIButton *)sender {
-    MCShop* shop = self.shops[self.section];
-    shop.isSelected = !shop.isSelected;
-    unsigned int i = 0;
-    if(shop.isSelected == true) {
-        for(i=0;i<shop.vegetables.count;i++) {
-            MCVegetable* temp = shop.vegetables[i];
-            temp.isSelected = true;
-        }
-    }else {
-        for(i=0;i<shop.vegetables.count;i++) {
-            MCVegetable* temp = shop.vegetables[i];
-            temp.isSelected = false;
-        }
-    }
-    
-    int count = 0;
-    for(i=0;i<self.shops.count;i++) {
-        MCShop* temp = self.shops[i];
-        if(temp.isSelected == true) {
-            count++;
-        }
-    }
-    if(count == self.shops.count) {
-        self.parentView.isTotalChoosed = YES;
-    }else {
-        self.parentView.isTotalChoosed = NO;
-    }
-
-    [self.tableView reloadData];
-    [self.parentView calculateTotalPrice];
-    [self.parentView dispLayTotalChoosedBtn];
-
-}
 
 @end

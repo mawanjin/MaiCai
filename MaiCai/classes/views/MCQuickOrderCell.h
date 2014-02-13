@@ -7,18 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-@class  MCQuickOrderViewController;
+#import "MCButton.h"
 
 @interface MCQuickOrderCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIButton *chooseBtn;
+@property (weak, nonatomic) IBOutlet MCButton *chooseBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *imageIcon;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *subTotalPriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *quantityLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *line;
-@property MCQuickOrderViewController* parentView;
-@property NSIndexPath* indexPath;
-- (IBAction)chooseBtnAction:(id)sender;
-
 @end

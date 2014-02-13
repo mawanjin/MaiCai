@@ -57,14 +57,12 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <connections>
-                        <action selector="helperAction:" destination="1" eventType="touchUpInside" id="u1K-A9-7BN"/>
-                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="addressLabel" destination="7bE-Od-Fva" id="UO9-ua-yP2"/>
+                <outlet property="helpBtn" destination="2Nx-6z-cfr" id="IIf-c2-odY"/>
                 <outlet property="mobileLabel" destination="2kp-Rl-PLm" id="7Jt-3Y-Fzi"/>
                 <outlet property="nameLabel" destination="G78-Lf-TOQ" id="cYc-vz-Tby"/>
             </connections>

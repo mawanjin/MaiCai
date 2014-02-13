@@ -39,11 +39,8 @@
             //[[MCContextManager getInstance] addKey:MC_USER Data:user];
             //[[MCContextManager getInstance]setLogged:YES];
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self dismissViewControllerAnimated:NO completion:^{
-                    if([self.previousView isKindOfClass:[MCLoginViewController class]]){
-                        [self.previousView showMsgHint:@"注册成功，请登入..."];
-                    }
-                }];
+                [self.delegate showHintMessage:@"注册成功,请登入"];
+                [self backBtnAction];
             });
         }
         @catch (NSException *exception) {

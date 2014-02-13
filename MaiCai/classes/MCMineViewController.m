@@ -17,6 +17,8 @@
 #import "MCMineCell.h"
 #import "MCMineFooter.h"
 #import "MCNetwork.h"
+#import "MCUserManager.h"
+
 
 
 @implementation MCMineViewController
@@ -40,7 +42,7 @@
 {
     [super viewDidLoad];
     footer = [MCMineFooter initInstance];
-    footer.parentView = self;
+    [footer.btn addTarget:self action:@selector(clickAction:) forControlEvents:UIControlEventTouchUpInside];
     self.tableView.tableFooterView = footer;
     
 }
@@ -235,6 +237,33 @@
     MCPersonalInfoViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCPersonalInfoViewController"];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc  animated:YES];
+}
+
+- (IBAction)clickAction:(UIButton *)sender {
+    BOOL isLoged = [[MCContextManager getInstance]isLogged];
+    
+    if(isLoged) {
+        UIAlertView* alert =  [[UIAlertView alloc]initWithTitle:nil message:@"确定需要退出吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        [alert show];
+    }else {
+        UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
+                                                      bundle:nil];
+        MCLoginViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCLoginViewController"];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        [[MCUserManager getInstance]clearLoginStatus];
+        [[MCContextManager getInstance]setLogged:NO];
+        [self viewWillAppear:YES];
+        
+    }else{
+        return;
+    }
 }
 
 @end

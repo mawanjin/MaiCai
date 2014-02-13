@@ -18,7 +18,7 @@
 {
     self = [super init];
     if (self) {
-        DDLogWarn(@"mcvegetable init");
+        DDLogDebug(@"mcvegetable init");
     }
     return self;
 }

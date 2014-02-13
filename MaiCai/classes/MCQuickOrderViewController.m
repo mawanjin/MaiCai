@@ -20,6 +20,7 @@
 #import "MCContextManager.h"
 #import "UIImageView+MCAsynLoadImage.h"
 #import "DDLogConfig.h"
+#import "MCCookBookDetailViewController.h"
 
 @interface MCQuickOrderViewController ()
 
@@ -59,7 +60,8 @@
                 MCQuickOrderTableHeader* header = [MCQuickOrderTableHeader initInstance];
                 header.nameLabel.text = self.recipe.name;
                 header.descriptionLabel.text = self.recipe.introduction;
-                header.parentView = self;
+                
+                [header.button addTarget:self action:@selector(clickTableHeaderAction:) forControlEvents:UIControlEventTouchUpInside];
                 
                 NSString* source = [[NSString alloc]initWithFormat:@"%@",self.recipe.bigImage];
                 [header.image loadImageByUrl:source];
@@ -100,8 +102,8 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MCQuickOrderCell* cell = [tableView dequeueReusableCellWithIdentifier:@"quickOrderCell"];
-    cell.parentView = self;
-    cell.indexPath = indexPath;
+    [cell.chooseBtn setParam:indexPath];
+    [cell.chooseBtn addTarget:self action:@selector(chooseBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     if(indexPath.section == 0) {
         //主料
         if(self.recipe.mainIngredients.count>0) {
@@ -155,8 +157,7 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     MCQuickOrderHeader* header = [MCQuickOrderHeader initInstance];
-    header.section = section;
-    header.parentView = self;
+    [header.chooseBtn addTarget:self action:@selector(chooseBtnHeaderAction:) forControlEvents:UIControlEventTouchUpInside];
     if(section == 0) {
         //主料
         header.nameLabel.text = @"主料";
@@ -374,6 +375,132 @@
             });
         }
     });
+}
+
+- (void)chooseBtnHeaderAction:(UIButton *)sender {
+    NSIndexPath* indexPath = [(MCButton*)sender param];
+    if(indexPath.section == 0) {
+        //主料
+        self.recipe.isMainIngredientsAllSelected = !self.recipe.isMainIngredientsAllSelected;
+        unsigned int i = 0;
+        if(self.recipe.isMainIngredientsAllSelected  == true) {
+            for(i=0;i<self.recipe.mainIngredients.count;i++) {
+                MCVegetable* temp = self.recipe.mainIngredients[i];
+                temp.isSelected = true;
+            }
+        }else {
+            for(i=0;i<self.recipe.mainIngredients.count;i++) {
+                MCVegetable* temp = self.recipe.mainIngredients[i];
+                temp.isSelected = false;
+            }
+        }
+        
+        if(self.recipe.isMainIngredientsAllSelected && self.recipe.isAccessoryIngredientsAllSelected) {
+            self.isTotalChoosed = YES;
+        }else{
+            self.isTotalChoosed = NO;
+        }
+        
+        
+    }else {
+        //配料
+        self.recipe.isAccessoryIngredientsAllSelected = !self.recipe.isAccessoryIngredientsAllSelected;
+        unsigned int i = 0;
+        if(self.recipe.isAccessoryIngredientsAllSelected  == true) {
+            for(i=0;i<self.recipe.accessoryIngredients.count;i++) {
+                MCVegetable* temp = self.recipe.accessoryIngredients[i];
+                temp.isSelected = true;
+            }
+        }else {
+            for(i=0;i<self.recipe.accessoryIngredients.count;i++) {
+                MCVegetable* temp = self.recipe.accessoryIngredients[i];
+                temp.isSelected = false;
+            }
+        }
+        
+        if(self.recipe.isMainIngredientsAllSelected && self.recipe.isAccessoryIngredientsAllSelected) {
+            self.isTotalChoosed = YES;
+        }else{
+            self.isTotalChoosed = NO;
+        }
+        
+        
+    }
+    
+    [self.tableView reloadData];
+    [self calculateTotalPrice];
+    [self dispLayTotalChoosedBtn];
+    
+}
+
+
+- (void)chooseBtnAction:(id)sender {
+    NSIndexPath* indexPath = [(MCButton*)sender param];
+    
+    if(indexPath.section == 0) {
+        //主料
+        MCVegetable* vegetable = self.recipe.mainIngredients[indexPath.row];
+        vegetable.isSelected = !vegetable.isSelected;
+        
+        unsigned int count = 0;
+        unsigned int i=0;
+        for(i=0;i<self.recipe.mainIngredients.count;i++) {
+            MCVegetable* temp = self.recipe.mainIngredients[i];
+            if(temp.isSelected) {
+                count++;
+            }
+        }
+        if(count == self.recipe.mainIngredients.count) {
+            self.recipe.isMainIngredientsAllSelected = true;
+        }else {
+            self.recipe.isMainIngredientsAllSelected = false;
+        }
+        
+        if(self.recipe.isMainIngredientsAllSelected && self.recipe.isAccessoryIngredientsAllSelected) {
+            self.isTotalChoosed = YES;
+        }else{
+            self.isTotalChoosed = NO;
+        }
+        
+        
+    }else{
+        //配料
+        MCVegetable* vegetable = self.recipe.accessoryIngredients[indexPath.row];
+        vegetable.isSelected = !vegetable.isSelected;
+        
+        unsigned int count = 0;
+        unsigned int i=0;
+        for(i=0;i<self.recipe.accessoryIngredients.count;i++) {
+            MCVegetable* temp = self.recipe.accessoryIngredients[i];
+            if(temp.isSelected) {
+                count++;
+            }
+        }
+        if(count == self.recipe.accessoryIngredients.count) {
+            self.recipe.isAccessoryIngredientsAllSelected = true;
+        }else {
+            self.recipe.isAccessoryIngredientsAllSelected = false;
+        }
+        
+        if(self.recipe.isMainIngredientsAllSelected && self.recipe.isAccessoryIngredientsAllSelected) {
+            self.isTotalChoosed = YES;
+        }else{
+            self.isTotalChoosed = NO;
+        }
+        
+    }
+    
+    [self.tableView reloadData];
+    [self calculateTotalPrice];
+    [self dispLayTotalChoosedBtn];
+    
+}
+
+- (void)clickTableHeaderAction:(UIButton *)sender {
+    MCCookBookDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCCookBookDetailViewController"];
+    vc.recipe = self.recipe;
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

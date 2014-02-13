@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MCBaseNavViewController.h"
-@interface MCMineAddressViewController :MCBaseNavViewController<UITableViewDataSource,UITableViewDelegate>
+@interface MCMineAddressViewController :MCBaseNavViewController<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property NSIndexPath* currentChoose ;
 @property NSMutableArray* data;

@@ -47,15 +47,12 @@
                     <rect key="frame" x="0.0" y="30" width="308" height="1"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YGw-YR-qtV">
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YGw-YR-qtV" customClass="MCButton">
                     <rect key="frame" x="0.0" y="9" width="306" height="112"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <connections>
-                        <action selector="changeAddressAction:" destination="1" eventType="touchUpInside" id="6Tz-0D-g2K"/>
-                    </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="right_arrow_gray" translatesAutoresizingMaskIntoConstraints="NO" id="btc-lE-hiJ">
                     <rect key="frame" x="288" y="54" width="14" height="40"/>
@@ -65,6 +62,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="addressLabel" destination="DMx-CB-iMi" id="MpA-IO-HhW"/>
+                <outlet property="button" destination="YGw-YR-qtV" id="XJA-XN-qXn"/>
                 <outlet property="mobileLabel" destination="ThP-NK-dJP" id="dc8-Fj-JWc"/>
                 <outlet property="nameLabel" destination="p3g-6h-MiC" id="blD-eb-hHP"/>
             </connections>

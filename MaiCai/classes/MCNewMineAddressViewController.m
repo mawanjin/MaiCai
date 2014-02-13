@@ -80,9 +80,7 @@
                 [[MCUserManager getInstance]updateUserAddress:mcaddress UserId:user.userId];
             }
             dispatch_async(dispatch_get_main_queue(), ^{
-               
-                [self dismissViewControllerAnimated:NO completion:^{
-                }];
+                [self backBtnAction];
             });
         }
         @catch (NSException *exception) {

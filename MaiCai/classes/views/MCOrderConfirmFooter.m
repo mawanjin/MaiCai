@@ -7,7 +7,6 @@
 //
 
 #import "MCOrderConfirmFooter.h"
-#import "MCOrderConfirmViewController.h"
 
 @implementation MCOrderConfirmFooter
 
@@ -43,31 +42,6 @@
     return view;
 }
 
-- (IBAction)chooseAction:(id)sender {
-    UIButton* btn = sender;
-    if(!btn.isSelected) {
-        [btn setSelected:YES];
-        self.parentView.paymentMethod = [btn.titleLabel.text integerValue];
-        if(btn == self.alipayBtn) {
-            [self.cashpayBtn setSelected:NO];
-        }else{
-            [self.alipayBtn setSelected:NO];
-        }
-    }
-}
-
-- (IBAction)chooseShipMethodAction:(id)sender {
-    UIButton* btn = sender;
-    if(!btn.isSelected) {
-        [btn setSelected:YES];
-        self.parentView.shipMethod = [btn.titleLabel.text integerValue];
-        if(btn == self.deliveryToHomeBtn) {
-            [self.getBySelfBtn setSelected:NO];
-        }else{
-            [self.deliveryToHomeBtn setSelected:NO];
-        }
-    }
-}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {

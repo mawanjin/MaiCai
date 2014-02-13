@@ -7,8 +7,6 @@
 //
 
 #import "MCQuickOrderTableHeader.h"
-#import "MCCookBookDetailViewController.h"
-#import "MCQuickOrderViewController.h"
 
 @implementation MCQuickOrderTableHeader
 
@@ -30,16 +28,7 @@
 }
 */
 
-- (IBAction)clickAction:(UIButton *)sender {
-    if([self.parentView isKindOfClass:[MCQuickOrderViewController class]]) {
-        MCQuickOrderViewController* controller = (MCQuickOrderViewController*)self.parentView;
-        MCCookBookDetailViewController *vc = [controller.storyboard instantiateViewControllerWithIdentifier:@"MCCookBookDetailViewController"];
-        vc.recipe = controller.recipe;
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.parentView.navigationController pushViewController:vc animated:YES];
 
-    }
-}
 
 +(id)initInstance
 {

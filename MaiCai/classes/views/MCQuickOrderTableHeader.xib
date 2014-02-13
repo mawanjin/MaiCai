@@ -43,13 +43,11 @@
                     <state key="normal">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <connections>
-                        <action selector="clickAction:" destination="1" eventType="touchUpInside" id="uMF-tx-dfD"/>
-                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
+                <outlet property="button" destination="Cwn-nO-WqK" id="SXj-3e-VvT"/>
                 <outlet property="descriptionLabel" destination="ueM-YW-3fs" id="bSV-g3-Ntx"/>
                 <outlet property="image" destination="vQ0-Nd-QmU" id="hXB-9m-TWi"/>
                 <outlet property="nameLabel" destination="Xau-pu-PfH" id="VjM-Rt-dbV"/>

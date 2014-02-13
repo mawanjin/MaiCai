@@ -23,6 +23,9 @@
 #import "MCAppDelegate.h"
 #import "UIImageView+MCAsynLoadImage.h"
 #import "DDLogConfig.h"
+#import "MCButton.h"
+#import "MCMineAddressViewController.h"
+#import "MCAddressHelperView.h"
 
 #import "DataSigner.h"
 #import "AlixPayResult.h"
@@ -54,7 +57,18 @@
     self.result = @selector(paymentResult:);
    
     MCOrderConfirmFooter* footerView = [MCOrderConfirmFooter initInstance];
-    footerView.parentView = self;
+    [footerView.cashpayBtn setParam:footerView];
+    [footerView.alipayBtn setParam:footerView];
+    [footerView.getBySelfBtn setParam:footerView];
+    [footerView.deliveryToHomeBtn setParam:footerView];
+
+    [footerView.cashpayBtn addTarget:self action:@selector(chooseAction:) forControlEvents:UIControlEventTouchUpInside];
+    [footerView.alipayBtn addTarget:self action:@selector(chooseAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [footerView.getBySelfBtn addTarget:self action:@selector(chooseShipMethodAction:) forControlEvents:UIControlEventTouchUpInside];
+    [footerView.deliveryToHomeBtn addTarget:self action:@selector(chooseShipMethodAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
     self.tableView.tableFooterView = footerView;
     if([self.previousView isKindOfClass:[MCMineCartViewController class]]) {
         self.totalPriceLabel.text = ((MCMineCartViewController*)self.previousView).totalPriceLabel.text;
@@ -69,7 +83,7 @@
     if(user.defaultAddress == nil) {
         self.tableView.tableHeaderView = [MCOrderConfirmHeader_ initInstance];
         self.header_ = (MCOrderConfirmHeader_*)self.tableView.tableHeaderView;
-        self.header_.parentView = self;
+        [self.header_.helpBtn addTarget:self action:@selector(helperAction:) forControlEvents:UIControlEventTouchUpInside];
     }else {
         if(self.address == nil) {
             MCAddress* address = user.defaultAddress;
@@ -77,7 +91,7 @@
             header.nameLabel.text = [[NSString alloc]initWithFormat:@"收货人：%@",address.shipper];
             header.mobileLabel.text = [[NSString alloc]initWithFormat:@"联系电话：%@",address.mobile];
             header.addressLabel.text = [[NSString alloc]initWithFormat:@"地址：%@",address.address];
-            header.parentView = self;
+            [header.button addTarget:self action:@selector(changeAddressAction:) forControlEvents:UIControlEventTouchUpInside];
             self.address = address;
             self.tableView.tableHeaderView = header;
         }else {
@@ -88,7 +102,7 @@
             header.nameLabel.text = [[NSString alloc]initWithFormat:@"收货人：%@",self.address.shipper];
             header.mobileLabel.text = [[NSString alloc]initWithFormat:@"联系电话：%@",self.address.mobile];
             header.addressLabel.text = [[NSString alloc]initWithFormat:@"地址：%@",self.address.address];
-            header.parentView = self;
+            [header.button addTarget:self action:@selector(changeAddressAction:) forControlEvents:UIControlEventTouchUpInside];
             self.tableView.tableHeaderView = header;
         }
     }
@@ -316,6 +330,50 @@
     return signedString;
 }
 
+
+- (void)chooseAction:(id)sender {
+    MCButton* btn = sender;
+    MCOrderConfirmFooter* footer = [btn param];
+    if(!btn.isSelected) {
+        [btn setSelected:YES];
+        self.paymentMethod = [btn.titleLabel.text integerValue];
+        if(btn == footer.alipayBtn) {
+            [footer.cashpayBtn setSelected:NO];
+        }else{
+            [footer.alipayBtn setSelected:NO];
+        }
+    }
+}
+
+- (void)chooseShipMethodAction:(id)sender {
+    MCButton* btn = sender;
+    MCOrderConfirmFooter* footer = [btn param];
+    if(!btn.isSelected) {
+        [btn setSelected:YES];
+        self.shipMethod = [btn.titleLabel.text integerValue];
+        if(btn == footer.deliveryToHomeBtn) {
+            [footer.getBySelfBtn setSelected:NO];
+        }else{
+            [footer.deliveryToHomeBtn setSelected:NO];
+        }
+    }
+}
+
+- (void)changeAddressAction:(UIButton *)sender {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
+                                                  bundle:nil];
+    MCMineAddressViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCMineAddressViewController"];
+    vc.previousView = (MCBaseViewController*)self;
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+- (void)helperAction:(UIButton *)sender {
+    MCAddressHelperView *popup = [[MCAddressHelperView alloc] initWithNibName:@"MCAddressHelperView" bundle:nil];
+    popup.previousView = self;
+    [self presentPopupViewController:popup animated:YES completion:nil];
+}
 
 
 #pragma mark- tableview

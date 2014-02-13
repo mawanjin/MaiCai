@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "MCBaseNavViewController.h"
+#import "MCRegisterViewController.h"
 
-@interface MCLoginViewController : MCBaseNavViewController
-@property (weak, nonatomic) IBOutlet UIView *loginView;
 
-@property (weak, nonatomic) IBOutlet UIImageView *loginBg;
+
+@interface MCLoginViewController : MCBaseNavViewController<MCRegisterViewControllerDelegate>
+
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 

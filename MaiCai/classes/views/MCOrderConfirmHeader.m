@@ -20,16 +20,6 @@
     return self;
 }
 
-- (IBAction)changeAddressAction:(UIButton *)sender {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
-                                                  bundle:nil];
-    MCMineAddressViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCMineAddressViewController"];
-    vc.previousView = (MCBaseViewController*)self.parentView;
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.parentView.navigationController pushViewController:vc animated:YES];
-
-}
-
 +(id)initInstance
 {
     MCOrderConfirmHeader* view = [[[NSBundle mainBundle]loadNibNamed:@"MCOrderConfirmHeader" owner:self options:nil]lastObject];

@@ -56,6 +56,7 @@
 		046962AB18AB1A4E00A58918 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 046962A318AB1A4E00A58918 /* DDASLLogger.m */; };
 		046962AD18AB1A4E00A58918 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 046962A818AB1A4E00A58918 /* DDLog.m */; };
 		046962AE18AB1A4E00A58918 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 046962AA18AB1A4E00A58918 /* DDTTYLogger.m */; };
+		046962B918ABA6C500A58918 /* MCButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 046962B818ABA6C500A58918 /* MCButton.m */; };
 		046D48FC187A5333000E07DA /* MCMarketIndexTipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046D48FB187A5333000E07DA /* MCMarketIndexTipCell.m */; };
 		046E99C718261F6D0005FB53 /* MCBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E99BC18261F6D0005FB53 /* MCBaseViewController.m */; };
 		046E99C818261F6D0005FB53 /* MCCookBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E99BE18261F6D0005FB53 /* MCCookBookViewController.m */; };
@@ -267,6 +268,8 @@
 		046962A918AB1A4E00A58918 /* DDTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTTYLogger.h; sourceTree = "<group>"; };
 		046962AA18AB1A4E00A58918 /* DDTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDTTYLogger.m; sourceTree = "<group>"; };
 		046962AF18AB36FC00A58918 /* DDLogConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLogConfig.h; sourceTree = "<group>"; };
+		046962B718ABA6C500A58918 /* MCButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCButton.h; sourceTree = "<group>"; };
+		046962B818ABA6C500A58918 /* MCButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCButton.m; sourceTree = "<group>"; };
 		046D48FA187A5333000E07DA /* MCMarketIndexTipCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMarketIndexTipCell.h; sourceTree = "<group>"; };
 		046D48FB187A5333000E07DA /* MCMarketIndexTipCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMarketIndexTipCell.m; sourceTree = "<group>"; };
 		046E99BB18261F6D0005FB53 /* MCBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCBaseViewController.h; sourceTree = "<group>"; };
@@ -569,6 +572,15 @@
 			path = Lumberjack;
 			sourceTree = "<group>";
 		};
+		046962B518ABA52F00A58918 /* customView */ = {
+			isa = PBXGroup;
+			children = (
+				046962B718ABA6C500A58918 /* MCButton.h */,
+				046962B818ABA6C500A58918 /* MCButton.m */,
+			);
+			path = customView;
+			sourceTree = "<group>";
+		};
 		046E99BA18261F6D0005FB53 /* classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -647,6 +659,7 @@
 		0472EBC0189211F700A40C9D /* MCObjectCUtilities */ = {
 			isa = PBXGroup;
 			children = (
+				046962B518ABA52F00A58918 /* customView */,
 				0472EBC1189211F700A40C9D /* category */,
 				0472EBCC189211F700A40C9D /* file */,
 				0472EBCF189211F700A40C9D /* network */,
@@ -1222,6 +1235,7 @@
 				04F059FE185ECF1100BB25C6 /* MCCookBookDetailHeader.m in Sources */,
 				042F253518616A64006783C2 /* MCFeedbackViewController.m in Sources */,
 				04DAF4DA184584E3009C7720 /* MCOrder.m in Sources */,
+				046962B918ABA6C500A58918 /* MCButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

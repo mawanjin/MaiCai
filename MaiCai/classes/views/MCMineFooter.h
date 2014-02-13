@@ -8,9 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MCMineFooter : UIView<UIAlertViewDelegate>
+@interface MCMineFooter : UIView
 @property (weak, nonatomic) IBOutlet UIButton *btn;
-@property UIViewController* parentView;
 +(id)initInstance;
-- (IBAction)clickAction:(UIButton *)sender;
 @end

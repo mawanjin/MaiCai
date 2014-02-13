@@ -9,7 +9,7 @@
 #import "MCLoginViewController.h"
 #import "MCUserManager.h"
 #import "MCUser.h"
-#import "MCRegisterViewController.h"
+#import "Toast+UIView.h"
 
 @implementation MCLoginViewController
 
@@ -72,7 +72,7 @@
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
                                                   bundle:nil];
     MCRegisterViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCRegisterViewController"];
-    vc.previousView = self;
+    vc.delegate = self;
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -83,4 +83,9 @@
 }
 
 
+-(void)showHintMessage:(NSString *)message
+{
+    
+    [self.view makeToast:message duration:2 position:@"center"];
+}
 @end

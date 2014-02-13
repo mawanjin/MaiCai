@@ -7,17 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-@class MCOrderConfirmViewController;
+#import "MCButton.h"
 @interface MCOrderConfirmFooter : UIView
-@property MCOrderConfirmViewController* parentView;
-@property (weak, nonatomic) IBOutlet UIButton *alipayBtn;
-@property (weak, nonatomic) IBOutlet UIButton *cashpayBtn;
-@property (weak, nonatomic) IBOutlet UIButton *deliveryToHomeBtn;
+@property (weak, nonatomic) IBOutlet MCButton *alipayBtn;
+@property (weak, nonatomic) IBOutlet MCButton *cashpayBtn;
+@property (weak, nonatomic) IBOutlet MCButton *deliveryToHomeBtn;
 @property (weak, nonatomic) IBOutlet UITextField *reviewTextField;
-@property (weak, nonatomic) IBOutlet UIButton *getBySelfBtn;
+@property (weak, nonatomic) IBOutlet MCButton *getBySelfBtn;
 +(id)initInstance;
-- (IBAction)chooseAction:(id)sender;
-- (IBAction)chooseShipMethodAction:(id)sender;
-
-
 @end

@@ -21,9 +21,20 @@
 #import "MCOrderConfirmViewController.h"
 #import "UIImageView+MCAsynLoadImage.h"
 #import "DDLogConfig.h"
-
+#import "MCButton.h"
 
 @implementation MCMineCartViewController
+{
+    @private
+//        float totalPrice;
+//        BOOL isTotalChoosed;
+//        NSMutableArray* data;
+}
+
+@synthesize data;
+@synthesize isTotalChoosed;
+@synthesize totalPrice;
+
 #pragma mark- base
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -53,10 +64,10 @@
         @try {
             if ([[MCContextManager getInstance]isLogged]) {
                 MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
-                self.data = [[MCTradeManager getInstance]getCartProductsOnlineByUserId:user.userId];
+                data = [[MCTradeManager getInstance]getCartProductsOnlineByUserId:user.userId];
             }else {
                 NSString* macId = (NSString*)[[MCContextManager getInstance]getDataByKey:MC_MAC_ID];
-                self.data = [[MCTradeManager getInstance]getCartProductsByUserId:macId];
+                data = [[MCTradeManager getInstance]getCartProductsByUserId:macId];
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self dispLayTotalChoosedBtn];
@@ -79,7 +90,7 @@
 
 -(void)viewDidDisappear:(BOOL)animated
 {
-    self.data = nil;
+     data = nil;
 }
 
 
@@ -92,7 +103,7 @@
 #pragma mark- tableview
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    MCShop* shop  = self.data[section];
+    MCShop* shop  = data[section];
     return shop.vegetables.count;
 }
 
@@ -106,7 +117,7 @@
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
-    return self.data.count;
+    return data.count;
 }
 
 
@@ -117,13 +128,12 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    MCShop* shop  = self.data[section];
+    MCShop* shop  = data[section];
     MCCartHeader* header = [MCCartHeader initMCCartHeader];
-    header.tableView = self.tableView;
-    header.section = section;
+    header.chooseBtn.tag = section;
     header.titleLabel.text = shop.name;
-    header.shops = self.data;
-    header.parentView = self;
+    [header.chooseBtn addTarget:self action:@selector(shopHeaderChooseAction:) forControlEvents:UIControlEventTouchUpInside];
+    
     if(shop.isSelected) {
         [ header.chooseBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_selected"] forState:UIControlStateNormal];
     }else{
@@ -151,7 +161,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MCCartCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"cartCell"];
-    MCShop* shop = self.data[indexPath.section];
+    MCShop* shop = data[indexPath.section];
     NSMutableArray* vegetables = shop.vegetables;
     MCVegetable* vegetable = vegetables[indexPath.row];
     [cell.imageIcon loadImageByUrl:vegetable.image];
@@ -159,15 +169,15 @@
     cell.quantityLabel.text = [[NSString alloc]initWithFormat:@"数量：%d",vegetable.quantity];
     cell.priceLabel.text = [[NSString alloc]initWithFormat:@"单价：%0.02f元/%@",vegetable.price,vegetable.unit];
     cell.subTotalPriceLabel.text = [[NSString alloc]initWithFormat:@"小计：%0.02f元",vegetable.price*vegetable.quantity];
+    
+    [cell.chooseBtn setParam:indexPath];
+    [cell.chooseBtn addTarget:self action:@selector(tableCellChooseAction:) forControlEvents:UIControlEventTouchUpInside];
+    
     if(vegetable.isSelected) {
         [cell.chooseBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_selected"] forState:UIControlStateNormal];
     }else {
         [cell.chooseBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_normal"] forState:UIControlStateNormal];
     }
-    cell.indexPath = indexPath;
-    cell.shops = self.data;
-    cell.tableView = self.tableView;
-    cell.parentView = self;
     
     if(indexPath.row == ([tableView numberOfRowsInSection:indexPath.section]-1)) {
         cell.divideline.hidden = YES;
@@ -183,7 +193,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        MCShop* shop = self.data[indexPath.section];
+        MCShop* shop = data[indexPath.section];
         NSMutableArray* vegetables = shop.vegetables;
         MCVegetable* vegetable = vegetables[indexPath.row];
         NSMutableArray* array = [[NSMutableArray alloc]init];
@@ -197,7 +207,7 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [vegetables removeObjectAtIndex:indexPath.row];
                         if(vegetables.count == 0) {
-                            [self.data removeObjectAtIndex:indexPath.section];
+                            [data removeObjectAtIndex:indexPath.section];
                         }
                         [self.tableView reloadData];
                     });
@@ -223,7 +233,7 @@
                      dispatch_async(dispatch_get_main_queue(), ^{
                          [vegetables removeObjectAtIndex:indexPath.row];
                          if(vegetables.count == 0) {
-                             [self.data removeObjectAtIndex:indexPath.section];
+                             [data removeObjectAtIndex:indexPath.section];
                          }
                          [self.tableView reloadData];
                      });
@@ -255,46 +265,46 @@
 
 -(void)resetCart
 {
-    self.isTotalChoosed = NO;
+    isTotalChoosed = NO;
     [self dispLayTotalChoosedBtn];
     self.totalPriceLabel.text =[[NSString alloc]initWithFormat:@"总价：0.00元"];
-    self.totalPrice = 0.0f;
+    totalPrice = 0.0f;
 }
 
 -(void)calculateTotalPrice
 {
-    float totalPrice = 0.0f;
+    float totalPrice_ = 0.0f;
     unsigned int i = 0;
     unsigned int j = 0;
-    for(i=0;i<self.data.count;i++) {
-        MCShop* shop = self.data[i];
+    for(i=0;i<data.count;i++) {
+        MCShop* shop = data[i];
         for(j=0;j<shop.vegetables.count;j++) {
             MCVegetable* vegetable = shop.vegetables[j];
             if(vegetable.isSelected) {
-                totalPrice += vegetable.quantity*vegetable.price;
+                totalPrice_ += vegetable.quantity*vegetable.price;
             }
         }
     }
-    self.totalPrice = totalPrice;
+    totalPrice = totalPrice_;
     self.totalPriceLabel.text = [[NSString alloc]initWithFormat:@"总价：%.02f元",totalPrice];
 }
 
 - (IBAction)totalChooseBtnClickAction:(UIButton *)sender {
-    self.isTotalChoosed = !self.isTotalChoosed;
+    isTotalChoosed = !isTotalChoosed;
     unsigned int i=0;
     unsigned int j=0;
-    float totalPrice = 0.0f;
-    for(i=0;i<self.data.count;i++) {
-        MCShop* shop = self.data[i];
+    float totalPrice_ = 0.0f;
+    for(i=0;i<data.count;i++) {
+        MCShop* shop = data[i];
         for(j=0;j<shop.vegetables.count;j++) {
             MCVegetable* vegetable = shop.vegetables[j];
-            vegetable.isSelected = self.isTotalChoosed;
-            totalPrice += vegetable.price*vegetable.quantity;
+            vegetable.isSelected = isTotalChoosed;
+            totalPrice_ += vegetable.price*vegetable.quantity;
         }
-        shop.isSelected = self.isTotalChoosed;
+        shop.isSelected = isTotalChoosed;
     }
-    self.totalPrice = totalPrice;
-    if(self.isTotalChoosed)
+    totalPrice = totalPrice_;
+    if(isTotalChoosed)
         self.totalPriceLabel.text = [[NSString alloc]initWithFormat:@"总价：%.02f元",totalPrice];
     else
         self.totalPriceLabel.text = [[NSString alloc]initWithFormat:@"总价：0.00元"];
@@ -305,7 +315,7 @@
 
 -(void)dispLayTotalChoosedBtn
 {
-    if(self.isTotalChoosed) {
+    if(isTotalChoosed) {
         [self.totalChooseBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_selected"] forState:UIControlStateNormal];
     }else {
         [self.totalChooseBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_normal"] forState:UIControlStateNormal];
@@ -329,5 +339,80 @@
        [self.navigationController pushViewController:vc animated:YES];
     }
 }
+
+-(void)shopHeaderChooseAction:(id)sender{
+    int section =  [sender tag];
+    MCShop* shop = data[section];
+    shop.isSelected = !shop.isSelected;
+    unsigned int i = 0;
+    if(shop.isSelected == true) {
+        for(i=0;i<shop.vegetables.count;i++) {
+            MCVegetable* temp = shop.vegetables[i];
+            temp.isSelected = true;
+        }
+    }else {
+        for(i=0;i<shop.vegetables.count;i++) {
+            MCVegetable* temp = shop.vegetables[i];
+            temp.isSelected = false;
+        }
+    }
+    
+    int count = 0;
+    for(i=0;i<data.count;i++) {
+        MCShop* temp = data[i];
+        if(temp.isSelected == true) {
+            count++;
+        }
+    }
+    if(count == data.count) {
+        isTotalChoosed = YES;
+    }else {
+        isTotalChoosed = NO;
+    }
+    
+    [self.tableView reloadData];
+    [self calculateTotalPrice];
+    [self dispLayTotalChoosedBtn];
+}
+
+- (void)tableCellChooseAction:(id)sender {
+    NSIndexPath* indexPath =[(MCButton*)sender param];
+    
+    MCShop* shop = data[indexPath.section];
+    MCVegetable* vegetable = shop.vegetables[indexPath.row];
+    vegetable.isSelected = !vegetable.isSelected;
+    unsigned int count = 0;
+    unsigned int i=0;
+    for(i=0;i<shop.vegetables.count;i++) {
+        MCVegetable* temp = shop.vegetables[i];
+        if(temp.isSelected) {
+            count++;
+        }
+    }
+    if(count == shop.vegetables.count) {
+        shop.isSelected = true;
+    }else {
+        shop.isSelected = false;
+    }
+    
+    count = 0;
+    
+    for(i=0;i<data.count;i++) {
+        MCShop* temp = data[i];
+        if(temp.isSelected == true) {
+            count++;
+        }
+    }
+    if(count == data.count) {
+        isTotalChoosed = YES;
+    }else{
+        isTotalChoosed = NO;
+    }
+    
+    [self.tableView reloadData];
+    [self calculateTotalPrice];
+    [self dispLayTotalChoosedBtn];
+}
+
 
 @end

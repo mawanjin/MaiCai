@@ -344,27 +344,21 @@
                                                                     <color key="textColor" red="0.30980392159999998" green="0.22352941179999999" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mw9-gJ-7zM">
+                                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mw9-gJ-7zM" customClass="MCButton">
                                                                     <rect key="frame" x="204" y="-1" width="30" height="30"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                                     <state key="normal" title="编辑">
                                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                                     </state>
-                                                                    <connections>
-                                                                        <action selector="editBtnAction:" destination="z03-Ue-xR1" eventType="touchUpInside" id="b5p-VH-Z1q"/>
-                                                                    </connections>
                                                                 </button>
-                                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GvY-VW-SfS">
+                                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GvY-VW-SfS" customClass="MCButton">
                                                                     <rect key="frame" x="253" y="-1" width="46" height="30"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                                     <state key="normal" title="删除">
                                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                                     </state>
-                                                                    <connections>
-                                                                        <action selector="deleteBtnAction:" destination="z03-Ue-xR1" eventType="touchUpInside" id="bzA-lW-j3r"/>
-                                                                    </connections>
                                                                 </button>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cart_choose_btn_normal" translatesAutoresizingMaskIntoConstraints="NO" id="khO-og-Jx2">
                                                                     <rect key="frame" x="6" y="4" width="20" height="20"/>
@@ -399,6 +393,8 @@
                                         <connections>
                                             <outlet property="addressLabel" destination="1vc-bI-Xij" id="U2V-he-4i5"/>
                                             <outlet property="chooseIcon" destination="YNV-vg-peT" id="XOM-5w-iae"/>
+                                            <outlet property="deleteBtn" destination="GvY-VW-SfS" id="IH8-mf-ZDd"/>
+                                            <outlet property="editBtn" destination="Mw9-gJ-7zM" id="2bY-a1-qIC"/>
                                             <outlet property="mobileLabel" destination="zAA-b2-oPd" id="0HJ-b2-8sv"/>
                                             <outlet property="usernameLabel" destination="SK2-eQ-cVi" id="uih-Qa-lIg"/>
                                         </connections>
@@ -2164,15 +2160,12 @@
                                                     <color key="textColor" red="0.30980392159999998" green="0.22352941179999999" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yXW-JU-7kK">
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yXW-JU-7kK" customClass="MCButton">
                                                     <rect key="frame" x="6" y="18" width="25" height="26"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" backgroundImage="cart_choose_btn_normal">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
-                                                    <connections>
-                                                        <action selector="chooseBtnClick:" destination="Mey-UY-MUk" eventType="touchUpInside" id="Wj0-Ot-qJF"/>
-                                                    </connections>
                                                 </button>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Bb-25-siR">
                                                     <rect key="frame" x="6" y="61" width="300" height="1"/>
@@ -2321,15 +2314,12 @@
                                                     <color key="textColor" red="0.30980392159999998" green="0.22352941179999999" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1w-Wa-ssC">
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1w-Wa-ssC" customClass="MCButton">
                                                     <rect key="frame" x="6" y="15" width="30" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" backgroundImage="cart_choose_btn_normal">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
-                                                    <connections>
-                                                        <action selector="chooseBtnAction:" destination="Jr6-Df-nM4" eventType="touchUpInside" id="aLH-1W-N06"/>
-                                                    </connections>
                                                 </button>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dotted_line" translatesAutoresizingMaskIntoConstraints="NO" id="DfL-j0-YiY">
                                                     <rect key="frame" x="0.0" y="63" width="320" height="1"/>
