@@ -48,7 +48,7 @@
 	<key>Seller</key>
 	<string>mall@join-cn.com</string>
 	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
+	<string>Main_iphone5</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

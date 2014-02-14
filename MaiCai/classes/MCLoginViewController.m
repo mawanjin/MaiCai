@@ -69,9 +69,7 @@
 }
 
 - (IBAction)registerAction:(UIButton *)sender {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
-                                                  bundle:nil];
-    MCRegisterViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCRegisterViewController"];
+    MCRegisterViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCRegisterViewController"];
     [vc setShowMsg:^(NSString * msg) {
         [self showMsgHint:msg];
     }];

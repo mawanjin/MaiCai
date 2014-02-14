@@ -127,9 +127,7 @@
 #pragma mark- others
 -(void)addBtnAction
 {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
-                                                  bundle:nil];
-    MCNewMineAddressViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCNewMineAddressViewController"];
+    MCNewMineAddressViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCNewMineAddressViewController"];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -137,9 +135,8 @@
 - (IBAction)editBtnAction:(id)sender {
     NSIndexPath* indexPath = [(MCButton*)sender param];
     
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
-                                                  bundle:nil];
-    MCNewMineAddressViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCNewMineAddressViewController"];
+   
+    MCNewMineAddressViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCNewMineAddressViewController"];
     vc.navigationItem.title = @"修改收货地址";
     MCAddress* obj = self.data[indexPath.row];
     vc.obj = obj;

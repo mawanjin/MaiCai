@@ -12,9 +12,9 @@
 #import "DDASLLogger.h"
 
 #if DEBUG
-static const int ddLogLevel = LOG_LEVEL_DEBUG;
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 #else
-static const int ddLogLevel = LOG_LEVEL_DEBUG;
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 #endif
 
 @interface DDLogConfig : NSObject

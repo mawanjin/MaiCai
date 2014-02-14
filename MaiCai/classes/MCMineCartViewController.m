@@ -49,9 +49,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    UIButton* button = [[UIButton alloc]init];
-    button.titleLabel.text = @"删除";
-    [self.navigationController.navigationItem.rightBarButtonItem setCustomView:button];
+
+    UIBarButtonItem* item = [[UIBarButtonItem alloc]initWithTitle:@"清空" style:UIBarButtonItemStylePlain target:self action:@selector(emptyCartAction)];
+    item.tintColor = [UIColor whiteColor];
+    self.navigationItem.rightBarButtonItem = item;
 }
 
 
@@ -258,9 +259,64 @@
 }
 
 #pragma mark- others
--(void)deleteAction
+-(void)emptyCartAction
 {
-    
+    NSMutableArray* array = [[NSMutableArray alloc]init];
+    for(int i=0;i<self.data.count;i++) {
+        MCShop* shop = self.data[i];
+        for(int j=0;j<shop.vegetables.count;j++) {
+            MCVegetable* vegetable = shop.vegetables[j];
+            [array addObject:[NSNumber numberWithInt:vegetable.id]];
+        }
+    }
+    if ([[MCContextManager getInstance]isLogged]) {
+        MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
+        [self showProgressHUD];
+       
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            @try {
+                [[MCTradeManager getInstance]deleteProductsInCartOnlineByUserId:user.userId ProductIds:array];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.data removeAllObjects];
+                    [self.tableView reloadData];
+                });
+            }
+            @catch (NSException *exception) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self showMsgHint:MC_ERROR_MSG_0001];
+                });
+                
+            }
+            @finally {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self hideProgressHUD];
+                });
+            }
+        });
+    }else {
+        NSString* macId = (NSString*)[[MCContextManager getInstance]getDataByKey:MC_MAC_ID];
+        [self showProgressHUD];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            @try {
+                [[MCTradeManager getInstance]deleteProductsInCartByUserId:macId ProductIds:array];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.data removeAllObjects];
+                    [self.tableView reloadData];
+                });
+            }@catch (NSException *exception) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self showMsgHint:MC_ERROR_MSG_0001];
+                });
+            }
+            @finally {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self hideProgressHUD];
+                });
+            }
+        });
+    }
+
 }
 
 -(void)resetCart
@@ -324,9 +380,7 @@
 
 -(IBAction)submitBtnAction:(UIButton *)sender {
     if([[MCContextManager getInstance]isLogged]){
-        UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
-                                                      bundle:nil];
-        MCOrderConfirmViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCOrderConfirmViewController"];
+        MCOrderConfirmViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCOrderConfirmViewController"];
         
         vc.data = self.data;
         vc.totalPrice = self.totalPrice;
@@ -338,9 +392,7 @@
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }else{
-        UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
-                                                    bundle:nil];
-        MCLoginViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCLoginViewController"];
+        MCLoginViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCLoginViewController"];
         vc.hidesBottomBarWhenPushed = YES;
        [self.navigationController pushViewController:vc animated:YES];
     }

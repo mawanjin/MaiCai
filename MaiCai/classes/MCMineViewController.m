@@ -75,17 +75,13 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.row == 0) {
-        UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
-                                                      bundle:nil];
-        MCMineCartViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCMineCartViewController"];
+        MCMineCartViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCMineCartViewController"];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc  animated:YES];
     }else if(indexPath.row == 1) {
         BOOL isLoged = [[MCContextManager getInstance]isLogged];
         if(isLoged) {
-            UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
-                                                          bundle:nil];
-            MCMineOrderViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCMineOrderViewController"];
+            MCMineOrderViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCMineOrderViewController"];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc  animated:YES];
         }else{
@@ -96,9 +92,7 @@
         
         BOOL isLoged = [[MCContextManager getInstance]isLogged];
         if(isLoged) {
-            UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
-                                                          bundle:nil];
-            MCMineAddressViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCMineCollectViewController"];
+            MCMineAddressViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCMineCollectViewController"];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc  animated:YES];
         }else{
@@ -108,9 +102,7 @@
     }else if(indexPath.row == 3) {
         BOOL isLoged = [[MCContextManager getInstance]isLogged];
         if(isLoged) {
-            UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
-                                                          bundle:nil];
-            MCMineAddressViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCMineAddressViewController"];
+            MCMineAddressViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCMineAddressViewController"];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc  animated:YES];
         }else{
@@ -118,18 +110,14 @@
         }
 
     }else if(indexPath.row == 4) {
-        UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
-                                                      bundle:nil];
-        MCPersonalInfoViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCFeedbackViewController"];
+        MCPersonalInfoViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCFeedbackViewController"];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc  animated:YES];
 
     }else if(indexPath.row == 5) {
         BOOL isLoged = [[MCContextManager getInstance]isLogged];
         if(isLoged) {
-            UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
-                                                          bundle:nil];
-            MCPersonalInfoViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCPersonalInfoViewController"];
+            MCPersonalInfoViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCPersonalInfoViewController"];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc  animated:YES];
         }else{
@@ -231,10 +219,7 @@
 #pragma mark- others
 -(void)minePersonalInfoBtnAction
 {
-    
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
-                                                  bundle:nil];
-    MCPersonalInfoViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCPersonalInfoViewController"];
+    MCPersonalInfoViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCPersonalInfoViewController"];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc  animated:YES];
 }
@@ -246,9 +231,7 @@
         UIAlertView* alert =  [[UIAlertView alloc]initWithTitle:nil message:@"确定需要退出吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         [alert show];
     }else {
-        UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
-                                                      bundle:nil];
-        MCLoginViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCLoginViewController"];
+        MCLoginViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCLoginViewController"];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }

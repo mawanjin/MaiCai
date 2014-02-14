@@ -168,9 +168,7 @@
 #pragma mark- tableview
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
-                                                  bundle:nil];
-    MCOrderDetailViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCOrderDetailViewController"];
+    MCOrderDetailViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCOrderDetailViewController"];
     vc.order = self.data[indexPath.row];
     [vc setShowMsg:^(NSString *msg) {
         [self showMsgHint:msg];

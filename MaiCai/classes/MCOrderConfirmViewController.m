@@ -17,7 +17,6 @@
 #import "MCUser.h"
 #import "MCOrderConfirmHeader_.h"
 #import "MCVegetableManager.h"
-#import "MCOrderConfirmFooter.h"
 #import "MCTradeManager.h"
 #import "MCAddress.h"
 #import "MCAppDelegate.h"
@@ -26,6 +25,10 @@
 #import "MCButton.h"
 #import "MCMineAddressViewController.h"
 #import "MCAddressHelperView.h"
+#import "GCPlaceholderTextView.h"
+#import "MCOrderConfirmReviewCell.h"
+#import "MCOrderConfirmPayCell.h"
+#import "MCOrderConfirmDeliveryCell.h"
 
 #import "DataSigner.h"
 #import "AlixPayResult.h"
@@ -53,24 +56,10 @@
     [self initData];
     //默认支付宝支付
     self.paymentMethod = 0;
+    //默认的评论为空
+    self.reviewContent= @"";
     
     self.result = @selector(paymentResult:);
-   
-    MCOrderConfirmFooter* footerView = [MCOrderConfirmFooter initInstance];
-    [footerView.cashpayBtn setParam:footerView];
-    [footerView.alipayBtn setParam:footerView];
-    [footerView.getBySelfBtn setParam:footerView];
-    [footerView.deliveryToHomeBtn setParam:footerView];
-
-    [footerView.cashpayBtn addTarget:self action:@selector(chooseAction:) forControlEvents:UIControlEventTouchUpInside];
-    [footerView.alipayBtn addTarget:self action:@selector(chooseAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [footerView.getBySelfBtn addTarget:self action:@selector(chooseShipMethodAction:) forControlEvents:UIControlEventTouchUpInside];
-    [footerView.deliveryToHomeBtn addTarget:self action:@selector(chooseShipMethodAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    self.tableView.tableFooterView = footerView;
-    
     self.totalPriceLabel.text = [[NSString alloc]initWithFormat:@"总价：%.02f元",self.totalPrice];
 }
 
@@ -103,16 +92,6 @@
             self.tableView.tableHeaderView = header;
         }
     }
-
-    if(IS_IPHONE_5){
-         self.scrollView.frame = CGRectMake(0, 65, 320, 458);
-        self.scrollView.contentSize = CGSizeMake(320,self.tableView.frame.size.height);
-    }else{
-        self.scrollView.frame = CGRectMake(0, 65, 320, 370);
-        self.scrollView.contentSize = CGSizeMake(320,self.tableView.frame.size.height);
-    }
-    //注意这里scrollview不能滚动的原因是因为 MBProgressbar与toast需要在scrollview里面创建
-    self.scrollView.scrollEnabled = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -154,6 +133,10 @@
                 [copyVegetables addObject:copyVegetable];
             }
         }
+        for(int z=0;z<3;z++) {
+            MCVegetable* copyVegetable = [[MCVegetable alloc]init];
+            [copyVegetables addObject:copyVegetable];
+        }
         copyShop.vegetables = copyVegetables;
         if(copyShop.vegetables == nil || copyShop.vegetables.count == 0) {
             
@@ -165,7 +148,16 @@
     self.data = copyShops;
 }
 
+
+
 - (IBAction)submitOrderAction:(id)sender {
+    for(int i=0;i<self.data.count;i++) {
+        MCShop* shop = self.data[i];
+        [shop.vegetables removeLastObject];
+        [shop.vegetables removeLastObject];
+        [shop.vegetables removeLastObject];
+    }
+
     MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
     MCAddress* address = [[MCAddress alloc]init];
     if(user.defaultAddress == nil) {
@@ -195,11 +187,10 @@
     }else {
         address = self.address;
     }
-    MCOrderConfirmFooter* footer = (MCOrderConfirmFooter*)self.tableView.tableFooterView;
     
     float totalPrice = 0.0f;
     totalPrice = self.totalPrice;
-    NSString* pay_no =  [[MCTradeManager getInstance]submitOrder:self.data PaymentMethod:self.paymentMethod ShipMethod:self.shipMethod Address:address UserId:user.userId TotalPrice:totalPrice Review:footer.reviewTextField.text];
+    NSString* pay_no =  [[MCTradeManager getInstance]submitOrder:self.data PaymentMethod:self.paymentMethod ShipMethod:self.shipMethod Address:address UserId:user.userId TotalPrice:totalPrice Review:self.reviewContent];
     
     if(self.paymentMethod == 0) {
         self.pay_no = pay_no;
@@ -353,7 +344,7 @@
 
 - (void)chooseAction:(id)sender {
     MCButton* btn = sender;
-    MCOrderConfirmFooter* footer = [btn param];
+    MCOrderConfirmPayCell* footer = [btn param];
     if(!btn.isSelected) {
         [btn setSelected:YES];
         self.paymentMethod = [btn.titleLabel.text integerValue];
@@ -367,7 +358,7 @@
 
 - (void)chooseShipMethodAction:(id)sender {
     MCButton* btn = sender;
-    MCOrderConfirmFooter* footer = [btn param];
+    MCOrderConfirmDeliveryCell* footer = [btn param];
     if(!btn.isSelected) {
         [btn setSelected:YES];
         self.shipMethod = [btn.titleLabel.text integerValue];
@@ -380,9 +371,7 @@
 }
 
 - (void)changeAddressAction:(UIButton *)sender {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
-                                                  bundle:nil];
-    MCMineAddressViewController* vc = [sb instantiateViewControllerWithIdentifier:@"MCMineAddressViewController"];
+    MCMineAddressViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCMineAddressViewController"];
     vc.previousView = (MCBaseViewController*)self;
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
@@ -395,20 +384,61 @@
     [self presentPopupViewController:popup animated:YES completion:nil];
 }
 
-
-
 #pragma mark- tableview
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCOrderConfirmCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"orderConfirmCell"];
     MCShop* shop = self.data[indexPath.section];
     MCVegetable* vegetable = shop.vegetables[indexPath.row];
-    [cell.imageIcon loadImageByUrl:vegetable.image];
-    cell.nameLabel.text = [[NSString alloc]initWithFormat:@"%@",vegetable.name];
-    cell.quantityLabel.text = [[NSString alloc]initWithFormat:@"数量：%d",vegetable.quantity];
-    cell.unitLabel.text = [[NSString alloc]initWithFormat:@"单价：%.02f元/%@",vegetable.price,vegetable.unit];
-    cell.priceLabel.text = [[NSString alloc]initWithFormat:@"小计：%.02f元",vegetable.price*vegetable.quantity];
-    return cell;
+    if(indexPath.row == (shop.vegetables.count-3)) {
+        MCOrderConfirmReviewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"orderConfirmReviewCell"];
+        cell.content.placeholderColor = [UIColor lightGrayColor];
+        cell.content.placeholder = @"请留下你的宝贵意见。";
+        return cell;
+    }else if(indexPath.row == (shop.vegetables.count-2)) {
+        MCOrderConfirmPayCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"orderConfirmPayCell"];
+        [cell.alipayBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_normal"] forState:UIControlStateNormal];
+        [cell.alipayBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_selected"] forState:UIControlStateSelected];
+        
+        [cell.cashpayBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_normal"] forState:UIControlStateNormal];
+        [cell.cashpayBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_selected"] forState:UIControlStateSelected];
+        
+        [cell.alipayBtn setSelected:YES];
+        [cell.cashpayBtn setSelected:NO];
+        
+        [cell.cashpayBtn setParam:cell];
+        [cell.alipayBtn setParam:cell];
+        
+        [cell.cashpayBtn addTarget:self action:@selector(chooseAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.alipayBtn addTarget:self action:@selector(chooseAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        return cell;
+    }else if(indexPath.row == (shop.vegetables.count-1)) {
+        MCOrderConfirmDeliveryCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"orderConfirmDeliveryCell"];
+        
+        [cell.getBySelfBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_normal"] forState:UIControlStateNormal];
+        [cell.getBySelfBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_selected"] forState:UIControlStateSelected];
+        
+        [cell.deliveryToHomeBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_normal"] forState:UIControlStateNormal];
+        [cell.deliveryToHomeBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_selected"] forState:UIControlStateSelected];
+        
+        [cell.deliveryToHomeBtn setSelected:YES];
+        [cell.getBySelfBtn setSelected:NO];
+        
+        [cell.getBySelfBtn setParam:cell];
+        [cell.deliveryToHomeBtn setParam:cell];
+        
+        [cell.getBySelfBtn addTarget:self action:@selector(chooseShipMethodAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.deliveryToHomeBtn addTarget:self action:@selector(chooseShipMethodAction:) forControlEvents:UIControlEventTouchUpInside];
+        return cell;
+    }else {
+        MCOrderConfirmCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"orderConfirmCell"];
+        [cell.imageIcon loadImageByUrl:vegetable.image];
+        cell.nameLabel.text = [[NSString alloc]initWithFormat:@"%@",vegetable.name];
+        cell.quantityLabel.text = [[NSString alloc]initWithFormat:@"数量：%d",vegetable.quantity];
+        cell.unitLabel.text = [[NSString alloc]initWithFormat:@"单价：%.02f元/%@",vegetable.price,vegetable.unit];
+        cell.priceLabel.text = [[NSString alloc]initWithFormat:@"小计：%.02f元",vegetable.price*vegetable.quantity];
+        return cell;
+    }
 }
 
 
@@ -455,7 +485,29 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 68;
+    MCShop* shop = self.data[indexPath.section];
+    if(indexPath.row == (shop.vegetables.count-3)) {
+        return 82;
+    }else if(indexPath.row == (shop.vegetables.count-2)) {
+        return 55;
+    }else if(indexPath.row == (shop.vegetables.count-1)) {
+        return 55;
+    }else {
+        return 68;
+    }
+
+}
+
+#pragma mark- uitextview
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    if([text isEqualToString:@"\n"]) {
+        self.reviewContent = textView.text;
+        [textView resignFirstResponder];
+        return NO;
+    }
+    
+    return YES;
 }
 
 @end
