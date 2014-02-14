@@ -157,6 +157,7 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     MCQuickOrderHeader* header = [MCQuickOrderHeader initInstance];
+    [header.chooseBtn setParam:[NSNumber numberWithInt:section]];
     [header.chooseBtn addTarget:self action:@selector(chooseBtnHeaderAction:) forControlEvents:UIControlEventTouchUpInside];
     if(section == 0) {
         //主料
@@ -385,8 +386,9 @@
 }
 
 - (void)chooseBtnHeaderAction:(UIButton *)sender {
-    NSIndexPath* indexPath = [(MCButton*)sender param];
-    if(indexPath.section == 0) {
+    NSNumber* value = [(MCButton*)sender param];
+    NSInteger section = [value integerValue];
+    if(section == 0) {
         //主料
         self.recipe.isMainIngredientsAllSelected = !self.recipe.isMainIngredientsAllSelected;
         unsigned int i = 0;
