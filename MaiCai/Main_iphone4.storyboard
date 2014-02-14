@@ -1871,7 +1871,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dotted_line" translatesAutoresizingMaskIntoConstraints="NO" id="LGx-OQ-U39">
-                                                    <rect key="frame" x="0.0" y="67" width="307" height="1"/>
+                                                    <rect key="frame" x="0.0" y="67" width="320" height="1"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </imageView>

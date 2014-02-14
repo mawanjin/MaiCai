@@ -141,6 +141,9 @@
         }else{
             MCHealthDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCHealthDetailViewController"];
             vc.health = self.healthList[indexPath.row];
+            [vc setShowMsg:^(NSString *msg) {
+                [self showMsgHint:msg];
+            }];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
 

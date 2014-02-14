@@ -13,5 +13,6 @@
 @interface MCHealthDetailViewController : MCBaseNavViewController<UICollectionViewDataSource,UICollectionViewDelegate>
 @property MCHealth* health;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong,nonatomic) void(^showMsg)(NSString* msg);
 - (IBAction)clickAction:(id)sender;
 @end

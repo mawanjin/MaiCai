@@ -61,6 +61,8 @@
 		046962C518ACFAF700A58918 /* MCOrderConfirmPayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046962C418ACFAF700A58918 /* MCOrderConfirmPayCell.m */; };
 		046962C718ADA48500A58918 /* Main_iphone4.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 046962C618ADA48500A58918 /* Main_iphone4.storyboard */; };
 		046962C818ADB97A00A58918 /* Main_iphone5.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 044BC9AD183083DC00D43115 /* Main_iphone5.storyboard */; };
+		046962CC18ADE72700A58918 /* MCOrderConfirmFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 046962CA18ADE72700A58918 /* MCOrderConfirmFooter.m */; };
+		046962CD18ADE72700A58918 /* MCOrderConfirmFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046962CB18ADE72700A58918 /* MCOrderConfirmFooter.xib */; };
 		046D48FC187A5333000E07DA /* MCMarketIndexTipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046D48FB187A5333000E07DA /* MCMarketIndexTipCell.m */; };
 		046E99C718261F6D0005FB53 /* MCBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E99BC18261F6D0005FB53 /* MCBaseViewController.m */; };
 		046E99C818261F6D0005FB53 /* MCCookBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046E99BE18261F6D0005FB53 /* MCCookBookViewController.m */; };
@@ -279,6 +281,9 @@
 		046962C318ACFAF700A58918 /* MCOrderConfirmPayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOrderConfirmPayCell.h; sourceTree = "<group>"; };
 		046962C418ACFAF700A58918 /* MCOrderConfirmPayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCOrderConfirmPayCell.m; sourceTree = "<group>"; };
 		046962C618ADA48500A58918 /* Main_iphone4.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iphone4.storyboard; sourceTree = "<group>"; };
+		046962C918ADE72700A58918 /* MCOrderConfirmFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOrderConfirmFooter.h; sourceTree = "<group>"; };
+		046962CA18ADE72700A58918 /* MCOrderConfirmFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCOrderConfirmFooter.m; sourceTree = "<group>"; };
+		046962CB18ADE72700A58918 /* MCOrderConfirmFooter.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCOrderConfirmFooter.xib; sourceTree = "<group>"; };
 		046D48FA187A5333000E07DA /* MCMarketIndexTipCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMarketIndexTipCell.h; sourceTree = "<group>"; };
 		046D48FB187A5333000E07DA /* MCMarketIndexTipCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMarketIndexTipCell.m; sourceTree = "<group>"; };
 		046E99BB18261F6D0005FB53 /* MCBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCBaseViewController.h; sourceTree = "<group>"; };
@@ -935,12 +940,19 @@
 				04DAF4DC1845921B009C7720 /* MCOrderCell.m */,
 				04DAF4C81842F229009C7720 /* MCOrderConfirmCell.h */,
 				04DAF4C91842F229009C7720 /* MCOrderConfirmCell.m */,
+				046962C018ACFAEB00A58918 /* MCOrderConfirmDeliveryCell.h */,
+				046962C118ACFAEB00A58918 /* MCOrderConfirmDeliveryCell.m */,
+				046962C918ADE72700A58918 /* MCOrderConfirmFooter.h */,
+				046962CA18ADE72700A58918 /* MCOrderConfirmFooter.m */,
+				046962CB18ADE72700A58918 /* MCOrderConfirmFooter.xib */,
 				04DAF4BC1842D9AF009C7720 /* MCOrderConfirmHeader.h */,
 				04DAF4BD1842D9AF009C7720 /* MCOrderConfirmHeader.m */,
 				04DAF4BF1842D9EA009C7720 /* MCOrderConfirmHeader.xib */,
 				04DAF4CB1842FA44009C7720 /* MCOrderConfirmHeader_.h */,
 				04DAF4CC1842FA44009C7720 /* MCOrderConfirmHeader_.m */,
 				04DAF4CE1842FA7C009C7720 /* MCOrderConfirmHeader_.xib */,
+				046962C318ACFAF700A58918 /* MCOrderConfirmPayCell.h */,
+				046962C418ACFAF700A58918 /* MCOrderConfirmPayCell.m */,
 				046962BA18ACF11B00A58918 /* MCOrderConfirmReviewCell.h */,
 				046962BB18ACF11B00A58918 /* MCOrderConfirmReviewCell.m */,
 				04DAF4C11842E2E5009C7720 /* MCOrderConfirmSectionHeader.h */,
@@ -974,10 +986,6 @@
 				041E5A78187BC89200BB0F67 /* MCVegetableDetailRecipeCell.m */,
 				041E5A7D187BC90D00BB0F67 /* MCVegetableDetailShopInfoCell.h */,
 				041E5A7E187BC90D00BB0F67 /* MCVegetableDetailShopInfoCell.m */,
-				046962C018ACFAEB00A58918 /* MCOrderConfirmDeliveryCell.h */,
-				046962C118ACFAEB00A58918 /* MCOrderConfirmDeliveryCell.m */,
-				046962C318ACFAF700A58918 /* MCOrderConfirmPayCell.h */,
-				046962C418ACFAF700A58918 /* MCOrderConfirmPayCell.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -1090,6 +1098,7 @@
 			files = (
 				046962C818ADB97A00A58918 /* Main_iphone5.storyboard in Resources */,
 				041E5A87187D2FB400BB0F67 /* MCHealthDetailProductCell.xib in Resources */,
+				046962CD18ADE72700A58918 /* MCOrderConfirmFooter.xib in Resources */,
 				0437A4901847491A000D427B /* Alixpay.bundle in Resources */,
 				04C9733B186A6EF600138DB8 /* MCQuickOrderTableHeader.xib in Resources */,
 				048445CD183DF42D006F4090 /* MCChangePasswordView.xib in Resources */,
@@ -1140,6 +1149,7 @@
 				046962C218ACFAEB00A58918 /* MCOrderConfirmDeliveryCell.m in Sources */,
 				0497B8091839EEBE008A6F8B /* FMDatabaseQueue.m in Sources */,
 				04DAF4CD1842FA44009C7720 /* MCOrderConfirmHeader_.m in Sources */,
+				046962CC18ADE72700A58918 /* MCOrderConfirmFooter.m in Sources */,
 				04DAF4BB1841A369009C7720 /* MCOrderConfirmViewController.m in Sources */,
 				04C9734B186D5C4900138DB8 /* MCRecipeIngredientCell.m in Sources */,
 				04DAF4E61845DD9C009C7720 /* MCOrderDetailFooter.m in Sources */,

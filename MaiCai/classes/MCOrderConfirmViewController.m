@@ -16,6 +16,7 @@
 #import "MCContextManager.h"
 #import "MCUser.h"
 #import "MCOrderConfirmHeader_.h"
+#import "MCOrderConfirmFooter.h"
 #import "MCVegetableManager.h"
 #import "MCTradeManager.h"
 #import "MCAddress.h"
@@ -60,6 +61,20 @@
     self.reviewContent= @"";
     
     self.result = @selector(paymentResult:);
+    
+    
+    MCOrderConfirmFooter* footerView = [MCOrderConfirmFooter initInstance];
+    [footerView.cashpayBtn setParam:footerView];
+    [footerView.alipayBtn setParam:footerView];
+    [footerView.getBySelfBtn setParam:footerView];
+    [footerView.deliveryToHomeBtn setParam:footerView];
+    
+    [footerView.cashpayBtn addTarget:self action:@selector(chooseAction:) forControlEvents:UIControlEventTouchUpInside];
+    [footerView.alipayBtn addTarget:self action:@selector(chooseAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [footerView.getBySelfBtn addTarget:self action:@selector(chooseShipMethodAction:) forControlEvents:UIControlEventTouchUpInside];
+    [footerView.deliveryToHomeBtn addTarget:self action:@selector(chooseShipMethodAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.tableView.tableFooterView = footerView;
     self.totalPriceLabel.text = [[NSString alloc]initWithFormat:@"总价：%.02f元",self.totalPrice];
 }
 
@@ -133,10 +148,10 @@
                 [copyVegetables addObject:copyVegetable];
             }
         }
-        for(int z=0;z<3;z++) {
-            MCVegetable* copyVegetable = [[MCVegetable alloc]init];
-            [copyVegetables addObject:copyVegetable];
-        }
+        
+        MCVegetable* copyVegetable = [[MCVegetable alloc]init];
+        [copyVegetables addObject:copyVegetable];
+        
         copyShop.vegetables = copyVegetables;
         if(copyShop.vegetables == nil || copyShop.vegetables.count == 0) {
             
@@ -153,8 +168,6 @@
 - (IBAction)submitOrderAction:(id)sender {
     for(int i=0;i<self.data.count;i++) {
         MCShop* shop = self.data[i];
-        [shop.vegetables removeLastObject];
-        [shop.vegetables removeLastObject];
         [shop.vegetables removeLastObject];
     }
 
@@ -344,7 +357,7 @@
 
 - (void)chooseAction:(id)sender {
     MCButton* btn = sender;
-    MCOrderConfirmPayCell* footer = [btn param];
+    MCOrderConfirmFooter* footer = [btn param];
     if(!btn.isSelected) {
         [btn setSelected:YES];
         self.paymentMethod = [btn.titleLabel.text integerValue];
@@ -358,7 +371,7 @@
 
 - (void)chooseShipMethodAction:(id)sender {
     MCButton* btn = sender;
-    MCOrderConfirmDeliveryCell* footer = [btn param];
+    MCOrderConfirmFooter* footer = [btn param];
     if(!btn.isSelected) {
         [btn setSelected:YES];
         self.shipMethod = [btn.titleLabel.text integerValue];
@@ -389,46 +402,10 @@
 {
     MCShop* shop = self.data[indexPath.section];
     MCVegetable* vegetable = shop.vegetables[indexPath.row];
-    if(indexPath.row == (shop.vegetables.count-3)) {
+    if(indexPath.row == (shop.vegetables.count-1)) {
         MCOrderConfirmReviewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"orderConfirmReviewCell"];
         cell.content.placeholderColor = [UIColor lightGrayColor];
         cell.content.placeholder = @"请留下你的宝贵意见。";
-        return cell;
-    }else if(indexPath.row == (shop.vegetables.count-2)) {
-        MCOrderConfirmPayCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"orderConfirmPayCell"];
-        [cell.alipayBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_normal"] forState:UIControlStateNormal];
-        [cell.alipayBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_selected"] forState:UIControlStateSelected];
-        
-        [cell.cashpayBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_normal"] forState:UIControlStateNormal];
-        [cell.cashpayBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_selected"] forState:UIControlStateSelected];
-        
-        [cell.alipayBtn setSelected:YES];
-        [cell.cashpayBtn setSelected:NO];
-        
-        [cell.cashpayBtn setParam:cell];
-        [cell.alipayBtn setParam:cell];
-        
-        [cell.cashpayBtn addTarget:self action:@selector(chooseAction:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.alipayBtn addTarget:self action:@selector(chooseAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-        return cell;
-    }else if(indexPath.row == (shop.vegetables.count-1)) {
-        MCOrderConfirmDeliveryCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"orderConfirmDeliveryCell"];
-        
-        [cell.getBySelfBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_normal"] forState:UIControlStateNormal];
-        [cell.getBySelfBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_selected"] forState:UIControlStateSelected];
-        
-        [cell.deliveryToHomeBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_normal"] forState:UIControlStateNormal];
-        [cell.deliveryToHomeBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_selected"] forState:UIControlStateSelected];
-        
-        [cell.deliveryToHomeBtn setSelected:YES];
-        [cell.getBySelfBtn setSelected:NO];
-        
-        [cell.getBySelfBtn setParam:cell];
-        [cell.deliveryToHomeBtn setParam:cell];
-        
-        [cell.getBySelfBtn addTarget:self action:@selector(chooseShipMethodAction:) forControlEvents:UIControlEventTouchUpInside];
-        [cell.deliveryToHomeBtn addTarget:self action:@selector(chooseShipMethodAction:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }else {
         MCOrderConfirmCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"orderConfirmCell"];
@@ -486,12 +463,8 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MCShop* shop = self.data[indexPath.section];
-    if(indexPath.row == (shop.vegetables.count-3)) {
+    if(indexPath.row == (shop.vegetables.count-1)) {
         return 82;
-    }else if(indexPath.row == (shop.vegetables.count-2)) {
-        return 55;
-    }else if(indexPath.row == (shop.vegetables.count-1)) {
-        return 55;
     }else {
         return 68;
     }
