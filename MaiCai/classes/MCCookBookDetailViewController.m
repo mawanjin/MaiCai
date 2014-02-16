@@ -18,6 +18,7 @@
 #import "MCStep.h"
 #import "MCQuickOrderViewController.h"
 #import "UIImageView+MCAsynLoadImage.h"
+#import "UILabel+MCAutoResize.h"
 
 @implementation MCCookBookDetailViewController
 
@@ -64,6 +65,11 @@
             });
         }
     });
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -121,7 +127,8 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.section == 0) {
-        return 98;
+        CGSize labelsize = [self.recipe.introduction sizeWithFont:[UIFont fontWithName:@"Arial" size:13] constrainedToSize:CGSizeMake(320,2000) lineBreakMode:UILineBreakModeWordWrap];
+        return labelsize.height+10;
     }else if(indexPath.section == 1) {
         return 37;
     }else if(indexPath.section == 2) {
@@ -135,7 +142,7 @@
     UITableViewCell* cell = nil;
     if(indexPath.section == 0) {
         MCRecipeDishDescriptionCell* temp = [tableView dequeueReusableCellWithIdentifier:@"dishDescriptionCell"];
-        temp.descriptionLabel.text = self.recipe.introduction;
+        [temp.descriptionLabel autoResizeByText:self.recipe.introduction PositionX:0 PositionY:5];
         cell = temp;
     }else if(indexPath.section == 1) {
         MCRecipeIngredientCell* temp = [tableView dequeueReusableCellWithIdentifier:@"ingredientCell"];

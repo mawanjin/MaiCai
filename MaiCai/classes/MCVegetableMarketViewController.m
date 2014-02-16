@@ -305,6 +305,18 @@
 //    return CGSizeMake(320, 80);
 //}
 
+#pragma mark -scrollview
+//-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+//{
+//    if (scrollView.contentOffset.y < -80) {
+//        [UIView beginAnimations:nil context:nil];
+//        [UIView setAnimationDuration:0.3];
+//        [scrollView setContentInset:UIEdgeInsetsMake(80, 0, 0, 0)];
+//        //        [scrollView setContentInset:UIEdgeInsetsMake(-80, 0, 0, 0)];
+//        NSLog(@"下拉刷新");
+//        [UIView commitAnimations];
+//    }
+//}
 @end
 
 

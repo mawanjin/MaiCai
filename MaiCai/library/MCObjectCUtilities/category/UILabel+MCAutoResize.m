@@ -13,9 +13,9 @@
 {
     self.frame = CGRectMake(0, 0, 0, 0);
     [self setNumberOfLines:0];
-    UIFont *font = [UIFont fontWithName:@"Arial" size:12];
+    UIFont *font = [UIFont fontWithName:@"Arial" size:13];
     CGSize size = CGSizeMake(320,2000);
-     CGSize labelsize = [text sizeWithFont:font constrainedToSize:size lineBreakMode:UILineBreakModeWordWrap];
+    CGSize labelsize = [text sizeWithFont:font constrainedToSize:size lineBreakMode:UILineBreakModeWordWrap];
     self.frame = CGRectMake(x, y, labelsize.width, labelsize.height );
     self.textColor = [UIColor blackColor];
     self.text = text;

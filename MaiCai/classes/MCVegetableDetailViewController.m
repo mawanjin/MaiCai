@@ -67,7 +67,8 @@
                 MCShop* shop = tenants[0];
                 self.vegetable = shop.vegetables[0];
                 [self.imageIcon loadImageByUrl:self.vegetable.image];
-                self.priceLabel.text = [[NSString alloc]initWithFormat:@"现价：%.02f元/%@",self.vegetable.price,self.vegetable.unit];
+                self.priceLabel.text = [[NSString alloc]initWithFormat:@"菜篮价：%.02f元/%@",self.vegetable.price,self.vegetable.unit];
+                 self.discoutPriceLabel.text = [[NSString alloc]initWithFormat:@"市场价：%.02f元/%@",self.vegetable.originalPrice,self.vegetable.unit];
                 self.shopLabel.text = self.vegetable.shop.name;
                 
                 [self.tableView reloadData];
@@ -190,7 +191,7 @@
 
 #pragma mark- others
 - (IBAction)phoneCallAction:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://10010"]];//打电话
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://021-54331510"]];//打电话
 }
 
 - (IBAction)addProductToCartAction:(id)sender {

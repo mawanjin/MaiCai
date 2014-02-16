@@ -28,7 +28,7 @@
     // Override point for customization after application launch.
     
     //两秒以后加载程序，能让用户更加仔细的看清楚，启动画面
-    [NSThread sleepForTimeInterval:2.0];
+    //[NSThread sleepForTimeInterval:1.0];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
     

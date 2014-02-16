@@ -13,7 +13,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="89" height="119"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="r_p_xiaonangua" translatesAutoresizingMaskIntoConstraints="NO" id="NCe-hr-gKs">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NCe-hr-gKs">
                         <rect key="frame" x="-1" y="0.0" width="90" height="90"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </imageView>
@@ -30,7 +30,4 @@
             <size key="customSize" width="89" height="119"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="r_p_xiaonangua" width="150" height="150"/>
-    </resources>
 </document>
