@@ -106,6 +106,8 @@
             });
         }
     });
+    
+    self.scrollView.scrollEnabled = YES;
 }
 
 - (void)didReceiveMemoryWarning

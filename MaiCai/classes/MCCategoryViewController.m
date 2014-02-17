@@ -53,17 +53,6 @@
     swipeGestureRecognizer2.numberOfTouchesRequired = 1;
     [self.view addGestureRecognizer:swipeGestureRecognizer2];
     
-    
-}
-
--(void)viewWillDisappear:(BOOL)animated
-{
-    
-}
-
-
--(void)viewWillAppear:(BOOL)animated
-{
     [self showProgressHUD];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -103,12 +92,12 @@
                 
                 [self.collectionView reloadData];
             });
-
+            
         }
         @catch (NSException *exception) {
-             dispatch_async(dispatch_get_main_queue(), ^{
-                 [self showMsgHint:MC_ERROR_MSG_0001];
-             });
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self showMsgHint:MC_ERROR_MSG_0001];
+            });
         }
         @finally {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -118,6 +107,20 @@
         }
         
     });
+
+    
+    
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    
+}
+
+
+-(void)viewWillAppear:(BOOL)animated
+{
+
 }
 
 

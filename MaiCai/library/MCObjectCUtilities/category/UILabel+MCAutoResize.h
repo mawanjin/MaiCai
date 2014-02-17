@@ -10,4 +10,5 @@
 
 @interface UILabel (MCAutoResize)
 -(void)autoResizeByText:(NSString*)text PositionX:(float)x PositionY:(float)y;
++(CGFloat)calculateHeightByText:(NSString*)text;
 @end

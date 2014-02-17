@@ -127,8 +127,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.section == 0) {
-        CGSize labelsize = [self.recipe.introduction sizeWithFont:[UIFont fontWithName:@"Arial" size:13] constrainedToSize:CGSizeMake(320,2000) lineBreakMode:UILineBreakModeWordWrap];
-        return labelsize.height+10;
+        return [UILabel calculateHeightByText:self.recipe.introduction]+10;
     }else if(indexPath.section == 1) {
         return 37;
     }else if(indexPath.section == 2) {

@@ -72,10 +72,7 @@
     UISwipeGestureRecognizerDirectionRight;
     swipeGestureRecognizer2.numberOfTouchesRequired = 1;
     [self.view addGestureRecognizer:swipeGestureRecognizer2];
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
+    
     [self showProgressHUD];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -100,6 +97,11 @@
         }
     });
 
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    
 }
 
 - (void)didReceiveMemoryWarning

@@ -19,6 +19,7 @@
 #import "UIImageView+MCAsynLoadImage.h"
 #import "MCRecipe.h"
 #import "MCCookBookDetailViewController.h"
+#import "UILabel+MCAutoResize.h"
 
 @interface MCVegetableDetailViewController ()
 @property NSDictionary* data;
@@ -61,8 +62,7 @@
                 [self showMsgHint:MC_ERROR_MSG_0001];
             });
         }@finally {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self hideProgressHUD];
+            dispatch_sync(dispatch_get_main_queue(), ^{
                 NSMutableArray* tenants = self.data[@"tenants"];
                 MCShop* shop = tenants[0];
                 self.vegetable = shop.vegetables[0];
@@ -72,16 +72,16 @@
                 self.shopLabel.text = self.vegetable.shop.name;
                 
                 [self.tableView reloadData];
-                if(IS_IPHONE_5){
-                    
-                }else{
-                    self.tableView.frame = CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width,self.tableView.frame.size.height-90);
-                }
-                
+                [self hideProgressHUD];
             });
         }
     });
 
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [self.tableView reloadData];
 }
 
 
@@ -130,7 +130,7 @@
 {
     if(indexPath.section == 0) {
        MCVegetableDetailDescriptionCell* cell =  [tableView dequeueReusableCellWithIdentifier:@"vegetableDetailDescriptionCell"];
-        cell.descriptionLabel.text = self.data[@"summary"];
+        [cell.descriptionLabel autoResizeByText:self.data[@"summary"] PositionX:0 PositionY:0];
         return cell;
     }else if(indexPath.section == 1) {
         MCVegetableDetailShopInfoCell* cell = [tableView dequeueReusableCellWithIdentifier:@"vegetableDetailShopInfoCell"];
@@ -158,7 +158,7 @@
 {
     if(indexPath.section == 0) {
         //商品介绍
-        return 84;
+        return [UILabel calculateHeightByText:self.data[@"summary"]];
     }else if(indexPath.section == 1) {
         //店铺信息
         return 110;
