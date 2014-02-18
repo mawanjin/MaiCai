@@ -385,7 +385,11 @@
 
 - (void)changeAddressAction:(UIButton *)sender {
     MCMineAddressViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCMineAddressViewController"];
-    vc.previousView = (MCBaseViewController*)self;
+    [vc setChooseAddressComplete:^(MCAddress *address, int row) {
+        self.address = address;
+        self.index = row;
+    }];
+    vc.choosedRow = self.index;
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
     

@@ -1794,7 +1794,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dotted_line" translatesAutoresizingMaskIntoConstraints="NO" id="Wtp-Za-fZ0">
-                                                    <rect key="frame" x="0.0" y="67" width="307" height="1"/>
+                                                    <rect key="frame" x="0.0" y="67" width="320" height="1"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </imageView>
@@ -1825,11 +1825,6 @@
                                                         <outlet property="delegate" destination="HVQ-J3-Pt4" id="Ke8-JP-1Gj"/>
                                                     </connections>
                                                 </textView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="dotted_line" translatesAutoresizingMaskIntoConstraints="NO" id="ntw-Sf-fXf">
-                                                    <rect key="frame" x="0.0" y="81" width="320" height="1"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
@@ -2089,7 +2084,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ph4-1t-S3m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1161" y="3182"/>
+            <point key="canvasLocation" x="-1206" y="3194"/>
         </scene>
         <!--Mine Cart View Controller - 菜篮子-->
         <scene sceneID="0J3-LH-glJ">

@@ -21,6 +21,7 @@
     @private
         int addressId;
         NSIndexPath* index;
+        
 }
 #pragma mark- base
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -39,7 +40,6 @@
     self.navigationItem.rightBarButtonItem=
     [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addBtnAction)];
     self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -83,17 +83,12 @@
     MCMineAdressCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"addressCell"];
     MCAddress* address = self.data[indexPath.row];
     cell.usernameLabel.text = [[NSString alloc]initWithFormat:@"收货人：%@",address.shipper];
-    if([self.previousView isKindOfClass:[MCOrderConfirmViewController class]]){
-         MCOrderConfirmViewController* controller = ( MCOrderConfirmViewController*)self.previousView;
-        if(indexPath.row == controller.index) {
-            [cell.chooseIcon setHidden:NO];
-        }else{
-             [cell.chooseIcon setHidden:YES];
-        }
-    }else {
-        [cell.chooseIcon setHidden:YES];
-    }
     
+    if(indexPath.row == _choosedRow) {
+        [cell.chooseIcon setHidden:NO];
+    }else{
+         [cell.chooseIcon setHidden:YES];
+    }
     cell.mobileLabel.text = [[NSString alloc]initWithFormat:@"联系电话：%@",address.mobile];
     cell.addressLabel.text = [[NSString alloc]initWithFormat:@"收货地址：%@",address.address];
     
@@ -108,7 +103,7 @@
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if([self.previousView isKindOfClass:[MCOrderConfirmViewController class]]){
+    if(self.chooseAddressComplete){
         if(self.currentChoose != Nil) {
             MCMineAdressCell* cell =(MCMineAdressCell* ) [self.tableView cellForRowAtIndexPath:self.currentChoose];
             [cell.chooseIcon setHidden:YES];
@@ -117,9 +112,8 @@
         [cell.chooseIcon setHidden:NO];
         self.currentChoose = indexPath;
         MCAddress* address = self.data[indexPath.row];
-        MCOrderConfirmViewController* controller = ( MCOrderConfirmViewController*)self.previousView;
-        controller.address = address;
-        controller.index = indexPath.row;
+        self.chooseAddressComplete(address,indexPath.row);
+        self.chooseAddressComplete = nil;
         [self backBtnAction];
     }
 }
