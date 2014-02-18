@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04015AA718B1D2F8002901A1 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 04015A9D18B1D2F8002901A1 /* MJRefresh.bundle */; };
+		04015AA818B1D2F8002901A1 /* MJRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04015AA018B1D2F8002901A1 /* MJRefreshBaseView.m */; };
+		04015AA918B1D2F8002901A1 /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 04015AA218B1D2F8002901A1 /* MJRefreshConst.m */; };
+		04015AAA18B1D2F8002901A1 /* MJRefreshFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04015AA418B1D2F8002901A1 /* MJRefreshFooterView.m */; };
+		04015AAB18B1D2F8002901A1 /* MJRefreshHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04015AA618B1D2F8002901A1 /* MJRefreshHeaderView.m */; };
 		04069919184F6693006F615C /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 04069918184F6693006F615C /* HMSegmentedControl.m */; };
 		0406991C18500C50006F615C /* MCMarketTradeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0406991B18500C50006F615C /* MCMarketTradeCell.m */; };
 		04069921185021D8006F615C /* MCMarketTradeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04069920185021D8006F615C /* MCMarketTradeCell.xib */; };
@@ -182,6 +187,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04015A9D18B1D2F8002901A1 /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
+		04015A9E18B1D2F8002901A1 /* MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefresh.h; sourceTree = "<group>"; };
+		04015A9F18B1D2F8002901A1 /* MJRefreshBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBaseView.h; sourceTree = "<group>"; };
+		04015AA018B1D2F8002901A1 /* MJRefreshBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshBaseView.m; sourceTree = "<group>"; };
+		04015AA118B1D2F8002901A1 /* MJRefreshConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshConst.h; sourceTree = "<group>"; };
+		04015AA218B1D2F8002901A1 /* MJRefreshConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshConst.m; sourceTree = "<group>"; };
+		04015AA318B1D2F8002901A1 /* MJRefreshFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshFooterView.h; sourceTree = "<group>"; };
+		04015AA418B1D2F8002901A1 /* MJRefreshFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshFooterView.m; sourceTree = "<group>"; };
+		04015AA518B1D2F8002901A1 /* MJRefreshHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshHeaderView.h; sourceTree = "<group>"; };
+		04015AA618B1D2F8002901A1 /* MJRefreshHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshHeaderView.m; sourceTree = "<group>"; };
 		04069917184F6693006F615C /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		04069918184F6693006F615C /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		0406991A18500C50006F615C /* MCMarketTradeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMarketTradeCell.h; sourceTree = "<group>"; };
@@ -506,6 +521,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04015A9C18B1D2F8002901A1 /* MJRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				04015A9D18B1D2F8002901A1 /* MJRefresh.bundle */,
+				04015A9E18B1D2F8002901A1 /* MJRefresh.h */,
+				04015A9F18B1D2F8002901A1 /* MJRefreshBaseView.h */,
+				04015AA018B1D2F8002901A1 /* MJRefreshBaseView.m */,
+				04015AA118B1D2F8002901A1 /* MJRefreshConst.h */,
+				04015AA218B1D2F8002901A1 /* MJRefreshConst.m */,
+				04015AA318B1D2F8002901A1 /* MJRefreshFooterView.h */,
+				04015AA418B1D2F8002901A1 /* MJRefreshFooterView.m */,
+				04015AA518B1D2F8002901A1 /* MJRefreshHeaderView.h */,
+				04015AA618B1D2F8002901A1 /* MJRefreshHeaderView.m */,
+			);
+			path = MJRefresh;
+			sourceTree = "<group>";
+		};
 		04069916184F6693006F615C /* HMSegmentedControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -1002,6 +1034,7 @@
 		04D230AE182B883E00D4B4AC /* library */ = {
 			isa = PBXGroup;
 			children = (
+				04015A9C18B1D2F8002901A1 /* MJRefresh */,
 				046962A118AB1A4E00A58918 /* Lumberjack */,
 				047F63C318A8E67200F4D5DA /* SVProgressHUD */,
 				0472EBC0189211F700A40C9D /* MCObjectCUtilities */,
@@ -1098,6 +1131,7 @@
 			files = (
 				046962C818ADB97A00A58918 /* Main_iphone5.storyboard in Resources */,
 				041E5A87187D2FB400BB0F67 /* MCHealthDetailProductCell.xib in Resources */,
+				04015AA718B1D2F8002901A1 /* MJRefresh.bundle in Resources */,
 				046962CD18ADE72700A58918 /* MCOrderConfirmFooter.xib in Resources */,
 				0437A4901847491A000D427B /* Alixpay.bundle in Resources */,
 				04C9733B186A6EF600138DB8 /* MCQuickOrderTableHeader.xib in Resources */,
@@ -1179,6 +1213,7 @@
 				0497B8081839EEBE008A6F8B /* FMDatabasePool.m in Sources */,
 				048445C5183DD08A006F4090 /* UIDevice+IdentifierAddition.m in Sources */,
 				046E99CA18261F6D0005FB53 /* MCMineCartViewController.m in Sources */,
+				04015AA918B1D2F8002901A1 /* MJRefreshConst.m in Sources */,
 				0437A4991847491A000D427B /* SBJsonBase.m in Sources */,
 				0437A4961847491A000D427B /* NSObject+SBJSON.m in Sources */,
 				041E5A8A187F8E3500BB0F67 /* MCLabelDetailViewController.m in Sources */,
@@ -1186,6 +1221,7 @@
 				04B990BB18346D060018F84E /* MCCategory.m in Sources */,
 				046962C518ACFAF700A58918 /* MCOrderConfirmPayCell.m in Sources */,
 				04C9733E186A6F1700138DB8 /* MCQuickOrderTableHeader.m in Sources */,
+				04015AAB18B1D2F8002901A1 /* MJRefreshHeaderView.m in Sources */,
 				04C9734E186D5C7500138DB8 /* MCRecipeDishDescriptionCell.m in Sources */,
 				044FF8AF187154260077CE67 /* MCHealth.m in Sources */,
 				04DAF4E31845D77D009C7720 /* MCOrderDetailCell.m in Sources */,
@@ -1212,6 +1248,7 @@
 				0472EBD8189211F800A40C9D /* UILabel+MCAutoResize.m in Sources */,
 				046D48FC187A5333000E07DA /* MCMarketIndexTipCell.m in Sources */,
 				046E99CB18261F6D0005FB53 /* MCVegetableMarketViewController.m in Sources */,
+				04015AAA18B1D2F8002901A1 /* MJRefreshFooterView.m in Sources */,
 				0472EBD9189211F800A40C9D /* MCFileOperation.m in Sources */,
 				047F63C918A8E67200F4D5DA /* SVProgressHUD.m in Sources */,
 				0437A4931847491A000D427B /* AlixPayOrder.m in Sources */,
@@ -1231,6 +1268,7 @@
 				04C97337186962F400138DB8 /* MCQuickOrderHeader.m in Sources */,
 				047390BD183C51AE003F443D /* Toast+UIView.m in Sources */,
 				04C973311869297A00138DB8 /* MCQuickOrderViewController.m in Sources */,
+				04015AA818B1D2F8002901A1 /* MJRefreshBaseView.m in Sources */,
 				0437A4941847491A000D427B /* AlixPayResult.m in Sources */,
 				0467B7FC184ED7AB005A72F0 /* MCMarketIndexQuickOrderCell.m in Sources */,
 				046962AD18AB1A4E00A58918 /* DDLog.m in Sources */,

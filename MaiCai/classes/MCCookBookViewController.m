@@ -5,7 +5,6 @@
 //  Created by Peng Jack on 13-10-25.
 //  Copyright (c) 2013年 JoinSoft. All rights reserved.
 //
-
 #import "MCCookBookViewController.h"
 #import "MCCookBookDetailViewController.h"
 #import "MCVegetableManager.h"
@@ -30,14 +29,12 @@
         int pageSize;
 }
 
-
 #pragma mark- base
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        
     }
     return self;
 }
@@ -58,6 +55,7 @@
     } else {
         yDelta = 0.0f;
     }
+    
     self.recipes = [[NSMutableArray alloc]init];
     self.healthList = [[NSMutableArray alloc]init];
     
@@ -78,7 +76,6 @@
     [self.segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:self.segmentedControl];
     
-    
     //手势滑动控制
     UISwipeGestureRecognizer* swipeGestureRecognizer1 = [[UISwipeGestureRecognizer alloc]
                                                          initWithTarget:self
@@ -95,16 +92,14 @@
     UISwipeGestureRecognizerDirectionRight;
     swipeGestureRecognizer2.numberOfTouchesRequired = 1;
     [self.view addGestureRecognizer:swipeGestureRecognizer2];
-
     
+    // 3.1.下拉刷新
+    [self addHeader];
     
-    UIView* view = [[UIView alloc]initWithFrame:self.segmentedControl.frame];
-    [view setBackgroundColor:[UIColor clearColor]];
-    self.tableView.tableHeaderView = view;
+    // 3.2.上拉加载更多
+    [self addFooter];
     
-    page = 1;
-    [self getRecipes];
-    
+    [self.header beginRefreshing];
 }
 
 - (void)didReceiveMemoryWarning
@@ -113,103 +108,73 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+/**
+ 为了保证内部不泄露，在dealloc中释放占用的内存
+ */
+- (void)dealloc
+{
+    [_header free];
+    [_footer free];
+}
+
+
 #pragma mark- tableview
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     if(self.segmentedControl.selectedSegmentIndex == 0) {
-        //菜谱
-        if(indexPath.row == self.recipes.count) {
-            page++;
-           // UITableViewCell *loadMoreCell=[tableView cellForRowAtIndexPath:indexPath];
-            
-            [self getRecipes];
-            
-            [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        }else {
-            MCCookBookDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCCookBookDetailViewController"];
-            vc.recipe = self.recipes[indexPath.row];
-            vc.hidesBottomBarWhenPushed = YES;
-           [self.navigationController pushViewController:vc animated:YES];
-        }
+        MCCookBookDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCCookBookDetailViewController"];
+        vc.recipe = self.recipes[indexPath.row];
+        vc.hidesBottomBarWhenPushed = YES;
+       [self.navigationController pushViewController:vc animated:YES];
     }else {
-        //养身
-        if(indexPath.row == self.healthList.count) {
-            page++;
-            [self getHealthList];
-             [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        }else{
-            MCHealthDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCHealthDetailViewController"];
-            vc.health = self.healthList[indexPath.row];
-            [vc setShowMsg:^(NSString *msg) {
-                [self showMsgHint:msg];
-            }];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-
-        }
-        
+        MCHealthDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCHealthDetailViewController"];
+        vc.health = self.healthList[indexPath.row];
+        [vc setShowMsg:^(NSString *msg) {
+            [self showMsgHint:msg];
+        }];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   
-        if(self.segmentedControl.selectedSegmentIndex == 0) {
-            if(indexPath.row == self.recipes.count){
-                //加载更多
-                MCCookBookCell* cell = [tableView dequeueReusableCellWithIdentifier:@"loadMoreCell"];
-                
-                return cell;
-            }else {
-                //菜谱
-                MCCookBookCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cookBookCell"];
-                MCRecipe* recipe = self.recipes[indexPath.row];
-                [cell.image loadImageByUrl:recipe.image];
-                cell.nameLabel.text = recipe.name;
-                cell.introductionLabel.text = recipe.introduction;
-                return cell;
-            }
-        }else {
-            if(indexPath.row == self.healthList.count){
-                //加载更多
-                MCCookBookCell* cell = [tableView dequeueReusableCellWithIdentifier:@"loadMoreCell"];
-                return cell;
-            }else {
-                //养身
-               MCHealth* health = self.healthList[indexPath.row];
-                MCHealthCell* cell = [tableView dequeueReusableCellWithIdentifier:@"healthCell"];
-                cell.label.text = health.name;
-                return cell;
-            }
-
-        }
-    
+    if(self.segmentedControl.selectedSegmentIndex == 0) {
+        MCCookBookCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cookBookCell"];
+        MCRecipe* recipe = self.recipes[indexPath.row];
+        [cell.image setImage:[[UIImage alloc]init]];
+        [cell.image loadImageByUrl:recipe.image];
+        cell.nameLabel.text = recipe.name;
+        cell.introductionLabel.text = recipe.introduction;
+        return cell;
+    }else {
+        MCHealth* health = self.healthList[indexPath.row];
+        MCHealthCell* cell = [tableView dequeueReusableCellWithIdentifier:@"healthCell"];
+        cell.label.text = health.name;
+        return cell;
+    }
 }
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row == self.recipes.count) {
-        return 43;
+    if(self.segmentedControl.selectedSegmentIndex == 0) {
+        //菜谱
+        return 73;
     }else {
-        if(self.segmentedControl.selectedSegmentIndex == 0) {
-            //菜谱
-            return 73;
-        }else {
-            //养身
-            return 43;
-        }
+        //养身
+        return 43;
     }
-    
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if(self.segmentedControl.selectedSegmentIndex == 0) {
-        return self.recipes.count+1;
+        return self.recipes.count;
     }else {
-        return self.healthList.count+1;
+        return self.healthList.count;
     }
     
 }
@@ -217,19 +182,12 @@
 #pragma mark- others
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
 	DDLogVerbose(@"Selected index %i (via UIControlEventValueChanged)", segmentedControl.selectedSegmentIndex);
-    if(segmentedControl.selectedSegmentIndex == 0) {
-        page = 1;
-        [self.recipes removeAllObjects];
-        //[self.tableView reloadData];
-        [self getRecipes];
-    }else {
-        page = 1;
-        [self.healthList removeAllObjects];
-        //[self.tableView reloadData];
-        [self getHealthList];
-    }
-}
+    [self.recipes removeAllObjects];
+    [self.healthList removeAllObjects];
+    [self.tableView reloadData];
+    [self.header beginRefreshing];
 
+}
 
 
 - (IBAction)handleSwipe:(UISwipeGestureRecognizer *)sender {
@@ -238,7 +196,6 @@
         if(self.segmentedControl.selectedSegmentIndex < 2) {
             [self.segmentedControl setSelectedSegmentIndex:(self.segmentedControl.selectedSegmentIndex+1) animated:YES];
             [self segmentedControlChangedValue:self.segmentedControl];
-            
         }
     }
     if (sender.direction & UISwipeGestureRecognizerDirectionRight){
@@ -250,59 +207,134 @@
     }
 }
 
--(void)getRecipes{
-    [self showProgressHUD];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        @try {
-            NSMutableArray* newData = [[MCVegetableManager getInstance]getRecipesByPage:page Pagesize:pageSize];
-            
-            [self.recipes addObjectsFromArray:newData];
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
-            });
 
-        }
-        @catch (NSException *exception) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self showMsgHint:MC_ERROR_MSG_0001]; 
-            });
-        }
-        @finally {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self hideProgressHUD];
-            });
-        }
-    });
-}
-
-
--(void)getHealthList
+#pragma mark- 下拉刷新，上拉加载更多
+- (void)addFooter
 {
-    [self showProgressHUD];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        @try {
-            NSMutableArray* newData = [[MCVegetableManager getInstance]getHealthListByPage:page Pagesize:pageSize];
-            
-            [self.healthList addObjectsFromArray:newData];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
+    MJRefreshFooterView *footer = [MJRefreshFooterView footer];
+    footer.scrollView = self.tableView;
+    footer.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
+        // 模拟延迟加载数据，因此2秒后才调用）
+        // 这里的refreshView其实就是footer
+        page++;
+        if (self.segmentedControl.selectedSegmentIndex == 0) {
+            //菜谱
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                @try {
+                    NSMutableArray* newData = [[MCVegetableManager getInstance]getRecipesByPage:page Pagesize:pageSize];
+                    
+                    [self.recipes addObjectsFromArray:newData];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self performSelector:@selector(doneWithView:) withObject:refreshView afterDelay:0.0];
+                    });
+                }
+                @catch (NSException *exception) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self showMsgHint:MC_ERROR_MSG_0001];
+                    });
+                }
+            });
+        }else {
+            //养身
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                @try {
+                    NSMutableArray* newData = [[MCVegetableManager getInstance]getHealthListByPage:page Pagesize:pageSize];
+                    [self.healthList addObjectsFromArray:newData];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self performSelector:@selector(doneWithView:) withObject:refreshView afterDelay:0.0];
+                    });
+                }
+                @catch (NSException *exception) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self showMsgHint:MC_ERROR_MSG_0001];
+                    });
+                }
             });
         }
-        @catch (NSException *exception) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self showMsgHint:MC_ERROR_MSG_0001];
-            });
-        }
-        @finally {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self hideProgressHUD];
-                                //重新调用UITableView的方法, 来生成行.
-                
-            });
-        }
-    });
+        //NSLog(@"%@----开始进入刷新状态", refreshView.class);
+    };
+    self.footer = footer;
 }
 
 
+- (void)addHeader
+{
+    MJRefreshHeaderView *header = [MJRefreshHeaderView header];
+    header.scrollView = self.tableView;
+    
+    header.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
+        // 进入刷新状态就会回调这个Block
+        page = 1;
+        if (self.segmentedControl.selectedSegmentIndex == 0) {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                @try {
+                    [self.recipes removeAllObjects];
+                    NSMutableArray* newData = [[MCVegetableManager getInstance]getRecipesByPage:page Pagesize:pageSize];
+                    [self.recipes addObjectsFromArray:newData];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self performSelector:@selector(doneWithView:) withObject:refreshView afterDelay:0.0];
+                    });
+                }
+                @catch (NSException *exception) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self showMsgHint:MC_ERROR_MSG_0001];
+                    });
+                }
+            });
 
+        }else {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                @try {
+                    
+                    [self.healthList removeAllObjects];
+                    NSMutableArray* newData = [[MCVegetableManager getInstance]getHealthListByPage:page Pagesize:pageSize];
+                    [self.healthList addObjectsFromArray:newData];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self performSelector:@selector(doneWithView:) withObject:refreshView afterDelay:0.0];
+                        
+                    });
+                }
+                @catch (NSException *exception) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self showMsgHint:MC_ERROR_MSG_0001];
+                    });
+                }
+            });
+        }
+    };
+    
+    header.endStateChangeBlock = ^(MJRefreshBaseView *refreshView) {
+        // 刷新完毕就会回调这个Block
+        //NSLog(@"%@----刷新完毕", refreshView.class);
+    };
+    
+    header.refreshStateChangeBlock = ^(MJRefreshBaseView *refreshView, MJRefreshState state) {
+        // 控件的刷新状态切换了就会调用这个block
+        switch (state) {
+            case MJRefreshStateNormal:
+                //NSLog(@"%@----切换到：普通状态", refreshView.class);
+                break;
+                
+            case MJRefreshStatePulling:
+                //NSLog(@"%@----切换到：松开即可刷新的状态", refreshView.class);
+                break;
+                
+            case MJRefreshStateRefreshing:
+                //NSLog(@"%@----切换到：正在刷新状态", refreshView.class);
+                break;
+            default:
+                break;
+        }
+    };
+    
+    self.header = header;
+}
+
+- (void)doneWithView:(MJRefreshBaseView *)refreshView
+{
+    // 刷新表格
+    [self.tableView reloadData];
+    //(最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+    [refreshView endRefreshing];
+}
 @end
