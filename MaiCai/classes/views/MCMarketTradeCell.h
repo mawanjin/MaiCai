@@ -11,5 +11,6 @@
 @interface MCMarketTradeCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *imageIcon;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 
 @end

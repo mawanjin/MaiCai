@@ -5,7 +5,6 @@
 //  Created by Peng Jack on 13-11-24.
 //  Copyright (c) 2013年 JoinSoft. All rights reserved.
 //
-
 #import "MCOrderConfirmViewController.h"
 #import "MCOrderConfirmHeader.h"
 #import "MCOrderConfirmSectionHeader.h"
@@ -36,6 +35,7 @@
 #import "DataVerifier.h"
 #import "AlixPayOrder.h"
 #import "AlixLibService.h"
+
 
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 @implementation MCOrderConfirmViewController

@@ -55,15 +55,13 @@ NSString* const MC_ERROR_MSG_0004 = @"请填写收货人地址";
 #pragma mark- others
 -(void)showMsgHint:(NSString*)msg;
 {
-    
     [self.view makeToast:msg duration:1 position:@"center"];
-    
 }
 
 
 -(void)showProgressHUD
 {
-    [SVProgressHUD showWithStatus:@"努力加载中..." maskType: SVProgressHUDMaskTypeClear];
+    [SVProgressHUD showWithStatus:@"努力加载中..." maskType: SVProgressHUDMaskTypeNone];
 }
 
 -(void)hideProgressHUD

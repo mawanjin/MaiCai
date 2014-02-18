@@ -151,6 +151,7 @@
     [myCell.imageIcon setImage:[[UIImage alloc]init]];
     [myCell.imageIcon loadImageByUrl:vegetable.image];
     myCell.nameLabel.text = vegetable.name;
+    myCell.priceLabel.text = [[NSString alloc]initWithFormat:@"%.02f元/斤",vegetable.price];
     return myCell;
 }
 
