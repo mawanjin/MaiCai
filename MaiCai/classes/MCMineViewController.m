@@ -150,24 +150,30 @@
         BOOL isLoged = [[MCContextManager getInstance]isLogged];
         if(isLoged) {
             cell.image.image = [UIImage imageNamed:@"mine_order_normal"];
+            cell.label.textColor = [UIColor blackColor];
         }else {
             cell.image.image = [UIImage imageNamed:@"mine_order_grey"];
+            cell.label.textColor = [UIColor grayColor];
         }
         cell.label.text = @"我的订单";
     }else if(indexPath.row == 2) {
         BOOL isLoged = [[MCContextManager getInstance]isLogged];
         if(isLoged) {
             cell.image.image = [UIImage imageNamed:@"mine_cookbook_normal"];
+            cell.label.textColor = [UIColor blackColor];
         }else {
             cell.image.image = [UIImage imageNamed:@"mine_cookbook_grey"];
+            cell.label.textColor = [UIColor grayColor];
         }
         cell.label.text = @"我的收藏";
     }else if(indexPath.row == 3) {
         BOOL isLoged = [[MCContextManager getInstance]isLogged];
         if(isLoged) {
             cell.image.image = [UIImage imageNamed:@"mine_address_normal"];
+            cell.label.textColor = [UIColor blackColor];
         }else {
             cell.image.image = [UIImage imageNamed:@"mine_address_grey"];
+            cell.label.textColor = [UIColor grayColor];
         }
         cell.label.text = @"收货地址";
     }else if(indexPath.row == 4) {
@@ -177,10 +183,13 @@
         BOOL isLoged = [[MCContextManager getInstance]isLogged];
         if(isLoged) {
             cell.image.image = [UIImage imageNamed:@"mine_personal_normal"];
+            cell.label.textColor = [UIColor blackColor];
         }else {
             cell.image.image = [UIImage imageNamed:@"mine_personal_grey"];
+            cell.label.textColor = [UIColor grayColor];
         }
         cell.label.text = @"个人信息";
+        
     }else if(indexPath.row == 6) {
         cell.image.image = [UIImage imageNamed:@"mine_personal_normal"];
         cell.label.text = [[NSString alloc]initWithFormat:@"清除缓存(%@MB)",[[MCNetwork getInstance] sizeCache]];

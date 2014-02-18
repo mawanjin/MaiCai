@@ -152,7 +152,7 @@
                     if(vegetable.isSelected) {
                         NSDictionary* product = @{
                                                   @"id":[[NSNumber alloc]initWithInt:vegetable.id],
-                                                  @"quantity":[[NSNumber alloc]initWithInt:vegetable.quantity],
+                                                  @"quantity":[[NSNumber alloc]initWithInt:(vegetable.quantity==0)?1:vegetable.quantity],
                                                   // @"dosage":vegetable.dosage
                                                   };
                         [choosedProducts addObject:product];
@@ -175,7 +175,7 @@
                     if(vegetable.isSelected) {
                         NSDictionary* product = @{
                                                   @"id":[[NSNumber alloc]initWithInt:vegetable.id],
-                                                  @"quantity":[[NSNumber alloc]initWithInt:vegetable.quantity]
+                                                  @"quantity":[[NSNumber alloc]initWithInt:(vegetable.quantity==0)?1:vegetable.quantity]
                                                   };
                         [choosedProducts addObject:product];
                     }

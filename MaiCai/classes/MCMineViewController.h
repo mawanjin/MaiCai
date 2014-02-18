@@ -15,6 +15,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *quitAndLoginLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-
 @property NSMutableArray* data;
 @end
