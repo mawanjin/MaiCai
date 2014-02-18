@@ -10,6 +10,7 @@
 #import "MCAppDelegate.h"
 #import "SVProgressHUD.h"
 #import "DDLogConfig.h"
+#import "Reachability.h"
 
 
 NSString* const MC_ERROR_MSG_0001 = @"操作失败...";
@@ -31,7 +32,7 @@ NSString* const MC_ERROR_MSG_0004 = @"请填写收货人地址";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-       
+    [self registerReachability];
 }
 
 
@@ -67,6 +68,29 @@ NSString* const MC_ERROR_MSG_0004 = @"请填写收货人地址";
 -(void)hideProgressHUD
 {
     [SVProgressHUD dismiss];
+}
+
+
+-(void)registerReachability{
+    Reachability* reach = [Reachability reachabilityWithHostname:@"www.google.com"];
+    
+    // Set the blocks
+    reach.reachableBlock = ^(Reachability*reach)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //[self showMsgHint:@""];
+        });
+    };
+    
+    reach.unreachableBlock = ^(Reachability*reach)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self showMsgHint:@"当前无网络连接！"];
+        });
+    };
+    
+    // Start the notifier, which will cause the reachability object to retain itself!
+    [reach startNotifier];
 }
 
 @end

@@ -45,6 +45,7 @@
 		0437A4A2184C870A000D427B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DAF63318472D90009C7720 /* CFNetwork.framework */; };
 		0437A4A3184C871E000D427B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DAF63118472D7A009C7720 /* SystemConfiguration.framework */; };
 		0437A4A4184C8724000D427B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DAF5091846E3B0009C7720 /* Security.framework */; };
+		043F2FDB18B33B0A00E8D5AD /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F2FDA18B33B0A00E8D5AD /* Reachability.m */; };
 		044BC9AC1830687800D43115 /* MCMineAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044BC9AB1830687800D43115 /* MCMineAddressViewController.m */; };
 		044BC9B118308CB200D43115 /* MCNewMineAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044BC9B018308CB200D43115 /* MCNewMineAddressViewController.m */; };
 		044BC9B41830A6C900D43115 /* MCMineAdressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 044BC9B31830A6C900D43115 /* MCMineAdressCell.m */; };
@@ -116,13 +117,7 @@
 		0497B7F11838C531008A6F8B /* MCCartHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0497B7F01838C531008A6F8B /* MCCartHeader.xib */; };
 		0497B7F41839BB9C008A6F8B /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0497B7F21839BB9B008A6F8B /* libsqlite3.0.dylib */; };
 		0497B7FA1839E438008A6F8B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0497B7F31839BB9B008A6F8B /* libsqlite3.dylib */; };
-		0497B8061839EEBE008A6F8B /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0497B7FD1839EEBE008A6F8B /* FMDatabase.m */; };
-		0497B8071839EEBE008A6F8B /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0497B7FF1839EEBE008A6F8B /* FMDatabaseAdditions.m */; };
-		0497B8081839EEBE008A6F8B /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0497B8011839EEBE008A6F8B /* FMDatabasePool.m */; };
-		0497B8091839EEBE008A6F8B /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0497B8031839EEBE008A6F8B /* FMDatabaseQueue.m */; };
-		0497B80A1839EEBE008A6F8B /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0497B8051839EEBE008A6F8B /* FMResultSet.m */; };
 		0497B80D1839FD40008A6F8B /* MCUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0497B80C1839FD40008A6F8B /* MCUser.m */; };
-		0497B8101839FF1D008A6F8B /* MCDBManger.m in Sources */ = {isa = PBXBuildFile; fileRef = 0497B80F1839FF1D008A6F8B /* MCDBManger.m */; };
 		0497B813183A012B008A6F8B /* MCUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0497B812183A012B008A6F8B /* MCUserManager.m */; };
 		0497B816183AFCB1008A6F8B /* MCRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0497B815183AFCB1008A6F8B /* MCRegisterViewController.m */; };
 		049904911855957C00AE8DFB /* AlipayRsaLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0499048D1855957C00AE8DFB /* AlipayRsaLib.a */; };
@@ -255,6 +250,8 @@
 		0437A4891847491A000D427B /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		0437A48D1847491A000D427B /* DataSigner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSigner.h; sourceTree = "<group>"; };
 		0437A48E1847491A000D427B /* DataVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataVerifier.h; sourceTree = "<group>"; };
+		043F2FD918B33B0A00E8D5AD /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		043F2FDA18B33B0A00E8D5AD /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		044BC9AA1830687800D43115 /* MCMineAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMineAddressViewController.h; sourceTree = "<group>"; };
 		044BC9AB1830687800D43115 /* MCMineAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMineAddressViewController.m; sourceTree = "<group>"; };
 		044BC9AD183083DC00D43115 /* Main_iphone5.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iphone5.storyboard; sourceTree = "<group>"; };
@@ -380,20 +377,8 @@
 		0497B7F01838C531008A6F8B /* MCCartHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCCartHeader.xib; sourceTree = "<group>"; };
 		0497B7F21839BB9B008A6F8B /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		0497B7F31839BB9B008A6F8B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		0497B7FC1839EEBE008A6F8B /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
-		0497B7FD1839EEBE008A6F8B /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
-		0497B7FE1839EEBE008A6F8B /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
-		0497B7FF1839EEBE008A6F8B /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
-		0497B8001839EEBE008A6F8B /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
-		0497B8011839EEBE008A6F8B /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
-		0497B8021839EEBE008A6F8B /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
-		0497B8031839EEBE008A6F8B /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
-		0497B8041839EEBE008A6F8B /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
-		0497B8051839EEBE008A6F8B /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		0497B80B1839FD40008A6F8B /* MCUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCUser.h; sourceTree = "<group>"; };
 		0497B80C1839FD40008A6F8B /* MCUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCUser.m; sourceTree = "<group>"; };
-		0497B80E1839FF1D008A6F8B /* MCDBManger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCDBManger.h; sourceTree = "<group>"; };
-		0497B80F1839FF1D008A6F8B /* MCDBManger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCDBManger.m; sourceTree = "<group>"; };
 		0497B811183A012B008A6F8B /* MCUserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCUserManager.h; sourceTree = "<group>"; };
 		0497B812183A012B008A6F8B /* MCUserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCUserManager.m; sourceTree = "<group>"; };
 		0497B814183AFCB1008A6F8B /* MCRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCRegisterViewController.h; sourceTree = "<group>"; };
@@ -591,6 +576,15 @@
 			path = RSA;
 			sourceTree = "<group>";
 		};
+		043F2FD818B33B0A00E8D5AD /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				043F2FD918B33B0A00E8D5AD /* Reachability.h */,
+				043F2FDA18B33B0A00E8D5AD /* Reachability.m */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
 		0464C995182F7015009066C3 /* CWPopup */ = {
 			isa = PBXGroup;
 			children = (
@@ -691,8 +685,6 @@
 				04B990BD183496E10018F84E /* MCContextManager.m */,
 				0486A0ED1835BAD100FDC854 /* MCTradeManager.h */,
 				0486A0EE1835BAD100FDC854 /* MCTradeManager.m */,
-				0497B80E1839FF1D008A6F8B /* MCDBManger.h */,
-				0497B80F1839FF1D008A6F8B /* MCDBManger.m */,
 				0497B811183A012B008A6F8B /* MCUserManager.h */,
 				0497B812183A012B008A6F8B /* MCUserManager.m */,
 			);
@@ -862,23 +854,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		0497B7FB1839EEBE008A6F8B /* FMDB */ = {
-			isa = PBXGroup;
-			children = (
-				0497B7FC1839EEBE008A6F8B /* FMDatabase.h */,
-				0497B7FD1839EEBE008A6F8B /* FMDatabase.m */,
-				0497B7FE1839EEBE008A6F8B /* FMDatabaseAdditions.h */,
-				0497B7FF1839EEBE008A6F8B /* FMDatabaseAdditions.m */,
-				0497B8001839EEBE008A6F8B /* FMDatabasePool.h */,
-				0497B8011839EEBE008A6F8B /* FMDatabasePool.m */,
-				0497B8021839EEBE008A6F8B /* FMDatabaseQueue.h */,
-				0497B8031839EEBE008A6F8B /* FMDatabaseQueue.m */,
-				0497B8041839EEBE008A6F8B /* FMResultSet.h */,
-				0497B8051839EEBE008A6F8B /* FMResultSet.m */,
-			);
-			path = FMDB;
-			sourceTree = "<group>";
-		};
 		04B98D8018331D680018F84E /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1034,6 +1009,7 @@
 		04D230AE182B883E00D4B4AC /* library */ = {
 			isa = PBXGroup;
 			children = (
+				043F2FD818B33B0A00E8D5AD /* Reachability */,
 				04015A9C18B1D2F8002901A1 /* MJRefresh */,
 				046962A118AB1A4E00A58918 /* Lumberjack */,
 				047F63C318A8E67200F4D5DA /* SVProgressHUD */,
@@ -1043,7 +1019,6 @@
 				0437A47118474919000D427B /* alipay */,
 				048445C2183DD08A006F4090 /* TSDeviceId */,
 				047390BA183C51AE003F443D /* Toast */,
-				0497B7FB1839EEBE008A6F8B /* FMDB */,
 				0464C995182F7015009066C3 /* CWPopup */,
 			);
 			path = library;
@@ -1177,11 +1152,9 @@
 			files = (
 				048445CC183DF42D006F4090 /* MCChangePasswordView.m in Sources */,
 				044BC9B41830A6C900D43115 /* MCMineAdressCell.m in Sources */,
-				0497B8071839EEBE008A6F8B /* FMDatabaseAdditions.m in Sources */,
 				04C97348186D565500138DB8 /* MCStep.m in Sources */,
 				0423D3991864170500F08F1E /* MCSearchResultCell.m in Sources */,
 				046962C218ACFAEB00A58918 /* MCOrderConfirmDeliveryCell.m in Sources */,
-				0497B8091839EEBE008A6F8B /* FMDatabaseQueue.m in Sources */,
 				04DAF4CD1842FA44009C7720 /* MCOrderConfirmHeader_.m in Sources */,
 				046962CC18ADE72700A58918 /* MCOrderConfirmFooter.m in Sources */,
 				04DAF4BB1841A369009C7720 /* MCOrderConfirmViewController.m in Sources */,
@@ -1194,7 +1167,6 @@
 				04C9732E186928D200138DB8 /* MCQuickOrderCell.m in Sources */,
 				046962AE18AB1A4E00A58918 /* DDTTYLogger.m in Sources */,
 				041E5A7F187BC90D00BB0F67 /* MCVegetableDetailShopInfoCell.m in Sources */,
-				0497B8101839FF1D008A6F8B /* MCDBManger.m in Sources */,
 				04B98D8B18331D680018F84E /* MCShop.m in Sources */,
 				04F05A20185FE5F100BB25C6 /* MCCookStepCell.m in Sources */,
 				0467B7F6184EBCA2005A72F0 /* MCMarketIndexNewsCell.m in Sources */,
@@ -1210,7 +1182,6 @@
 				0486A0F21835CC6200FDC854 /* MCCartCell.m in Sources */,
 				041E5A921883777B00BB0F67 /* MCMineCollectViewController.m in Sources */,
 				046E99C918261F6D0005FB53 /* MCMineViewController.m in Sources */,
-				0497B8081839EEBE008A6F8B /* FMDatabasePool.m in Sources */,
 				048445C5183DD08A006F4090 /* UIDevice+IdentifierAddition.m in Sources */,
 				046E99CA18261F6D0005FB53 /* MCMineCartViewController.m in Sources */,
 				04015AA918B1D2F8002901A1 /* MJRefreshConst.m in Sources */,
@@ -1262,7 +1233,6 @@
 				04C97354186D6D7E00138DB8 /* MCCookBookCell.m in Sources */,
 				04BFBCF51867D9D60085F39F /* MCMarketIndexTipsHeader.m in Sources */,
 				0497B80D1839FD40008A6F8B /* MCUser.m in Sources */,
-				0497B8061839EEBE008A6F8B /* FMDatabase.m in Sources */,
 				04C97345186D292E00138DB8 /* GCPlaceholderTextView.m in Sources */,
 				0437A4971847491A000D427B /* NSString+SBJSON.m in Sources */,
 				04C97337186962F400138DB8 /* MCQuickOrderHeader.m in Sources */,
@@ -1284,7 +1254,7 @@
 				04B98D8A18331D680018F84E /* MCMarket.m in Sources */,
 				04069919184F6693006F615C /* HMSegmentedControl.m in Sources */,
 				04C3733E182A1E9500B01341 /* MCLoginViewController.m in Sources */,
-				0497B80A1839EEBE008A6F8B /* FMResultSet.m in Sources */,
+				043F2FDB18B33B0A00E8D5AD /* Reachability.m in Sources */,
 				046E99C818261F6D0005FB53 /* MCCookBookViewController.m in Sources */,
 				041E5A85187D2F8F00BB0F67 /* MCHealthDetailProductCell.m in Sources */,
 				04DAF4B7183EF853009C7720 /* MCAddressHelperView.m in Sources */,

@@ -13,9 +13,7 @@
 
 @interface MCUserManager : NSObject
 +(MCUserManager*)getInstance;
--(MCUser*)getDefaultUser;
 -(void)registerUser:(MCUser*)user MacId:(NSString*)macId;
--(void)insertUserToLocalDB:(MCUser*)user;
 -(void)login:(MCUser*)user;
 -(MCUser*)getUserInfo:(NSString*)id;
 -(void)changeNickName:(NSString*)nickname;

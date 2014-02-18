@@ -32,11 +32,7 @@
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
     
-    //MCDBManger* dbManger = [MCDBManger getInstance];
-    //[dbManger createTable];
-    
     MCUserManager* userManager = [MCUserManager getInstance];
-    //MCUser* user = [userManager getDefaultUser];
     MCUser* user = [userManager getLoginStatus];
     if(user!=nil) {
         [[MCContextManager getInstance] addKey:MC_USER Data:user];

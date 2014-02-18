@@ -8,8 +8,6 @@
 
 #import "MCUserManager.h"
 #import "MCUser.h"
-#import "FMDatabase.h"
-#import "MCDBManger.h"
 #import "MCNetwork.h"
 #import "MCContextManager.h"
 #import "MCAddress.h"
@@ -28,39 +26,6 @@ static MCUserManager* instance;
         }
     }
     return instance;
-}
-
--(MCUser*)getDefaultUser
-{
-    NSString* sql = @"select count(*) from mc_user";
-    FMDatabase* db = [[MCDBManger getInstance]getDB];
-    MCUser* user = nil;
-    FMResultSet* rs = [db executeQuery:sql];
-    if([rs next]) {
-        int count = [rs intForColumnIndex:0] ;
-        if(count>0) {
-            user = [[MCUser alloc]init];
-            sql = @"select * from mc_user order by id desc";
-            rs = [db executeQuery:sql];
-            if ([rs next]) {
-                user.id = [rs intForColumn:@"id"];
-                user.userId = [rs stringForColumn:@"user_id"];
-                user.password = [rs stringForColumn:@"password"];
-                user.name = [rs stringForColumn:@"name"];
-                user.image = [rs stringForColumn:@"image"];
-            }
-        }
-    }
-    [rs close];
-    [db close];
-    return user;
-}
-
--(void)insertUserToLocalDB:(MCUser*)user
-{
-    NSString* sql = @"insert into mc_user (user_id,password,name,image) values(?,?,?,?)";
-    FMDatabase* db = [[MCDBManger getInstance]getDB];
-    [db executeUpdate:sql,user.userId,user.password,user.name,@""];
 }
 
 -(void)registerUser:(MCUser*)user MacId:(NSString*)macId
