@@ -29,6 +29,8 @@
 //        float totalPrice;
 //        BOOL isTotalChoosed;
 //        NSMutableArray* data;
+        float temp_totalPrice;
+        NSMutableArray* temp_data;
 }
 
 @synthesize data;
@@ -379,6 +381,7 @@
 }
 
 -(IBAction)submitBtnAction:(UIButton *)sender {
+    
     if([[MCContextManager getInstance]isLogged]){
         MCOrderConfirmViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCOrderConfirmViewController"];
         
@@ -392,7 +395,22 @@
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }else{
+        temp_data = self.data;
+        temp_totalPrice = self.totalPrice;
         MCLoginViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCLoginViewController"];
+        [vc setLoginComplete:^{
+            MCOrderConfirmViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCOrderConfirmViewController"];
+            
+            vc.data = temp_data;
+            vc.totalPrice = temp_totalPrice;
+            
+            [vc setShowMsg:^(NSString *msg) {
+                [self showMsgHint:msg];
+            }];
+            
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }];
         vc.hidesBottomBarWhenPushed = YES;
        [self.navigationController pushViewController:vc animated:YES];
     }

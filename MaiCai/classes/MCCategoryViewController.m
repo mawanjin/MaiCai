@@ -107,9 +107,9 @@
                 [self hideProgressHUD];
             });
         }
-        
     });
 }
+
 
 /**
  为了保证内部不泄露，在dealloc中释放占用的内存
@@ -126,6 +126,7 @@
 {
     return 1;
 }
+
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView
     numberOfItemsInSection:(NSInteger)section
@@ -186,7 +187,7 @@
     }
 }
 
-- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
+-(void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
 	DDLogVerbose(@"Selected index %i (via UIControlEventValueChanged)", segmentedControl.selectedSegmentIndex);
     [self.collectionView reloadData];
 }
@@ -195,9 +196,26 @@
 #pragma mark 开始进入刷新状态
 - (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView
 {
-    NSLog(@"%@----开始进入刷新状态", refreshView.class);
-    // 2.2秒后刷新表格UI
-    [self performSelector:@selector(doneWithView:) withObject:refreshView afterDelay:2.0];
+    //NSLog(@"%@----开始进入刷新状态", refreshView.class);
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        @try {
+            self.sourceData = [[MCVegetableManager getInstance]getMarketProducts];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // 2.2秒后刷新表格UI
+                [self performSelector:@selector(doneWithView:) withObject:refreshView afterDelay:0];
+            });
+            
+        }
+        @catch (NSException *exception) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self showMsgHint:MC_ERROR_MSG_0001];
+            });
+        }
+    });
+
+    
+    
 }
 
 - (void)doneWithView:(MJRefreshBaseView *)refreshView
@@ -212,7 +230,7 @@
 #pragma mark 刷新完毕
 - (void)refreshViewEndRefreshing:(MJRefreshBaseView *)refreshView
 {
-    NSLog(@"%@----刷新完毕", refreshView.class);
+    //NSLog(@"%@----刷新完毕", refreshView.class);
 }
 
 #pragma mark 监听刷新状态的改变
@@ -220,15 +238,15 @@
 {
     switch (state) {
         case MJRefreshStateNormal:
-            NSLog(@"%@----切换到：普通状态", refreshView.class);
+            //NSLog(@"%@----切换到：普通状态", refreshView.class);
             break;
             
         case MJRefreshStatePulling:
-            NSLog(@"%@----切换到：松开即可刷新的状态", refreshView.class);
+            //NSLog(@"%@----切换到：松开即可刷新的状态", refreshView.class);
             break;
             
         case MJRefreshStateRefreshing:
-            NSLog(@"%@----切换到：正在刷新状态", refreshView.class);
+            //NSLog(@"%@----切换到：正在刷新状态", refreshView.class);
             break;
         default:
             break;

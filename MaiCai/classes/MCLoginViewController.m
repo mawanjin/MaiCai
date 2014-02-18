@@ -50,6 +50,16 @@
             [[MCUserManager getInstance]login:user];
             dispatch_sync(dispatch_get_main_queue(), ^{
                 [self backBtnAction];
+                 if (self.loginComplete) {
+                    double delayInSeconds = 1.0;
+                    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                        self.loginComplete();
+                        self.loginComplete = nil;
+                        
+                    });
+                }
+                
             });
         }
         @catch (NSException *exception) {
@@ -80,11 +90,5 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     return [textField resignFirstResponder];
-}
-
-
--(void)receiveMessage:(id)message
-{
-    [self.view makeToast:message duration:2 position:@"center"];
 }
 @end
