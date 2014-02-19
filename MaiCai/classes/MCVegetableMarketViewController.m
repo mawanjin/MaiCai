@@ -49,20 +49,27 @@
     return self;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    self.navigationItem.title = @"莘庄";
+    
     self.navigationItem.rightBarButtonItem=
     [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchBtnAction)];
     self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
-
+    
+    UITableView* table = [[UITableView alloc]initWithFrame:CGRectMake(0, 325, 320, 66*0+50) style:UITableViewStylePlain];
+    self.tableView = table;
+    table.delegate = self;
+    table.dataSource = self;
+    self.tableView.backgroundColor = [UIColor clearColor];
+    [table registerNib:[UINib nibWithNibName:@"MCMarketIndexTipCell" bundle:nil] forCellReuseIdentifier:@"tipCell"];
+    table.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.scrollView addSubview:table];
 }
 
--(void)viewWillDisappear:(BOOL)animated
-{
-    [self.tableView removeFromSuperview];
-}
 
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -76,17 +83,8 @@
             recipes = data[@"recipes"];
             labels = data[@"labels"];
             products = data[@"products"];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                UITableView* table = [[UITableView alloc]initWithFrame:CGRectMake(0, 325, 320, 66*products.count+50) style:UITableViewStylePlain];
-                self.tableView = table;
-                table.delegate = self;
-                table.dataSource = self;
-                self.tableView.backgroundColor = [UIColor clearColor];
-                [table registerNib:[UINib nibWithNibName:@"MCMarketIndexTipCell" bundle:nil] forCellReuseIdentifier:@"tipCell"];
-                table.separatorStyle = UITableViewCellSeparatorStyleNone;
-                [self.scrollView addSubview:table];
-                
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                self.tableView.frame = CGRectMake(0, 325, 320, 66*products.count+50);
                 self.scrollView.contentSize = CGSizeMake(320, self.newsView.frame.size.height+self.quickOrderCollectionView.frame.size.height+self.categoryCollectionView.frame.size.height+self.tableView.frame.size.height+90);
                 
                 //注意这里scrollview不能滚动的原因是因为 MBProgressbar与toast需要在scrollview里面创建
@@ -94,15 +92,16 @@
             });
         }
         @catch (NSException *exception) {
-            dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_sync(dispatch_get_main_queue(), ^{
                 [self showMsgHint:MC_ERROR_MSG_0001];
             });
         }
         @finally {
-            dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_sync(dispatch_get_main_queue(), ^{
                 [self hideProgressHUD];
                 [self.quickOrderCollectionView reloadData];
                 [self.categoryCollectionView reloadData];
+                [self.tableView reloadData];
                 self.vegetablePricePageControl.numberOfPages = (recipes.count%1 ==0)?recipes.count/1:(recipes.count/1+1);
             });
         }
@@ -124,7 +123,6 @@
 {
     MCMarketIndexTipCell* cell = [tableView dequeueReusableCellWithIdentifier:@"tipCell"];
     MCVegetable* vegetable = products[indexPath.row];
-    //NSDictionary* dic = [[MCVegetableManager getInstance]getRelationshipBetweenProductAndImage];
     [cell.icon loadImageByUrl:vegetable.image];
     
     cell.nameLabel.text = vegetable.name;
@@ -145,11 +143,6 @@
 {
     return 1;
 }
-
-//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-//{
-//    return @"热们菜谱";
-//}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -225,8 +218,6 @@
                  cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell* myCell = nil;
-    
-    
     if([collectionView.restorationIdentifier isEqualToString:@"categoryCollectionView"]){
         myCell = [collectionView
                   dequeueReusableCellWithReuseIdentifier:@"categoryCollectionCell"
@@ -287,39 +278,6 @@
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
-
-//-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
-//{
-//    UICollectionReusableView* view = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"divideReuseView" forIndexPath:indexPath];
-//    return view;
-//}
-
-//-(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
-//{
-//    return 0;
-//}
-
-
-//-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if (indexPath.section == 1) {
-//        return CGSizeMake(320, 200);
-//    }
-//    return CGSizeMake(320, 80);
-//}
-
-#pragma mark -scrollview
-//-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-//{
-//    if (scrollView.contentOffset.y < -80) {
-//        [UIView beginAnimations:nil context:nil];
-//        [UIView setAnimationDuration:0.3];
-//        [scrollView setContentInset:UIEdgeInsetsMake(80, 0, 0, 0)];
-//        //        [scrollView setContentInset:UIEdgeInsetsMake(-80, 0, 0, 0)];
-//        NSLog(@"下拉刷新");
-//        [UIView commitAnimations];
-//    }
-//}
 @end
 
 

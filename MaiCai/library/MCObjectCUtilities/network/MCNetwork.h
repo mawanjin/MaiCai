@@ -13,6 +13,8 @@
 -(NSData*) httpGetSynUrl:(NSString*)httpUrl Params:(NSMutableDictionary*)params Cache:(BOOL)flag;
 -(NSData*) httpPostSynUrl:(NSString*)httpUrl Params:(NSMutableDictionary*)params;
 -(UIImage*) loadImageFromSource:(NSString*)url;
--(void)clearCache;
-- (NSString *)sizeCache;
+-(void)clearImageCache;
+-(void)clearDocumentCache;
+- (NSString *)sizeImageCache;
+- (NSString *)sizeDocumentCache;
 @end

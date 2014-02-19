@@ -64,11 +64,22 @@
     
     [SVProgressHUD show];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        self.hotWords = [[MCVegetableManager getInstance]getHotWordsByQuantity:10];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-            [SVProgressHUD dismiss];
-        });
+        @try {
+            self.hotWords = [[MCVegetableManager getInstance]getHotWordsByQuantity:10];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [self.tableView reloadData];
+                
+            });
+        }
+        @catch (NSException *exception) {
+            
+        }
+        @finally {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismiss];
+            });
+        }
+        
     });
     [self.searchDisplayController.searchResultsTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
@@ -109,7 +120,6 @@
     // Dequeue a cell from self's table view.
 	UITableViewCell *cell = Nil;
     if (tableView == self.searchDisplayController.searchResultsTableView) {
-        //cell = [self.tableView dequeueReusableCellWithIdentifier:@"searchResultCell"];
         if(!flag) {
             //建议结果
             MCHotWordsCell* hotCell = [self.tableView dequeueReusableCellWithIdentifier:@"hotwordsCell"];
@@ -123,13 +133,10 @@
                 [resultCell.image loadImageByUrl:obj[@"image"]];
                 resultCell.label.text = obj[@"name"];
                 cell = resultCell;
-
             }else {
                 cell = [self.tableView dequeueReusableCellWithIdentifier:@"loadMoreCell"];
             }
-            
         }
-        
     } else {
         MCHotWordsCell* hotCell = [self.tableView dequeueReusableCellWithIdentifier:@"hotwordsCell"];
         hotCell.hotwordLabel.text = self.hotWords[indexPath.row];

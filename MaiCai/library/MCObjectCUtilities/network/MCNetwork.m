@@ -171,22 +171,41 @@ static MCNetwork* instance;
 }
 
 /*计算缓存整体缓存大小*/
-- (NSString *)sizeCache{
+- (NSString *)sizeImageCache{
     MCFileOperation* operation = [MCFileOperation getInstance];
-    long docSize = [operation fileSizeForDir:[operation getDocumentPath]];
+    long docSize = 0;
     long ImageCacheSize = [operation fileSizeForDir:[operation getCachePath]];
     
     long totalSize = docSize + ImageCacheSize;
     const unsigned int bytes = 1024*1024 ;   //字节数，如果想获取KB就1024，MB就1024*1024
     NSString *string = [NSString stringWithFormat:@"%.2f",(1.0 *totalSize/bytes)];
-    DDLogVerbose(@"docSize:%ld,ImageCacheSize:%ld",docSize,ImageCacheSize);
+    //DDLogVerbose(@"docSize:%ld,ImageCacheSize:%ld",docSize,ImageCacheSize);
     return string;
 }
 
--(void)clearCache
+- (NSString *)sizeDocumentCache{
+    MCFileOperation* operation = [MCFileOperation getInstance];
+    long docSize = [operation fileSizeForDir:[operation getDocumentPath]];
+    long ImageCacheSize = 0;
+    
+    long totalSize = docSize + ImageCacheSize;
+    const unsigned int bytes = 1024*1024 ;   //字节数，如果想获取KB就1024，MB就1024*1024
+    NSString *string = [NSString stringWithFormat:@"%.2f",(1.0 *totalSize/bytes)];
+    //DDLogVerbose(@"docSize:%ld,ImageCacheSize:%ld",docSize,ImageCacheSize);
+    return string;
+}
+
+-(void)clearImageCache
+{
+    MCFileOperation* operation = [MCFileOperation getInstance];
+    //[operation emptyFolder:[operation getDocumentPath]];
+    [operation emptyFolder:[operation getCachePath]];
+}
+
+-(void)clearDocumentCache
 {
     MCFileOperation* operation = [MCFileOperation getInstance];
     [operation emptyFolder:[operation getDocumentPath]];
-    [operation emptyFolder:[operation getCachePath]];
+    //[operation emptyFolder:[operation getCachePath]];
 }
 @end

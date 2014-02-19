@@ -182,7 +182,12 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    
+    if (self.recipe.mainIngredients.count>0 && self.recipe.accessoryIngredients.count>0) {
+        return 2;
+    }else {
+        return 1;
+    }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

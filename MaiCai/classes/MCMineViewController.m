@@ -18,6 +18,7 @@
 #import "MCMineFooter.h"
 #import "MCNetwork.h"
 #import "MCUserManager.h"
+#import "MCSettingViewController.h"
 
 
 
@@ -123,19 +124,10 @@
         }else{
             
         }
-        
     }else if(indexPath.row == 6) {
-        [self showProgressHUD];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-             [[MCNetwork getInstance]clearCache];
-              dispatch_async(dispatch_get_main_queue(), ^{
-                  [self hideProgressHUD];
-                  [self showMsgHint:@"清空缓存成功..."];
-                  [self.tableView reloadData];
-              });
-        });
-       
-        
+        MCSettingViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCSettingViewController"];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc  animated:YES];
     }
 
 }
@@ -191,8 +183,8 @@
         cell.label.text = @"个人信息";
         
     }else if(indexPath.row == 6) {
-        cell.image.image = [UIImage imageNamed:@"mine_personal_normal"];
-        cell.label.text = [[NSString alloc]initWithFormat:@"清除缓存(%@MB)",[[MCNetwork getInstance] sizeCache]];
+        cell.image.image = [UIImage imageNamed:@"mine_setting_normal"];
+        cell.label.text = @"系统设置";
         cell.divideLine.hidden = YES;
     }else{
         
