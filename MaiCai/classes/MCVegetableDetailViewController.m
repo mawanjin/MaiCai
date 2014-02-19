@@ -158,7 +158,8 @@
 {
     if(indexPath.section == 0) {
         //商品介绍
-        return [UILabel calculateHeightByText:self.data[@"summary"]];
+        float value = [UILabel calculateHeightByText:self.data[@"summary"]];
+        return (value<84)?84:value;
     }else if(indexPath.section == 1) {
         //店铺信息
         return 110;

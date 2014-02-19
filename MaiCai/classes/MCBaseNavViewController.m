@@ -23,8 +23,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    
     //设置Navigation Bar背景图片
     UINavigationBar *navBar = self.navigationController.navigationBar;
     [navBar setBarTintColor:[UIColor colorWithRed:0.33f green:0.71f blue:0.06f alpha:1.00f]];
@@ -44,8 +42,6 @@
     [backBtn addTarget:self action:@selector(backBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [item setCustomView:backBtn];
     self.navigationItem.leftBarButtonItem= item;
-    
-    
 }
 
 - (void)didReceiveMemoryWarning

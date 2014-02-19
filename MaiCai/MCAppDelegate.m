@@ -25,13 +25,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    
     //两秒以后加载程序，能让用户更加仔细的看清楚，启动画面
     //[NSThread sleepForTimeInterval:1.0];
     
+    //状态栏颜色
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
     
+    //免登入操作
     MCUserManager* userManager = [MCUserManager getInstance];
     MCUser* user = [userManager getLoginStatus];
     if(user!=nil) {
@@ -43,8 +43,26 @@
         [[MCContextManager getInstance] setLogged:NO];
     }
     
+    //日志操作
     [DDLog addLogger:[DDASLLogger sharedInstance]];
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    
+    //错误处理操作
+    // Default exception handling code
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    if ([settings boolForKey:@"ExceptionOccurredOnLastRun"])
+    {
+        // Reset exception occurred flag
+        [settings setBool:NO forKey:@"ExceptionOccurredOnLastRunKey"];
+        [settings synchronize];
+        // Notify the user
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"We're sorry"
+                                                        message:@"An error occurred on the previous run." delegate:nil
+                                              cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        [alert show];
+    }
+    
+    NSSetUncaughtExceptionHandler(&exceptionHandler);
     
     //根据不同的屏幕尺寸加载不同的程序
     [self initializeStoryBoardBasedOnScreenSize];
@@ -236,6 +254,20 @@
 	}
     
 	return result;
+}
+
+void exceptionHandler(NSException *exception)
+{
+    //Set flag
+    NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
+    [settings setBool:YES forKey:@"ExceptionOccurredOnLastRun"];
+    [settings synchronize];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"抱歉"
+                                                    message:@"此应用需要在有网络的前提下才能正常运行." delegate:nil
+                                          cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+    [alert show];
+
 }
 
 @end
