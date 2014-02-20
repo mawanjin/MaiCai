@@ -57,22 +57,19 @@
     
     [self showProgressHUD];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        @try {
-            [[MCUserManager getInstance]feedbackByTel:tel Content:content];
-            dispatch_async(dispatch_get_main_queue(), ^{
+        if ([[MCUserManager getInstance]feedbackByTel:tel Content:content]) {
+            dispatch_sync(dispatch_get_main_queue(), ^{
                 [self showMsgHint:@"提交成功"];
             });
-        }
-        @catch (NSException *exception) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self showMsgHint:MC_ERROR_MSG_0001];
+        }else {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                //[self showMsgHint:MC_ERROR_MSG_0001];
             });
         }
-        @finally {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self hideProgressHUD];
-            });
-        }
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self hideProgressHUD];
+        });
     });
 }
 

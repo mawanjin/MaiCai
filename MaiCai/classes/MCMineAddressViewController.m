@@ -49,18 +49,16 @@
     [self showProgressHUD];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        @try {
-            self.data = [[MCUserManager getInstance]getUserAddressByUserId:user.userId];
-        }
-        @catch (NSException *exception) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self showMsgHint:MC_ERROR_MSG_0001];
-            });
-        }
-        @finally {
-            dispatch_async(dispatch_get_main_queue(), ^{
+        self.data = [[MCUserManager getInstance]getUserAddressByUserId:user.userId];
+        if (self.data) {
+            dispatch_sync(dispatch_get_main_queue(), ^{
                 [self hideProgressHUD];
                 [self.tableView reloadData];
+            });
+        }else {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [self hideProgressHUD];
+                //[self showMsgHint:MC_ERROR_MSG_0001];
             });
         }
     });
@@ -149,16 +147,16 @@
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            @try {
-                MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
-                [[MCUserManager getInstance]deleteUserAddressById:[[NSString alloc]initWithFormat:@"%d",addressId]UserId:user.userId];
+            MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
+            if ([[MCUserManager getInstance]deleteUserAddressById:[[NSString alloc]initWithFormat:@"%d",addressId]UserId:user.userId]) {
                 [self.data removeObject:self.data[index.row]];
-                dispatch_async(dispatch_get_main_queue(), ^{
+                dispatch_sync(dispatch_get_main_queue(), ^{
                     [self.tableView reloadData];
                 });
-            }
-            @catch (NSException *exception) {
-                [self.view makeToast:@"操作失败" duration:2 position:@"center"];
+            }else {
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [self.view makeToast:@"操作失败" duration:2 position:@"center"];
+                });
             }
         });
     }else{

@@ -64,22 +64,16 @@
     
     [SVProgressHUD show];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        @try {
-            self.hotWords = [[MCVegetableManager getInstance]getHotWordsByQuantity:10];
+        self.hotWords = [[MCVegetableManager getInstance]getHotWordsByQuantity:10];
+        if (self.hotWords) {
             dispatch_sync(dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismiss];
                 [self.tableView reloadData];
                 
             });
-        }
-        @catch (NSException *exception) {
+        }else {
             
         }
-        @finally {
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                [SVProgressHUD dismiss];
-            });
-        }
-        
     });
     [self.searchDisplayController.searchResultsTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }

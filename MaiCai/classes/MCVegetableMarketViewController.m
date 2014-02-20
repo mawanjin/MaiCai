@@ -70,7 +70,6 @@
     [self.scrollView addSubview:table];
 }
 
-
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -78,8 +77,8 @@
     [self showProgressHUD];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        @try {
-            data = [[MCVegetableManager getInstance]getMarketIndexInfo];
+        data = [[MCVegetableManager getInstance]getMarketIndexInfo];
+        if (data) {
             recipes = data[@"recipes"];
             labels = data[@"labels"];
             products = data[@"products"];
@@ -89,25 +88,24 @@
                 
                 //注意这里scrollview不能滚动的原因是因为 MBProgressbar与toast需要在scrollview里面创建
                 self.scrollView.scrollEnabled = YES;
-            });
-        }
-        @catch (NSException *exception) {
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                [self showMsgHint:MC_ERROR_MSG_0001];
-            });
-        }
-        @finally {
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                [self hideProgressHUD];
+                
+                
                 [self.quickOrderCollectionView reloadData];
                 [self.categoryCollectionView reloadData];
                 [self.tableView reloadData];
                 self.vegetablePricePageControl.numberOfPages = (recipes.count%1 ==0)?recipes.count/1:(recipes.count/1+1);
+                [self hideProgressHUD];
+            });
+        }else {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [self hideProgressHUD];
+                //[self showMsgHint:MC_ERROR_MSG_0001];
             });
         }
+        
     });
     
-    self.scrollView.scrollEnabled = YES;
+    //self.scrollView.scrollEnabled = YES;
 }
 
 - (void)didReceiveMemoryWarning

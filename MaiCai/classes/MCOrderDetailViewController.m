@@ -48,10 +48,11 @@
     
     [self showProgressHUD];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        @try {
-            self.order = [[MCTradeManager getInstance]getOrderDetailByOrderId:[[NSString alloc]initWithFormat:@"%d",self.order.id]];
-            
+        self.order = [[MCTradeManager getInstance]getOrderDetailByOrderId:[[NSString alloc]initWithFormat:@"%d",self.order.id]];
+        
+        if (self.order) {
             dispatch_sync(dispatch_get_main_queue(), ^{
+                [self hideProgressHUD];
                 //初始化头
                 MCOrderDetailHeader* header = [MCOrderDetailHeader initInstance];
                 header.nameLabel.text = [[NSString alloc]initWithFormat:@"收货人：%@", self.order.shipper];
@@ -65,7 +66,7 @@
                 footer.shipMethodLabel.text = [[NSString alloc]initWithFormat:@"配送方式：%@",self.order.shipMethod];
                 footer.orderStatusLabel.text = [[NSString alloc]initWithFormat:@"订单状态：%@",self.order.status];
                 footer.messageLabel.text = [[NSString alloc]initWithFormat:@"留言：%@",self.order.message];
-
+                
                 self.tableView.tableFooterView = footer;
                 
                 self.totalPriceLabel.text = [[NSString alloc]initWithFormat:@"总价：%.02f元",self.order.total];
@@ -75,17 +76,12 @@
                 }else{
                     [self.payBtn setHidden:YES];
                 }
-            });
-        }
-        @catch (NSException *exception) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self showMsgHint:MC_ERROR_MSG_0001];
-            });
-        }
-        @finally {
-            dispatch_sync(dispatch_get_main_queue(), ^{
                 [self.tableView reloadData];
+            });
+        }else {
+            dispatch_sync(dispatch_get_main_queue(), ^{
                 [self hideProgressHUD];
+                //[self showMsgHint:MC_ERROR_MSG_0001];
             });
         }
     });
@@ -229,19 +225,8 @@
         else
         {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                @try {
-                    [[MCTradeManager getInstance]cancelPaymentByPaymentNo:self.pay_no];
-                }
-                @catch (NSException *exception) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        if(self.showMsg){
-                            self.showMsg(MC_ERROR_MSG_0001);
-                            self.showMsg = nil;
-                        }
-                    });
-                }
-                @finally {
-                    dispatch_async(dispatch_get_main_queue(), ^{
+                if ([[MCTradeManager getInstance]cancelPaymentByPaymentNo:self.pay_no]) {
+                    dispatch_sync(dispatch_get_main_queue(), ^{
                         if(self.showMsg){
                             self.showMsg(@"交易失败");
                             self.showMsg = nil;
@@ -249,36 +234,37 @@
                         [self backBtnAction];
                         
                     });
+                }else{
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                        if(self.showMsg){
+                            self.showMsg(MC_ERROR_MSG_0001);
+                            self.showMsg = nil;
+                        }
+                    });
                 }
             });
-
         }
     }
     else
     {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            @try {
-                [[MCTradeManager getInstance]cancelPaymentByPaymentNo:self.pay_no];
-            }
-            @catch (NSException *exception) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if(self.showMsg){
-                        self.showMsg(MC_ERROR_MSG_0001);
-                        self.showMsg = nil;
-                    }
-                });
-            }
-            @finally {
-                dispatch_async(dispatch_get_main_queue(), ^{
+            if ([[MCTradeManager getInstance]cancelPaymentByPaymentNo:self.pay_no]) {
+                dispatch_sync(dispatch_get_main_queue(), ^{
                     if(self.showMsg){
                         self.showMsg(@"交易失败");
                         self.showMsg = nil;
                     }
                     [self backBtnAction];
                 });
+            }else {
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    if(self.showMsg){
+                        self.showMsg(MC_ERROR_MSG_0001);
+                        self.showMsg = nil;
+                    }
+                });
             }
         });
-
     }
 }
 

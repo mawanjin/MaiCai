@@ -76,22 +76,21 @@
     [self showProgressHUD];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        @try {
-            MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
-            //初始化待付款订单数据
-            NSString* status = [[NSString alloc]initWithFormat:@"[%d]",TO_PAY];
-            self.data = [[MCTradeManager getInstance]getOrdersByUserId:user.userId Status:status];
-        }
-        @catch (NSException *exception) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self showMsgHint:MC_ERROR_MSG_0001];
-            });
-        }
-        @finally {
-            dispatch_async(dispatch_get_main_queue(), ^{
+        MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
+        //初始化待付款订单数据
+        NSString* status = [[NSString alloc]initWithFormat:@"[%d]",TO_PAY];
+        self.data = [[MCTradeManager getInstance]getOrdersByUserId:user.userId Status:status];
+    
+        if (self.data) {
+            dispatch_sync(dispatch_get_main_queue(), ^{
                 [self.segmentedControl setSelectedSegmentIndex:0];
                 [self.segmentedControl addTarget:self action:@selector(segmentChanged:) forControlEvents:UIControlEventValueChanged];
                 [self.tableView reloadData];
+                [self hideProgressHUD];
+            });
+        }else {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                //[self showMsgHint:MC_ERROR_MSG_0001];
                 [self hideProgressHUD];
             });
         }
@@ -116,31 +115,29 @@
     [self showProgressHUD];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        @try {
-            if(index == 0) {
-                MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
-                NSString* status = [[NSString alloc]initWithFormat:@"[%d]",TO_PAY];
-                self.data = [[MCTradeManager getInstance]getOrdersByUserId:user.userId Status:status];
-            }else if(index == 1) {
-                MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
-                NSString* status = [[NSString alloc]initWithFormat:@"[%d]",TO_SHIP];
-                self.data = [[MCTradeManager getInstance]getOrdersByUserId:user.userId Status:status];
-            }else{
-                MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
-                NSString* status = [[NSString alloc]initWithFormat:@"[%d]",SHIPPED];
-                self.data = [[MCTradeManager getInstance]getOrdersByUserId:user.userId Status:status];
-            }
+        if(index == 0) {
+            MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
+            NSString* status = [[NSString alloc]initWithFormat:@"[%d]",TO_PAY];
+            self.data = [[MCTradeManager getInstance]getOrdersByUserId:user.userId Status:status];
+        }else if(index == 1) {
+            MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
+            NSString* status = [[NSString alloc]initWithFormat:@"[%d]",TO_SHIP];
+            self.data = [[MCTradeManager getInstance]getOrdersByUserId:user.userId Status:status];
+        }else{
+            MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
+            NSString* status = [[NSString alloc]initWithFormat:@"[%d]",SHIPPED];
+            self.data = [[MCTradeManager getInstance]getOrdersByUserId:user.userId Status:status];
+        }
 
-        }
-        @catch (NSException *exception) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self showMsgHint:MC_ERROR_MSG_0001];
+        if (self.data) {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [self hideProgressHUD];
+                [self.tableView reloadData];
             });
-        }
-        @finally {
-            dispatch_async(dispatch_get_main_queue(), ^{
-               [self hideProgressHUD];
-               [self.tableView reloadData];
+        }else {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [self hideProgressHUD];
+                //[self showMsgHint:MC_ERROR_MSG_0001];
             });
         }
     });

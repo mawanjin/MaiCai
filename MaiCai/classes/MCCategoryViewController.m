@@ -53,8 +53,8 @@
     [self showProgressHUD];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        @try {
             self.sourceData = [[MCVegetableManager getInstance]getMarketProducts];
+        if (self.sourceData != nil) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 CGFloat yDelta;
                 
@@ -91,22 +91,14 @@
                 MJRefreshHeaderView *header = [MJRefreshHeaderView header];
                 header.scrollView = self.collectionView;
                 header.delegate = self;
-                
+
                 [self.collectionView reloadData];
             });
-            
         }
-        @catch (NSException *exception) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self showMsgHint:MC_ERROR_MSG_0001];
-            });
-        }
-        @finally {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                //移除ProgressBar
-                [self hideProgressHUD];
-            });
-        }
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self hideProgressHUD];
+        });
+        
     });
 }
 
@@ -169,8 +161,6 @@
 
 #pragma mark- others
 - (IBAction)handleSwipe:(UISwipeGestureRecognizer *)sender {
-    
-    
     if (sender.direction & UISwipeGestureRecognizerDirectionLeft){
         DDLogVerbose(@"Swiped Left.");
         if(self.segmentedControl.selectedSegmentIndex < (self.sourceData.count-1)) {
@@ -200,23 +190,21 @@
     //NSLog(@"%@----开始进入刷新状态", refreshView.class);
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        @try {
-            self.sourceData = [[MCVegetableManager getInstance]getMarketProducts];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                // 2.2秒后刷新表格UI
+        self.sourceData = [[MCVegetableManager getInstance]getMarketProducts];
+        
+        if (self.sourceData) {
+            dispatch_sync(dispatch_get_main_queue(), ^{
                 [self performSelector:@selector(doneWithView:) withObject:refreshView afterDelay:0];
             });
-            
         }
-        @catch (NSException *exception) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self showMsgHint:MC_ERROR_MSG_0001];
-            });
-        }
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            if([refreshView isRefreshing]) {
+                [refreshView endRefreshing];
+            }
+        });
+        
     });
-
-    
-    
 }
 
 - (void)doneWithView:(MJRefreshBaseView *)refreshView

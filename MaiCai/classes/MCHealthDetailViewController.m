@@ -71,8 +71,6 @@
                 height = height+label.frame.size.height;
             }
             
-            
-            
             UICollectionView* collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, height, 320, (self.health.products.count/3+1)*50+20) collectionViewLayout:[self flowLayout]];
 
             [collectionView registerNib:[UINib nibWithNibName:@"MCHealthDetailProductCell" bundle:nil]  forCellWithReuseIdentifier:@"productCell"];
@@ -157,65 +155,69 @@
 - (IBAction)clickAction:(id)sender {
     [self showProgressHUD];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        @try {
-            if ([[MCContextManager getInstance]isLogged]) {
-                MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
-                NSMutableArray* choosedProducts = [[NSMutableArray alloc]init];
-                NSArray* products = self.health.products;
-                for(int i=0;i<products.count;i++) {
-                    MCVegetable* vegetable = products[i];
-                    if(vegetable.isSelected) {
-                        NSDictionary* product = @{
-                                                  @"id":[[NSNumber alloc]initWithInt:vegetable.id],
-                                                  @"quantity":[[NSNumber alloc]initWithInt:vegetable.quantity],
-                                                 // @"dosage":vegetable.dosage
-                                                  };
-                        [choosedProducts addObject:product];
-                    }
+        if ([[MCContextManager getInstance]isLogged]) {
+            MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
+            NSMutableArray* choosedProducts = [[NSMutableArray alloc]init];
+            NSArray* products = self.health.products;
+            for(int i=0;i<products.count;i++) {
+                MCVegetable* vegetable = products[i];
+                if(vegetable.isSelected) {
+                    NSDictionary* product = @{
+                                              @"id":[[NSNumber alloc]initWithInt:vegetable.id],
+                                              @"quantity":[[NSNumber alloc]initWithInt:vegetable.quantity],
+                                             // @"dosage":vegetable.dosage
+                                              };
+                    [choosedProducts addObject:product];
                 }
-                [[MCTradeManager getInstance]addProductToCartOnlineByUserId:user.userId Products:choosedProducts Recipe:Nil];
-                dispatch_async(dispatch_get_main_queue(), ^{
+            }
+            
+            if ([[MCTradeManager getInstance]addProductToCartOnlineByUserId:user.userId Products:choosedProducts Recipe:Nil]) {
+                dispatch_sync(dispatch_get_main_queue(), ^{
                     //结束后需要做些什么
                     if(self.showMsg) {
                         self.showMsg(@"加入菜篮成功");
                         self.showMsg = nil;
                     }
+                    
+                    [self hideProgressHUD];
+                    [self backBtnAction];
                 });
             }else {
-                NSString* macId = (NSString*)[[MCContextManager getInstance]getDataByKey:MC_MAC_ID];
-                NSMutableArray* choosedProducts = [[NSMutableArray alloc]init];
-                NSArray* products = self.health.products;
-                for(int i=0;i<products.count;i++) {
-                    MCVegetable* vegetable = products[i];
-                    if(vegetable.isSelected) {
-                        NSDictionary* product = @{
-                                                  @"id":[[NSNumber alloc]initWithInt:vegetable.id],
-                                                  @"quantity":[[NSNumber alloc]initWithInt:vegetable.quantity]
-                                                  };
-                        [choosedProducts addObject:product];
-                    }
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    //[self showMsgHint:MC_ERROR_MSG_0001];
+                });
+            }
+        }else {
+            NSString* macId = (NSString*)[[MCContextManager getInstance]getDataByKey:MC_MAC_ID];
+            NSMutableArray* choosedProducts = [[NSMutableArray alloc]init];
+            NSArray* products = self.health.products;
+            for(int i=0;i<products.count;i++) {
+                MCVegetable* vegetable = products[i];
+                if(vegetable.isSelected) {
+                    NSDictionary* product = @{
+                                              @"id":[[NSNumber alloc]initWithInt:vegetable.id],
+                                              @"quantity":[[NSNumber alloc]initWithInt:vegetable.quantity]
+                                              };
+                    [choosedProducts addObject:product];
                 }
+            }
 
-                [[MCTradeManager getInstance]addProductToCartByUserId:macId Products:choosedProducts Recipe:nil];
-                dispatch_async(dispatch_get_main_queue(), ^{
+            if ([[MCTradeManager getInstance]addProductToCartByUserId:macId Products:choosedProducts Recipe:nil]) {
+                dispatch_sync(dispatch_get_main_queue(), ^{
                     //结束后需要做些什么
                     if(self.showMsg) {
                         self.showMsg(@"加入菜篮成功");
                         self.showMsg = nil;
                     }
+                    [self hideProgressHUD];
+                    [self backBtnAction];
+                });
+            }else {
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    //[self showMsgHint:MC_ERROR_MSG_0001];
                 });
             }
-        }
-        @catch (NSException *exception) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                DDLogError(@"%@",exception);
-                [self showMsgHint:MC_ERROR_MSG_0001];
-            });
-        }@finally {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self hideProgressHUD];
-                [self backBtnAction];
-            });
+            
         }
     });
 }

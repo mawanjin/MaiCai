@@ -46,11 +46,11 @@
     user.password = password;
     [self showProgressHUD];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        @try {
-            [[MCUserManager getInstance]login:user];
+        if ([[MCUserManager getInstance]login:user]) {
             dispatch_sync(dispatch_get_main_queue(), ^{
+                [self hideProgressHUD];
                 [self backBtnAction];
-                 if (self.loginComplete) {
+                if (self.loginComplete) {
                     double delayInSeconds = 1.0;
                     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
                     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -59,16 +59,11 @@
                         
                     });
                 }
-                
             });
-        }
-        @catch (NSException *exception) {
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                [[[UIAlertView alloc]initWithTitle:@"提示" message:@"登入失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil]show];
-            });
-        }@finally {
+        }else {
             dispatch_sync(dispatch_get_main_queue(), ^{
                 [self hideProgressHUD];
+                [[[UIAlertView alloc]initWithTitle:@"提示" message:@"登入失败" delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil]show];
             });
         }
     });

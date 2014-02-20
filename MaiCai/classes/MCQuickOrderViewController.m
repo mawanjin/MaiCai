@@ -43,19 +43,12 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    
     [self showProgressHUD];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        @try {
-            self.recipe = [[MCVegetableManager getInstance]getRecipeById:self.recipe.id];
-        }
-        @catch (NSException *exception) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self showMsgHint:MC_ERROR_MSG_0001];
-            });
-        }
-        @finally {
-            dispatch_async(dispatch_get_main_queue(), ^{
+        self.recipe = [[MCVegetableManager getInstance]getRecipeById:self.recipe.id];
+        
+        if (self.recipe) {
+            dispatch_sync(dispatch_get_main_queue(), ^{
                 [self hideProgressHUD];
                 MCQuickOrderTableHeader* header = [MCQuickOrderTableHeader initInstance];
                 header.nameLabel.text = self.recipe.name;
@@ -67,13 +60,15 @@
                 [header.image loadImageByUrl:source];
                 self.tableView.tableHeaderView = header;
                 [self.tableView reloadData];
-                [self totalChooseAction:Nil];
+                [self totalChooseAction:nil];
+            });
+        }else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self hideProgressHUD];
+                //[self showMsgHint:MC_ERROR_MSG_0001];
             });
         }
     });
-    
-    
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -290,42 +285,95 @@
 - (IBAction)addCartAction:(id)sender {
     [self showProgressHUD];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        @try {
-            if ([[MCContextManager getInstance]isLogged]) {
-                MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
-                NSMutableArray* products = [[NSMutableArray alloc]init];
-                for(int i=0;i<self.recipe.mainIngredients.count;i++) {
-                    MCVegetable* vegetable = self.recipe.mainIngredients[i];
-                    if(vegetable.isSelected == true) {
-                        NSDictionary* product = @{
-                                                  @"id":[[NSNumber alloc]initWithInt:vegetable.id],
-                                                  @"quantity":[[NSNumber alloc]initWithInt:vegetable.quantity],
-                                                  @"dosage":vegetable.dosage
-                                                  };
-                        [products addObject:product];
+        if ([[MCContextManager getInstance]isLogged]) {
+            //登入状态
+            MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
+            NSMutableArray* products = [[NSMutableArray alloc]init];
+            for(int i=0;i<self.recipe.mainIngredients.count;i++) {
+                MCVegetable* vegetable = self.recipe.mainIngredients[i];
+                if(vegetable.isSelected == true) {
+                    NSDictionary* product = @{
+                                              @"id":[[NSNumber alloc]initWithInt:vegetable.id],
+                                              @"quantity":[[NSNumber alloc]initWithInt:vegetable.quantity],
+                                              @"dosage":vegetable.dosage
+                                              };
+                    [products addObject:product];
+                
+                }
+            }
+            
+            for(int i=0;i<self.recipe.accessoryIngredients.count;i++) {
+                MCVegetable* vegetable = self.recipe.accessoryIngredients[i];
+                if(vegetable.isSelected == true) {
+                    NSDictionary* product = @{
+                                              @"id":[[NSNumber alloc]initWithInt:vegetable.id],
+                                              @"quantity":[[NSNumber alloc]initWithInt:vegetable.quantity],
+                                              @"dosage":vegetable.dosage
+                                              };
+                    [products addObject:product];
+                }
+            }
+            
+            NSDictionary* recipe = @{
+                                      @"id":[[NSNumber alloc]initWithInt:self.recipe.id],
+                                      @"name":self.recipe.name,
+                                      @"image":self.recipe.bigImage
+                                     };
+            if ([[MCTradeManager getInstance]addProductToCartOnlineByUserId:user.userId Products:products Recipe:recipe]) {
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [self hideProgressHUD];
+                    //结束后需要做些什么
+                    if(self.showMsg) {
+                        self.showMsg(@"加入菜篮成功");
+                        self.showMsg = nil;
+                    }
+                    [self backBtnAction];
+                });
+            }else {
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [self hideProgressHUD];
+                    //[self showMsgHint:MC_ERROR_MSG_0001];
+                });
+            }
+            
+        }else {
+            NSString* macId = (NSString*)[[MCContextManager getInstance]getDataByKey:MC_MAC_ID];
+            NSMutableArray* products = [[NSMutableArray alloc]init];
+            for(int i=0;i<self.recipe.mainIngredients.count;i++) {
+                MCVegetable* vegetable = self.recipe.mainIngredients[i];
+                if(vegetable.isSelected == true) {
+                    NSDictionary* product = @{
+                                              @"id":[[NSNumber alloc]initWithInt:vegetable.id],
+                                              @"quantity":[[NSNumber alloc]initWithInt:vegetable.quantity],
+                                              @"dosage":vegetable.dosage
+                                              };
+                    [products addObject:product];
                     
-                    }
                 }
-                
-                for(int i=0;i<self.recipe.accessoryIngredients.count;i++) {
-                    MCVegetable* vegetable = self.recipe.accessoryIngredients[i];
-                    if(vegetable.isSelected == true) {
-                        NSDictionary* product = @{
-                                                  @"id":[[NSNumber alloc]initWithInt:vegetable.id],
-                                                  @"quantity":[[NSNumber alloc]initWithInt:vegetable.quantity],
-                                                  @"dosage":vegetable.dosage
-                                                  };
-                        [products addObject:product];
-                    }
+            }
+            
+            for(int i=0;i<self.recipe.accessoryIngredients.count;i++) {
+                MCVegetable* vegetable = self.recipe.accessoryIngredients[i];
+                if(vegetable.isSelected == true) {
+                    NSDictionary* product = @{
+                                              @"id":[[NSNumber alloc]initWithInt:vegetable.id],
+                                              @"quantity":[[NSNumber alloc]initWithInt:vegetable.quantity],
+                                              @"dosage":vegetable.dosage
+                                              };
+                    [products addObject:product];
                 }
-                
-                NSDictionary* recipe = @{
-                                          @"id":[[NSNumber alloc]initWithInt:self.recipe.id],
-                                          @"name":self.recipe.name,
-                                          @"image":self.recipe.bigImage
-                                         };
-                [[MCTradeManager getInstance]addProductToCartOnlineByUserId:user.userId Products:products Recipe:recipe];
-                dispatch_async(dispatch_get_main_queue(), ^{
+            }
+            
+            NSDictionary* recipe = @{
+                                     @"id":[[NSNumber alloc]initWithInt:self.recipe.id],
+                                     @"name":self.recipe.name,
+                                     @"image":self.recipe.bigImage
+                                     };
+            
+            if ([[MCTradeManager getInstance]addProductToCartByUserId:macId Products:products Recipe:recipe]) {
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [self hideProgressHUD];
+                    [self backBtnAction];
                     //结束后需要做些什么
                     if(self.showMsg) {
                         self.showMsg(@"加入菜篮成功");
@@ -333,59 +381,11 @@
                     }
                 });
             }else {
-                NSString* macId = (NSString*)[[MCContextManager getInstance]getDataByKey:MC_MAC_ID];
-                NSMutableArray* products = [[NSMutableArray alloc]init];
-                for(int i=0;i<self.recipe.mainIngredients.count;i++) {
-                    MCVegetable* vegetable = self.recipe.mainIngredients[i];
-                    if(vegetable.isSelected == true) {
-                        NSDictionary* product = @{
-                                                  @"id":[[NSNumber alloc]initWithInt:vegetable.id],
-                                                  @"quantity":[[NSNumber alloc]initWithInt:vegetable.quantity],
-                                                  @"dosage":vegetable.dosage
-                                                  };
-                        [products addObject:product];
-                        
-                    }
-                }
-                
-                for(int i=0;i<self.recipe.accessoryIngredients.count;i++) {
-                    MCVegetable* vegetable = self.recipe.accessoryIngredients[i];
-                    if(vegetable.isSelected == true) {
-                        NSDictionary* product = @{
-                                                  @"id":[[NSNumber alloc]initWithInt:vegetable.id],
-                                                  @"quantity":[[NSNumber alloc]initWithInt:vegetable.quantity],
-                                                  @"dosage":vegetable.dosage
-                                                  };
-                        [products addObject:product];
-                    }
-                }
-                
-                NSDictionary* recipe = @{
-                                         @"id":[[NSNumber alloc]initWithInt:self.recipe.id],
-                                         @"name":self.recipe.name,
-                                         @"image":self.recipe.bigImage
-                                         };
-                
-                [[MCTradeManager getInstance]addProductToCartByUserId:macId Products:products Recipe:recipe];
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    //结束后需要做些什么
-                    if(self.showMsg) {
-                        self.showMsg(@"加入菜篮成功");
-                        self.showMsg = nil;
-                    }
+                    [self hideProgressHUD];
+                    //[self showMsgHint:MC_ERROR_MSG_0001];
                 });
             }
-        }
-        @catch (NSException *exception) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                DDLogError(@"%@",exception);
-                [self showMsgHint:MC_ERROR_MSG_0001];
-            });
-        }@finally {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self hideProgressHUD];
-                [self backBtnAction];
-            });
         }
     });
 }

@@ -45,25 +45,19 @@
     }
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        @try {
-            [[MCUserManager getInstance]changeNickName:nickname];
-            dispatch_async(dispatch_get_main_queue(), ^{
+        if ([[MCUserManager getInstance]changeNickName:nickname]) {
+            dispatch_sync(dispatch_get_main_queue(), ^{
                 [self.previousView.view makeToast:@"修改成功" duration:1 position:@"center"];
-            });
-        }
-        @catch (NSException *exception) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.previousView.view makeToast:@"修改失败" duration:1 position:@"center"];
-            });
-        }
-        @finally {
-            dispatch_async(dispatch_get_main_queue(), ^{
                 [self.previousView.nickNameLabel setText:[[NSString alloc]initWithFormat:@"我的昵称：%@",nickname]];
                 if (self.previousView.popupViewController != nil) {
                     [self.previousView dismissPopupViewControllerAnimated:YES completion:^{
                         DDLogVerbose(@"popup view dismissed");
                     }];
                 }
+            });
+        }else {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [self.previousView.view makeToast:@"修改失败" duration:1 position:@"center"];
             });
         }
     });

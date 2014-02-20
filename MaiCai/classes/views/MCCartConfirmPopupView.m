@@ -88,30 +88,32 @@
 - (IBAction)okBtnAction:(UIButton *)sender {
     [self showProgressHUD];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        @try {
-            if ([[MCContextManager getInstance]isLogged]) {
-                MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
-                
-                NSArray* products =@[@{
-                                          @"id":[[NSNumber alloc]initWithInt:self.vegetable.shop_product_id],
-                                          @"quantity":[[NSNumber alloc]initWithInt:self.vegetable.quantity]
-                                          }];
-                [[MCTradeManager getInstance]addProductToCartOnlineByUserId:user.userId Products:products Recipe:nil];
-                dispatch_async(dispatch_get_main_queue(), ^{
+        if ([[MCContextManager getInstance]isLogged]) {
+            //登入状态
+            MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
+            
+            NSArray* products =@[@{
+                                      @"id":[[NSNumber alloc]initWithInt:self.vegetable.shop_product_id],
+                                      @"quantity":[[NSNumber alloc]initWithInt:self.vegetable.quantity]
+                                }];
+            if ([[MCTradeManager getInstance]addProductToCartOnlineByUserId:user.userId Products:products Recipe:nil]) {
+                dispatch_sync(dispatch_get_main_queue(), ^{
                     if (self.previousView.popupViewController != nil) {
                         [self.previousView dismissPopupViewControllerAnimated:NO completion:^{
                         }];
                     }
                 });
-            }else {
-                NSString* macId = (NSString*)[[MCContextManager getInstance]getDataByKey:MC_MAC_ID];
-                
-                NSArray* products =@[@{
-                                         @"id":[[NSNumber alloc]initWithInt:self.vegetable.shop_product_id],
-                                         @"quantity":[[NSNumber alloc]initWithInt:self.vegetable.quantity]
-                                         }];
-                [[MCTradeManager getInstance]addProductToCartByUserId:macId Products:products Recipe:nil];
-                dispatch_async(dispatch_get_main_queue(), ^{
+            }
+        }else {
+            //非登入状态
+            NSString* macId = (NSString*)[[MCContextManager getInstance]getDataByKey:MC_MAC_ID];
+            
+            NSArray* products =@[@{
+                                     @"id":[[NSNumber alloc]initWithInt:self.vegetable.shop_product_id],
+                                     @"quantity":[[NSNumber alloc]initWithInt:self.vegetable.quantity]
+                                }];
+            if ([[MCTradeManager getInstance]addProductToCartByUserId:macId Products:products Recipe:nil]) {
+                dispatch_sync(dispatch_get_main_queue(), ^{
                     if (self.previousView.popupViewController != nil) {
                         [self.previousView dismissPopupViewControllerAnimated:NO completion:^{
                         }];
@@ -119,15 +121,10 @@
                 });
             }
         }
-        @catch (NSException *exception) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.view makeToast:@"无法连接网络" duration:2 position:@"center"];
-            });
-        }@finally {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self hideProgressHUD];
-            });
-        }
+    
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self hideProgressHUD];
+        });
     });
 }
 @end

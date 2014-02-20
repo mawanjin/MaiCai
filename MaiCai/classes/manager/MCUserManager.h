@@ -13,16 +13,16 @@
 
 @interface MCUserManager : NSObject
 +(MCUserManager*)getInstance;
--(void)registerUser:(MCUser*)user MacId:(NSString*)macId;
--(void)login:(MCUser*)user;
+-(BOOL)registerUser:(MCUser*)user MacId:(NSString*)macId;
+-(BOOL)login:(MCUser*)user;
 -(MCUser*)getUserInfo:(NSString*)id;
--(void)changeNickName:(NSString*)nickname;
--(void)changePassword:(NSString*)oldPassword NewPassword:(NSString*)newPassword;
+-(BOOL)changeNickName:(NSString*)nickname;
+-(BOOL)changePassword:(NSString*)oldPassword NewPassword:(NSString*)newPassword;
 -(NSMutableArray*)getUserAddressByUserId:(NSString*)id;
--(void)addUserAddress:(MCAddress*)address UserId:(NSString*)id;
--(void)deleteUserAddressById:(NSString*)addressId UserId:(NSString*)userId;
--(void)updateUserAddress:(MCAddress*)address UserId:(NSString*)userId;
--(void)feedbackByTel:(NSString*)tel Content:(NSString*)content;
+-(BOOL)addUserAddress:(MCAddress*)address UserId:(NSString*)id;
+-(BOOL)deleteUserAddressById:(NSString*)addressId UserId:(NSString*)userId;
+-(BOOL)updateUserAddress:(MCAddress*)address UserId:(NSString*)userId;
+-(BOOL)feedbackByTel:(NSString*)tel Content:(NSString*)content;
 -(void)saveLoginStatusByUser:(MCUser*)user;
 -(MCUser*)getLoginStatus;
 -(void)clearLoginStatus;

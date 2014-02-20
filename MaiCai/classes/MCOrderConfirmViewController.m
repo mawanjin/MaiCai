@@ -288,29 +288,21 @@
         else
         {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                @try {
-                    [[MCTradeManager getInstance]cancelPaymentByPaymentNo:self.pay_no];
-                }
-                @catch (NSException *exception) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        if(self.showMsg){
-                            self.showMsg(MC_ERROR_MSG_0001);
-                            self.showMsg = nil;
-                        }
-                        
-                        [self backBtnAction];
-                        
-                    });
-                }
-                @finally {
-                    dispatch_async(dispatch_get_main_queue(), ^{
+                if ([[MCTradeManager getInstance]cancelPaymentByPaymentNo:self.pay_no]) {
+                    dispatch_sync(dispatch_get_main_queue(), ^{
                         if (self.showMsg) {
                             self.showMsg(@"交易失败");
                             self.showMsg = nil;
                         }
-                        
                         [self backBtnAction];
-                        
+                    });
+                }else {
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                        if(self.showMsg){
+                            self.showMsg(MC_ERROR_MSG_0001);
+                            self.showMsg = nil;
+                        }
+                        [self backBtnAction];
                     });
                 }
             });
@@ -319,27 +311,22 @@
     else
     {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            @try {
-                [[MCTradeManager getInstance]cancelPaymentByPaymentNo:self.pay_no];
-            }
-            @catch (NSException *exception) {
-                dispatch_async(dispatch_get_main_queue(), ^{
+            
+            if ([[MCTradeManager getInstance]cancelPaymentByPaymentNo:self.pay_no]) {
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    if (self.showMsg) {
+                        self.showMsg(@"交易失败");
+                        self.showMsg = nil;
+                    }
+                    [self backBtnAction];
+                });
+            }else {
+                dispatch_sync(dispatch_get_main_queue(), ^{
                     if(self.showMsg){
                         self.showMsg(MC_ERROR_MSG_0001);
                         self.showMsg = nil;
                     }
                     [self backBtnAction];
-                });
-            }
-            @finally {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (self.showMsg) {
-                        self.showMsg(@"交易失败");
-                        self.showMsg = nil;
-                    }
-
-                    [self backBtnAction];
-                    
                 });
             }
         });

@@ -72,25 +72,32 @@
     MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
     [self showProgressHUD];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        @try {
-            if (self.obj == nil) {
-                [[MCUserManager getInstance]addUserAddress:mcaddress UserId:user.userId];
-            }else{
-                mcaddress.id = self.obj.id;
-                [[MCUserManager getInstance]updateUserAddress:mcaddress UserId:user.userId];
+        if (self.obj == nil) {
+            if ([[MCUserManager getInstance]addUserAddress:mcaddress UserId:user.userId]) {
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [self hideProgressHUD];
+                    [self backBtnAction];
+                });
+            }else {
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [self hideProgressHUD];
+                    //[self showMsgHint:MC_ERROR_MSG_0001];
+                });
             }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self backBtnAction];
-            });
-        }
-        @catch (NSException *exception) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self showMsgHint:MC_ERROR_MSG_0001];
-            });
-        }@finally {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self hideProgressHUD];
-            });
+            
+        }else{
+            mcaddress.id = self.obj.id;
+            if ([[MCUserManager getInstance]updateUserAddress:mcaddress UserId:user.userId]) {
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [self hideProgressHUD];
+                    [self backBtnAction];
+                });
+            }else {
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [self hideProgressHUD];
+                    //[self showMsgHint:MC_ERROR_MSG_0001];
+                });
+            }
         }
     });
 }

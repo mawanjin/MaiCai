@@ -114,54 +114,48 @@
 - (IBAction)okBtnAction:(UIButton *)sender {
     [self showProgressHUD];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        @try {
-            if ([[MCContextManager getInstance]isLogged]) {
-                if([self.previousView isKindOfClass:[MCMineCartViewController class]]) {
-                    //如果是MCMineCartViewController
-                    MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
-                    [[MCTradeManager getInstance]changeProductNumInCartOnlineByUserId:user.userId ProductId:self.vegetable.id Quantity:self.vegetable.quantity];
+        if ([[MCContextManager getInstance]isLogged]) {
+            //登入状态
+            if([self.previousView isKindOfClass:[MCMineCartViewController class]]) {
+                //如果是MCMineCartViewController
+                MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
+                if ([[MCTradeManager getInstance]changeProductNumInCartOnlineByUserId:user.userId ProductId:self.vegetable.id Quantity:self.vegetable.quantity]) {
                     ((MCMineCartViewController*)self.previousView).data = [[MCTradeManager getInstance]getCartProductsOnlineByUserId:user.userId];
-                }else if([self.previousView isKindOfClass:[MCQuickOrderViewController class]]) {
-                    //如果是MCQuickOrderViewController
-                    [(MCQuickOrderViewController*)self.previousView resetTotalChooseBtn];
                 }
-            }else {
-                if([self.previousView isKindOfClass:[MCMineCartViewController class]]) {
-                    //如果是MCMineCartViewController
-                    NSString* macId = (NSString*)[[MCContextManager getInstance]getDataByKey:MC_MAC_ID];
-                    [[MCTradeManager getInstance]changeProductNumInCartByUserId:macId ProductId:self.vegetable.id Quantity:self.vegetable.quantity];
-                    ((MCMineCartViewController*)self.previousView).data = [[MCTradeManager getInstance]getCartProductsByUserId:macId];
-
-                }else if([self.previousView isKindOfClass:[MCQuickOrderViewController class]]) {
-                    //如果是MCQuickOrderViewController
-                     [(MCQuickOrderViewController*)self.previousView resetTotalChooseBtn];
-                }
+            }else if([self.previousView isKindOfClass:[MCQuickOrderViewController class]]) {
+                //如果是MCQuickOrderViewController
+                [(MCQuickOrderViewController*)self.previousView resetTotalChooseBtn];
             }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (self.previousView.popupViewController != nil) {
-                    [self.previousView dismissPopupViewControllerAnimated:NO completion:^{
-                        if([self.previousView isKindOfClass:[MCMineCartViewController class]]) {
-                            //如果是MCMineCartViewController
-                            [ ((MCMineCartViewController*)self.previousView).tableView reloadData];
-                        }else if([self.previousView isKindOfClass:[MCQuickOrderViewController class]]) {
-                            //如果是MCQuickOrderViewController
-                             [(MCQuickOrderViewController*)self.previousView resetTotalChooseBtn];
-                            [ ((MCQuickOrderViewController*)self.previousView).tableView reloadData];
-
-                        }
-                    }];
+        }else {
+            //注销状态
+            if([self.previousView isKindOfClass:[MCMineCartViewController class]]) {
+                //如果是MCMineCartViewController
+                NSString* macId = (NSString*)[[MCContextManager getInstance]getDataByKey:MC_MAC_ID];
+                if ([[MCTradeManager getInstance]changeProductNumInCartByUserId:macId ProductId:self.vegetable.id Quantity:self.vegetable.quantity]) {
+                     ((MCMineCartViewController*)self.previousView).data = [[MCTradeManager getInstance]getCartProductsByUserId:macId];
                 }
-            });
+            }else if([self.previousView isKindOfClass:[MCQuickOrderViewController class]]) {
+                //如果是MCQuickOrderViewController
+                 [(MCQuickOrderViewController*)self.previousView resetTotalChooseBtn];
+            }
         }
-        @catch (NSException *exception) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.view makeToast:@"无法获取网络资源" duration:2 position:@"center"];
-            });
-        }@finally {
-            dispatch_async(dispatch_get_main_queue(), ^{
-               [self hideProgressHUD];
-            });
-        }
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            if (self.previousView.popupViewController != nil) {
+                [self.previousView dismissPopupViewControllerAnimated:NO completion:^{
+                    if([self.previousView isKindOfClass:[MCMineCartViewController class]]) {
+                        //如果是MCMineCartViewController
+                        [((MCMineCartViewController*)self.previousView).tableView reloadData];
+                    }else if([self.previousView isKindOfClass:[MCQuickOrderViewController class]]) {
+                        //如果是MCQuickOrderViewController
+                         [(MCQuickOrderViewController*)self.previousView resetTotalChooseBtn];
+                        [ ((MCQuickOrderViewController*)self.previousView).tableView reloadData];
+
+                    }
+                }];
+            }
+            [self hideProgressHUD];
+        });
     });
 }
 

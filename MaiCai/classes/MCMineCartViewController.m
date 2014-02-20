@@ -64,30 +64,41 @@
     [self showProgressHUD];
     [self resetCart];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        @try {
-            if ([[MCContextManager getInstance]isLogged]) {
-                MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
-                data = [[MCTradeManager getInstance]getCartProductsOnlineByUserId:user.userId];
-            }else {
-                NSString* macId = (NSString*)[[MCContextManager getInstance]getDataByKey:MC_MAC_ID];
-                data = [[MCTradeManager getInstance]getCartProductsByUserId:macId];
+        if ([[MCContextManager getInstance]isLogged]) {
+            //登入状态
+            MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
+            NSMutableArray* data_ = [[MCTradeManager getInstance]getCartProductsOnlineByUserId:user.userId];
+            if (data_) {
+                self.data = data_;
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [self dispLayTotalChoosedBtn];
+                    [self.tableView reloadData];
+                    [self hideProgressHUD];
+                });
+            }else{
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [self hideProgressHUD];
+                    //[self showMsgHint:MC_ERROR_MSG_0001];
+                });
             }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self dispLayTotalChoosedBtn];
-                [self.tableView reloadData];
-            });
+        }else {
+            //非登入状态
+            NSString* macId = (NSString*)[[MCContextManager getInstance]getDataByKey:MC_MAC_ID];
+            NSMutableArray* data_ = [[MCTradeManager getInstance]getCartProductsByUserId:macId];
+            if (data_) {
+                self.data = data_;
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [self dispLayTotalChoosedBtn];
+                    [self.tableView reloadData];
+                    [self hideProgressHUD];
+                });
+            }else{
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [self hideProgressHUD];
+                    //[self showMsgHint:MC_ERROR_MSG_0001];
+                });
+            }
         }
-        @catch (NSException *exception) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self showMsgHint:MC_ERROR_MSG_0001];
-            });
-            
-        }@finally {
-           dispatch_async(dispatch_get_main_queue(), ^{
-             [self hideProgressHUD];
-           });
-        }
-
     });
 }
 
@@ -205,25 +216,19 @@
             MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
             [self showProgressHUD];
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                @try {
-                    [[MCTradeManager getInstance]deleteProductsInCartOnlineByUserId:user.userId ProductIds:array];
-                    dispatch_async(dispatch_get_main_queue(), ^{
+                if ([[MCTradeManager getInstance]deleteProductsInCartOnlineByUserId:user.userId ProductIds:array]) {
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                        [self hideProgressHUD];
                         [vegetables removeObjectAtIndex:indexPath.row];
                         if(vegetables.count == 0) {
                             [data removeObjectAtIndex:indexPath.section];
                         }
                         [self.tableView reloadData];
                     });
-                }
-                @catch (NSException *exception) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self showMsgHint:MC_ERROR_MSG_0001];
-                    });
-                    
-                }
-                @finally {
-                    dispatch_async(dispatch_get_main_queue(), ^{
+                }else {
+                    dispatch_sync(dispatch_get_main_queue(), ^{
                         [self hideProgressHUD];
+                        //[self showMsgHint:MC_ERROR_MSG_0001];
                     });
                 }
             });
@@ -231,25 +236,21 @@
             NSString* macId = (NSString*)[[MCContextManager getInstance]getDataByKey:MC_MAC_ID];
             [self showProgressHUD];
              dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                 @try {
-                     [[MCTradeManager getInstance]deleteProductsInCartByUserId:macId ProductIds:array];
-                     dispatch_async(dispatch_get_main_queue(), ^{
+                 if ([[MCTradeManager getInstance]deleteProductsInCartByUserId:macId ProductIds:array]) {
+                     dispatch_sync(dispatch_get_main_queue(), ^{
+                         [self hideProgressHUD];
                          [vegetables removeObjectAtIndex:indexPath.row];
                          if(vegetables.count == 0) {
                              [data removeObjectAtIndex:indexPath.section];
                          }
                          [self.tableView reloadData];
                      });
-                }@catch (NSException *exception) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self showMsgHint:MC_ERROR_MSG_0001];
-                    });
-                }
-                @finally {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self hideProgressHUD];
-                    });
-                }
+                 }else {
+                     dispatch_sync(dispatch_get_main_queue(), ^{
+                         [self hideProgressHUD];
+                         //[self showMsgHint:MC_ERROR_MSG_0001];
+                     });
+                 }
             });
         }
     }
@@ -274,25 +275,17 @@
     if ([[MCContextManager getInstance]isLogged]) {
         MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
         [self showProgressHUD];
-       
-        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            @try {
-                [[MCTradeManager getInstance]deleteProductsInCartOnlineByUserId:user.userId ProductIds:array];
-                dispatch_async(dispatch_get_main_queue(), ^{
+            if ([[MCTradeManager getInstance]deleteProductsInCartOnlineByUserId:user.userId ProductIds:array]) {
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [self hideProgressHUD];
                     [self.data removeAllObjects];
                     [self.tableView reloadData];
                 });
-            }
-            @catch (NSException *exception) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self showMsgHint:MC_ERROR_MSG_0001];
-                });
-                
-            }
-            @finally {
+            }else{
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self hideProgressHUD];
+                    //[self showMsgHint:MC_ERROR_MSG_0001];
                 });
             }
         });
@@ -300,20 +293,16 @@
         NSString* macId = (NSString*)[[MCContextManager getInstance]getDataByKey:MC_MAC_ID];
         [self showProgressHUD];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            @try {
-                [[MCTradeManager getInstance]deleteProductsInCartByUserId:macId ProductIds:array];
-                dispatch_async(dispatch_get_main_queue(), ^{
+            if ([[MCTradeManager getInstance]deleteProductsInCartByUserId:macId ProductIds:array]) {
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [self hideProgressHUD];
                     [self.data removeAllObjects];
                     [self.tableView reloadData];
                 });
-            }@catch (NSException *exception) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self showMsgHint:MC_ERROR_MSG_0001];
-                });
-            }
-            @finally {
-                dispatch_async(dispatch_get_main_queue(), ^{
+            }else {
+                dispatch_sync(dispatch_get_main_queue(), ^{
                     [self hideProgressHUD];
+                    //[self showMsgHint:MC_ERROR_MSG_0001];
                 });
             }
         });

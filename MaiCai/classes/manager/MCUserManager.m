@@ -28,7 +28,7 @@ static MCUserManager* instance;
     return instance;
 }
 
--(void)registerUser:(MCUser*)user MacId:(NSString*)macId
+-(BOOL)registerUser:(MCUser*)user MacId:(NSString*)macId
 {
     NSString* param = [[NSString alloc]initWithFormat:@"{\"id\":\"%@\",\"name\":\"%@\",\"password\":\"%@\",\"mac\":\"%@\"}",user.userId,user.name,user.password,macId];
     NSString* sign = [@"/api/ios/v1/private/customer/register.dodhfuewjcuehiudjuwdwyfcs" stringFromMD5];
@@ -38,18 +38,21 @@ static MCUserManager* instance;
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
     NSData* result = [[MCNetwork getInstance]httpPostSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/private/customer/register.do" Params:data];
+    if (result == nil) {
+        return false;
+    }
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
      DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(!flag) {
-        @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
+    if(flag) {
+        return true;
+    }else {
+        return false;
     }
-    
-    
 }
 
--(void)login:(MCUser*)user {
+-(BOOL)login:(MCUser*)user {
     NSString* param = [[NSString alloc]initWithFormat:@"{\"id\":\"%@\",\"password\":\"%@\"}",user.userId,user.password];
     NSString* sign = [@"/api/ios/v1/private/customer/login.dodhfuewjcuehiudjuwdwyfcs" stringFromMD5];
     NSDictionary* params = @{
@@ -58,29 +61,33 @@ static MCUserManager* instance;
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
     NSData* result = [[MCNetwork getInstance]httpPostSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/private/customer/login.do" Params:data];
+    if (result == nil) {
+        return false;
+    }
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
      DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(!flag) {
-        @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
+    if(flag) {
+        NSDictionary* address_ = ((NSDictionary*)responseData[@"data"])[@"address"];
+        if(address_ !=nil && address_ != (NSDictionary*)[NSNull null] && [address_ count]>0) {
+            MCAddress* address = [[MCAddress alloc]init];
+            address.id = [address_[@"id"]integerValue];
+            address.name = address_[@"name"];
+            address.shipper = address_[@"shipper"];
+            address.mobile = address_[@"tel"];
+            address.address = address_[@"address"];
+            user.defaultAddress = address;
+        }
+        
+        [[MCContextManager getInstance] addKey:MC_USER Data:user];
+        [[MCContextManager getInstance] setLogged:YES];
+        
+        [[MCUserManager getInstance]saveLoginStatusByUser:user];
+        return true;
+    }else {
+        return false;
     }
-
-    NSDictionary* address_ = ((NSDictionary*)responseData[@"data"])[@"address"];
-    if(address_ !=nil && address_ != (NSDictionary*)[NSNull null] && [address_ count]>0) {
-        MCAddress* address = [[MCAddress alloc]init];
-        address.id = [address_[@"id"]integerValue];
-        address.name = address_[@"name"];
-        address.shipper = address_[@"shipper"];
-        address.mobile = address_[@"tel"];
-        address.address = address_[@"address"];
-        user.defaultAddress = address;
-    }
-    
-    [[MCContextManager getInstance] addKey:MC_USER Data:user];
-    [[MCContextManager getInstance] setLogged:YES];
-    
-    [[MCUserManager getInstance]saveLoginStatusByUser:user];
 }
 
 -(MCUser*)getUserInfo:(NSString*)id
@@ -92,21 +99,25 @@ static MCUserManager* instance;
                                                                                  @"sign":sign
                                                                                  }];
     NSData* result = [[MCNetwork getInstance]httpPostSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/private/customer/index.do" Params:params];
+    if (result == nil) {
+        return nil;
+    }
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
      DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(!flag) {
-        @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
+    if(flag) {
+        MCUser* user = [[MCUser alloc]init];
+        user.userId = ((NSDictionary*)responseData[@"data"])[@"id"];
+        user.name = ((NSDictionary*)responseData[@"data"])[@"name"];
+        return user;
+    }else {
+        return nil;
     }
-    MCUser* user = [[MCUser alloc]init];
-    user.userId = ((NSDictionary*)responseData[@"data"])[@"id"];
-    user.name = ((NSDictionary*)responseData[@"data"])[@"name"];
-    return user;
 }
 
--(void)changeNickName:(NSString*)nickname
+-(BOOL)changeNickName:(NSString*)nickname
 {
     MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
     
@@ -118,16 +129,21 @@ static MCUserManager* instance;
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
     NSData* result = [[MCNetwork getInstance]httpPostSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/private/customer/update/name.do" Params:data];
+    if (result == nil) {
+        return false;
+    }
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
      DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(!flag) {
-        @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
-    }    
+    if(flag) {
+        return true;
+    }else {
+        return false;
+    }
 }
 
--(void)changePassword:(NSString*)oldPassword NewPassword:(NSString*)newPassword
+-(BOOL)changePassword:(NSString*)oldPassword NewPassword:(NSString*)newPassword
 {
     MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
     
@@ -139,12 +155,17 @@ static MCUserManager* instance;
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
     NSData* result = [[MCNetwork getInstance]httpPostSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/private/customer/update/password.do" Params:data];
+    if (result == nil) {
+        return false;
+    }
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
      BOOL flag = [responseData[@"success"]boolValue];
      DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(!flag) {
-        @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
+    if(flag) {
+        return true;
+    }else {
+        return false;
     }
 }
 
@@ -155,33 +176,36 @@ static MCUserManager* instance;
                                                                                    @"sign":sign
                                                                                    }];
     NSData* result = [[MCNetwork getInstance]httpPostSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/private/address/index.do" Params:params];
+    if (result == nil) {
+        return nil;
+    }
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
      DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(!flag) {
-        @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
+    if(flag) {
+        NSArray* dataArray = responseData[@"data"];
+        NSMutableArray* finalResult = [[NSMutableArray alloc]init];
+        unsigned int i=0;
+        for(i=0;i<dataArray.count;i++) {
+            NSDictionary* temp = dataArray[i];
+            MCAddress* address = [[MCAddress alloc]init];
+            address.id = [temp[@"id"]integerValue];
+            address.name = temp[@"name"];
+            address.shipper = temp[@"shipper"];
+            address.mobile = temp[@"tel"];
+            address.address = temp[@"address"];
+            [finalResult addObject:address];
+        }
+        return finalResult;
+    }else {
+        return nil;
     }
-    
-    NSArray* dataArray = responseData[@"data"];
-    NSMutableArray* finalResult = [[NSMutableArray alloc]init];
-    unsigned int i=0;
-    for(i=0;i<dataArray.count;i++) {
-        NSDictionary* temp = dataArray[i];
-        MCAddress* address = [[MCAddress alloc]init];
-        address.id = [temp[@"id"]integerValue];
-        address.name = temp[@"name"];
-        address.shipper = temp[@"shipper"];
-        address.mobile = temp[@"tel"];
-        address.address = temp[@"address"];
-        [finalResult addObject:address];
-    }
-    return finalResult;
 }
 
 
--(void)addUserAddress:(MCAddress*)address UserId:(NSString*)id {
+-(BOOL)addUserAddress:(MCAddress*)address UserId:(NSString*)id {
     NSString* sign = [@"/api/ios/v1/private/address/save.dodhfuewjcuehiudjuwdwyfcs" stringFromMD5];
     NSString* param = [[NSString alloc]initWithFormat:@"{\"customer_id\":\"%@\",\"name\":\"%@\",\"shipper\":\"%@\",\"tel\":\"%@\",\"address\":\"%@\"}",id,address.name,address.shipper,address.mobile,address.address];
     NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithDictionary:@{
@@ -189,19 +213,26 @@ static MCUserManager* instance;
                                                                                    @"sign":sign
                                                                                    }];
     NSData* result = [[MCNetwork getInstance]httpPostSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/private/address/save.do" Params:params];
+    
+    if (result == nil) {
+        return false;
+    }
+    
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
      DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(!flag) {
-        @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
+    if(flag) {
+        return true;
+    }else {
+        return false;
     }
    
 }
 
 
--(void)deleteUserAddressById:(NSString*)addressId UserId:(NSString*)userId;
+-(BOOL)deleteUserAddressById:(NSString*)addressId UserId:(NSString*)userId;
 {
     NSString* sign = [@"/api/ios/v1/private/address/delete.dodhfuewjcuehiudjuwdwyfcs" stringFromMD5];
     NSString* param = [[NSString alloc]initWithFormat:@"{\"ids\":[%@],\"customer_id\":\"%@\"}",addressId,userId];
@@ -210,17 +241,20 @@ static MCUserManager* instance;
                                                                                    @"sign":sign
                                                                                    }];
     NSData* result = [[MCNetwork getInstance]httpPostSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/private/address/delete.do" Params:params];
+    
+    if (result == nil) {
+        return false;
+    }
+    
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(!flag) {
-        @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
-    }
+    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    return flag;
 }
 
--(void)updateUserAddress:(MCAddress*)address UserId:(NSString*)userId;
+-(BOOL)updateUserAddress:(MCAddress*)address UserId:(NSString*)userId;
 {
     NSString* sign = [@"/api/ios/v1/private/address/update.dodhfuewjcuehiudjuwdwyfcs" stringFromMD5];
     NSString* param = [[NSString alloc]initWithFormat:@"{\"id\":\"%d\",\"customer_id\":\"%@\",\"shipper\":\"%@\",\"tel\":\"%@\",\"address\":\"%@\"}",address.id,userId,address.shipper,address.mobile,address.address];
@@ -229,17 +263,19 @@ static MCUserManager* instance;
                                                                                    @"sign":sign
                                                                                    }];
     NSData* result = [[MCNetwork getInstance]httpPostSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/private/address/update.do" Params:params];
+    if (result == nil) {
+        return false;
+    }
+    
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
      DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(!flag) {
-        @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
-    }
+    return flag;
 }
 
--(void)feedbackByTel:(NSString*)tel Content:(NSString*)content
+-(BOOL)feedbackByTel:(NSString*)tel Content:(NSString*)content
 {
     
     NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithDictionary:@{
@@ -247,13 +283,14 @@ static MCUserManager* instance;
                                                                                     @"tel":tel
                                                                                    }];
     NSData* result = [[MCNetwork getInstance]httpPostSynUrl: @"http://star-faith.com:8083/maicai/mobile/client/feedback.do" Params:params];
+    if (result == nil) {
+        return false;
+    }
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
      DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(!flag) {
-        @throw [NSException exceptionWithName:@"接口错误" reason:[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding] userInfo:nil];
-    }
+    return flag;
 }
 
 -(void)saveLoginStatusByUser:(MCUser*)user

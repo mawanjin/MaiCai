@@ -220,41 +220,43 @@
         if (self.segmentedControl.selectedSegmentIndex == 0) {
             //菜谱
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                @try {
-                    NSMutableArray* newData = [[MCVegetableManager getInstance]getRecipesByPage:page Pagesize:pageSize];
-                    
+                NSMutableArray* newData = [[MCVegetableManager getInstance]getRecipesByPage:page Pagesize:pageSize];
+                if (newData) {
                     [self.recipes addObjectsFromArray:newData];
-                    dispatch_async(dispatch_get_main_queue(), ^{
+                    dispatch_sync(dispatch_get_main_queue(), ^{
                         [self performSelector:@selector(doneWithView:) withObject:refreshView afterDelay:0.0];
                     });
-                }
-                @catch (NSException *exception) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self showMsgHint:MC_ERROR_MSG_0001];
+                }else {
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                        //[self showMsgHint:MC_ERROR_MSG_0001];
                         if([refreshView isRefreshing]) {
                             [refreshView endRefreshing];
                         }
                     });
+                
                 }
+                
+                
             });
         }else {
             //养身
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                @try {
-                    NSMutableArray* newData = [[MCVegetableManager getInstance]getHealthListByPage:page Pagesize:pageSize];
+                NSMutableArray* newData = [[MCVegetableManager getInstance]getHealthListByPage:page Pagesize:pageSize];
+                if (newData) {
                     [self.healthList addObjectsFromArray:newData];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self performSelector:@selector(doneWithView:) withObject:refreshView afterDelay:0.0];
                     });
-                }
-                @catch (NSException *exception) {
+                }else {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self showMsgHint:MC_ERROR_MSG_0001];
+                        //[self showMsgHint:MC_ERROR_MSG_0001];
                         if([refreshView isRefreshing]) {
                             [refreshView endRefreshing];
                         }
                     });
                 }
+                
+                
             });
         }
         //NSLog(@"%@----开始进入刷新状态", refreshView.class);
@@ -273,42 +275,37 @@
         page = 1;
         if (self.segmentedControl.selectedSegmentIndex == 0) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                @try {
-                    [self.recipes removeAllObjects];
-                    NSMutableArray* newData = [[MCVegetableManager getInstance]getRecipesByPage:page Pagesize:pageSize];
+                [self.recipes removeAllObjects];
+                NSMutableArray* newData = [[MCVegetableManager getInstance]getRecipesByPage:page Pagesize:pageSize];
+                if (newData) {
                     [self.recipes addObjectsFromArray:newData];
                     dispatch_sync(dispatch_get_main_queue(), ^{
                         [self performSelector:@selector(doneWithView:) withObject:refreshView afterDelay:0.0];
                     });
-                }
-                @catch (NSException *exception) {
+                }else {
                     dispatch_sync(dispatch_get_main_queue(), ^{
-                        [self showMsgHint:MC_ERROR_MSG_0001];
+                        //[self showMsgHint:MC_ERROR_MSG_0001];
                         if([refreshView isRefreshing]) {
                             [refreshView endRefreshing];
                         }
-
                     });
                 }
             });
         }else {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                @try {
-                    
-                    [self.healthList removeAllObjects];
-                    NSMutableArray* newData = [[MCVegetableManager getInstance]getHealthListByPage:page Pagesize:pageSize];
+                [self.healthList removeAllObjects];
+                NSMutableArray* newData = [[MCVegetableManager getInstance]getHealthListByPage:page Pagesize:pageSize];
+                if (newData) {
                     [self.healthList addObjectsFromArray:newData];
                     dispatch_sync(dispatch_get_main_queue(), ^{
                         [self performSelector:@selector(doneWithView:) withObject:refreshView afterDelay:0.0];
                     });
-                }
-                @catch (NSException *exception) {
+                }else {
                     dispatch_sync(dispatch_get_main_queue(), ^{
-                        [self showMsgHint:MC_ERROR_MSG_0001];
+                        //[self showMsgHint:MC_ERROR_MSG_0001];
                         if([refreshView isRefreshing]) {
                             [refreshView endRefreshing];
                         }
-
                     });
                 }
             });

@@ -54,29 +54,28 @@
     self.navItem.rightBarButtonItem = item;
     [self showProgressHUD];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        @try {
-            self.data = [[MCVegetableManager getInstance]getVegetableDetailByProductId:self.vegetable.id Longitude: lng Latitude:lat];
-        }
-        @catch (NSException *exception) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self showMsgHint:MC_ERROR_MSG_0001];
-            });
-        }@finally {
+        self.data = [[MCVegetableManager getInstance]getVegetableDetailByProductId:self.vegetable.id Longitude: lng Latitude:lat];
+        if (self.data) {
             dispatch_sync(dispatch_get_main_queue(), ^{
                 NSMutableArray* tenants = self.data[@"tenants"];
                 MCShop* shop = tenants[0];
                 self.vegetable = shop.vegetables[0];
                 [self.imageIcon loadImageByUrl:self.vegetable.image];
                 self.priceLabel.text = [[NSString alloc]initWithFormat:@"菜篮价：%.02f元/%@",self.vegetable.price,self.vegetable.unit];
-                 self.discoutPriceLabel.text = [[NSString alloc]initWithFormat:@"市场价：%.02f元/%@",self.vegetable.originalPrice,self.vegetable.unit];
+                self.discoutPriceLabel.text = [[NSString alloc]initWithFormat:@"市场价：%.02f元/%@",self.vegetable.originalPrice,self.vegetable.unit];
                 self.shopLabel.text = self.vegetable.shop.name;
-                
                 [self.tableView reloadData];
                 [self hideProgressHUD];
+                
             });
+        }else {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [self hideProgressHUD];
+                //[self showMsgHint:MC_ERROR_MSG_0001];
+            });
+
         }
     });
-
 }
 
 -(void)viewDidAppear:(BOOL)animated

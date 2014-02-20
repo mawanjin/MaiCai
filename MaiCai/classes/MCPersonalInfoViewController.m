@@ -36,28 +36,21 @@
     
     [self showProgressHUD];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        @try {
-            MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
-            user = [[MCUserManager getInstance]getUserInfo:user.userId];
-            dispatch_async(dispatch_get_main_queue(), ^{
+        MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
+        user = [[MCUserManager getInstance]getUserInfo:user.userId];
+        if (user) {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [self hideProgressHUD];
                 self.nickNameLabel.text = [[NSString alloc]initWithFormat:@"我的昵称：%@",user.name];
                 self.userIdLabel.text = [[NSString alloc]initWithFormat:@"我的账号：%@",user.userId];
             });
-        }
-        @catch (NSException *exception) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self showMsgHint:MC_ERROR_MSG_0001];
-            });
-        }
-        @finally {
-            dispatch_async(dispatch_get_main_queue(), ^{
+        }else {
+            dispatch_sync(dispatch_get_main_queue(), ^{
                 [self hideProgressHUD];
+                //[self showMsgHint:MC_ERROR_MSG_0001];
             });
         }
-
     });
-    
-    
 }
 
 - (void)didReceiveMemoryWarning

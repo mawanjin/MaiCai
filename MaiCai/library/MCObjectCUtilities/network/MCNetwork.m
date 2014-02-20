@@ -70,23 +70,21 @@ static MCNetwork* instance;
     if ([response respondsToSelector:@selector(allHeaderFields)]) {
         // 取得http状态码
          DDLogVerbose(@"此次请求状态码是%ld",(long)[response statusCode]);
-        if((long)[response statusCode] != 200) {
-            @throw [[NSException alloc]initWithName:@"错误" reason:@"状态码不是200" userInfo:nil];
-        }
-       
-        // 取得所有的请求的头
-        NSDictionary *dictionary = [response allHeaderFields];
-        NSString* expires = dictionary[@"Expires"];
-        if(flag == true) {
-            //存入缓存
-            MCNetWorkObject* object = [[MCNetWorkObject alloc]init];
-            object.expire = expires;
-            object.data = result;
-            [NSKeyedArchiver archiveRootObject:object toFile:path];
+        if((long)[response statusCode] == 200) {
+            // 取得所有的请求的头
+            NSDictionary *dictionary = [response allHeaderFields];
+            NSString* expires = dictionary[@"Expires"];
+            if(flag == true) {
+                //存入缓存
+                MCNetWorkObject* object = [[MCNetWorkObject alloc]init];
+                object.expire = expires;
+                object.data = result;
+                [NSKeyedArchiver archiveRootObject:object toFile:path];
+            }
+            return result;
         }
     }
-
-    return result;
+    return nil;
 }
 
 
@@ -121,11 +119,11 @@ static MCNetwork* instance;
     if ([response respondsToSelector:@selector(allHeaderFields)]) {
         // 取得http状态码
         DDLogVerbose(@"此次请求状态码是%ld",(long)[response statusCode]);
-        if((long)[response statusCode] != 200) {
-            @throw [[NSException alloc]initWithName:@"错误" reason:@"状态码不是200" userInfo:nil];
+        if((long)[response statusCode] == 200) {
+            return result;
         }
     }
-    return  result;
+    return nil;
 }
 
 -(UIImage*) loadImageFromSource:(NSString*)url
@@ -152,22 +150,21 @@ static MCNetwork* instance;
     if ([response respondsToSelector:@selector(allHeaderFields)]) {
         // 取得http状态码
         DDLogVerbose(@"此次请求状态码是%ld",(long)[response statusCode]);
-        if((long)[response statusCode] != 200) {
-            @throw [[NSException alloc]initWithName:@"错误" reason:@"状态码不是200" userInfo:nil];
+        if((long)[response statusCode] == 200) {
+            // 取得所有的请求的头
+            NSDictionary *dictionary = [response allHeaderFields];
+            NSString* expires = dictionary[@"Expires"];
+            
+            MCNetWorkObject* object = [[MCNetWorkObject alloc]init];
+            object.expire = expires;
+            object.data = imgData;
+            //建立缓存
+            [NSKeyedArchiver archiveRootObject:object toFile:path];
+            
+            return [UIImage imageWithData:imgData];
         }
-        
-        // 取得所有的请求的头
-        NSDictionary *dictionary = [response allHeaderFields];
-        NSString* expires = dictionary[@"Expires"];
-        
-        MCNetWorkObject* object = [[MCNetWorkObject alloc]init];
-        object.expire = expires;
-        object.data = imgData;
-        //建立缓存
-        [NSKeyedArchiver archiveRootObject:object toFile:path];
     }
-    
-    return [UIImage imageWithData:imgData];
+    return nil;
 }
 
 /*计算缓存整体缓存大小*/

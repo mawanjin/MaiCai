@@ -181,60 +181,46 @@
         else
         {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                @try {
-                    [[MCTradeManager getInstance]cancelPaymentByPaymentNo:self.pay_no];
-                }
-                @catch (NSException *exception) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        if(self.alipayErrorAction) {
-                            self.alipayErrorAction();
-                            self.alipayErrorAction = nil;
-                        }
-                    });
-                }
-                @finally {
-                    dispatch_async(dispatch_get_main_queue(), ^{
+                if ([[MCTradeManager getInstance]cancelPaymentByPaymentNo:self.pay_no]) {
+                    dispatch_sync(dispatch_get_main_queue(), ^{
                         self.pay_no = nil;
                         if(self.alipayEndAction) {
                             self.alipayEndAction();
                             self.alipayEndAction = nil;
                         }
                     });
-                }
-            });
-
-        }
-    }
-    else
-    {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            @try {
-                [[MCTradeManager getInstance]cancelPaymentByPaymentNo:self.pay_no];
-            }
-            @catch (NSException *exception) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    dispatch_async(dispatch_get_main_queue(), ^{
+                }else {
+                    dispatch_sync(dispatch_get_main_queue(), ^{
                         if(self.alipayErrorAction) {
                             self.alipayErrorAction();
                             self.alipayErrorAction = nil;
                         }
                     });
-
-                });
-            }
-            @finally {
-                dispatch_async(dispatch_get_main_queue(), ^{
+                }
+            });
+        }
+    }
+    else
+    {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            if ([[MCTradeManager getInstance]cancelPaymentByPaymentNo:self.pay_no]) {
+                dispatch_sync(dispatch_get_main_queue(), ^{
                     self.pay_no = nil;
                     if(self.alipayEndAction) {
                         self.alipayEndAction();
                         self.alipayEndAction = nil;
                     }
                 });
+            }else {
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    if(self.alipayErrorAction) {
+                        self.alipayErrorAction();
+                        self.alipayErrorAction = nil;
+                    }
+                });
             }
         });
-
     }
-    
 }
 
 - (AlixPayResult *)resultFromURL:(NSURL *)url {

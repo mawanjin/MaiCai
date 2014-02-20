@@ -43,27 +43,25 @@
     
     [self showProgressHUD];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        @try {
-            self.recipe = [[MCVegetableManager getInstance]getRecipeDetailById:self.recipe.id];
-            dispatch_async(dispatch_get_main_queue(), ^{
+        self.recipe = [[MCVegetableManager getInstance]getRecipeDetailById:self.recipe.id];
+        if (self.recipe) {
+            dispatch_sync(dispatch_get_main_queue(), ^{
                 [self.navItem setTitle:self.recipe.name];
                 MCCookBookDetailHeader* header = [MCCookBookDetailHeader initInstance];
                 header.label.text = self.recipe.name;
                 [self.tableView setTableHeaderView:header];
-                 [header.image loadImageByUrl:self.recipe.bigImage];
+                [header.image loadImageByUrl:self.recipe.bigImage];
+            });
+        }else {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                //[self showMsgHint:MC_ERROR_MSG_0001];
             });
         }
-        @catch (NSException *exception) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self showMsgHint:MC_ERROR_MSG_0001];
-            });
-        }
-        @finally {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self hideProgressHUD];
-                [self.tableView reloadData];
-            });
-        }
+    
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+            [self hideProgressHUD];
+        });
     });
 }
 
@@ -82,7 +80,6 @@
 -(void)quickOrderAction{
     MCQuickOrderViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCQuickOrderViewController"];
     vc.recipe = self.recipe;
-    //vc.previousView = self;
     [vc setShowMsg:^(NSString * msg) {
         [self showMsgHint:msg];
     }];
