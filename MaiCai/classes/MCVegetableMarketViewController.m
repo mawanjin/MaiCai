@@ -124,7 +124,7 @@
     [cell.icon loadImageByUrl:vegetable.image];
     
     cell.nameLabel.text = vegetable.name;
-    cell.descriptionLabel.text = [[NSString alloc]initWithFormat:@"市场价：%.02f元/%@",vegetable.price,vegetable.unit];
+    cell.descriptionLabel.text = [[NSString alloc]initWithFormat:@"菜篮价：%.02f元/%@",vegetable.price,vegetable.unit];
     if(indexPath.row == (products.count-1)) {
         cell.divideLine.hidden = YES;
     }

@@ -81,12 +81,16 @@
     MCMineAdressCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"addressCell"];
     MCAddress* address = self.data[indexPath.row];
     cell.usernameLabel.text = [[NSString alloc]initWithFormat:@"收货人：%@",address.shipper];
-    
-    if(indexPath.row == _choosedRow) {
-        [cell.chooseIcon setHidden:NO];
-    }else{
-         [cell.chooseIcon setHidden:YES];
+    if(self.chooseAddressComplete){
+        if(indexPath.row == _choosedRow) {
+            [cell.chooseIcon setHidden:NO];
+        }else{
+            [cell.chooseIcon setHidden:YES];
+        }
+    }else {
+        [cell.chooseIcon setHidden:YES];
     }
+    
     cell.mobileLabel.text = [[NSString alloc]initWithFormat:@"联系电话：%@",address.mobile];
     cell.addressLabel.text = [[NSString alloc]initWithFormat:@"收货地址：%@",address.address];
     
@@ -102,7 +106,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(self.chooseAddressComplete){
-        if(self.currentChoose != Nil) {
+        if(self.currentChoose != nil) {
             MCMineAdressCell* cell =(MCMineAdressCell* ) [self.tableView cellForRowAtIndexPath:self.currentChoose];
             [cell.chooseIcon setHidden:YES];
         }
