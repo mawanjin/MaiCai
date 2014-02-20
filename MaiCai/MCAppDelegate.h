@@ -10,7 +10,7 @@
 @class PayViewController;
 @class MCBaseNavViewController;
 
-@interface MCAppDelegate : UIResponder <UIApplicationDelegate>
+@interface MCAppDelegate : UIResponder <UIApplicationDelegate,UIAlertViewDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property BOOL isReachable;

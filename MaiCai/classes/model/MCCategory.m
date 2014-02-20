@@ -7,20 +7,20 @@
 //
 
 #import "MCCategory.h"
-#import "DDLogConfig.h"
+
 
 @implementation MCCategory
 - (id)init
 {
     self = [super init];
     if (self) {
-        DDLogDebug(@"mccategory init");
+        MCLog(@"mccategory init");
     }
     return self;
 }
 
 - (void)dealloc
 {
-    DDLogDebug(@"mccategory dealloc");
+    MCLog(@"mccategory dealloc");
 }
 @end

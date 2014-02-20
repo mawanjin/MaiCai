@@ -17,7 +17,6 @@
 #import "MCContextManager.h"
 #import "MCUser.h"
 #import "MCTradeManager.h"
-#import "DDLogConfig.h"
 
 @interface MCHealthDetailViewController ()
 

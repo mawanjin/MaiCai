@@ -11,7 +11,6 @@
 #import "Toast+UIView.h"
 #import "MCUserManager.h"
 #import "Toast+UIView.h"
-#import "DDLogConfig.h"
 
 @interface MCChangePasswordView ()
 
@@ -44,7 +43,7 @@
 - (IBAction)cancelBtn:(id)sender {
     if (self.previousView.popupViewController != nil) {
         [self.previousView dismissPopupViewControllerAnimated:YES completion:^{
-            DDLogVerbose(@"popup view dismissed");
+            MCLog(@"popup view dismissed");
         }];
     }
 
@@ -76,7 +75,7 @@
                 [self.previousView.view makeToast:@"修改成功" duration:3 position:@"center"];
                 if (self.previousView.popupViewController != nil) {
                     [self.previousView dismissPopupViewControllerAnimated:YES completion:^{
-                        DDLogVerbose(@"popup view dismissed");
+                        MCLog(@"popup view dismissed");
                     }];
                 }
             });

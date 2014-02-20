@@ -13,7 +13,7 @@
 #import "MCAddress.h"
 #import "NSString+MD5Addition.h"
 #import "MCFileOperation.h"
-#import "DDLogConfig.h"
+
 
 @implementation MCUserManager
 static MCUserManager* instance;
@@ -44,7 +44,7 @@ static MCUserManager* instance;
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
-     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+     MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
         return true;
     }else {
@@ -67,7 +67,7 @@ static MCUserManager* instance;
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
-     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+     MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
         NSDictionary* address_ = ((NSDictionary*)responseData[@"data"])[@"address"];
         if(address_ !=nil && address_ != (NSDictionary*)[NSNull null] && [address_ count]>0) {
@@ -106,7 +106,7 @@ static MCUserManager* instance;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+     MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
         MCUser* user = [[MCUser alloc]init];
         user.userId = ((NSDictionary*)responseData[@"data"])[@"id"];
@@ -135,7 +135,7 @@ static MCUserManager* instance;
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
-     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+     MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
         return true;
     }else {
@@ -161,7 +161,7 @@ static MCUserManager* instance;
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
      BOOL flag = [responseData[@"success"]boolValue];
-     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+     MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
         return true;
     }else {
@@ -183,7 +183,7 @@ static MCUserManager* instance;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+     MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
         NSArray* dataArray = responseData[@"data"];
         NSMutableArray* finalResult = [[NSMutableArray alloc]init];
@@ -222,7 +222,7 @@ static MCUserManager* instance;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+     MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
         return true;
     }else {
@@ -250,7 +250,7 @@ static MCUserManager* instance;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     return flag;
 }
 
@@ -271,7 +271,7 @@ static MCUserManager* instance;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+     MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     return flag;
 }
 
@@ -289,7 +289,7 @@ static MCUserManager* instance;
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
-     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+     MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     return flag;
 }
 

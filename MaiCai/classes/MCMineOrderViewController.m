@@ -15,7 +15,6 @@
 #import "MCVegetableManager.h"
 #import "MCOrderDetailViewController.h"
 #import "UIImageView+MCAsynLoadImage.h"
-#import "DDLogConfig.h"
 
 @implementation MCMineOrderViewController
 
@@ -147,7 +146,7 @@
     
     
     if (sender.direction & UISwipeGestureRecognizerDirectionLeft){
-        DDLogVerbose(@"Swiped Left.");
+        MCLog(@"Swiped Left.");
         if(self.segmentedControl.selectedSegmentIndex < 2) {
             [self.segmentedControl setSelectedSegmentIndex:(self.segmentedControl.selectedSegmentIndex+1) animated:YES];
             [self segmentChanged:(UISegmentedControl*)self.segmentedControl];
@@ -155,7 +154,7 @@
         }
     }
     if (sender.direction & UISwipeGestureRecognizerDirectionRight){
-        DDLogVerbose(@"Swiped Right.");
+        MCLog(@"Swiped Right.");
         if(self.segmentedControl.selectedSegmentIndex >0) {
             [self.segmentedControl setSelectedSegmentIndex:(self.segmentedControl.selectedSegmentIndex-1) animated:YES];
             [self segmentChanged:(UISegmentedControl*)self.segmentedControl];

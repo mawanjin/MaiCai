@@ -20,7 +20,6 @@
 #import "MCUser.h"
 #import "MCOrderConfirmViewController.h"
 #import "UIImageView+MCAsynLoadImage.h"
-#import "DDLogConfig.h"
 #import "MCButton.h"
 
 @implementation MCMineCartViewController

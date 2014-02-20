@@ -19,7 +19,6 @@
 #import "NSDictionary+MCJsonString.h"
 #import "NSArray+MCJsonString.h"
 #import "MCRecipe.h"
-#import "DDLogConfig.h"
 
 @implementation MCTradeManager
 
@@ -48,7 +47,7 @@ static MCTradeManager* instance;
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
    BOOL flag = [responseData[@"success"]boolValue];
-     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+     MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag){
         NSDictionary* obj = responseData[@"data"];
          NSMutableArray* finalResult = [[NSMutableArray alloc]init];
@@ -120,7 +119,7 @@ static MCTradeManager* instance;
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
-    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag){
         NSDictionary* obj = responseData[@"data"];
         NSMutableArray* finalResult = [[NSMutableArray alloc]init];
@@ -210,7 +209,7 @@ static MCTradeManager* instance;
 
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
-    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
         return true;
     }else {
@@ -253,7 +252,7 @@ static MCTradeManager* instance;
     NSError* error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
-    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
         return true;
     }else {
@@ -276,7 +275,7 @@ static MCTradeManager* instance;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     int num = 0;
     BOOL flag = [responseData[@"success"]boolValue];
-    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         return num;
     }else {
@@ -302,7 +301,7 @@ static MCTradeManager* instance;
     int num = 0;
     
     BOOL flag = [responseData[@"success"]boolValue];
-    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
 
     }else {
@@ -330,7 +329,7 @@ static MCTradeManager* instance;
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
-    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(!flag) {
         return false;
     }else {
@@ -354,7 +353,7 @@ static MCTradeManager* instance;
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
-    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
         return true;
     }else {
@@ -385,7 +384,7 @@ static MCTradeManager* instance;
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
-    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
         return true;
     }else {
@@ -418,7 +417,7 @@ static MCTradeManager* instance;
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
-    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
         return true;
     }else {
@@ -490,7 +489,7 @@ static MCTradeManager* instance;
     }
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
-    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
         int addressId = [((NSDictionary*)responseData[@"data"])[@"address_id"]integerValue];
         
@@ -523,7 +522,7 @@ static MCTradeManager* instance;
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
-    DDLogVerbose(@"%@",content);
+    MCLog(@"%@",content);
     if(flag) {
         NSArray* data_ = responseData[@"data"];
         NSMutableArray* orders = [[NSMutableArray alloc]init];
@@ -569,7 +568,7 @@ static MCTradeManager* instance;
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
-    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
         NSDictionary* data_ = responseData[@"data"];
         
@@ -633,7 +632,7 @@ static MCTradeManager* instance;
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
-    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
         NSString* data_ = responseData[@"data"];
         return data_;
@@ -657,7 +656,7 @@ static MCTradeManager* instance;
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
-    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
         return true;
     }else{

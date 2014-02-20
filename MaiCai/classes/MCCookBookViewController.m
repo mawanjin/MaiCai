@@ -16,7 +16,7 @@
 #import "MCHealthCell.h"
 #import "MCHealth.h"
 #import "MCHealthDetailViewController.h"
-#import "DDLogConfig.h"
+
 
 @interface MCCookBookViewController ()
 
@@ -181,7 +181,7 @@
 
 #pragma mark- others
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
-	DDLogVerbose(@"Selected index %i (via UIControlEventValueChanged)", segmentedControl.selectedSegmentIndex);
+	MCLog(@"Selected index %i (via UIControlEventValueChanged)", segmentedControl.selectedSegmentIndex);
     [self.recipes removeAllObjects];
     [self.healthList removeAllObjects];
     [self.tableView reloadData];
@@ -192,14 +192,14 @@
 
 - (IBAction)handleSwipe:(UISwipeGestureRecognizer *)sender {
     if (sender.direction & UISwipeGestureRecognizerDirectionLeft){
-        DDLogVerbose(@"Swiped Left.");
+        MCLog(@"Swiped Left.");
         if(self.segmentedControl.selectedSegmentIndex < 2) {
             [self.segmentedControl setSelectedSegmentIndex:(self.segmentedControl.selectedSegmentIndex+1) animated:YES];
             [self segmentedControlChangedValue:self.segmentedControl];
         }
     }
     if (sender.direction & UISwipeGestureRecognizerDirectionRight){
-        DDLogVerbose(@"Swiped Right.");
+        MCLog(@"Swiped Right.");
         if(self.segmentedControl.selectedSegmentIndex >0) {
             [self.segmentedControl setSelectedSegmentIndex:(self.segmentedControl.selectedSegmentIndex-1) animated:YES];
             [self segmentedControlChangedValue:self.segmentedControl];

@@ -10,7 +10,7 @@
 #import "MCNewMineAddressViewController.h"
 #import "MCOrderConfirmViewController.h"
 #import "MCOrderConfirmHeader_.h"
-#import "DDLogConfig.h"
+
 
 @interface MCAddressHelperView ()
 
@@ -43,7 +43,7 @@
 - (IBAction)cancelBtn:(id)sender {
     if (self.previousView.popupViewController != nil) {
         [self.previousView dismissPopupViewControllerAnimated:YES completion:^{
-            DDLogVerbose(@"popup view dismissed");
+            MCLog(@"popup view dismissed");
         }];
     }
 }

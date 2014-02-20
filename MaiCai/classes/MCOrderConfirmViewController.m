@@ -21,7 +21,6 @@
 #import "MCAddress.h"
 #import "MCAppDelegate.h"
 #import "UIImageView+MCAsynLoadImage.h"
-#import "DDLogConfig.h"
 #import "MCButton.h"
 #import "MCMineAddressViewController.h"
 #import "MCAddressHelperView.h"
@@ -224,7 +223,7 @@
         order.notifyURL = [@"http://star-faith.com:8083/maicai/api/ios/v1/public/alipay/notify.do" stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]; //回调URL
         NSString* signedStr = [self doRsa:[order description]];
         
-        DDLogVerbose(@"%@",signedStr);
+        MCLog(@"%@",signedStr);
         
         NSString *orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
                                  [order description], signedStr, @"RSA"];
@@ -254,7 +253,7 @@
 
 -(void)paymentResultDelegate:(NSString *)result
 {
-    DDLogVerbose(@"%@",result);
+    MCLog(@"%@",result);
 }
 
 //wap回调函数

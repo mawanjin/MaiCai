@@ -7,7 +7,7 @@
 //
 
 #import "MCShop.h"
-#import "DDLogConfig.h"
+
 
 @implementation MCShop
 
@@ -15,14 +15,14 @@
 {
     self = [super init];
     if (self) {
-        DDLogDebug(@"mcshop init");
+        MCLog(@"mcshop init");
     }
     return self;
 }
 
 - (void)dealloc
 {
-    DDLogDebug(@"mcshop dealloc");
+    MCLog(@"mcshop dealloc");
 }
 
 -(void) encodeWithCoder:(NSCoder *)encoder

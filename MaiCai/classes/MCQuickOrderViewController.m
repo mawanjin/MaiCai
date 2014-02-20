@@ -19,7 +19,6 @@
 #import "MCUser.h"
 #import "MCContextManager.h"
 #import "UIImageView+MCAsynLoadImage.h"
-#import "DDLogConfig.h"
 #import "MCCookBookDetailViewController.h"
 
 @interface MCQuickOrderViewController ()

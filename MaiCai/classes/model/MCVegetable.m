@@ -9,8 +9,6 @@
 
 
 #import "MCVegetable.h"
-#import "DDLogConfig.h"
-
 
 
 @implementation MCVegetable
@@ -18,14 +16,14 @@
 {
     self = [super init];
     if (self) {
-        DDLogDebug(@"mcvegetable init");
+        MCLog(@"mcvegetable init");
     }
     return self;
 }
 
 - (void)dealloc
 {
-    DDLogDebug(@"mcvegetable dealloc");
+    MCLog(@"mcvegetable dealloc");
 }
 
 -(void) encodeWithCoder:(NSCoder *)encoder

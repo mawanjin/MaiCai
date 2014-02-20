@@ -16,7 +16,6 @@
 #import "MCRecipe.h"
 #import "MCStep.h"
 #import "MCHealth.h"
-#import "DDLogConfig.h"
 
 @implementation MCVegetableManager
 static MCVegetableManager* instance;
@@ -50,7 +49,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
         return responseData[@"data"];
     }else {
@@ -74,7 +73,7 @@ static NSMutableDictionary* relationship;
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];
-    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
         return responseData[@"data"];
     }else {
@@ -97,7 +96,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
         NSMutableArray* recipes = [[NSMutableArray alloc]init];
         NSArray* data = responseData[@"data"];
@@ -131,7 +130,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+     MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
         NSMutableArray* healthList = [[NSMutableArray alloc]init];
         NSArray* data = responseData[@"data"];
@@ -162,7 +161,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
         NSDictionary* data = responseData[@"data"];
         MCRecipe* recipe = [[MCRecipe alloc]init];
@@ -223,7 +222,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+     MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
         NSDictionary* data = responseData[@"data"];
         MCRecipe* recipe = [[MCRecipe alloc]init];
@@ -286,7 +285,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
          return responseData[@"data"];
     }else {
@@ -305,7 +304,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* dicResult = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [dicResult[@"success"]boolValue];
-     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+     MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
         NSDictionary*  data = [dicResult objectForKey:@"data"];
         NSArray* recipes = [data objectForKey:@"recipes"];
@@ -389,7 +388,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* dicResult = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [dicResult[@"success"]boolValue];
-    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
         NSDictionary*  data = [dicResult objectForKey:@"data"];
         NSArray*  category = [data objectForKey:@"categories"];
@@ -440,7 +439,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
         NSDictionary* dicResult = responseData[@"data"];
         NSMutableDictionary* obj = [[NSMutableDictionary alloc]init];
@@ -509,7 +508,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+     MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
         NSDictionary* obj = responseData[@"data"];
         NSMutableArray* vegetables = [[NSMutableArray alloc]init];
@@ -549,7 +548,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
         NSDictionary* data = responseData[@"data"];
         MCHealth* health = [[MCHealth alloc]init];
@@ -599,7 +598,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag_ = [responseData[@"success"]boolValue];
-     DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+     MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag_) {
         if(flag == false) {
             NSMutableArray* healthList = [[NSMutableArray alloc]init];
@@ -645,7 +644,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
         NSDictionary* data = responseData[@"data"];
         NSMutableDictionary* finalResult = [[NSMutableDictionary alloc]init];
@@ -685,7 +684,7 @@ static NSMutableDictionary* relationship;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     
     BOOL flag = [responseData[@"success"]boolValue];
-    DDLogVerbose(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
     if(flag) {
         NSMutableArray* data = responseData[@"data"];
         return data;

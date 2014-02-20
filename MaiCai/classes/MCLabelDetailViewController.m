@@ -17,7 +17,7 @@
 #import "MCContextManager.h"
 #import "MCTradeManager.h"
 #import "MCVegetableMarketViewController.h"
-#import "DDLogConfig.h"
+
 
 
 @interface MCLabelDetailViewController ()

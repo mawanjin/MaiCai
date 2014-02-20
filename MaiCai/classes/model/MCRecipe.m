@@ -7,21 +7,21 @@
 //
 
 #import "MCRecipe.h"
-#import "DDLogConfig.h"
+
 
 @implementation MCRecipe
 - (id)init
 {
     self = [super init];
     if (self) {
-        DDLogDebug(@"mcrecipe init");
+        MCLog(@"mcrecipe init");
     }
     return self;
 }
 
 - (void)dealloc
 {
-    DDLogDebug(@"mcrecipe dealloc");
+    MCLog(@"mcrecipe dealloc");
 }
 
 

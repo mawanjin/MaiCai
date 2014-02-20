@@ -7,8 +7,6 @@
 //
 
 #import "MCAddress.h"
-#import "DDLogConfig.h"
-
 
 @implementation MCAddress
 
@@ -16,14 +14,14 @@
 {
     self = [super init];
     if (self) {
-        DDLogDebug(@"mcaddress init");
+        MCLog(@"mcaddress init");
     }
     return self;
 }
 
 - (void)dealloc
 {
-    DDLogDebug(@"mcaddress dealloc");
+    MCLog(@"mcaddress dealloc");
 }
 
 -(void) encodeWithCoder:(NSCoder *)encoder

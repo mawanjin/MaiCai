@@ -9,7 +9,6 @@
 #import "MCBaseViewController.h"
 #import "MCAppDelegate.h"
 #import "SVProgressHUD.h"
-#import "DDLogConfig.h"
 #import "Reachability.h"
 
 
@@ -50,7 +49,7 @@ NSString* const MC_ERROR_MSG_0004 = @"请填写收货人地址";
 
 - (void)dealloc
 {
-    DDLogDebug(@"%@ dealloc",[self class]);
+    MCLog(@"%@ dealloc",[self class]);
 }
 
 #pragma mark- others

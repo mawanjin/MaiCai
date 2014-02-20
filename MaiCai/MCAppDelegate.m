@@ -17,12 +17,11 @@
 #import "MCTradeManager.h"
 #import "MCBaseNavViewController.h"
 #import "MCOrderDetailViewController.h"
-#import "DDLog.h"
-#import "DDASLLogger.h"
-#import "DDTTYLogger.h"
+
 
 @implementation MCAppDelegate
 
+#pragma mark - base
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     //两秒以后加载程序，能让用户更加仔细的看清楚，启动画面
@@ -43,10 +42,6 @@
         [[MCContextManager getInstance] setLogged:NO];
     }
     
-    //日志操作
-    [DDLog addLogger:[DDASLLogger sharedInstance]];
-    [DDLog addLogger:[DDTTYLogger sharedInstance]];
-    
     //错误处理操作
     // Default exception handling code
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
@@ -59,10 +54,18 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"抱歉"
                                                         message:@"应用存在错误，异常退出了！" delegate:nil
                                               cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert addButtonWithTitle:@"上传错误报告"];
         [alert show];
+    }else
+    {
+        NSSetUncaughtExceptionHandler(&exceptionHandler);
+        // Redirect stderr output stream to file
+//        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+//                                                             NSUserDomainMask, YES);
+//        NSString *documentsPath = [paths objectAtIndex:0];
+//        NSString *stderrPath = [documentsPath stringByAppendingPathComponent:@"stderr.log"];
+//        freopen([stderrPath cStringUsingEncoding:NSASCIIStringEncoding], "w", stderr);
     }
-    
-    NSSetUncaughtExceptionHandler(&exceptionHandler);
     
     //根据不同的屏幕尺寸加载不同的程序
     [self initializeStoryBoardBasedOnScreenSize];
@@ -152,6 +155,7 @@
     }
 }
 
+#pragma mark- alipay
 //独立客户端回调函数
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
 	
@@ -242,12 +246,21 @@
 	return result;
 }
 
+#pragma mark- exception handler
 void exceptionHandler(NSException *exception)
 {
     //Set flag
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
     [settings setBool:YES forKey:@"ExceptionOccurredOnLastRun"];
     [settings synchronize];
+}
+
+-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        //todo: Email a report here
+    }
 }
 
 @end

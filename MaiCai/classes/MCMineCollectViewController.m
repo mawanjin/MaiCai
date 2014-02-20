@@ -19,7 +19,7 @@
 #import "MCHealthDetailViewController.h"
 #import "MCContextManager.h"
 #import "MCUser.h"
-#import "DDLogConfig.h"
+
 
 @interface MCMineCollectViewController ()
 
@@ -195,7 +195,7 @@
 }
 
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
-	DDLogVerbose(@"Selected index %i (via UIControlEventValueChanged)", segmentedControl.selectedSegmentIndex);
+	MCLog(@"Selected index %i (via UIControlEventValueChanged)", segmentedControl.selectedSegmentIndex);
     if(segmentedControl.selectedSegmentIndex == 0) {
         page = 1;
         [self.recipes removeAllObjects];
@@ -220,7 +220,7 @@
 #pragma mark- others
 - (IBAction)handleSwipe:(UISwipeGestureRecognizer *)sender {
     if (sender.direction & UISwipeGestureRecognizerDirectionLeft){
-        DDLogVerbose(@"Swiped Left.");
+        MCLog(@"Swiped Left.");
         if(self.segmentedControl.selectedSegmentIndex < 2) {
             [self.segmentedControl setSelectedSegmentIndex:(self.segmentedControl.selectedSegmentIndex+1) animated:YES];
             [self segmentedControlChangedValue:self.segmentedControl];
@@ -228,7 +228,7 @@
         }
     }
     if (sender.direction & UISwipeGestureRecognizerDirectionRight){
-        DDLogVerbose(@"Swiped Right.");
+        MCLog(@"Swiped Right.");
         if(self.segmentedControl.selectedSegmentIndex >0) {
             [self.segmentedControl setSelectedSegmentIndex:(self.segmentedControl.selectedSegmentIndex-1) animated:YES];
             [self segmentedControlChangedValue:self.segmentedControl];

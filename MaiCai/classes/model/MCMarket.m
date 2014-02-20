@@ -7,7 +7,6 @@
 //
 
 #import "MCMarket.h"
-#import "DDLogConfig.h"
 
 @implementation MCMarket
 
@@ -15,14 +14,14 @@
 {
     self = [super init];
     if (self) {
-        DDLogDebug(@"mcmarket init");
+        MCLog(@"mcmarket init");
     }
     return self;
 }
 
 - (void)dealloc
 {
-    DDLogDebug(@"mcmarket dealloc");
+    MCLog(@"mcmarket dealloc");
 }
 
 
