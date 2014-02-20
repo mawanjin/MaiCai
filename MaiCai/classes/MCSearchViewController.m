@@ -28,6 +28,7 @@
 {
     @private
         bool flag;
+        NSString* searchKey;
 }
 
 #pragma mark- base
@@ -69,7 +70,6 @@
             dispatch_sync(dispatch_get_main_queue(), ^{
                 [SVProgressHUD dismiss];
                 [self.tableView reloadData];
-                
             });
         }else {
             
@@ -100,7 +100,6 @@
         if(!flag) {
             return self.suggestData.count;
         }else {
-            //return self.filterData.count+1;
             return self.filterData.count;
         }
     } else {
@@ -224,6 +223,7 @@
 
 #pragma mark Content Filtering
 -(void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope {
+    searchKey = searchText;
     if(!flag) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             if(searchText == Nil|| [searchText isEqualToString:@""]) {
@@ -273,6 +273,12 @@
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     flag = false;
+}
+
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    flag = true;
+    [self.searchDisplayController setActive:YES animated:YES];
+    self.searchDisplayController.searchBar.text = searchKey;
 }
 
 #pragma mark - others
