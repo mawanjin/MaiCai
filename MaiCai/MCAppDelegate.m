@@ -56,9 +56,9 @@
         [settings setBool:NO forKey:@"ExceptionOccurredOnLastRunKey"];
         [settings synchronize];
         // Notify the user
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"We're sorry"
-                                                        message:@"An error occurred on the previous run." delegate:nil
-                                              cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"抱歉"
+                                                        message:@"应用存在错误，异常退出了！" delegate:nil
+                                              cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
     }
     
@@ -248,12 +248,6 @@ void exceptionHandler(NSException *exception)
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
     [settings setBool:YES forKey:@"ExceptionOccurredOnLastRun"];
     [settings synchronize];
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"抱歉"
-                                                    message:@"此应用需要在有网络的前提下才能正常运行." delegate:nil
-                                          cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
-    [alert show];
-
 }
 
 @end

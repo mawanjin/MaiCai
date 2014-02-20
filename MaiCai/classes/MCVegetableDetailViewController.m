@@ -49,6 +49,7 @@
     NSString* lat = ((NSDictionary*)[[MCContextManager getInstance]getDataByKey:MC_CONTEXT_POSITION])[@"lat"];
     
     self.navItem.title = self.vegetable.name;
+    self.productNameLabel.text = self.vegetable.name;
     UIBarButtonItem* item = [[UIBarButtonItem alloc]initWithTitle:@"联系客服" style:UIBarButtonItemStylePlain target:self action:@selector(phoneCallAction:)];
     item.tintColor = [UIColor whiteColor];
     self.navItem.rightBarButtonItem = item;

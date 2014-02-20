@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UINavigationItem *navItem;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *shopLabel;
+@property (weak, nonatomic) IBOutlet UILabel *productNameLabel;
 
 
 - (IBAction)phoneCallAction:(id)sender;

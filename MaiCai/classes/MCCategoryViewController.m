@@ -196,14 +196,13 @@
             dispatch_sync(dispatch_get_main_queue(), ^{
                 [self performSelector:@selector(doneWithView:) withObject:refreshView afterDelay:0];
             });
+        }else {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                if([refreshView isRefreshing]) {
+                    [refreshView endRefreshing];
+                }
+            });
         }
-        
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            if([refreshView isRefreshing]) {
-                [refreshView endRefreshing];
-            }
-        });
-        
     });
 }
 
