@@ -40,6 +40,11 @@ NSString* const MC_ERROR_MSG_0004 = @"请填写收货人地址";
     //self.navigationController.navigationBarHidden = YES;
 }
 
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -72,23 +77,31 @@ NSString* const MC_ERROR_MSG_0004 = @"请填写收货人地址";
 -(void)registerReachability{
     Reachability* reach = [Reachability reachabilityWithHostname:@"www.google.com"];
     
-    // Set the blocks
-    reach.reachableBlock = ^(Reachability*reach)
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            //[self showMsgHint:@""];
-        });
-    };
+    [[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(reachabilityChanged:)
+												 name:kReachabilityChangedNotification
+											   object:nil];
     
-    reach.unreachableBlock = ^(Reachability*reach)
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self showMsgHint:@"当前无网络连接！"];
-        });
-    };
     
     // Start the notifier, which will cause the reachability object to retain itself!
     [reach startNotifier];
 }
+
+-(void)reachabilityChanged:(NSNotification*)note
+{
+    Reachability * reach = [note object];
+    
+    if([reach isReachable])
+    {
+        
+    }
+    else
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self showMsgHint:@"当前无网络连接！"];
+        });
+    }
+}
+
 
 @end
