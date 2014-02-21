@@ -44,7 +44,8 @@
         [[MCContextManager getInstance] addKey:MC_MAC_ID Data:udid];
         [[MCContextManager getInstance] setLogged:NO];
     }
-    
+
+#if !DEBUG
     //错误处理操作
     // Default exception handling code
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
@@ -71,8 +72,8 @@
         
         freopen([stderrPath cStringUsingEncoding:NSASCIIStringEncoding], "w", stderr);
     }
-    
-    
+#endif
+
     return YES;
 }
 							
@@ -273,6 +274,9 @@ void exceptionHandler(NSException *exception)
     if (buttonIndex == 1)
     {
         NSString* content = [[MCFileOperation getInstance]readTextFromPath:stderrPath];
+//        [[[UIAlertView alloc] initWithTitle:@"提示"
+//                                    message:content delegate:nil
+//                          cancelButtonTitle:@"确定" otherButtonTitles:nil]show];
         if ([[MCContextManager getInstance]submitErrorMessage:content]) {
             [[[UIAlertView alloc] initWithTitle:@"提示"
                                        message:@"错误提交成功，技术人员将尽快解决bug" delegate:nil
