@@ -17,7 +17,7 @@
 #import "MCTradeManager.h"
 #import "MCBaseNavViewController.h"
 #import "MCOrderDetailViewController.h"
-
+#import "MCFileOperation.h"
 
 @implementation MCAppDelegate
 
@@ -26,6 +26,9 @@
 {
     //两秒以后加载程序，能让用户更加仔细的看清楚，启动画面
     //[NSThread sleepForTimeInterval:1.0];
+    
+    //根据不同的屏幕尺寸加载不同的程序
+    [self initializeStoryBoardBasedOnScreenSize];
     
     //状态栏颜色
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
@@ -48,27 +51,28 @@
     if ([settings boolForKey:@"ExceptionOccurredOnLastRun"])
     {
         // Reset exception occurred flag
-        [settings setBool:NO forKey:@"ExceptionOccurredOnLastRunKey"];
+        [settings setBool:NO forKey:@"ExceptionOccurredOnLastRun"];
         [settings synchronize];
         // Notify the user
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"抱歉"
-                                                        message:@"应用存在错误，异常退出了！" delegate:nil
+                                                        message:@"应用存在错误，异常退出了！" delegate:self
                                               cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        [alert addButtonWithTitle:@"上传错误报告"];
+        [alert addButtonWithTitle:@"发送"];
+        
         [alert show];
     }else
     {
         NSSetUncaughtExceptionHandler(&exceptionHandler);
         // Redirect stderr output stream to file
-//        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
-//                                                             NSUserDomainMask, YES);
-//        NSString *documentsPath = [paths objectAtIndex:0];
-//        NSString *stderrPath = [documentsPath stringByAppendingPathComponent:@"stderr.log"];
-//        freopen([stderrPath cStringUsingEncoding:NSASCIIStringEncoding], "w", stderr);
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                             NSUserDomainMask, YES);
+        NSString *documentsPath = [paths objectAtIndex:0];
+        NSString *stderrPath = [documentsPath stringByAppendingPathComponent:@"stderr.log"];
+        
+        freopen([stderrPath cStringUsingEncoding:NSASCIIStringEncoding], "w", stderr);
     }
     
-    //根据不同的屏幕尺寸加载不同的程序
-    [self initializeStoryBoardBasedOnScreenSize];
+    
     return YES;
 }
 							
@@ -249,18 +253,38 @@
 #pragma mark- exception handler
 void exceptionHandler(NSException *exception)
 {
+    NSLog(@"Uncaught exception: %@\nReason: %@\nUser Info: %@\nCall Stack: %@",
+          exception.name, exception.reason, exception.userInfo, exception.callStackSymbols);
+    
     //Set flag
     NSUserDefaults *settings = [NSUserDefaults standardUserDefaults];
     [settings setBool:YES forKey:@"ExceptionOccurredOnLastRun"];
     [settings synchronize];
+
 }
 
 -(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
+    // Attach log file
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                         NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0];
+    NSString *stderrPath = [documentsPath stringByAppendingPathComponent:@"stderr.log"];
     if (buttonIndex == 1)
     {
-        //todo: Email a report here
+        NSString* content = [[MCFileOperation getInstance]readTextFromPath:stderrPath];
+        if ([[MCContextManager getInstance]submitErrorMessage:content]) {
+            [[[UIAlertView alloc] initWithTitle:@"提示"
+                                       message:@"错误提交成功，技术人员将尽快解决bug" delegate:nil
+                             cancelButtonTitle:@"确定" otherButtonTitles:nil]show];
+        }else {
+        
+        }
+        
     }
+    NSSetUncaughtExceptionHandler(&exceptionHandler);
+    // Redirect stderr output stream to file
+    freopen([stderrPath cStringUsingEncoding:NSASCIIStringEncoding], "w", stderr);
 }
 
 @end

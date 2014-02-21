@@ -50,7 +50,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-
     UIBarButtonItem* item = [[UIBarButtonItem alloc]initWithTitle:@"清空" style:UIBarButtonItemStylePlain target:self action:@selector(emptyCartAction)];
     item.tintColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = item;

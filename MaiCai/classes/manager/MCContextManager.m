@@ -7,6 +7,7 @@
 //
 
 #import "MCContextManager.h"
+#import "MCNetwork.h"
 
 NSString* const MC_CONTEXT_POSITION = @"position";
 NSString* const MC_USER = @"user";
@@ -49,6 +50,25 @@ bool isLogged;
 -(void)setLogged:(BOOL)value
 {
     isLogged = value;
+}
+
+-(BOOL)submitErrorMessage:(NSString*) errorMessage
+{
+    NSDictionary* params = @{
+                             @"content":errorMessage,
+                             @"log_type":@"4"
+                             };
+    NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:@"http://star-faith.com:8083/maicai/mobile/client/log.do" Params:data];
+    if (result == nil) {
+        return false;
+    }
+    NSError *error;
+    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
+    
+    BOOL flag = [responseData[@"success"]boolValue];
+    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    return flag;
 }
 
 @end

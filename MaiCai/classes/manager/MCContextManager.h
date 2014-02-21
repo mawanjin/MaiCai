@@ -20,4 +20,5 @@ extern  NSString* const MC_PAY_NO;
 -(NSObject*)getDataByKey:(NSString*)key;
 -(void)setLogged:(BOOL)value;
 -(BOOL)isLogged;
+-(BOOL)submitErrorMessage:(NSString*) errorMessage;
 @end
