@@ -9,11 +9,6 @@
 #import "MCContextManager.h"
 #import "MCNetwork.h"
 
-NSString* const MC_CONTEXT_POSITION = @"position";
-NSString* const MC_USER = @"user";
-NSString* const MC_MAC_ID = @"macId";
-NSString* const MC_PAY_NO = @"payNo";
-
 
 @implementation MCContextManager
 static MCContextManager* instance;
@@ -59,7 +54,8 @@ bool isLogged;
                              @"log_type":@"4"
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:@"http://star-faith.com:8083/maicai/mobile/client/log.do" Params:data];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/mobile/client/log.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
     if (result == nil) {
         return false;
     }

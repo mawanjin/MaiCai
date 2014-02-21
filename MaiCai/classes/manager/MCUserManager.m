@@ -37,7 +37,8 @@ static MCUserManager* instance;
                              @"sign":sign
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/private/customer/register.do" Params:data];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/customer/register.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
     if (result == nil) {
         return false;
     }
@@ -60,7 +61,8 @@ static MCUserManager* instance;
                              @"sign":sign
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/private/customer/login.do" Params:data];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/customer/login.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
     if (result == nil) {
         return false;
     }
@@ -98,7 +100,8 @@ static MCUserManager* instance;
                                                                                  @"id":id,
                                                                                  @"sign":sign
                                                                                  }];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/private/customer/index.do" Params:params];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/customer/index.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:params];
     if (result == nil) {
         return nil;
     }
@@ -128,7 +131,8 @@ static MCUserManager* instance;
                              @"sign":sign
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/private/customer/update/name.do" Params:data];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/customer/update/name.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
     if (result == nil) {
         return false;
     }
@@ -154,7 +158,8 @@ static MCUserManager* instance;
                              @"sign":sign
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/private/customer/update/password.do" Params:data];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/customer/update/password.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
     if (result == nil) {
         return false;
     }
@@ -175,7 +180,8 @@ static MCUserManager* instance;
                                                                                    @"id":id,
                                                                                    @"sign":sign
                                                                                    }];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/private/address/index.do" Params:params];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/address/index.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:params];
     if (result == nil) {
         return nil;
     }
@@ -212,7 +218,8 @@ static MCUserManager* instance;
                                                                                    @"param":param,
                                                                                    @"sign":sign
                                                                                    }];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/private/address/save.do" Params:params];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/address/save.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:params];
     
     if (result == nil) {
         return false;
@@ -240,7 +247,8 @@ static MCUserManager* instance;
                                                                                    @"param":param,
                                                                                    @"sign":sign
                                                                                    }];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/private/address/delete.do" Params:params];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/address/delete.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:params];
     
     if (result == nil) {
         return false;
@@ -262,7 +270,8 @@ static MCUserManager* instance;
                                                                                    @"param":param,
                                                                                    @"sign":sign
                                                                                    }];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/private/address/update.do" Params:params];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/address/update.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:params];
     if (result == nil) {
         return false;
     }
@@ -282,7 +291,8 @@ static MCUserManager* instance;
                                                                                    @"suggest":content,
                                                                                     @"tel":tel
                                                                                    }];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl: @"http://star-faith.com:8083/maicai/mobile/client/feedback.do" Params:params];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/mobile/client/feedback.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:params];
     if (result == nil) {
         return false;
     }

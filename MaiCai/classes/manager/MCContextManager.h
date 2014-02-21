@@ -8,10 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-extern  NSString* const MC_CONTEXT_POSITION;
-extern  NSString* const MC_USER;
-extern  NSString* const MC_MAC_ID;
-extern  NSString* const MC_PAY_NO;
 
 @interface MCContextManager : NSObject
 

@@ -47,7 +47,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-
+    
     UIBarButtonItem* item = [[UIBarButtonItem alloc]initWithTitle:@"清空" style:UIBarButtonItemStylePlain target:self action:@selector(emptyCartAction)];
     item.tintColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = item;
@@ -67,8 +67,9 @@
             if (data_) {
                 self.data = data_;
                 dispatch_sync(dispatch_get_main_queue(), ^{
-                    [self dispLayTotalChoosedBtn];
+                    [self totalChooseBtnClickAction:nil];
                     [self.tableView reloadData];
+                    
                     [self hideProgressHUD];
                 });
             }else{
@@ -84,7 +85,7 @@
             if (data_) {
                 self.data = data_;
                 dispatch_sync(dispatch_get_main_queue(), ^{
-                    [self dispLayTotalChoosedBtn];
+                    [self totalChooseBtnClickAction:nil];
                     [self.tableView reloadData];
                     [self hideProgressHUD];
                 });
@@ -265,7 +266,9 @@
         MCShop* shop = self.data[i];
         for(int j=0;j<shop.vegetables.count;j++) {
             MCVegetable* vegetable = shop.vegetables[j];
-            [array addObject:[NSNumber numberWithInt:vegetable.id]];
+            if (vegetable.isSelected) {
+                [array addObject:[NSNumber numberWithInt:vegetable.id]];
+            }
         }
     }
     if ([[MCContextManager getInstance]isLogged]) {
@@ -273,9 +276,9 @@
         [self showProgressHUD];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             if ([[MCTradeManager getInstance]deleteProductsInCartOnlineByUserId:user.userId ProductIds:array]) {
+                self.data = [[MCTradeManager getInstance]getCartProductsOnlineByUserId:user.userId];
                 dispatch_sync(dispatch_get_main_queue(), ^{
                     [self hideProgressHUD];
-                    [self.data removeAllObjects];
                     [self.tableView reloadData];
                 });
             }else{
@@ -290,9 +293,9 @@
         [self showProgressHUD];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             if ([[MCTradeManager getInstance]deleteProductsInCartByUserId:macId ProductIds:array]) {
+                self.data = [[MCTradeManager getInstance]getCartProductsByUserId:macId];
                 dispatch_sync(dispatch_get_main_queue(), ^{
                     [self hideProgressHUD];
-                    [self.data removeAllObjects];
                     [self.tableView reloadData];
                 });
             }else {
@@ -303,7 +306,20 @@
             }
         });
     }
+}
 
+-(int)calculateSelectedNum {
+    int count = 0;
+    for(int i=0;i<data.count;i++) {
+        MCShop* shop = data[i];
+        for(int j=0;j<shop.vegetables.count;j++) {
+            MCVegetable* vegetable = shop.vegetables[j];
+            if(vegetable.isSelected) {
+                ++count;
+            }
+        }
+    }
+    return count;
 }
 
 -(void)resetCart
@@ -368,6 +384,11 @@
 -(IBAction)submitBtnAction:(UIButton *)sender {
     
     if([[MCContextManager getInstance]isLogged]){
+        if ([self calculateSelectedNum]<=0) {
+            [self showMsgHint:@"请选择至少一样商品"];
+            return;
+        }
+        
         MCOrderConfirmViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCOrderConfirmViewController"];
         
         vc.data = self.data;
@@ -380,6 +401,11 @@
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }else{
+        if ([self calculateSelectedNum]<=0) {
+            [self showMsgHint:@"请选择至少一样商品"];
+            return;
+        }
+        
         temp_data = self.data;
         temp_totalPrice = self.totalPrice;
         MCLoginViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCLoginViewController"];

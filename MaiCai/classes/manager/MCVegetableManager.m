@@ -39,7 +39,8 @@ static NSMutableDictionary* relationship;
                                                                                    @"hot":[[NSString alloc]initWithFormat:@"%d",quantity],
                     
                                                                                    }];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/public/search/hot.do" Params:params];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/search/hot.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:params];
     
     if (result == nil) {
         return nil;
@@ -65,7 +66,8 @@ static NSMutableDictionary* relationship;
                                                                                    @"hot":[[NSString alloc]initWithFormat:@"%d",quantity],
                                                                                    
                                                                                    }];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/public/search/go.do" Params:params];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/search/go.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:params];
     if (result == nil) {
         return nil;
     }
@@ -88,7 +90,8 @@ static NSMutableDictionary* relationship;
                                                                                     @"page":[[NSString alloc]initWithFormat:@"%d",page],
                                                                                     @"pagesize":        [[NSString alloc]initWithFormat:@"%d",pagesize]
                                                                                    }];
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/public/recipe/list.do" Params:params Cache:YES];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/recipe/list.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:url Params:params Cache:YES];
     if (result == nil) {
         return nil;
     }
@@ -122,7 +125,8 @@ static NSMutableDictionary* relationship;
                                                                                    @"page":[[NSString alloc]initWithFormat:@"%d",page],
                                                                                    @"pagesize":        [[NSString alloc]initWithFormat:@"%d",pagesize]
                                                                                    }];
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/public/healthcare/list.do" Params:params Cache:YES];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/healthcare/list.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:url Params:params Cache:YES];
     if (result == nil) {
         return nil;
     }
@@ -153,7 +157,8 @@ static NSMutableDictionary* relationship;
     NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithDictionary:@{
                                                                                    @"id":[[NSString alloc]initWithFormat:@"%d",id]
                                                                                    }];
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/public/recipe/buy.do" Params:params Cache:YES];
+     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/recipe/buy.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:url Params:params Cache:YES];
     if (result == nil) {
         return nil;
     }
@@ -214,7 +219,8 @@ static NSMutableDictionary* relationship;
     NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithDictionary:@{
                                                                                    @"id":[[NSString alloc]initWithFormat:@"%d",id]
                                                                                    }];
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/public/recipe/index.do" Params:params Cache:YES];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/recipe/index.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:url Params:params Cache:YES];
     if (result == nil) {
         return nil;
     }
@@ -277,7 +283,8 @@ static NSMutableDictionary* relationship;
                                                                                    @"hot":[[NSString alloc]initWithFormat:@"%d",quantity],
                                                                                    
                                                                                    }];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/public/search/suggest.do" Params:params];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/search/suggest.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:params];
     if (result == nil) {
         return nil;
     }
@@ -296,7 +303,8 @@ static NSMutableDictionary* relationship;
 //首页信息
 -(NSMutableDictionary*)getMarketIndexInfo
 {
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/public/index.do" Params:Nil Cache:YES];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/index.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:url Params:Nil Cache:YES];
     if (result == nil) {
         return nil;
     }
@@ -380,7 +388,8 @@ static NSMutableDictionary* relationship;
                              @"lng":lng,
                              @"lat":lat
                              };
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/public/market/list.do" Params:[[NSMutableDictionary alloc]initWithDictionary:params] Cache:YES];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/market/list.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:url Params:[[NSMutableDictionary alloc]initWithDictionary:params] Cache:YES];
     if (result == nil) {
         return nil;
     }
@@ -431,7 +440,8 @@ static NSMutableDictionary* relationship;
                              @"lat":latitude
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/public/product/index.do" Params:data Cache:YES];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/product/index.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:url Params:data Cache:YES];
     if (result == nil) {
         return nil;
     }
@@ -500,7 +510,8 @@ static NSMutableDictionary* relationship;
                              @"id":id
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/public/tenant/list.do" Params:data Cache:YES];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/tenant/list.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:url Params:data Cache:YES];
     if (result == nil) {
         return nil;
     }
@@ -540,7 +551,8 @@ static NSMutableDictionary* relationship;
     NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithDictionary:@{
                                                                                    @"id":[[NSString alloc]initWithFormat:@"%d",id]
                                                                                    }];
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/public/healthcare/index.do" Params:params Cache:YES];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/healthcare/index.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:url Params:params Cache:YES];
     if (result == nil) {
         return nil;
     }
@@ -590,7 +602,8 @@ static NSMutableDictionary* relationship;
                                                                                        [[NSString alloc]initWithFormat:@"%d",userId],
                                                                                    @"recipe":(flag==true)?@"true":@"false"
                                                                                    }];
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/public/favorite/list.do" Params:params Cache:YES];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/favorite/list.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:url Params:params Cache:YES];
     if (result == nil) {
         return nil;
     }
@@ -636,7 +649,8 @@ static NSMutableDictionary* relationship;
     NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithDictionary:@{
                                                                                    @"id":[[NSString alloc]initWithFormat:@"%d",id]
                                                                                    }];
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/public/label/index.do" Params:params Cache:YES];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/label/index.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:url Params:params Cache:YES];
     if (result == nil) {
         return nil;
     }
@@ -676,7 +690,8 @@ static NSMutableDictionary* relationship;
 
 -(NSMutableArray*)getProductCategories
 {
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl: @"http://star-faith.com:8083/maicai/api/ios/v1/public/product/category.do" Params:NULL Cache:YES];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/product/category.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:url Params:NULL Cache:YES];
     if (result == nil) {
         return nil;
     }

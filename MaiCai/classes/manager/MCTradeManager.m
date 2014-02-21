@@ -40,7 +40,8 @@ static MCTradeManager* instance;
                              @"id":id,
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/public/offline/cart/index.do" Params:data Cache:NO];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/offline/cart/index.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:url Params:data Cache:NO];
     if (result == nil) {
         return nil;
     }
@@ -66,6 +67,7 @@ static MCTradeManager* instance;
                 MCMarket* market = [[MCMarket alloc]init];
                 market.name = shop[@"market_name"];
                 temp.market = market;
+                
                 NSMutableArray* vegetables = [[NSMutableArray alloc]init];
                 NSArray* products = shop[@"products"];
                 for(j=0;j<products.count;j++) {
@@ -78,6 +80,7 @@ static MCTradeManager* instance;
                     vegetable.unit = product[@"unit"];
                     vegetable.quantity = [product[@"quantity"]integerValue];
                     vegetable.image = product[@"image"];
+                    
                     NSArray* recipes_ = product[@"recipes"];
                     NSMutableArray* recipes = [[NSMutableArray alloc]init];
                     if((NSNull*)recipes_ != [NSNull null]) {
@@ -106,13 +109,14 @@ static MCTradeManager* instance;
 
 -(NSMutableArray*)getCartProductsOnlineByUserId:(NSString*)id
 {
-     NSString* sign = [@"/api/ios/v1/private/cart/index.dodhfuewjcuehiudjuwdwyfcs" stringFromMD5];
+    NSString* sign = [@"/api/ios/v1/private/cart/index.dodhfuewjcuehiudjuwdwyfcs" stringFromMD5];
     NSDictionary* params = @{
                              @"id":id,
                              @"sign":sign
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/private/cart/index.do" Params:data Cache:NO];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/cart/index.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:url Params:data Cache:NO];
     if (result == nil) {
         return nil;
     }
@@ -199,7 +203,8 @@ static MCTradeManager* instance;
                              @"param":param
                             };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/public/offline/cart/save.do" Params:data];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/offline/cart/save.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
     
     if (result == nil) {
         return false;
@@ -243,7 +248,8 @@ static MCTradeManager* instance;
                              @"sign":sign
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/private/cart/save.do" Params:data];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/cart/save.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
     
     if (result == nil) {
         return false;
@@ -267,7 +273,8 @@ static MCTradeManager* instance;
                              @"id":id,
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/public/offline/cart/quantity/index.do" Params:data Cache:NO];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/offline/cart/quantity/index.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:url Params:data Cache:NO];
     if (result == nil) {
         return 0;
     }
@@ -292,7 +299,8 @@ static MCTradeManager* instance;
                              @"sign":sign
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/private/cart/quantity/index.do" Params:data Cache:NO];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/cart/quantity/index.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:url Params:data Cache:NO];
     if (result == nil) {
         return 0;
     }
@@ -320,7 +328,8 @@ static MCTradeManager* instance;
                                 @"param":param
                             };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/public/offline/cart/quantity/update.do" Params:data];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/offline/cart/quantity/update.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
     
     if (result == nil) {
         return false;
@@ -346,7 +355,8 @@ static MCTradeManager* instance;
                              @"sign":sign
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/private/cart/quantity/update.do" Params:data];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/cart/quantity/update.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
     if (result == nil) {
         return false;
     }
@@ -377,7 +387,8 @@ static MCTradeManager* instance;
                              @"param":param
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/public/offline/cart/delete.do" Params:data];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/offline/cart/delete.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
     if (result == nil) {
         return false;
     }
@@ -410,7 +421,8 @@ static MCTradeManager* instance;
                              @"sign":sign
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/private/cart/delete.do" Params:data];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/cart/delete.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
     if (result == nil) {
         return false;
     }
@@ -483,7 +495,8 @@ static MCTradeManager* instance;
                              @"sign":sign
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/private/order/save.do" Params:data];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/order/save.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
     if (result == nil) {
         return nil;
     }
@@ -513,7 +526,8 @@ static MCTradeManager* instance;
                              @"sign":sign
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/private/order/index.do" Params:data];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/order/index.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
     if (result == nil) {
         return nil;
     }
@@ -561,7 +575,8 @@ static MCTradeManager* instance;
                              @"sign":sign
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/private/order/detail.do" Params:data];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/order/detail.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
     if (result == nil) {
         return nil;
     }
@@ -625,7 +640,8 @@ static MCTradeManager* instance;
                              @"sign":sign
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/private/pay/index.do" Params:data];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/pay/index.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
     if (result == nil) {
         return nil;
     }
@@ -649,7 +665,8 @@ static MCTradeManager* instance;
                              @"sign":sign
                              };
     NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:@"http://star-faith.com:8083/maicai/api/ios/v1/private/pay/esc.do" Params:data];
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/pay/esc.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
     if (result == nil) {
         return false;
     }
