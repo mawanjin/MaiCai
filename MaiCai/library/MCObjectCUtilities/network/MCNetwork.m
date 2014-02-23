@@ -45,7 +45,7 @@ static MCNetwork* instance;
     MCNetWorkObject* data = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
     
     //如何有缓存，并且没有过有效期
-    if(data != nil || flag == true) {
+    if(data != nil && flag == true) {
         NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
         NSTimeInterval a=[dat timeIntervalSince1970]*1000;
         NSString *currentTime = [NSString stringWithFormat:@"%.0f", a];
@@ -72,13 +72,13 @@ static MCNetwork* instance;
             // 取得所有的请求的头
             NSDictionary *dictionary = [response allHeaderFields];
             NSString* expires = dictionary[@"Expires"];
-            if(flag == true) {
-                //存入缓存
-                MCNetWorkObject* object = [[MCNetWorkObject alloc]init];
-                object.expire = expires;
-                object.data = result;
-                [NSKeyedArchiver archiveRootObject:object toFile:path];
-            }
+            
+            //存入缓存
+            MCNetWorkObject* object = [[MCNetWorkObject alloc]init];
+            object.expire = expires;
+            object.data = result;
+            [NSKeyedArchiver archiveRootObject:object toFile:path];
+            
             return result;
         }
     }

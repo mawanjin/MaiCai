@@ -23,11 +23,11 @@
 #import "UIImageView+MCAsynLoadImage.h"
 #import "MCButton.h"
 #import "MCMineAddressViewController.h"
-#import "MCAddressHelperView.h"
 #import "GCPlaceholderTextView.h"
 #import "MCOrderConfirmReviewCell.h"
 #import "MCOrderConfirmPayCell.h"
 #import "MCOrderConfirmDeliveryCell.h"
+#import "MCAddressHelperViewController.h"
 
 #import "DataSigner.h"
 #import "AlixPayResult.h"
@@ -75,16 +75,19 @@
     [footerView.deliveryToHomeBtn addTarget:self action:@selector(chooseShipMethodAction:) forControlEvents:UIControlEventTouchUpInside];
     self.tableView.tableFooterView = footerView;
     self.totalPriceLabel.text = [[NSString alloc]initWithFormat:@"总价：%.02f元",self.totalPrice];
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
+    
     MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
     if(user.defaultAddress == nil) {
         self.tableView.tableHeaderView = [MCOrderConfirmHeader_ initInstance];
         self.header_ = (MCOrderConfirmHeader_*)self.tableView.tableHeaderView;
         [self.header_.helpBtn addTarget:self action:@selector(helperAction:) forControlEvents:UIControlEventTouchUpInside];
-    }else {
+    }
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
+    if(user.defaultAddress != nil) {
         if(self.address == nil) {
             MCAddress* address = user.defaultAddress;
             MCOrderConfirmHeader* header = [MCOrderConfirmHeader initInstance];
@@ -382,9 +385,12 @@
 }
 
 - (void)helperAction:(UIButton *)sender {
-    MCAddressHelperView *popup = [[MCAddressHelperView alloc] initWithNibName:@"MCAddressHelperView" bundle:nil];
-    popup.previousView = self;
-    [self presentPopupViewController:popup animated:YES completion:nil];
+    MCAddressHelperViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCAddressHelperViewController"];
+    [vc setSelectionComplete:^(NSString *address) {
+        self.header_.addressLabel.text = address;
+    }];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc  animated:YES];
 }
 
 #pragma mark- tableview

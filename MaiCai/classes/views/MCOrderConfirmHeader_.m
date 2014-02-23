@@ -7,7 +7,6 @@
 //
 
 #import "MCOrderConfirmHeader_.h"
-#import "MCAddressHelperView.h"
 
 @implementation MCOrderConfirmHeader_
 

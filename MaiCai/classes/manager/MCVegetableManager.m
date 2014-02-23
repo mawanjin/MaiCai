@@ -84,14 +84,14 @@ static NSMutableDictionary* relationship;
 }
 
 
--(NSMutableArray*)getRecipesByPage:(int)page Pagesize:(int)pagesize
+-(NSMutableArray*)getRecipesByPage:(int)page Pagesize:(int)pagesize Cache:(BOOL)cache
 {
     NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithDictionary:@{
                                                                                     @"page":[[NSString alloc]initWithFormat:@"%d",page],
                                                                                     @"pagesize":        [[NSString alloc]initWithFormat:@"%d",pagesize]
                                                                                    }];
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/recipe/list.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:url Params:params Cache:YES];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:url Params:params Cache:cache];
     if (result == nil) {
         return nil;
     }
@@ -119,14 +119,14 @@ static NSMutableDictionary* relationship;
     }
 }
 
--(NSMutableArray*)getHealthListByPage:(int)page Pagesize:(int)pagesize
+-(NSMutableArray*)getHealthListByPage:(int)page Pagesize:(int)pagesize Cache:(BOOL)cache
 {
     NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithDictionary:@{
                                                                                    @"page":[[NSString alloc]initWithFormat:@"%d",page],
                                                                                    @"pagesize":        [[NSString alloc]initWithFormat:@"%d",pagesize]
                                                                                    }];
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/healthcare/list.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:url Params:params Cache:YES];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:url Params:params Cache:cache];
     if (result == nil) {
         return nil;
     }
@@ -371,7 +371,7 @@ static NSMutableDictionary* relationship;
 }
 
 
--(NSMutableArray*)getMarketProducts
+-(NSMutableArray*)getMarketProductsByCache:(BOOL)cache
 {
     NSString* lng = ((NSDictionary*)[[MCContextManager getInstance]getDataByKey:MC_CONTEXT_POSITION])[@"lng"];
     NSString* lat = ((NSDictionary*)[[MCContextManager getInstance]getDataByKey:MC_CONTEXT_POSITION])[@"lat"];
@@ -389,7 +389,7 @@ static NSMutableDictionary* relationship;
                              @"lat":lat
                              };
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/market/list.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:url Params:[[NSMutableDictionary alloc]initWithDictionary:params] Cache:YES];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:url Params:[[NSMutableDictionary alloc]initWithDictionary:params] Cache:cache];
     if (result == nil) {
         return nil;
     }

@@ -27,6 +27,7 @@
 #import "MCMarketIndexTipCell.h"
 #import "MCLabelDetailViewController.h"
 #import "SVProgressHUD.h"
+#import "MCAddressHelperViewController.h"
 
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 
@@ -56,9 +57,17 @@
     
     self.navigationItem.title = @"莘庄";
     
+    //search
     self.navigationItem.rightBarButtonItem=
     [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchBtnAction)];
     self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
+    
+    
+    //联系客服
+    UIBarButtonItem* item = [[UIBarButtonItem alloc]initWithTitle:@"配送地区" style:UIBarButtonItemStylePlain target:self action:@selector(addressHelperAction)];
+    item.tintColor = [UIColor whiteColor];
+    self.navigationItem.leftBarButtonItem = item;
+    
     
     UITableView* table = [[UITableView alloc]initWithFrame:CGRectMake(0, 325, 320, 66*0+50) style:UITableViewStylePlain];
     self.tableView = table;
@@ -275,6 +284,17 @@
     MCSearchViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCSearchViewController"];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)addressHelperAction {
+    MCAddressHelperViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCAddressHelperViewController"];
+    [vc setShowMsg:^{
+        [[[UIAlertView alloc] initWithTitle:@"友情提示"
+                                    message:@"目前配送仅支持下列显示的地址，其他地址请联系客服确认！" delegate:nil
+                          cancelButtonTitle:@"确定" otherButtonTitles:nil]show];
+    }];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc  animated:YES];
 }
 @end
 

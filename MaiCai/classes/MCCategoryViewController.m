@@ -53,7 +53,7 @@
     [self showProgressHUD];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            self.sourceData = [[MCVegetableManager getInstance]getMarketProducts];
+            self.sourceData = [[MCVegetableManager getInstance]getMarketProductsByCache:YES];
         if (self.sourceData != nil) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 CGFloat yDelta;
@@ -190,7 +190,7 @@
     //NSLog(@"%@----开始进入刷新状态", refreshView.class);
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        self.sourceData = [[MCVegetableManager getInstance]getMarketProducts];
+        self.sourceData = [[MCVegetableManager getInstance]getMarketProductsByCache:NO];
         
         if (self.sourceData) {
             dispatch_sync(dispatch_get_main_queue(), ^{

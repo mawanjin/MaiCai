@@ -13,14 +13,14 @@
 @interface MCVegetableManager : NSObject
 +(MCVegetableManager*)getInstance;
 -(NSMutableDictionary*)getMarketIndexInfo;
--(NSMutableArray*)getMarketProducts;
+-(NSMutableArray*)getMarketProductsByCache:(BOOL)cache;
 -(NSMutableDictionary*)getVegetableDetailByProductId:(int)id Longitude:(NSString*)longitude Latitude:(NSString*)latitude;
 -(NSMutableDictionary*)getShopVegetablesByShopId:(NSString*)id;
 -(NSMutableArray*)getHotWordsByQuantity:(int)quantity;
 -(NSMutableArray*)getSearchResultByKeywords:(NSString*)words Quantity:(int)quantity;
 -(NSMutableArray*)getSuggestResultByKeywords:(NSString*)words Quantity:(int)quantity;
--(NSMutableArray*)getRecipesByPage:(int)page Pagesize:(int)pagesize;
--(NSMutableArray*)getHealthListByPage:(int)page Pagesize:(int)pagesize;
+-(NSMutableArray*)getRecipesByPage:(int)page Pagesize:(int)pagesize Cache:(BOOL)cache;
+-(NSMutableArray*)getHealthListByPage:(int)page Pagesize:(int)pagesize Cache:(BOOL)cache;
 -(NSMutableArray*)getCollectionListByPage:(int)page Pagesize:(int)pagesize Recipe:(BOOL)flag UserId:(int)userId;
 -(NSMutableArray*)getProductCategories;
 //这是一键买菜接口

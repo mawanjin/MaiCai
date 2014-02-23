@@ -46,6 +46,11 @@
 {
     [super viewDidLoad];
     
+    //联系客服
+    UIBarButtonItem* item = [[UIBarButtonItem alloc]initWithTitle:@"联系客服" style:UIBarButtonItemStylePlain target:self action:@selector(phoneCallAction:)];
+    item.tintColor = [UIColor whiteColor];
+    self.navigationItem.rightBarButtonItem = item;
+    
     [self showProgressHUD];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         self.order = [[MCTradeManager getInstance]getOrderDetailByOrderId:[[NSString alloc]initWithFormat:@"%d",self.order.id]];
@@ -140,6 +145,10 @@
 
 
 #pragma mark- others
+- (IBAction)phoneCallAction:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://021-54331510"]];//打电话
+}
+
 - (IBAction)payBtnAction:(id)sender {
     NSString* orderIds = [[NSString alloc]initWithFormat:@"%d",self.order.id];
     NSString* userId = ((MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER]).userId;

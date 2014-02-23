@@ -303,6 +303,23 @@ static MCUserManager* instance;
     return flag;
 }
 
+-(NSMutableArray*)getAddressHelperList {
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1//public/address/help.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:nil];
+    if (result == nil) {
+        return false;
+    }
+    NSError *error;
+    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
+    BOOL flag = [responseData[@"success"]boolValue];
+    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    if (flag) {
+        return responseData[@"data"];
+    }else {
+        return nil;
+    }
+}
+
 -(void)saveLoginStatusByUser:(MCUser*)user
 {
     NSString * path = [[[MCFileOperation getInstance]getDocumentPath] stringByAppendingPathComponent:[[NSString alloc]initWithFormat:@"%@.txt",[@"UserLoginStatus" stringFromMD5]]];

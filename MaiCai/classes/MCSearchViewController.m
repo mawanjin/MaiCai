@@ -229,7 +229,7 @@
             if(searchText == Nil|| [searchText isEqualToString:@""]) {
             
             }else {
-                self.suggestData = [[MCVegetableManager getInstance]getSuggestResultByKeywords:searchText Quantity:10];
+                self.suggestData = [[MCVegetableManager getInstance]getSuggestResultByKeywords:searchText Quantity:0];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.searchDisplayController.searchResultsTableView reloadData];
                 });
@@ -240,7 +240,7 @@
     }else {
         [SVProgressHUD show];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            self.filterData = [[MCVegetableManager getInstance]getSearchResultByKeywords:searchText Quantity:10];
+            self.filterData = [[MCVegetableManager getInstance]getSearchResultByKeywords:searchText Quantity:0];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.searchDisplayController.searchResultsTableView reloadData];
                 [SVProgressHUD dismiss];

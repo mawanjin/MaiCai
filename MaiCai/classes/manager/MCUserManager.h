@@ -24,6 +24,7 @@
 -(BOOL)updateUserAddress:(MCAddress*)address UserId:(NSString*)userId;
 -(BOOL)feedbackByTel:(NSString*)tel Content:(NSString*)content;
 -(void)saveLoginStatusByUser:(MCUser*)user;
+-(NSMutableArray*)getAddressHelperList;
 -(MCUser*)getLoginStatus;
 -(void)clearLoginStatus;
 @end

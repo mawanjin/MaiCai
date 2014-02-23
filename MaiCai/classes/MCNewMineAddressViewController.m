@@ -11,8 +11,8 @@
 #import "MCAddress.h"
 #import "MCUser.h"
 #import "MCContextManager.h"
-#import "MCAddressHelperView.h"
 #import "MCMineAddressViewController.h"
+#import "MCAddressHelperViewController.h"
 
 
 @implementation MCNewMineAddressViewController
@@ -103,9 +103,12 @@
 }
 
 - (IBAction)addressHelperAction:(id)sender {
-    MCAddressHelperView *popup = [[MCAddressHelperView alloc] initWithNibName:@"MCAddressHelperView" bundle:nil];
-    popup.previousView = self;
-    [self presentPopupViewController:popup animated:YES completion:nil];
+    MCAddressHelperViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCAddressHelperViewController"];
+    [vc setSelectionComplete:^(NSString *address) {
+        self.address.text = address;
+    }];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc  animated:YES];
 
 }
 
