@@ -20,4 +20,5 @@
 - (BOOL)isMobileNumber:(NSString *)mobileNum;
 - (BOOL) isBlankString:(NSString *)string;
 - (BOOL) validatePassword:(NSString *)passWord;
+-(BOOL) validateEmail:(NSString *)email;
 @end

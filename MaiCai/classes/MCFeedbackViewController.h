@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet  GCPlaceholderTextView* content;
 @property (weak, nonatomic) IBOutlet UITextField *tel;
 - (IBAction)submitBtnAction:(UIButton *)sender;
+- (IBAction)viewClickAction:(id)sender;
 
 @end

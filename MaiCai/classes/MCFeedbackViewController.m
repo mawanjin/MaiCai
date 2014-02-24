@@ -52,7 +52,7 @@
     }
     
     
-    if(![[MCContextManager getInstance]isMobileNumber:tel]) {
+    if(![[MCContextManager getInstance]isMobileNumber:tel]&&![[MCContextManager getInstance]validateEmail:tel]) {
         [self showMsgHint:@"请提供你正确的联系方式"];
         return;
     }
@@ -73,6 +73,10 @@
             [self hideProgressHUD];
         });
     });
+}
+
+- (IBAction)viewClickAction:(id)sender {
+    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

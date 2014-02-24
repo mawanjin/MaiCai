@@ -556,11 +556,11 @@
                         <viewControllerLayoutGuide type="top" id="qhZ-tJ-Phc"/>
                         <viewControllerLayoutGuide type="bottom" id="oha-89-NaB"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="UGR-aG-nXe">
+                    <view key="view" contentMode="scaleToFill" id="UGR-aG-nXe" customClass="UIControl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请留下您的邮箱/QQ/手机号等联系方式" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D1C-aV-Akn">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请留下您的邮箱/手机号作为联系方式" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D1C-aV-Akn">
                                 <rect key="frame" x="13" y="292" width="294" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -594,6 +594,9 @@
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <connections>
+                            <action selector="viewClickAction:" destination="C50-19-sf3" eventType="touchDown" id="q15-43-bD0"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="意见反馈" id="VSd-63-HBa"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
@@ -1867,7 +1870,7 @@
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
-                            <action selector="viewClickAction:" destination="MbA-cy-9ro" eventType="valueChanged" id="um6-cv-FE6"/>
+                            <action selector="viewClickAction:" destination="MbA-cy-9ro" eventType="touchDown" id="0dg-dC-Tfa"/>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" title="注册" id="u2p-Zg-VDL"/>
