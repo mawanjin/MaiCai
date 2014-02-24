@@ -99,6 +99,11 @@
             if ([[MCTradeManager getInstance]addProductToCartOnlineByUserId:user.userId Products:products Recipe:nil]) {
                 dispatch_sync(dispatch_get_main_queue(), ^{
                     if (self.previousView.popupViewController != nil) {
+                        if (self.addProductComplete) {
+                            self.addProductComplete();
+                            self.addProductComplete = nil;
+                        }
+                        
                         [self.previousView dismissPopupViewControllerAnimated:NO completion:^{
                         }];
                     }
@@ -115,6 +120,11 @@
             if ([[MCTradeManager getInstance]addProductToCartByUserId:macId Products:products Recipe:nil]) {
                 dispatch_sync(dispatch_get_main_queue(), ^{
                     if (self.previousView.popupViewController != nil) {
+                        if (self.addProductComplete) {
+                            self.addProductComplete();
+                            self.addProductComplete = nil;
+                        }
+                        
                         [self.previousView dismissPopupViewControllerAnimated:NO completion:^{
                         }];
                     }

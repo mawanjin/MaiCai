@@ -16,11 +16,45 @@
 
 @implementation MCRegisterViewController
 
-- (IBAction)registerBtn:(UIButton *)sender {
+- (IBAction)viewClickAction:(id)sender {
+    [[UIApplication sharedApplication] sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+}
+
+-(IBAction)registerBtn:(UIButton *)sender {
     NSString* username = self.username.text;
     NSString* nickname = self.nickname.text;
     NSString* password = self.password.text;
     NSString* passwordAgain = self.passwordAgain.text;
+    
+    if (![[MCContextManager getInstance]isMobileNumber:username]) {
+        [self showMsgHint:@"请输入正确的手机号码"];
+        return;
+    }
+    
+    if ([[MCContextManager getInstance]isBlankString:nickname]) {
+        [self showMsgHint:@"请输入昵称"];
+        return;
+    }
+    
+    if ([[MCContextManager getInstance]isBlankString:password]) {
+        [self showMsgHint:@"请输入密码"];
+        return;
+    }
+    
+    if ([[MCContextManager getInstance]isBlankString:passwordAgain]) {
+        [self showMsgHint:@"请再一次输入密码"];
+        return;
+    }
+    
+    if (![[MCContextManager getInstance]validatePassword:password]) {
+        [self showMsgHint:@"密码6~10位"];
+        return;
+    }
+    
+    if (![[MCContextManager getInstance]validatePassword:passwordAgain]) {
+        [self showMsgHint:@"密码6~10位"];
+        return;
+    }
     
     if(![password isEqual:passwordAgain]) {
         [self showMsgHint:@"两次密码不一致"];
@@ -51,6 +85,8 @@
         }
     });
 }
+
+
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {

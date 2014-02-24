@@ -25,6 +25,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
 @property (weak, nonatomic) IBOutlet UIButton *okBtn;
+@property (strong,nonatomic) void(^addProductComplete)();
+
 - (IBAction)plusBtnAction:(UIButton *)sender;
 - (IBAction)viewTouchDown:(id)sender;
 

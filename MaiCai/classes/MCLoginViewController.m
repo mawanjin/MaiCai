@@ -10,6 +10,8 @@
 #import "MCUserManager.h"
 #import "MCUser.h"
 #import "Toast+UIView.h"
+#import "MCContextManager.h"
+
 
 @implementation MCLoginViewController
 
@@ -40,6 +42,16 @@
 - (IBAction)loginBtnAction:(UIButton *)sender {
     NSString* userId = self.usernameTextField.text;
     NSString* password = self.passwordTextField.text;
+    
+    if (![[MCContextManager getInstance]isMobileNumber:userId]) {
+        [self showMsgHint:@"请输入正确的手机号码"];
+        return;
+    }
+    
+    if (![[MCContextManager getInstance]validatePassword:password]) {
+        [self showMsgHint:@"请输入正确的密码"];
+        return;
+    }
     
     MCUser* user = [[MCUser alloc]init];
     user.userId = userId;
@@ -82,6 +94,7 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+#pragma mark- textfield
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     return [textField resignFirstResponder];

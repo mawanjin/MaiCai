@@ -31,6 +31,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //联系客服
+    UIBarButtonItem* item = [[UIBarButtonItem alloc]initWithTitle:@"联系客服" style:UIBarButtonItemStylePlain target:self action:@selector(phoneCallAction:)];
+    item.tintColor = [UIColor whiteColor];
+    self.navigationItem.rightBarButtonItem = item;
+    
     CGFloat yDelta;
     if ([[[UIDevice currentDevice] systemVersion] compare:@"7.0" options:NSNumericSearch] != NSOrderedAscending) {
         yDelta = 20.0f;
@@ -160,6 +166,10 @@
             [self segmentChanged:(UISegmentedControl*)self.segmentedControl];
         }
     }
+}
+
+- (IBAction)phoneCallAction:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://021-54331510"]];//打电话
 }
 
 

@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *password;
 @property (weak, nonatomic) IBOutlet UITextField *passwordAgain;
 @property (nonatomic,strong) void(^showMsg)(NSString* msg);
+- (IBAction)viewClickAction:(id)sender;
 
 - (IBAction)registerBtn:(UIButton *)sender;
 @end

@@ -180,25 +180,20 @@
         address.mobile = self.header_.mobileLabel.text;
         address.address = self.header_.addressLabel.text;
         
-        if(address.shipper == nil || [address.shipper stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length == 0)
-        {
-            [self showMsgHint:MC_ERROR_MSG_0002];
+        if ([[MCContextManager getInstance]isBlankString:address.shipper]) {
+            [self showMsgHint:@"请填写收货人姓名"];
             return;
         }
         
-        if(address.mobile == nil || [address.mobile stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length == 0)
-        {
-            [self showMsgHint:MC_ERROR_MSG_0003];
+        if (![[MCContextManager getInstance]isMobileNumber:address.mobile]) {
+            [self showMsgHint:@"请填写正确的收货人联系方式"];
             return;
         }
         
-        if(address.address == nil || [address.address stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length == 0)
-        {
-            [self showMsgHint:MC_ERROR_MSG_0004];
+        if ([[MCContextManager getInstance]isBlankString:address.address]) {
+            [self showMsgHint:@"请填写收货人地址"];
             return;
         }
-        
-        
     }else {
         address = self.address;
     }

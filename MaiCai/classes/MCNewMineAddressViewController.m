@@ -50,18 +50,18 @@
     NSString* mobile = [self.mobile.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     NSString* address = [self.address.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
-    if(receiver==Nil || receiver.length == 0) {
-        [self showMsgHint:MC_ERROR_MSG_0002];
+    if ([[MCContextManager getInstance]isBlankString:receiver]) {
+        [self showMsgHint:@"请填写收货人姓名"];
         return;
     }
     
-    if(mobile==Nil || mobile.length == 0) {
-        [self showMsgHint:MC_ERROR_MSG_0003];
+    if (![[MCContextManager getInstance]isMobileNumber:mobile]) {
+        [self showMsgHint:@"请填写正确的收货人联系方式"];
         return;
     }
     
-    if(address==Nil || address.length == 0) {
-        [self showMsgHint:MC_ERROR_MSG_0004];
+    if ([[MCContextManager getInstance]isBlankString:address]) {
+        [self showMsgHint:@"请填写收货人地址"];
         return;
     }
     

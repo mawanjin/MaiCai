@@ -9,6 +9,7 @@
 #import "MCFeedbackViewController.h"
 #import "MCUserManager.h"
 #import "GCPlaceholderTextView.h"
+#import "MCContextManager.h"
 
 @interface MCFeedbackViewController ()
 
@@ -45,13 +46,14 @@
     
     NSString* tel = [self.tel.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
-    if([content isEqual:@""]){
+    if ([[MCContextManager getInstance]isBlankString:content]) {
         [self showMsgHint:@"请提供您的宝贵意见"];
         return;
     }
     
-    if([tel isEqual:@""]) {
-        [self showMsgHint:@"请提供你的联系方式"];
+    
+    if(![[MCContextManager getInstance]isMobileNumber:tel]) {
+        [self showMsgHint:@"请提供你正确的联系方式"];
         return;
     }
     

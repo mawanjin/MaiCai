@@ -203,6 +203,9 @@
     MCCartConfirmPopupView *popup = [[MCCartConfirmPopupView alloc] initWithNibName:@"MCCartConfirmPopupView" bundle:nil];
     popup.previousView = self;
     popup.vegetable = self.vegetable;
+    [popup setAddProductComplete:^{
+        [self showMsgHint:@"加入菜篮成功"];
+    }];
     [self presentPopupViewController:popup animated:YES completion:nil];
 }
 @end

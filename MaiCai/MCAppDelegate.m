@@ -25,7 +25,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     //两秒以后加载程序，能让用户更加仔细的看清楚，启动画面
-    //[NSThread sleepForTimeInterval:1.0];
+    [NSThread sleepForTimeInterval:2.0];
     
     //根据不同的屏幕尺寸加载不同的程序
     [self initializeStoryBoardBasedOnScreenSize];
