@@ -13,6 +13,7 @@
 @interface MCVegetable : NSObject<NSCoding>
 @property  unsigned int id;
 @property  NSString* name;
+@property  NSString* description;
 @property  unsigned int product_id;
 @property  NSString* image;
 @property  unsigned int shop_product_id;

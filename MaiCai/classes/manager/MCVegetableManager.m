@@ -340,6 +340,7 @@ static NSMutableDictionary* relationship;
             temp.product_id = [obj[@"product_id"]integerValue];
             temp.image = obj[@"image"];
             temp.unit = obj[@"unit"];
+            temp.description = obj[@"summary"];
             [productsArray addObject:temp];
         }
         

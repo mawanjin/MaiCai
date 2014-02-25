@@ -64,7 +64,7 @@
     
     
     //联系客服
-    UIBarButtonItem* item = [[UIBarButtonItem alloc]initWithTitle:@"配送地区" style:UIBarButtonItemStylePlain target:self action:@selector(addressHelperAction)];
+    UIBarButtonItem* item = [[UIBarButtonItem alloc]initWithTitle:@"配送说明" style:UIBarButtonItemStylePlain target:self action:@selector(addressHelperAction)];
     item.tintColor = [UIColor whiteColor];
     self.navigationItem.leftBarButtonItem = item;
     
@@ -133,7 +133,8 @@
     [cell.icon loadImageByUrl:vegetable.image];
     
     cell.nameLabel.text = vegetable.name;
-    cell.descriptionLabel.text = [[NSString alloc]initWithFormat:@"菜篮价：%.02f元/%@",vegetable.price,vegetable.unit];
+    cell.priceLabel.text = [[NSString alloc]initWithFormat:@"菜篮价：%.02f元/%@",vegetable.price,vegetable.unit];
+    cell.descriptionLabel.text = vegetable.description;
     if(indexPath.row == (products.count-1)) {
         cell.divideLine.hidden = YES;
     }
