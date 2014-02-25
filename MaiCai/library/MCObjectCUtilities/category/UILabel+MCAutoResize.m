@@ -9,11 +9,11 @@
 #import "UILabel+MCAutoResize.h"
 
 @implementation UILabel (MCAutoResize)
--(void)autoResizeByText:(NSString*)text PositionX:(float)x PositionY:(float)y
+-(void)autoResizeByText:(NSString*)text PositionX:(float)x PositionY:(float)y FontSize:(int)fontSize
 {
     self.frame = CGRectMake(0, 0, 0, 0);
     [self setNumberOfLines:0];
-    UIFont *font = [UIFont fontWithName:@"Arial" size:13];
+    UIFont *font = [UIFont fontWithName:@"Arial" size:fontSize];
     CGSize size = CGSizeMake(320,2000);
     CGSize labelsize = [text sizeWithFont:font constrainedToSize:size lineBreakMode:self.lineBreakMode];
     self.text = text;
@@ -22,10 +22,10 @@
     self.textColor = [UIColor blackColor];
 }
 
-+(CGFloat)calculateHeightByText:(NSString*)text
++(CGFloat)calculateHeightByText:(NSString*)text FontSize:(int)fontSize
 {
     CGSize maxSize = CGSizeMake(320, 9999);
-    UIFont* font = [UIFont fontWithName:@"Arial" size:13];
+    UIFont* font = [UIFont fontWithName:@"Arial" size:fontSize];
     CGSize expectedSize = [text sizeWithFont:font constrainedToSize:maxSize lineBreakMode:UILineBreakModeWordWrap];
     return expectedSize.height;
 }

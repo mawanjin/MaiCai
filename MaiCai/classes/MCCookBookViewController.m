@@ -222,9 +222,17 @@
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 NSMutableArray* newData = [[MCVegetableManager getInstance]getRecipesByPage:page Pagesize:pageSize Cache:YES];
                 if (newData) {
+                    int count = self.recipes.count;
                     [self.recipes addObjectsFromArray:newData];
+                    NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+                    
+                    for (int i=0; i<newData.count; i++) {
+                        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:count+i inSection:0];
+                        [indexPaths addObject: indexPath];
+                    }
+                    
                     dispatch_sync(dispatch_get_main_queue(), ^{
-                        [self performSelector:@selector(doneWithView:) withObject:refreshView afterDelay:0.0];
+                        [self performSelector:@selector(doneWithLoadMore:IndexPaths:) withObject:refreshView withObject:indexPaths];
                     });
                 }else {
                     dispatch_sync(dispatch_get_main_queue(), ^{
@@ -233,19 +241,23 @@
                             [refreshView endRefreshing];
                         }
                     });
-                
                 }
-                
-                
             });
         }else {
             //养身
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 NSMutableArray* newData = [[MCVegetableManager getInstance]getHealthListByPage:page Pagesize:pageSize Cache:YES];
                 if (newData) {
+                    int count = self.healthList.count;
                     [self.healthList addObjectsFromArray:newData];
+                    NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+                    
+                    for (int i=0; i<newData.count; i++) {
+                        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:count+i inSection:0];
+                        [indexPaths addObject: indexPath];
+                    }
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self performSelector:@selector(doneWithView:) withObject:refreshView afterDelay:0.0];
+                        [self performSelector:@selector(doneWithLoadMore:IndexPaths:) withObject:refreshView withObject:indexPaths];
                     });
                 }else {
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -255,8 +267,6 @@
                         }
                     });
                 }
-                
-                
             });
         }
         //NSLog(@"%@----开始进入刷新状态", refreshView.class);
@@ -280,7 +290,7 @@
                 if (newData) {
                     [self.recipes addObjectsFromArray:newData];
                     dispatch_sync(dispatch_get_main_queue(), ^{
-                        [self performSelector:@selector(doneWithView:) withObject:refreshView afterDelay:0.0];
+                        [self performSelector:@selector(doneWithRefresh:) withObject:refreshView afterDelay:0.0];
                     });
                 }else {
                     dispatch_sync(dispatch_get_main_queue(), ^{
@@ -298,7 +308,7 @@
                 if (newData) {
                     [self.healthList addObjectsFromArray:newData];
                     dispatch_sync(dispatch_get_main_queue(), ^{
-                        [self performSelector:@selector(doneWithView:) withObject:refreshView afterDelay:0.0];
+                        [self performSelector:@selector(doneWithRefresh:) withObject:refreshView afterDelay:0.0];
                     });
                 }else {
                     dispatch_sync(dispatch_get_main_queue(), ^{
@@ -339,11 +349,21 @@
     self.header = header;
 }
 
-- (void)doneWithView:(MJRefreshBaseView *)refreshView
+-(void)doneWithLoadMore:(MJRefreshBaseView *)refreshView IndexPaths:(NSMutableArray*)indexPaths
 {
+    [refreshView endRefreshing];
+    [self.tableView beginUpdates];
+    [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView endUpdates];
+    
+}
+
+- (void)doneWithRefresh:(MJRefreshBaseView *)refreshView
+{
+    [refreshView endRefreshing];
     // 刷新表格
     [self.tableView reloadData];
     //(最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-    [refreshView endRefreshing];
+    
 }
 @end

@@ -10,7 +10,7 @@
 #import "MCUserManager.h"
 #import "MCUser.h"
 #import "Toast+UIView.h"
-#import "MCContextManager.h"
+#import "NSString+Regex.h"
 
 
 @implementation MCLoginViewController
@@ -43,12 +43,12 @@
     NSString* userId = self.usernameTextField.text;
     NSString* password = self.passwordTextField.text;
     
-    if (![[MCContextManager getInstance]isMobileNumber:userId]) {
+    if (![userId isMobileNumber]) {
         [self showMsgHint:@"请输入正确的手机号码"];
         return;
     }
     
-    if (![[MCContextManager getInstance]validatePassword:password]) {
+    if (![password isPassword]) {
         [self showMsgHint:@"请输入正确的密码"];
         return;
     }

@@ -124,7 +124,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.section == 0) {
-        return [UILabel calculateHeightByText:self.recipe.introduction]+10;
+        return [UILabel calculateHeightByText:self.recipe.introduction FontSize:13]+10;
     }else if(indexPath.section == 1) {
         return 37;
     }else if(indexPath.section == 2) {
@@ -138,7 +138,7 @@
     UITableViewCell* cell = nil;
     if(indexPath.section == 0) {
         MCRecipeDishDescriptionCell* temp = [tableView dequeueReusableCellWithIdentifier:@"dishDescriptionCell"];
-        [temp.descriptionLabel autoResizeByText:self.recipe.introduction PositionX:0 PositionY:5];
+        [temp.descriptionLabel autoResizeByText:self.recipe.introduction PositionX:0 PositionY:5 FontSize:13];
         cell = temp;
     }else if(indexPath.section == 1) {
         MCRecipeIngredientCell* temp = [tableView dequeueReusableCellWithIdentifier:@"ingredientCell"];

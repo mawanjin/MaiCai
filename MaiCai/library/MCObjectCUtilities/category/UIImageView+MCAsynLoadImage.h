@@ -10,4 +10,5 @@
 
 @interface UIImageView (MCAsynLoadImage)
 -(void)loadImageByUrl:(NSString*)url;
+-(void)loadImageByUrl:(NSString*)url Size:(CGSize)size;
 @end

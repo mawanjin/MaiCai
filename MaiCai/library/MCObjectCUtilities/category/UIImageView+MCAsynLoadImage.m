@@ -8,6 +8,7 @@
 
 #import "UIImageView+MCAsynLoadImage.h"
 #import "MCNetwork.h"
+#import "UIImage+MCScaleSize.h"
 
 @implementation UIImageView (MCAsynLoadImage)
 -(void)loadImageByUrl:(NSString*)url
@@ -22,7 +23,21 @@
         @catch (NSException *exception) {
             
         }
-});
+    });
+}
 
+-(void)loadImageByUrl:(NSString*)url Size:(CGSize)size
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        @try {
+            UIImage* image = [[MCNetwork getInstance]loadImageFromSource:url];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.image = [image scaleToSize:size];
+            });
+        }
+        @catch (NSException *exception) {
+            
+        }
+    });
 }
 @end

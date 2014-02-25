@@ -134,7 +134,7 @@
 {
     if(indexPath.section == 0) {
        MCVegetableDetailDescriptionCell* cell =  [tableView dequeueReusableCellWithIdentifier:@"vegetableDetailDescriptionCell"];
-        [cell.descriptionLabel autoResizeByText:self.data[@"summary"] PositionX:0 PositionY:0];
+        [cell.descriptionLabel autoResizeByText:self.data[@"summary"] PositionX:0 PositionY:0 FontSize:13];
         return cell;
     }else if(indexPath.section == 1) {
         MCVegetableDetailShopInfoCell* cell = [tableView dequeueReusableCellWithIdentifier:@"vegetableDetailShopInfoCell"];
@@ -162,7 +162,7 @@
 {
     if(indexPath.section == 0) {
         //商品介绍
-        float value = [UILabel calculateHeightByText:self.data[@"summary"]];
+        float value = [UILabel calculateHeightByText:self.data[@"summary"] FontSize:13];
         return (value<84)?84:value;
     }else if(indexPath.section == 1) {
         //店铺信息

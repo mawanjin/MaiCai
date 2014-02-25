@@ -17,8 +17,4 @@
 -(void)setLogged:(BOOL)value;
 -(BOOL)isLogged;
 -(BOOL)submitErrorMessage:(NSString*) errorMessage;
-- (BOOL)isMobileNumber:(NSString *)mobileNum;
-- (BOOL) isBlankString:(NSString *)string;
-- (BOOL) validatePassword:(NSString *)passWord;
--(BOOL) validateEmail:(NSString *)email;
 @end

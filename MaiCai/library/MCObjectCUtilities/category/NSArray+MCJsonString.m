@@ -14,7 +14,6 @@
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self
                                                        options:(NSJSONWritingOptions) (prettyPrint ? NSJSONWritingPrettyPrinted : 0)
                                                          error:&error];
-    
     if (! jsonData) {
         NSLog(@"bv_jsonStringWithPrettyPrint: error: %@", error.localizedDescription);
         return @"[]";

@@ -59,18 +59,21 @@
             for(int i=0;i<items.count;i++) {
                 NSDictionary* item = items[i];
                 
-                UILabel* label = [[UILabel alloc]init];
-                [label autoResizeByText:item[@"content"] PositionX:0 PositionY:height];
-                [self.scrollView addSubview:label];
-                height = height+label.frame.size.height;
+                if (item[@"content"] && ![item[@"content"] isEqual:[NSNull null]]) {
+                    UILabel* label = [[UILabel alloc]init];
+                    [label autoResizeByText:item[@"content"] PositionX:0 PositionY:height FontSize:15];
+                    
+                    [self.scrollView addSubview:label];
+                    height = height+label.frame.size.height+5;
+                }
                 
-                UIImageView* imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0,height, 320, 200)];
-                [imageView loadImageByUrl:item[@"image"]];
-                [self.scrollView addSubview:imageView];
-                height = height+imageView.frame.size.height;
-                
-                
-                
+                if(item[@"image"]&& ![item[@"image"] isEqual:[NSNull null]]) {
+                    UIImageView* imageView = [[UIImageView alloc]init];
+                    [imageView loadImageByUrl:item[@"image"] Size:CGSizeMake(310, 136)];
+                    [imageView setFrame:CGRectMake(5, height,310,136)];
+                    [self.scrollView addSubview:imageView];
+                    height = height+imageView.frame.size.height+10;
+                }
             }
             
             UICollectionView* collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, height, 320, (self.health.products.count/3+1)*50+20) collectionViewLayout:[self flowLayout]];

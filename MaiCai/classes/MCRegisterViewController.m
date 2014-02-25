@@ -12,6 +12,7 @@
 #import "MCUser.h"
 #import "MCLoginViewController.h"
 #import "Toast+UIView.h"
+#import "NSString+Regex.h"
 
 
 @implementation MCRegisterViewController
@@ -26,32 +27,22 @@
     NSString* password = self.password.text;
     NSString* passwordAgain = self.passwordAgain.text;
     
-    if (![[MCContextManager getInstance]isMobileNumber:username]) {
+    if (![username isMobileNumber]) {
         [self showMsgHint:@"请输入正确的手机号码"];
         return;
     }
     
-    if ([[MCContextManager getInstance]isBlankString:nickname]) {
+    if ([nickname isBlankString]) {
         [self showMsgHint:@"请输入昵称"];
         return;
     }
     
-    if ([[MCContextManager getInstance]isBlankString:password]) {
-        [self showMsgHint:@"请输入密码"];
-        return;
-    }
-    
-    if ([[MCContextManager getInstance]isBlankString:passwordAgain]) {
-        [self showMsgHint:@"请再一次输入密码"];
-        return;
-    }
-    
-    if (![[MCContextManager getInstance]validatePassword:password]) {
+    if (![password isPassword]) {
         [self showMsgHint:@"密码6~10位"];
         return;
     }
     
-    if (![[MCContextManager getInstance]validatePassword:passwordAgain]) {
+    if (![passwordAgain isPassword]) {
         [self showMsgHint:@"密码6~10位"];
         return;
     }

@@ -28,6 +28,7 @@
 #import "MCOrderConfirmPayCell.h"
 #import "MCOrderConfirmDeliveryCell.h"
 #import "MCAddressHelperViewController.h"
+#import "NSString+Regex.h"
 
 #import "DataSigner.h"
 #import "AlixPayResult.h"
@@ -180,17 +181,17 @@
         address.mobile = self.header_.mobileLabel.text;
         address.address = self.header_.addressLabel.text;
         
-        if ([[MCContextManager getInstance]isBlankString:address.shipper]) {
+        if ([address.address isBlankString]) {
             [self showMsgHint:@"请填写收货人姓名"];
             return;
         }
         
-        if (![[MCContextManager getInstance]isMobileNumber:address.mobile]) {
+        if (![address.mobile isMobileNumber]) {
             [self showMsgHint:@"请填写正确的收货人联系方式"];
             return;
         }
         
-        if ([[MCContextManager getInstance]isBlankString:address.address]) {
+        if ([address.address isBlankString]) {
             [self showMsgHint:@"请填写收货人地址"];
             return;
         }

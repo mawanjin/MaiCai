@@ -13,7 +13,7 @@
 #import "MCContextManager.h"
 #import "MCMineAddressViewController.h"
 #import "MCAddressHelperViewController.h"
-
+#import "NSString+Regex.h"
 
 @implementation MCNewMineAddressViewController
 
@@ -50,17 +50,17 @@
     NSString* mobile = [self.mobile.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     NSString* address = [self.address.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
-    if ([[MCContextManager getInstance]isBlankString:receiver]) {
+    if ([receiver isBlankString]) {
         [self showMsgHint:@"请填写收货人姓名"];
         return;
     }
     
-    if (![[MCContextManager getInstance]isMobileNumber:mobile]) {
+    if (![mobile isMobileNumber]) {
         [self showMsgHint:@"请填写正确的收货人联系方式"];
         return;
     }
     
-    if ([[MCContextManager getInstance]isBlankString:address]) {
+    if ([address isBlankString]) {
         [self showMsgHint:@"请填写收货人地址"];
         return;
     }
