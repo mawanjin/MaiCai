@@ -53,8 +53,8 @@
     [self showProgressHUD];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            self.sourceData = [[MCVegetableManager getInstance]getMarketProductsByCache:YES];
-        if (self.sourceData != nil) {
+        NSMutableArray* sourceData = [[MCVegetableManager getInstance]getMarketProductsByCache:YES];
+        if (sourceData != nil) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 CGFloat yDelta;
                 
@@ -65,13 +65,16 @@
                 }
                 
                 // Segmented control with scrolling
-                NSMutableArray* categories = [[NSMutableArray alloc]init];
-                for(int i=0;i<self.sourceData.count;i++) {
-                    MCCategory* category = self.sourceData[i];
-                    [categories addObject:category.name];
+                self.categories = [[NSMutableArray alloc]init];
+                NSMutableArray* categoryNames = [[NSMutableArray alloc]init];
+                for(int i=0;i<sourceData.count;i++) {
+                    MCCategory* category = sourceData[i];
+                    category.vegetables = nil;
+                    [self.categories addObject:category];
+                    [categoryNames addObject:category.name];
                 }
                 
-                self.segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:categories];
+                self.segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:categoryNames];
                 [self.segmentedControl setSelectedSegmentIndex:0];
                 self.segmentedControl.segmentEdgeInset = UIEdgeInsetsMake(0, 10, 0, 10);
                 self.segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
@@ -86,19 +89,16 @@
                 [self.segmentedControl setFrame:CGRectMake(0, 40 + yDelta, 320, 40)];
                 [self.segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
                 [self.view addSubview:self.segmentedControl];
-                
                 //快速集成下拉刷新
-                MJRefreshHeaderView *header = [MJRefreshHeaderView header];
-                header.scrollView = self.collectionView;
-                header.delegate = self;
-
-                [self.collectionView reloadData];
+                [self addHeader];
+                
+                [self loadData];
+                
             });
         }
         dispatch_sync(dispatch_get_main_queue(), ^{
             [self hideProgressHUD];
         });
-        
     });
 }
 
@@ -124,8 +124,8 @@
     numberOfItemsInSection:(NSInteger)section
 {
     @try {
-        MCCategory* category = self.sourceData[self.segmentedControl.selectedSegmentIndex];
-        return category.vegetables.count;
+        
+        return self.data.count;
     }
     @catch (NSException *exception) {
         return 0;
@@ -138,8 +138,7 @@
 {
     MCMarketTradeCell* myCell = nil;
     myCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"gridCell" forIndexPath:indexPath];
-    MCCategory* category = self.sourceData[self.segmentedControl.selectedSegmentIndex];
-    MCVegetable* vegetable = category.vegetables[indexPath.row];
+    MCVegetable* vegetable = self.data[indexPath.row];
     [myCell.imageIcon setImage:[[UIImage alloc]init]];
     [myCell.imageIcon loadImageByUrl:vegetable.image];
     myCell.nameLabel.text = vegetable.name;
@@ -150,8 +149,7 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    MCCategory* category = self.sourceData[self.segmentedControl.selectedSegmentIndex];
-    MCVegetable* vegetable = category.vegetables[indexPath.row];
+    MCVegetable* vegetable = self.data[indexPath.row];
     MCVegetableDetailViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCVegetableDetailViewController"];
     vc.vegetable = vegetable;
     vc.hidesBottomBarWhenPushed = YES;
@@ -163,7 +161,7 @@
 - (IBAction)handleSwipe:(UISwipeGestureRecognizer *)sender {
     if (sender.direction & UISwipeGestureRecognizerDirectionLeft){
         MCLog(@"Swiped Left.");
-        if(self.segmentedControl.selectedSegmentIndex < (self.sourceData.count-1)) {
+        if(self.segmentedControl.selectedSegmentIndex < (self.categories.count-1)) {
             [self.segmentedControl setSelectedSegmentIndex:(self.segmentedControl.selectedSegmentIndex+1) animated:YES];
             [self segmentedControlChangedValue:self.segmentedControl];
             
@@ -180,65 +178,86 @@
 
 -(void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
 	MCLog(@"Selected index %i (via UIControlEventValueChanged)", segmentedControl.selectedSegmentIndex);
-    [self.collectionView reloadData];
+    [self loadData];
 }
 
-#pragma mark - 刷新控件的代理方法
-#pragma mark 开始进入刷新状态
-- (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView
+-(void)loadData
 {
-    //NSLog(@"%@----开始进入刷新状态", refreshView.class);
-    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        self.sourceData = [[MCVegetableManager getInstance]getMarketProductsByCache:NO];
-        
-        if (self.sourceData) {
+        MCCategory* category = self.categories[self.segmentedControl.selectedSegmentIndex];
+        self.data = [[MCVegetableManager getInstance]getMarketProductsByCategoryId:category.id Cache:YES];
+        if (self.data) {
             dispatch_sync(dispatch_get_main_queue(), ^{
-                [self performSelector:@selector(doneWithView:) withObject:refreshView afterDelay:0];
+                [self.collectionView reloadData];
             });
         }else {
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                if([refreshView isRefreshing]) {
-                    [refreshView endRefreshing];
-                }
-            });
+            
         }
     });
 }
 
+#pragma mark - 刷新控件的代理方法
+#pragma mark 开始进入刷新状态
+- (void)addHeader
+{
+    MJRefreshHeaderView *header = [MJRefreshHeaderView header];
+    header.scrollView = self.collectionView;
+    
+    header.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
+        // 进入刷新状态就会回调这个Block
+        //NSLog(@"%@----开始进入刷新状态", refreshView.class);
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            MCCategory* category = self.categories[self.segmentedControl.selectedSegmentIndex];
+            self.data = [[MCVegetableManager getInstance]getMarketProductsByCategoryId:category.id Cache:YES];
+            if (self.data) {
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [self performSelector:@selector(doneWithView:) withObject:refreshView afterDelay:0];
+                });
+            }else {
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    if([refreshView isRefreshing]) {
+                        [refreshView endRefreshing];
+                    }
+                });
+            }
+        });
+    };
+    
+    header.endStateChangeBlock = ^(MJRefreshBaseView *refreshView) {
+        // 刷新完毕就会回调这个Block
+        //NSLog(@"%@----刷新完毕", refreshView.class);
+    };
+    
+    header.refreshStateChangeBlock = ^(MJRefreshBaseView *refreshView, MJRefreshState state) {
+        // 控件的刷新状态切换了就会调用这个block
+        switch (state) {
+            case MJRefreshStateNormal:
+                //NSLog(@"%@----切换到：普通状态", refreshView.class);
+                break;
+                
+            case MJRefreshStatePulling:
+                //NSLog(@"%@----切换到：松开即可刷新的状态", refreshView.class);
+                break;
+                
+            case MJRefreshStateRefreshing:
+                //NSLog(@"%@----切换到：正在刷新状态", refreshView.class);
+                break;
+            default:
+                break;
+        }
+    };
+    
+    self.header = header;
+}
+
 - (void)doneWithView:(MJRefreshBaseView *)refreshView
 {
+    [refreshView endRefreshing];
     // 刷新表格
     [self.collectionView reloadData];
     
     // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-    [refreshView endRefreshing];
-}
-
-#pragma mark 刷新完毕
-- (void)refreshViewEndRefreshing:(MJRefreshBaseView *)refreshView
-{
-    //NSLog(@"%@----刷新完毕", refreshView.class);
-}
-
-#pragma mark 监听刷新状态的改变
-- (void)refreshView:(MJRefreshBaseView *)refreshView stateChange:(MJRefreshState)state
-{
-    switch (state) {
-        case MJRefreshStateNormal:
-            //NSLog(@"%@----切换到：普通状态", refreshView.class);
-            break;
-            
-        case MJRefreshStatePulling:
-            //NSLog(@"%@----切换到：松开即可刷新的状态", refreshView.class);
-            break;
-            
-        case MJRefreshStateRefreshing:
-            //NSLog(@"%@----切换到：正在刷新状态", refreshView.class);
-            break;
-        default:
-            break;
-    }
+    
 }
 
 @end

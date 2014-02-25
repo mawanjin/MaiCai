@@ -370,6 +370,54 @@ static NSMutableDictionary* relationship;
     }
 }
 
+-(NSMutableArray*)getMarketProductsByCategoryId:(int)categoryId Cache:(BOOL)cache
+{
+    NSString* lng = ((NSDictionary*)[[MCContextManager getInstance]getDataByKey:MC_CONTEXT_POSITION])[@"lng"];
+    NSString* lat = ((NSDictionary*)[[MCContextManager getInstance]getDataByKey:MC_CONTEXT_POSITION])[@"lat"];
+    
+    if (!lng) {
+        return nil;
+    }
+    
+    if (!lat) {
+        return nil;
+    }
+    
+    NSDictionary* params = @{
+                             @"lng":lng,
+                             @"lat":lat,
+                             @"category_id":[NSNumber numberWithInt:categoryId]
+                             };
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/market/list.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:url Params:[[NSMutableDictionary alloc]initWithDictionary:params] Cache:cache];
+    if (result == nil) {
+        return nil;
+    }
+    NSError *error;
+    NSDictionary* dicResult = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
+    
+    BOOL flag = [dicResult[@"success"]boolValue];
+    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    if(flag) {
+        NSArray*  vegetablesArray = [dicResult objectForKey:@"data"];
+        NSMutableArray* vegetables = [[NSMutableArray alloc]init];
+        unsigned int j=0;
+        for(j=0;j<vegetablesArray.count;j++) {
+            NSDictionary* obj1 = vegetablesArray[j];
+            MCVegetable* temp1 = [[MCVegetable alloc]init];
+            temp1.id = [obj1[@"id"]integerValue];
+            temp1.name = obj1[@"name"];
+            temp1.product_id = [obj1[@"product_id"]integerValue];
+            temp1.image = obj1[@"image"];
+            temp1.price = [obj1[@"price"]floatValue];
+            temp1.unit = obj1[@"unit"];
+            [vegetables addObject:temp1];
+        }
+        return vegetables;
+    }else {
+        return nil;
+    }
+}
 
 -(NSMutableArray*)getMarketProductsByCache:(BOOL)cache
 {
@@ -430,6 +478,8 @@ static NSMutableDictionary* relationship;
         return nil;
     }
 }
+
+
 
 
 -(NSMutableDictionary*)getVegetableDetailByProductId:(int)id Longitude:(NSString*)longitude Latitude:(NSString*)latitude

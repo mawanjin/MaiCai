@@ -358,7 +358,7 @@
 		048445CF183DF96D006F4090 /* MCChangeNicknameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCChangeNicknameView.m; sourceTree = "<group>"; };
 		048445D0183DF96D006F4090 /* MCChangeNicknameView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCChangeNicknameView.xib; sourceTree = "<group>"; };
 		0486A0ED1835BAD100FDC854 /* MCTradeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTradeManager.h; sourceTree = "<group>"; };
-		0486A0EE1835BAD100FDC854 /* MCTradeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTradeManager.m; sourceTree = "<group>"; };
+		0486A0EE1835BAD100FDC854 /* MCTradeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCTradeManager.m; path = ../../classes/manager/MCTradeManager.m; sourceTree = "<group>"; };
 		0486A0F01835CC6200FDC854 /* MCCartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCartCell.h; sourceTree = "<group>"; };
 		0486A0F11835CC6200FDC854 /* MCCartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCartCell.m; sourceTree = "<group>"; };
 		0489950B181A115100E1B156 /* MaiCai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MaiCai.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -602,6 +602,7 @@
 		0464C995182F7015009066C3 /* CWPopup */ = {
 			isa = PBXGroup;
 			children = (
+				0486A0EE1835BAD100FDC854 /* MCTradeManager.m */,
 				0464C996182F7015009066C3 /* UIViewController+CWPopup.h */,
 				0464C997182F7015009066C3 /* UIViewController+CWPopup.m */,
 			);
@@ -689,7 +690,6 @@
 				04B990BC183496E10018F84E /* MCContextManager.h */,
 				04B990BD183496E10018F84E /* MCContextManager.m */,
 				0486A0ED1835BAD100FDC854 /* MCTradeManager.h */,
-				0486A0EE1835BAD100FDC854 /* MCTradeManager.m */,
 				0497B811183A012B008A6F8B /* MCUserManager.h */,
 				0497B812183A012B008A6F8B /* MCUserManager.m */,
 			);

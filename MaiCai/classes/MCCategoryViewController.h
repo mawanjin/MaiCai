@@ -14,11 +14,9 @@
 
 @interface MCCategoryViewController :MCBaseTabViewController<UIScrollViewDelegate,UICollectionViewDelegateFlowLayout,UICollectionViewDelegate,UICollectionViewDataSource,MJRefreshBaseViewDelegate>
 @property NSMutableArray* data;
-@property NSMutableArray* sourceData;
+@property NSMutableArray* categories;
 @property (nonatomic, strong) HMSegmentedControl *segmentedControl;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-
-@property MJRefreshHeaderView *header;
-
+@property (nonatomic, weak)MJRefreshHeaderView *header;
 - (IBAction)handleSwipe:(UISwipeGestureRecognizer *)sender;
 @end

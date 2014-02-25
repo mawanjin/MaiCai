@@ -102,6 +102,7 @@
     [self.header beginRefreshing];
 }
 
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -288,6 +289,9 @@
                 [self.recipes removeAllObjects];
                 NSMutableArray* newData = [[MCVegetableManager getInstance]getRecipesByPage:page Pagesize:pageSize Cache:NO];
                 if (newData) {
+                    if (self.recipes == nil) {
+                        self.recipes = [[NSMutableArray alloc]init];
+                    }
                     [self.recipes addObjectsFromArray:newData];
                     dispatch_sync(dispatch_get_main_queue(), ^{
                         [self performSelector:@selector(doneWithRefresh:) withObject:refreshView afterDelay:0.0];
@@ -306,6 +310,9 @@
                 [self.healthList removeAllObjects];
                 NSMutableArray* newData = [[MCVegetableManager getInstance]getHealthListByPage:page Pagesize:pageSize Cache:NO];
                 if (newData) {
+                    if (self.healthList == nil) {
+                        self.healthList = [[NSMutableArray alloc]init];
+                    }
                     [self.healthList addObjectsFromArray:newData];
                     dispatch_sync(dispatch_get_main_queue(), ^{
                         [self performSelector:@selector(doneWithRefresh:) withObject:refreshView afterDelay:0.0];

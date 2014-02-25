@@ -16,6 +16,6 @@
 @property NSMutableArray* recipes;
 @property NSMutableArray* healthList;
 @property (nonatomic, strong) HMSegmentedControl *segmentedControl;
-@property MJRefreshHeaderView *header;
-@property MJRefreshFooterView *footer;
+@property (nonatomic,weak) MJRefreshHeaderView *header;
+@property (nonatomic,weak) MJRefreshFooterView *footer;
 @end

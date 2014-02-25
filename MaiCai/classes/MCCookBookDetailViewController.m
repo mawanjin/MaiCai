@@ -76,6 +76,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)dealloc {
+    self.recipe = nil;
+}
+
 #pragma mark- others
 -(void)quickOrderAction{
     MCQuickOrderViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCQuickOrderViewController"];

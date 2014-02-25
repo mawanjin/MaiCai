@@ -13,5 +13,5 @@
 @interface MCCookBookDetailViewController : MCBaseNavViewController<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UINavigationItem *navItem;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property MCRecipe* recipe;
+@property (strong,nonatomic) MCRecipe* recipe;
 @end
