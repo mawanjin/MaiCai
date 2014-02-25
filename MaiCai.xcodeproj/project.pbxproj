@@ -53,6 +53,8 @@
 		043F2FF018B7299A00E8D5AD /* MCAddressHelperCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F2FEF18B7299A00E8D5AD /* MCAddressHelperCell.m */; };
 		043F2FF918BB285700E8D5AD /* NSString+Regex.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F2FF818BB285700E8D5AD /* NSString+Regex.m */; };
 		043F2FFC18BB2AFC00E8D5AD /* UIImage+MCScaleSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F2FFB18BB2AFC00E8D5AD /* UIImage+MCScaleSize.m */; };
+		043F2FFF18BC7EC700E8D5AD /* MCCartTableViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F2FFE18BC7EC700E8D5AD /* MCCartTableViewHeader.m */; };
+		043F300118BC7EE900E8D5AD /* MCCartTableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 043F300018BC7EE900E8D5AD /* MCCartTableViewHeader.xib */; };
 		044BC9AC1830687800D43115 /* MCMineAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044BC9AB1830687800D43115 /* MCMineAddressViewController.m */; };
 		044BC9B118308CB200D43115 /* MCNewMineAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044BC9B018308CB200D43115 /* MCNewMineAddressViewController.m */; };
 		044BC9B41830A6C900D43115 /* MCMineAdressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 044BC9B31830A6C900D43115 /* MCMineAdressCell.m */; };
@@ -269,6 +271,9 @@
 		043F2FF818BB285700E8D5AD /* NSString+Regex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Regex.m"; sourceTree = "<group>"; };
 		043F2FFA18BB2AFC00E8D5AD /* UIImage+MCScaleSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MCScaleSize.h"; sourceTree = "<group>"; };
 		043F2FFB18BB2AFC00E8D5AD /* UIImage+MCScaleSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MCScaleSize.m"; sourceTree = "<group>"; };
+		043F2FFD18BC7EC700E8D5AD /* MCCartTableViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCartTableViewHeader.h; sourceTree = "<group>"; };
+		043F2FFE18BC7EC700E8D5AD /* MCCartTableViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCartTableViewHeader.m; sourceTree = "<group>"; };
+		043F300018BC7EE900E8D5AD /* MCCartTableViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCCartTableViewHeader.xib; sourceTree = "<group>"; };
 		044BC9AA1830687800D43115 /* MCMineAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMineAddressViewController.h; sourceTree = "<group>"; };
 		044BC9AB1830687800D43115 /* MCMineAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMineAddressViewController.m; sourceTree = "<group>"; };
 		044BC9AD183083DC00D43115 /* Main_iphone5.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iphone5.storyboard; sourceTree = "<group>"; };
@@ -894,6 +899,8 @@
 		04BDEEE3182CD12A004E1C84 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				043F2FEE18B7299A00E8D5AD /* MCAddressHelperCell.h */,
+				043F2FEF18B7299A00E8D5AD /* MCAddressHelperCell.m */,
 				0486A0F01835CC6200FDC854 /* MCCartCell.h */,
 				0486A0F11835CC6200FDC854 /* MCCartCell.m */,
 				0497B7E818386541008A6F8B /* MCCartChangeNumView.h */,
@@ -905,6 +912,9 @@
 				0497B7ED1838C51A008A6F8B /* MCCartHeader.h */,
 				0497B7EE1838C51A008A6F8B /* MCCartHeader.m */,
 				0497B7F01838C531008A6F8B /* MCCartHeader.xib */,
+				043F2FFD18BC7EC700E8D5AD /* MCCartTableViewHeader.h */,
+				043F2FFE18BC7EC700E8D5AD /* MCCartTableViewHeader.m */,
+				043F300018BC7EE900E8D5AD /* MCCartTableViewHeader.xib */,
 				048445CE183DF96D006F4090 /* MCChangeNicknameView.h */,
 				048445CF183DF96D006F4090 /* MCChangeNicknameView.m */,
 				048445D0183DF96D006F4090 /* MCChangeNicknameView.xib */,
@@ -994,16 +1004,14 @@
 				04C9734A186D5C4900138DB8 /* MCRecipeIngredientCell.m */,
 				0423D3971864170500F08F1E /* MCSearchResultCell.h */,
 				0423D3981864170500F08F1E /* MCSearchResultCell.m */,
+				043F2FDF18B34CEC00E8D5AD /* MCSettingCell.h */,
+				043F2FE018B34CEC00E8D5AD /* MCSettingCell.m */,
 				041E5A7A187BC8EB00BB0F67 /* MCVegetableDetailDescriptionCell.h */,
 				041E5A7B187BC8EB00BB0F67 /* MCVegetableDetailDescriptionCell.m */,
 				041E5A77187BC89200BB0F67 /* MCVegetableDetailRecipeCell.h */,
 				041E5A78187BC89200BB0F67 /* MCVegetableDetailRecipeCell.m */,
 				041E5A7D187BC90D00BB0F67 /* MCVegetableDetailShopInfoCell.h */,
 				041E5A7E187BC90D00BB0F67 /* MCVegetableDetailShopInfoCell.m */,
-				043F2FDF18B34CEC00E8D5AD /* MCSettingCell.h */,
-				043F2FE018B34CEC00E8D5AD /* MCSettingCell.m */,
-				043F2FEE18B7299A00E8D5AD /* MCAddressHelperCell.h */,
-				043F2FEF18B7299A00E8D5AD /* MCAddressHelperCell.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -1138,6 +1146,7 @@
 				04DAF4C71842E330009C7720 /* MCOrderConfirmSectionHeader.xib in Resources */,
 				047F63C818A8E67200F4D5DA /* SVProgressHUD.bundle in Resources */,
 				04899519181A115100E1B156 /* InfoPlist.strings in Resources */,
+				043F300118BC7EE900E8D5AD /* MCCartTableViewHeader.xib in Resources */,
 				048445D2183DF96D006F4090 /* MCChangeNicknameView.xib in Resources */,
 				04DAF4E81845DDC7009C7720 /* MCOrderDetailFooter.xib in Resources */,
 				04DAF4CF1842FA7C009C7720 /* MCOrderConfirmHeader_.xib in Resources */,
@@ -1199,6 +1208,7 @@
 				041E5A8A187F8E3500BB0F67 /* MCLabelDetailViewController.m in Sources */,
 				047F63C218A8E60900F4D5DA /* MCBaseTabViewController.m in Sources */,
 				04B990BB18346D060018F84E /* MCCategory.m in Sources */,
+				043F2FFF18BC7EC700E8D5AD /* MCCartTableViewHeader.m in Sources */,
 				043F2FF918BB285700E8D5AD /* NSString+Regex.m in Sources */,
 				046962C518ACFAF700A58918 /* MCOrderConfirmPayCell.m in Sources */,
 				04C9733E186A6F1700138DB8 /* MCQuickOrderTableHeader.m in Sources */,

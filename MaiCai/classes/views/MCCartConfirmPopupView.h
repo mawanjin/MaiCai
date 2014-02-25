@@ -12,9 +12,7 @@
 @class MCVegetable;
 
 @interface MCCartConfirmPopupView :MCBaseViewController
-- (IBAction)cancelBtnAction:(UIButton *)sender;
-@property  UIViewController* previousView;
-@property  NSInteger index;
+
 @property MCVegetable* vegetable;
 
 @property (weak, nonatomic) IBOutlet UIButton *plusBtn;
@@ -25,11 +23,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
 @property (weak, nonatomic) IBOutlet UIButton *okBtn;
-@property (strong,nonatomic) void(^addProductComplete)();
+@property (copy,nonatomic) void(^cancelAction)();
+@property (copy,nonatomic) void(^okAction)(MCVegetable* vegetable);
+
 
 - (IBAction)plusBtnAction:(UIButton *)sender;
 - (IBAction)viewTouchDown:(id)sender;
-
+- (IBAction)cancelBtnAction:(UIButton *)sender;
 - (IBAction)minusBtnAction:(UIButton *)sender;
 - (IBAction)okBtnAction:(UIButton *)sender;
 @end

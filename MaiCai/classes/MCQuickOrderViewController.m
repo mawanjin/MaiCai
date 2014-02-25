@@ -192,8 +192,37 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MCCartChangeNumView *popup = [[MCCartChangeNumView alloc] initWithNibName:@"MCCartChangeNumView" bundle:nil];
-    popup.previousView = self;
-    popup.indexPath = indexPath;
+    MCVegetable* vegetable = nil;
+    if(indexPath.section == 0) {
+        vegetable = self.recipe.mainIngredients[indexPath.row];
+    }else{
+        vegetable = self.recipe.accessoryIngredients[indexPath.row];
+    }
+    popup.vegetable = vegetable;
+    
+    [popup setActionCancel:^{
+        if (self.popupViewController != nil) {
+            [self dismissPopupViewControllerAnimated:YES completion:^{
+            }];
+        }
+        [self.tableView reloadData];
+    }];
+    
+    [popup setActionComplete:^(MCVegetable *vegetable) {
+        [self showProgressHUD];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                if (self.popupViewController != nil) {
+                    [self dismissPopupViewControllerAnimated:NO completion:^{
+                    }];
+                }
+                self.isTotalChoosed = false;
+                [self totalChooseAction:nil];
+                [self hideProgressHUD];
+            });
+        });
+
+    }];
     [self presentPopupViewController:popup animated:YES completion:nil];
 }
 

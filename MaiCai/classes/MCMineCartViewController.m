@@ -21,6 +21,7 @@
 #import "MCOrderConfirmViewController.h"
 #import "UIImageView+MCAsynLoadImage.h"
 #import "MCButton.h"
+#import "MCCartTableViewHeader.h"
 
 @implementation MCMineCartViewController
 {
@@ -51,6 +52,9 @@
     UIBarButtonItem* item = [[UIBarButtonItem alloc]initWithTitle:@"清空" style:UIBarButtonItemStylePlain target:self action:@selector(emptyCartAction)];
     item.tintColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = item;
+    
+    MCCartTableViewHeader* header = [MCCartTableViewHeader initInstance];
+    self.tableView.tableHeaderView = header;
 }
 
 
@@ -69,7 +73,6 @@
                 dispatch_sync(dispatch_get_main_queue(), ^{
                     [self totalChooseBtnClickAction:nil];
                     [self.tableView reloadData];
-                    
                     [self hideProgressHUD];
                 });
             }else{
@@ -122,8 +125,51 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MCCartChangeNumView *popup = [[MCCartChangeNumView alloc] initWithNibName:@"MCCartChangeNumView" bundle:nil];
-    popup.previousView = self;
-    popup.indexPath = indexPath;
+    //popup.previousView = self;
+    //popup.indexPath = indexPath;
+    MCShop* shop  = data[indexPath.section];
+    [popup setActionCancel:^{
+        if (self.popupViewController != nil) {
+            [self dismissPopupViewControllerAnimated:YES completion:^{
+            }];
+        }
+        isTotalChoosed = false;
+        [self totalChooseBtnClickAction:nil];
+    }];
+    
+    [popup setActionComplete:^(MCVegetable *vegetable) {
+        [self showProgressHUD];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            if ([[MCContextManager getInstance]isLogged]) {
+                //登入状态
+                //如果是MCMineCartViewController
+                MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
+                if ([[MCTradeManager getInstance]changeProductNumInCartOnlineByUserId:user.userId ProductId:vegetable.id Quantity:vegetable.quantity]) {
+                    self.data = [[MCTradeManager getInstance]getCartProductsOnlineByUserId:user.userId];
+                }
+            }else {
+                //注销状态
+                //如果是MCMineCartViewController
+                NSString* macId = (NSString*)[[MCContextManager getInstance]getDataByKey:MC_MAC_ID];
+                if ([[MCTradeManager getInstance]changeProductNumInCartByUserId:macId ProductId:vegetable.id Quantity:vegetable.quantity]) {
+                     self.data = [[MCTradeManager getInstance]getCartProductsByUserId:macId];
+                }
+                
+            }
+
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                if (self.popupViewController != nil) {
+                    [self dismissPopupViewControllerAnimated:NO completion:^{
+                    }];
+                }
+                isTotalChoosed = false;
+                [self totalChooseBtnClickAction:nil];
+                [self hideProgressHUD];
+            });
+        });
+    }];
+    
+    popup.vegetable = shop.vegetables[indexPath.row];
     [self presentPopupViewController:popup animated:YES completion:nil];
 }
 
@@ -389,6 +435,11 @@
             return;
         }
         
+        if (self.totalPrice < 15.0f) {
+            [self showMsgHint:@"需要购买至少15元的商品才能下单"];
+            return;
+        }
+        
         MCOrderConfirmViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCOrderConfirmViewController"];
         
         vc.data = self.data;
@@ -403,6 +454,11 @@
     }else{
         if ([self calculateSelectedNum]<=0) {
             [self showMsgHint:@"请选择至少一样商品"];
+            return;
+        }
+        
+        if (self.totalPrice < 15.0f) {
+            [self showMsgHint:@"需要购买至少15元的商品才能下单"];
             return;
         }
         

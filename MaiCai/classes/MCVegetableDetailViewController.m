@@ -12,6 +12,7 @@
 #import "MCVegetableManager.h"
 #import "MCCartConfirmPopupView.h"
 #import "MCContextManager.h"
+#import "MCUser.h"
 #import "MCShop.h"
 #import "MCVegetableDetailDescriptionCell.h"
 #import "MCVegetableDetailRecipeCell.h"
@@ -20,6 +21,7 @@
 #import "MCRecipe.h"
 #import "MCCookBookDetailViewController.h"
 #import "UILabel+MCAutoResize.h"
+#import "MCTradeManager.h"
 
 @interface MCVegetableDetailViewController ()
 @property NSDictionary* data;
@@ -201,11 +203,59 @@
 
 - (IBAction)addProductToCartAction:(id)sender {
     MCCartConfirmPopupView *popup = [[MCCartConfirmPopupView alloc] initWithNibName:@"MCCartConfirmPopupView" bundle:nil];
-    popup.previousView = self;
     popup.vegetable = self.vegetable;
-    [popup setAddProductComplete:^{
-        [self showMsgHint:@"加入菜篮成功"];
+    [popup setCancelAction:^{
+        if (self.popupViewController != nil) {
+            [self dismissPopupViewControllerAnimated:YES completion:^{
+            }];
+        }
     }];
+
+    [popup setOkAction:^(MCVegetable* vegetable){
+        [self showProgressHUD];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            if ([[MCContextManager getInstance]isLogged]) {
+                //登入状态
+                MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
+
+                NSArray* products =@[@{
+                                          @"id":[[NSNumber alloc]initWithInt:vegetable.shop_product_id],
+                                          @"quantity":[[NSNumber alloc]initWithInt:vegetable.quantity]
+                                    }];
+                if ([[MCTradeManager getInstance]addProductToCartOnlineByUserId:user.userId Products:products Recipe:nil]) {
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                        if (self.popupViewController != nil) {
+                            [self dismissPopupViewControllerAnimated:NO completion:^{
+                            }];
+                        }
+                        [self showMsgHint:@"加入菜篮成功"];
+                    });
+                }
+            }else {
+                //非登入状态
+                NSString* macId = (NSString*)[[MCContextManager getInstance]getDataByKey:MC_MAC_ID];
+
+                NSArray* products =@[@{
+                                         @"id":[[NSNumber alloc]initWithInt:vegetable.shop_product_id],
+                                         @"quantity":[[NSNumber alloc]initWithInt:vegetable.quantity]
+                                    }];
+                if ([[MCTradeManager getInstance]addProductToCartByUserId:macId Products:products Recipe:nil]) {
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                        if (self.popupViewController != nil) {
+                            [self dismissPopupViewControllerAnimated:NO completion:^{
+                            }];
+                        }
+                        [self showMsgHint:@"加入菜篮成功"];
+                    });
+                }
+            }
+        
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [self hideProgressHUD];
+            });
+        });
+    }];
+    
     [self presentPopupViewController:popup animated:YES completion:nil];
 }
 @end
