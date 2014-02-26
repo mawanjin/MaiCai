@@ -12,7 +12,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *icon;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *divideLine;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 
 @end

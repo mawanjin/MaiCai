@@ -7,6 +7,7 @@
 //
 
 #import "MCMarketIndexTipCell.h"
+#import "UIColor+ColorWithHex.h"
 
 @implementation MCMarketIndexTipCell
 
@@ -26,4 +27,14 @@
     // Configure the view for the selected state
 }
 
+-(void)drawRect:(CGRect)rect
+{
+    [super drawRect:rect];
+    [[UIColor colorWithHexString:DIVIDE_LINE_COLOR andAlpha:1.0f]set];
+    CGContextRef currentContext = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(currentContext,0.5f);
+    CGContextMoveToPoint(currentContext,0.0f,66.0f);
+    CGContextAddLineToPoint(currentContext,320.0f,66.0f);
+    CGContextStrokePath(currentContext);
+}
 @end

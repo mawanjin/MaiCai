@@ -135,9 +135,6 @@
     cell.nameLabel.text = vegetable.name;
     cell.priceLabel.text = [[NSString alloc]initWithFormat:@"菜篮价：%.02f元/%@",vegetable.price,vegetable.unit];
     cell.descriptionLabel.text = vegetable.description;
-    if(indexPath.row == (products.count-1)) {
-        cell.divideLine.hidden = YES;
-    }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }

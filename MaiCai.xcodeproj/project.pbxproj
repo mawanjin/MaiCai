@@ -627,6 +627,8 @@
 			isa = PBXGroup;
 			children = (
 				046E99D11827298C0005FB53 /* manager */,
+				043F2FEB18B7283400E8D5AD /* MCAddressHelperViewController.h */,
+				043F2FEC18B7283400E8D5AD /* MCAddressHelperViewController.m */,
 				04D230A5182B357E00D4B4AC /* MCBaseNavViewController.h */,
 				04D230A6182B357E00D4B4AC /* MCBaseNavViewController.m */,
 				047F63C018A8E60900F4D5DA /* MCBaseTabViewController.h */,
@@ -635,6 +637,8 @@
 				046E99BC18261F6D0005FB53 /* MCBaseViewController.m */,
 				046E99C518261F6D0005FB53 /* MCCategoryViewController.h */,
 				046E99C618261F6D0005FB53 /* MCCategoryViewController.m */,
+				043F2FE818B6F28500E8D5AD /* MCConstants.h */,
+				043F2FE918B6F28500E8D5AD /* MCConstants.m */,
 				04F059F6185EA68A00BB25C6 /* MCCookBookDetailViewController.h */,
 				04F059F7185EA68A00BB25C6 /* MCCookBookDetailViewController.m */,
 				046E99BD18261F6D0005FB53 /* MCCookBookViewController.h */,
@@ -679,10 +683,6 @@
 				046E99C418261F6D0005FB53 /* MCVegetableMarketViewController.m */,
 				04B98D8018331D680018F84E /* model */,
 				04BDEEE3182CD12A004E1C84 /* views */,
-				043F2FE818B6F28500E8D5AD /* MCConstants.h */,
-				043F2FE918B6F28500E8D5AD /* MCConstants.m */,
-				043F2FEB18B7283400E8D5AD /* MCAddressHelperViewController.h */,
-				043F2FEC18B7283400E8D5AD /* MCAddressHelperViewController.m */,
 			);
 			path = classes;
 			sourceTree = "<group>";

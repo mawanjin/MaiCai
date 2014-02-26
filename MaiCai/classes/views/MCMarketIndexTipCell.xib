@@ -31,11 +31,6 @@
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Coe-RD-MHh">
-                        <rect key="frame" x="0.0" y="65" width="320" height="1"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.67450982329999998" green="0.67450982329999998" blue="0.67450982329999998" alpha="1" colorSpace="deviceRGB"/>
-                    </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="12元/斤" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pqK-cc-YYa">
                         <rect key="frame" x="76" y="22" width="224" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -49,7 +44,6 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="descriptionLabel" destination="dCe-Uv-meJ" id="tYw-Ec-I0a"/>
-                <outlet property="divideLine" destination="Coe-RD-MHh" id="lbQ-AO-mkV"/>
                 <outlet property="icon" destination="WMc-Vf-eGJ" id="0t2-Hb-60f"/>
                 <outlet property="nameLabel" destination="Ll2-ok-5fK" id="zym-i4-fT6"/>
                 <outlet property="priceLabel" destination="pqK-cc-YYa" id="UR6-s4-sze"/>

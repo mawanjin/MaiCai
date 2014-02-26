@@ -15,6 +15,7 @@ NSString* const MC_PAY_NO = @"payNo";
 NSString* const MC_ERROR_MSG_0001 = @"操作失败...";
 NSString* const MC_BASE_URL = @"http://star-faith.com:8083/";
 
+NSString* const DIVIDE_LINE_COLOR = @"#C7C7C7";
 
 @implementation MCConstants
 

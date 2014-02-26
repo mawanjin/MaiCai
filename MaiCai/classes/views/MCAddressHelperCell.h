@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MCAddressHelperCell : UITableViewCell
+
+@interface MCAddressHelperCell :UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
 @end
