@@ -109,9 +109,9 @@
             [cell.imageIcon loadImageByUrl:vegetable.image];
             cell.subTotalPriceLabel.text = [[NSString alloc]initWithFormat:@"小计%.2f元",vegetable.price*vegetable.quantity];
             if(vegetable.isSelected) {
-                [cell.chooseBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_selected"] forState:UIControlStateNormal];
+                [cell.chooseBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_selected_long"] forState:UIControlStateNormal];
             }else {
-                [cell.chooseBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_normal"] forState:UIControlStateNormal];
+                [cell.chooseBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_normal_long"] forState:UIControlStateNormal];
             }
             
             if(indexPath.row == (self.recipe.mainIngredients.count-1)) {
@@ -129,9 +129,9 @@
             cell.subTotalPriceLabel.text = [[NSString alloc]initWithFormat:@"小计%.2f元",vegetable.price*vegetable.quantity];
             
             if(vegetable.isSelected) {
-                [cell.chooseBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_selected"] forState:UIControlStateNormal];
+                [cell.chooseBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_selected_long"] forState:UIControlStateNormal];
             }else {
-                [cell.chooseBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_normal"] forState:UIControlStateNormal];
+                [cell.chooseBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_normal_long"] forState:UIControlStateNormal];
             }
             
             if(indexPath.row == (self.recipe.accessoryIngredients.count-1)) {

@@ -22,6 +22,7 @@
 #import "UIImageView+MCAsynLoadImage.h"
 #import "MCButton.h"
 #import "MCCartTableViewHeader.h"
+#import "UIImage+MCScaleSize.h"
 
 @implementation MCMineCartViewController
 {
@@ -230,10 +231,13 @@
     [cell.chooseBtn setParam:indexPath];
     [cell.chooseBtn addTarget:self action:@selector(tableCellChooseAction:) forControlEvents:UIControlEventTouchUpInside];
     
+    UIImage* normal = [UIImage imageNamed:@"cart_choose_btn_normal_long"];
+    UIImage* selected = [UIImage imageNamed:@"cart_choose_btn_selected_long"];
+   
     if(vegetable.isSelected) {
-        [cell.chooseBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_selected"] forState:UIControlStateNormal];
+        [cell.chooseBtn setBackgroundImage:selected forState:UIControlStateNormal];
     }else {
-        [cell.chooseBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_normal"] forState:UIControlStateNormal];
+        [cell.chooseBtn setBackgroundImage:normal forState:UIControlStateNormal];
     }
     
     if(indexPath.row == ([tableView numberOfRowsInSection:indexPath.section]-1)) {

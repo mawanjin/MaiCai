@@ -189,6 +189,8 @@
         if (self.data) {
             dispatch_sync(dispatch_get_main_queue(), ^{
                 [self.collectionView reloadData];
+                [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]  atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
+                
             });
         }else {
             
