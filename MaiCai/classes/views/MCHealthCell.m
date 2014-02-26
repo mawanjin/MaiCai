@@ -7,6 +7,7 @@
 //
 
 #import "MCHealthCell.h"
+#import "UIColor+ColorWithHex.h"
 
 @implementation MCHealthCell
 
@@ -25,6 +26,22 @@
 
     // Configure the view for the selected state
     
+}
+
+-(void)drawRect:(CGRect)rect
+{
+    [super drawRect:rect];
+    CGContextRef currentContext = UIGraphicsGetCurrentContext();
+    //背景
+    CGContextSetFillColorWithColor(currentContext, [UIColor whiteColor].CGColor);
+    CGContextFillRect(currentContext, rect);
+    
+    //分割线
+    [[UIColor colorWithHexString:DIVIDE_LINE_COLOR andAlpha:1.0f]set];
+    CGContextSetLineWidth(currentContext,0.5f);
+    CGContextMoveToPoint(currentContext,0.0f,rect.size.height);
+    CGContextAddLineToPoint(currentContext,rect.size.width,rect.size.height);
+    CGContextStrokePath(currentContext);
 }
 
 @end

@@ -10,8 +10,6 @@
 #import "MCButton.h"
 @interface MCCartCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *imageIcon;
-@property (weak, nonatomic) IBOutlet UIImageView *divideline;
-
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *quantityLabel;
 @property (weak, nonatomic) IBOutlet UILabel *subTotalPriceLabel;

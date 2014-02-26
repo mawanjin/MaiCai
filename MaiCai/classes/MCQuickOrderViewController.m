@@ -365,6 +365,7 @@
             }
             
         }else {
+            //非登入状态
             NSString* macId = (NSString*)[[MCContextManager getInstance]getDataByKey:MC_MAC_ID];
             NSMutableArray* products = [[NSMutableArray alloc]init];
             for(int i=0;i<self.recipe.mainIngredients.count;i++) {

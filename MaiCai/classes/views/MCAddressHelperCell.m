@@ -30,11 +30,16 @@
 -(void)drawRect:(CGRect)rect
 {
     [super drawRect:rect];
-    [[UIColor colorWithHexString:DIVIDE_LINE_COLOR andAlpha:1.0f]set];
     CGContextRef currentContext = UIGraphicsGetCurrentContext();
+    //背景
+    CGContextSetFillColorWithColor(currentContext, [UIColor whiteColor].CGColor);
+    CGContextFillRect(currentContext, rect);
+    
+    //分割线
+    [[UIColor colorWithHexString:DIVIDE_LINE_COLOR andAlpha:1.0f]set];
     CGContextSetLineWidth(currentContext,0.5f);
-    CGContextMoveToPoint(currentContext,0.0f,55.0f);
-    CGContextAddLineToPoint(currentContext,320.0f,55.0f);
+    CGContextMoveToPoint(currentContext,0.0f,rect.size.height);
+    CGContextAddLineToPoint(currentContext,rect.size.width,rect.size.height);
     CGContextStrokePath(currentContext);
 }
 

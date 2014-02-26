@@ -643,14 +643,14 @@ static NSMutableDictionary* relationship;
     }
 }
 
--(NSMutableArray*)getCollectionListByPage:(int)page Pagesize:(int)pagesize Recipe:(BOOL)flag UserId:(int)userId
+-(NSMutableArray*)getCollectionListByPage:(int)page Pagesize:(int)pagesize Recipe:(BOOL)flag UserId:(NSString*)userId
 {
     
     NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithDictionary:@{
-                                                                                   @"page":[[NSString alloc]initWithFormat:@"%d",page],
-                                                                                   @"pagesize":        [[NSString alloc]initWithFormat:@"%d",pagesize],
+                                                                                   @"page":[NSNumber numberWithInt:page],
+                                                                                   @"pagesize":[NSNumber numberWithInt:pagesize],
                                                                                    @"customer_id":
-                                                                                       [[NSString alloc]initWithFormat:@"%d",userId],
+                                                                                       userId,
                                                                                    @"recipe":(flag==true)?@"true":@"false"
                                                                                    }];
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/favorite/list.do",MC_BASE_URL];

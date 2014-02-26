@@ -22,7 +22,7 @@
 -(NSMutableArray*)getSuggestResultByKeywords:(NSString*)words Quantity:(int)quantity;
 -(NSMutableArray*)getRecipesByPage:(int)page Pagesize:(int)pagesize Cache:(BOOL)cache;
 -(NSMutableArray*)getHealthListByPage:(int)page Pagesize:(int)pagesize Cache:(BOOL)cache;
--(NSMutableArray*)getCollectionListByPage:(int)page Pagesize:(int)pagesize Recipe:(BOOL)flag UserId:(int)userId;
+-(NSMutableArray*)getCollectionListByPage:(int)page Pagesize:(int)pagesize Recipe:(BOOL)flag UserId:(NSString*)userId;
 -(NSMutableArray*)getProductCategories;
 //这是一键买菜接口
 -(MCRecipe*)getRecipeById:(int)id;

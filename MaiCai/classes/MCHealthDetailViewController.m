@@ -38,10 +38,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
+    [self showProgressHUD];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
          self.health = [[MCVegetableManager getInstance]getHealthDetailById:self.health.id];
-        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_sync(dispatch_get_main_queue(), ^{
 //            self.scrollView.scrollEnabled = YES;
 //            UIImageView* bigImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 200)];
 //            [bigImageView loadImageByUrl:self.health.bigImage];
@@ -85,6 +85,8 @@
             [self.scrollView addSubview:collectionView];
             height += collectionView.frame.size.height;
             self.scrollView.contentSize = CGSizeMake(320,height+10);
+            
+            [self hideProgressHUD];
         });
     });
 }

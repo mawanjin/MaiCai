@@ -239,10 +239,6 @@
     }else {
         [cell.chooseBtn setBackgroundImage:normal forState:UIControlStateNormal];
     }
-    
-    if(indexPath.row == ([tableView numberOfRowsInSection:indexPath.section]-1)) {
-        cell.divideline.hidden = YES;
-    }
     return cell;
 }
 

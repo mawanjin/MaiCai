@@ -185,7 +185,6 @@
     }else if(indexPath.row == 6) {
         cell.image.image = [UIImage imageNamed:@"mine_setting_normal"];
         cell.label.text = @"系统设置";
-        cell.divideLine.hidden = YES;
     }else{
         
     }
