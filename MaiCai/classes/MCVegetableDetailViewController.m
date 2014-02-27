@@ -67,7 +67,7 @@
                 NSMutableArray* tenants = self.data[@"tenants"];
                 MCShop* shop = tenants[0];
                 self.vegetable = shop.vegetables[0];
-                [self.imageIcon loadImageScaleByUrl:self.vegetable.image];
+                [self.imageIcon loadImageByUrl:self.vegetable.image];
                 self.priceLabel.text = [[NSString alloc]initWithFormat:@"菜篮价：%.02f元/%@",self.vegetable.price,self.vegetable.unit];
                 self.discoutPriceLabel.text = [[NSString alloc]initWithFormat:@"市场价：%.02f元/%@",self.vegetable.originalPrice,self.vegetable.unit];
                 self.shopLabel.text = self.vegetable.shop.name;
@@ -142,14 +142,14 @@
         MCVegetableDetailShopInfoCell* cell = [tableView dequeueReusableCellWithIdentifier:@"vegetableDetailShopInfoCell"];
         MCShop* shop = self.data[@"tenants"][0];
         cell.shopNameLabel.text = shop.name;
-        [cell.shopImage loadImageScaleByUrl:shop.image];
-        [cell.licenseImage loadImageScaleByUrl:shop.license];
+        [cell.shopImage loadImageByUrl:shop.image];
+        [cell.licenseImage loadImageByUrl:shop.license];
         return cell;
     }else{
         MCVegetableDetailRecipeCell* cell = [tableView dequeueReusableCellWithIdentifier:@"vegetableDetailRecipeCell"];
         NSMutableArray* recipes = self.data[@"recipes"];
         MCRecipe* recipe = recipes[indexPath.row];
-        [cell.icon loadImageScaleByUrl:recipe.image];
+        [cell.icon loadImageByUrl:recipe.image];
         cell.name.text = recipe.name;
         cell.description.text = recipe.introduction;
         if(indexPath.row == (recipes.count-1)) {

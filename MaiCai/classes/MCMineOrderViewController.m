@@ -190,7 +190,7 @@
 {
     MCOrderCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"orderCell"];
     MCOrder* order = self.data[indexPath.row];
-    [cell.imageIcon loadImageScaleByUrl:order.image];
+    [cell.imageIcon loadImageByUrl:order.image];
     
     cell.shopNameLabel.text = order.shopName;
     cell.createTimeLabel.text = order.dateAdded;

@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UIImageView (MCAsynLoadImage)
-//-(void)loadImageByUrl:(NSString*)url;
+-(void)loadImageByUrl:(NSString*)url;
 -(void)loadImageScaleByUrl:(NSString*)url;
 @end

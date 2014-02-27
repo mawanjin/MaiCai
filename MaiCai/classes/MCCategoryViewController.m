@@ -140,7 +140,7 @@
     myCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"gridCell" forIndexPath:indexPath];
     MCVegetable* vegetable = self.data[indexPath.row];
     [myCell.imageIcon setImage:[[UIImage alloc]init]];
-    [myCell.imageIcon loadImageScaleByUrl:vegetable.image];
+    [myCell.imageIcon loadImageByUrl:vegetable.image];
     myCell.nameLabel.text = vegetable.name;
     myCell.priceLabel.text = [[NSString alloc]initWithFormat:@"%.02f元/斤",vegetable.price];
     return myCell;

@@ -86,7 +86,7 @@
         [collectionView dequeueReusableSupplementaryViewOfKind:kind
                                            withReuseIdentifier:@"MCLabelDetailHeader"
                                                   forIndexPath:indexPath];
-        [view_.imageView loadImageScaleByUrl:self.data[@"image"]];
+        [view_.imageView loadImageByUrl:self.data[@"image"]];
         view_.label.text = self.data[@"description"];
         view = view_;
     }

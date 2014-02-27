@@ -146,7 +146,7 @@
         MCCookBookCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cookBookCell"];
         MCRecipe* recipe = self.recipes[indexPath.row];
         [cell.image setImage:[[UIImage alloc]init]];
-        [cell.image loadImageScaleByUrl:recipe.image];
+        [cell.image loadImageByUrl:recipe.image];
         cell.nameLabel.text = recipe.name;
         cell.introductionLabel.text = recipe.introduction;
         return cell;

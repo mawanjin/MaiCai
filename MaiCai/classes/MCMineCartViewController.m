@@ -223,7 +223,7 @@
     MCShop* shop = data[indexPath.section];
     NSMutableArray* vegetables = shop.vegetables;
     MCVegetable* vegetable = vegetables[indexPath.row];
-    [cell.imageIcon loadImageScaleByUrl:vegetable.image];
+    [cell.imageIcon loadImageByUrl:vegetable.image];
     cell.nameLabel.text = vegetable.name;
     cell.quantityLabel.text = [[NSString alloc]initWithFormat:@"数量：%d",vegetable.quantity];
     cell.priceLabel.text = [[NSString alloc]initWithFormat:@"单价：%0.02f元/%@",vegetable.price,vegetable.unit];

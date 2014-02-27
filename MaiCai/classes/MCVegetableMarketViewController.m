@@ -130,7 +130,7 @@
 {
     MCMarketIndexTipCell* cell = [tableView dequeueReusableCellWithIdentifier:@"tipCell"];
     MCVegetable* vegetable = products[indexPath.row];
-    [cell.icon loadImageScaleByUrl:vegetable.image];
+    [cell.icon loadImageByUrl:vegetable.image];
     
     cell.nameLabel.text = vegetable.name;
     cell.priceLabel.text = [[NSString alloc]initWithFormat:@"菜篮价：%.02f元/%@",vegetable.price,vegetable.unit];
@@ -230,7 +230,7 @@
         MCMarketIndexCategoryCell* cell = (MCMarketIndexCategoryCell*)myCell;
         NSDictionary* obj = labels[indexPath.row];
         cell.nameLabel.text = obj[@"name"];
-        [cell.imageIcon loadImageScaleByUrl:obj[@"icon"]];
+        [cell.imageIcon loadImageByUrl:obj[@"icon"]];
         NSString* color = obj[@"color"];
         [cell setBackgroundColor:[UIColor colorWithHexString:color andAlpha:1]];
     }else if([collectionView.restorationIdentifier isEqualToString:@"quickOrderCollectionView"]){
@@ -241,7 +241,7 @@
         MCRecipe* obj = recipes[indexPath.row];
         cell.label.text = obj.name;
         NSString* source = [[NSString alloc]initWithFormat:@"%@",obj.image];
-        [cell.image loadImageScaleByUrl:source];
+        [cell.image loadImageByUrl:source];
     }
     return myCell;
 }

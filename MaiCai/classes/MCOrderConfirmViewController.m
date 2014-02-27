@@ -401,7 +401,7 @@
         return cell;
     }else {
         MCOrderConfirmCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"orderConfirmCell"];
-        [cell.imageIcon loadImageScaleByUrl:vegetable.image];
+        [cell.imageIcon loadImageByUrl:vegetable.image];
         cell.nameLabel.text = [[NSString alloc]initWithFormat:@"%@",vegetable.name];
         cell.quantityLabel.text = [[NSString alloc]initWithFormat:@"数量：%d",vegetable.quantity];
         cell.unitLabel.text = [[NSString alloc]initWithFormat:@"单价：%.02f元/%@",vegetable.price,vegetable.unit];

@@ -56,7 +56,7 @@
                 [header.button addTarget:self action:@selector(clickTableHeaderAction:) forControlEvents:UIControlEventTouchUpInside];
                 
                 NSString* source = [[NSString alloc]initWithFormat:@"%@",self.recipe.bigImage];
-                [header.image loadImageScaleByUrl:source];
+                [header.image loadImageByUrl:source];
                 self.tableView.tableHeaderView = header;
                 [self.tableView reloadData];
                 [self totalChooseAction:nil];
@@ -106,7 +106,7 @@
             cell.quantityLabel.text = [[NSString alloc]initWithFormat:@"用量：%@",vegetable.dosage];
             cell.nameLabel.text = [[NSString alloc]initWithFormat:@"%@x%d",vegetable.name,vegetable.quantity];
             cell.priceLabel.text = [[NSString alloc]initWithFormat:@"单价为%.2f元/%@",vegetable.price,vegetable.unit];
-            [cell.imageIcon loadImageScaleByUrl:vegetable.image];
+            [cell.imageIcon loadImageByUrl:vegetable.image];
             cell.subTotalPriceLabel.text = [[NSString alloc]initWithFormat:@"小计%.2f元",vegetable.price*vegetable.quantity];
             if(vegetable.isSelected) {
                 [cell.chooseBtn setBackgroundImage:[UIImage imageNamed:@"cart_choose_btn_selected_long"] forState:UIControlStateNormal];
@@ -125,7 +125,7 @@
             cell.quantityLabel.text = [[NSString alloc]initWithFormat:@"用量：%@",vegetable.dosage];
             cell.nameLabel.text = [[NSString alloc]initWithFormat:@"%@x%d",vegetable.name,vegetable.quantity];
             cell.priceLabel.text = [[NSString alloc]initWithFormat:@"单价为%.2f元/%@",vegetable.price,vegetable.unit];
-            [cell.imageIcon loadImageScaleByUrl:vegetable.image];
+            [cell.imageIcon loadImageByUrl:vegetable.image];
             cell.subTotalPriceLabel.text = [[NSString alloc]initWithFormat:@"小计%.2f元",vegetable.price*vegetable.quantity];
             
             if(vegetable.isSelected) {

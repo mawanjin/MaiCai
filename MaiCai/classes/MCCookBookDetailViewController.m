@@ -50,7 +50,7 @@
                 MCCookBookDetailHeader* header = [MCCookBookDetailHeader initInstance];
                 header.label.text = self.recipe.name;
                 [self.tableView setTableHeaderView:header];
-                [header.image loadImageScaleByUrl:self.recipe.bigImage];
+                [header.image loadImageByUrl:self.recipe.bigImage];
             });
         }else {
             dispatch_sync(dispatch_get_main_queue(), ^{
@@ -160,7 +160,7 @@
         MCCookStepCell* temp = [tableView dequeueReusableCellWithIdentifier:@"cookStepCell"];
         MCStep* step = self.recipe.steps[indexPath.row];
         temp.label.text = [[NSString alloc]initWithFormat:@"%d、%@",indexPath.row+1,step.content ];
-        [temp.image loadImageScaleByUrl:step.image];
+        [temp.image loadImageByUrl:step.image];
         cell = temp;
     }
     return cell;
