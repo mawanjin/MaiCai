@@ -149,7 +149,7 @@
         //菜谱
         MCCookBookCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cookBookCell"];
         MCRecipe* recipe = self.recipes[indexPath.row];
-        [cell.image loadImageByUrl:recipe.image];
+        [cell.image loadImageScaleByUrl:recipe.image];
         cell.nameLabel.text = recipe.name;
         cell.introductionLabel.text = recipe.introduction;
         return cell;

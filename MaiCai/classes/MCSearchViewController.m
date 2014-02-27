@@ -123,7 +123,7 @@
             if(indexPath.row != self.filterData.count) {
                 NSDictionary* obj = self.filterData[indexPath.row];
                 MCSearchResultCell* resultCell = [self.tableView dequeueReusableCellWithIdentifier:@"searchResultCell"];
-                [resultCell.image loadImageByUrl:obj[@"image"]];
+                [resultCell.image loadImageScaleByUrl:obj[@"image"]];
                 resultCell.label.text = obj[@"name"];
                 cell = resultCell;
             }else {

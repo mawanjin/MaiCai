@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MCButton.h"
 
 @interface MCCartTableViewHeader : UIView
 @property (weak, nonatomic) IBOutlet UILabel *label;
+@property (weak, nonatomic) IBOutlet MCButton *button;
+@property (weak, nonatomic) IBOutlet UIView *noticeView;
 +(id)initInstance;
 @end

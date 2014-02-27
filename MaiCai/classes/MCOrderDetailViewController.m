@@ -114,7 +114,7 @@
 
     cell.priceLabel.text = [[NSString alloc]initWithFormat:@"单价：%.02f元",vegetable.price];
     cell.totalPriceLabel.text = [[NSString alloc]initWithFormat:@"小计：%.02f元",vegetable.price*vegetable.quantity];
-    [cell.imageIcon loadImageByUrl:vegetable.image];
+    [cell.imageIcon loadImageScaleByUrl:vegetable.image];
     return cell;
 }
 

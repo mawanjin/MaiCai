@@ -658,7 +658,7 @@
                                     <outlet property="delegate" destination="Gym-3V-W9b" id="2xI-qr-XLQ"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="详细地址" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rUb-KW-wle">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="上海市闵行区xx路xx号" placeholder="详细地址" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rUb-KW-wle">
                                 <rect key="frame" x="25" y="221" width="275" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1244,7 +1244,6 @@
         <!--Mine Collect View Controller - 我的收藏-->
         <scene sceneID="F37-xg-cbF">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="C8V-j0-f3z" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="MCMineCollectViewController" id="fn1-85-NBJ" customClass="MCMineCollectViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Bmz-ko-2nV"/>
@@ -1331,6 +1330,7 @@
                         <outlet property="tableView" destination="IVj-Ir-d6g" id="6Bi-VW-2iy"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C8V-j0-f3z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-729" y="3194"/>
         </scene>

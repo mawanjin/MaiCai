@@ -55,6 +55,7 @@
     self.navigationItem.rightBarButtonItem = item;
     
     MCCartTableViewHeader* header = [MCCartTableViewHeader initInstance];
+    [header.button addTarget:self action:@selector(noticeShutDownAction:) forControlEvents:UIControlEventTouchUpInside];
     self.tableView.tableHeaderView = header;
 }
 
@@ -222,7 +223,7 @@
     MCShop* shop = data[indexPath.section];
     NSMutableArray* vegetables = shop.vegetables;
     MCVegetable* vegetable = vegetables[indexPath.row];
-    [cell.imageIcon loadImageByUrl:vegetable.image];
+    [cell.imageIcon loadImageScaleByUrl:vegetable.image];
     cell.nameLabel.text = vegetable.name;
     cell.quantityLabel.text = [[NSString alloc]initWithFormat:@"数量：%d",vegetable.quantity];
     cell.priceLabel.text = [[NSString alloc]initWithFormat:@"单价：%0.02f元/%@",vegetable.price,vegetable.unit];
@@ -352,6 +353,11 @@
             }
         });
     }
+}
+
+-(void)noticeShutDownAction:(id)sender
+{
+    self.tableView.tableHeaderView = nil;
 }
 
 -(int)calculateSelectedNum {

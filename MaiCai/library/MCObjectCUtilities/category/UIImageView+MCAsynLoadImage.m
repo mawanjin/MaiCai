@@ -26,13 +26,13 @@
     });
 }
 
--(void)loadImageByUrl:(NSString*)url Size:(CGSize)size
+-(void)loadImageScaleByUrl:(NSString*)url
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
             UIImage* image = [[MCNetwork getInstance]loadImageFromSource:url];
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.image = [image scaleToSize:size];
+                self.image = [image scaleToSize:self.frame.size];
             });
         }
         @catch (NSException *exception) {
