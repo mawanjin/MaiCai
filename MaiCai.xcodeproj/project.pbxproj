@@ -12,7 +12,6 @@
 		04015AA918B1D2F8002901A1 /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 04015AA218B1D2F8002901A1 /* MJRefreshConst.m */; };
 		04015AAA18B1D2F8002901A1 /* MJRefreshFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04015AA418B1D2F8002901A1 /* MJRefreshFooterView.m */; };
 		04015AAB18B1D2F8002901A1 /* MJRefreshHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04015AA618B1D2F8002901A1 /* MJRefreshHeaderView.m */; };
-		04069919184F6693006F615C /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 04069918184F6693006F615C /* HMSegmentedControl.m */; };
 		0406991C18500C50006F615C /* MCMarketTradeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0406991B18500C50006F615C /* MCMarketTradeCell.m */; };
 		04069921185021D8006F615C /* MCMarketTradeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04069920185021D8006F615C /* MCMarketTradeCell.xib */; };
 		0419D53A18505ECD000F7D51 /* MCVegetableDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0419D53918505ECD000F7D51 /* MCVegetableDetailViewController.m */; };
@@ -45,7 +44,6 @@
 		0437A4A2184C870A000D427B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DAF63318472D90009C7720 /* CFNetwork.framework */; };
 		0437A4A3184C871E000D427B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DAF63118472D7A009C7720 /* SystemConfiguration.framework */; };
 		0437A4A4184C8724000D427B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DAF5091846E3B0009C7720 /* Security.framework */; };
-		043F2FDB18B33B0A00E8D5AD /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F2FDA18B33B0A00E8D5AD /* Reachability.m */; };
 		043F2FDE18B349FA00E8D5AD /* MCSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F2FDD18B349FA00E8D5AD /* MCSettingViewController.m */; };
 		043F2FE118B34CEC00E8D5AD /* MCSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F2FE018B34CEC00E8D5AD /* MCSettingCell.m */; };
 		043F2FEA18B6F28500E8D5AD /* MCConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F2FE918B6F28500E8D5AD /* MCConstants.m */; };
@@ -55,13 +53,13 @@
 		043F2FFC18BB2AFC00E8D5AD /* UIImage+MCScaleSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F2FFB18BB2AFC00E8D5AD /* UIImage+MCScaleSize.m */; };
 		043F2FFF18BC7EC700E8D5AD /* MCCartTableViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F2FFE18BC7EC700E8D5AD /* MCCartTableViewHeader.m */; };
 		043F300118BC7EE900E8D5AD /* MCCartTableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 043F300018BC7EE900E8D5AD /* MCCartTableViewHeader.xib */; };
+		0449174618BF1C0800C9B3B1 /* MCTradeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449174518BF1C0800C9B3B1 /* MCTradeManager.m */; };
 		044BC9AC1830687800D43115 /* MCMineAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044BC9AB1830687800D43115 /* MCMineAddressViewController.m */; };
 		044BC9B118308CB200D43115 /* MCNewMineAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044BC9B018308CB200D43115 /* MCNewMineAddressViewController.m */; };
 		044BC9B41830A6C900D43115 /* MCMineAdressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 044BC9B31830A6C900D43115 /* MCMineAdressCell.m */; };
 		044FF8AF187154260077CE67 /* MCHealth.m in Sources */ = {isa = PBXBuildFile; fileRef = 044FF8AE187154260077CE67 /* MCHealth.m */; };
 		044FF8B5187257AA0077CE67 /* MCHealthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 044FF8B4187257AA0077CE67 /* MCHealthCell.m */; };
 		044FF8BB18725D7B0077CE67 /* MCHealthDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044FF8BA18725D7B0077CE67 /* MCHealthDetailViewController.m */; };
-		0464C998182F7015009066C3 /* UIViewController+CWPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 0464C997182F7015009066C3 /* UIViewController+CWPopup.m */; };
 		0464C99C182F7074009066C3 /* MCCartConfirmPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0464C99A182F7074009066C3 /* MCCartConfirmPopupView.m */; };
 		0464C99D182F7074009066C3 /* MCCartConfirmPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0464C99B182F7074009066C3 /* MCCartConfirmPopupView.xib */; };
 		0467B7F6184EBCA2005A72F0 /* MCMarketIndexNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0467B7F5184EBCA2005A72F0 /* MCMarketIndexNewsCell.m */; };
@@ -92,17 +90,13 @@
 		0472EBDA189211F800A40C9D /* MCNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 0472EBD1189211F800A40C9D /* MCNetwork.m */; };
 		0472EBDB189211F800A40C9D /* MCNetWorkObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0472EBD3189211F800A40C9D /* MCNetWorkObject.m */; };
 		047390B5183C49B6003F443D /* MCPersonalInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047390B4183C49B6003F443D /* MCPersonalInfoViewController.m */; };
-		047390BD183C51AE003F443D /* Toast+UIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047390BC183C51AE003F443D /* Toast+UIView.m */; };
 		047F63C218A8E60900F4D5DA /* MCBaseTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F63C118A8E60900F4D5DA /* MCBaseTabViewController.m */; };
-		047F63C818A8E67200F4D5DA /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 047F63C518A8E67200F4D5DA /* SVProgressHUD.bundle */; };
-		047F63C918A8E67200F4D5DA /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F63C718A8E67200F4D5DA /* SVProgressHUD.m */; };
 		048445C5183DD08A006F4090 /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = 048445C4183DD08A006F4090 /* UIDevice+IdentifierAddition.m */; };
 		048445C8183DD100006F4090 /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 048445C7183DD100006F4090 /* NSString+MD5Addition.m */; };
 		048445CC183DF42D006F4090 /* MCChangePasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 048445CA183DF42D006F4090 /* MCChangePasswordView.m */; };
 		048445CD183DF42D006F4090 /* MCChangePasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048445CB183DF42D006F4090 /* MCChangePasswordView.xib */; };
 		048445D1183DF96D006F4090 /* MCChangeNicknameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 048445CF183DF96D006F4090 /* MCChangeNicknameView.m */; };
 		048445D2183DF96D006F4090 /* MCChangeNicknameView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048445D0183DF96D006F4090 /* MCChangeNicknameView.xib */; };
-		0486A0EF1835BAD100FDC854 /* MCTradeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0486A0EE1835BAD100FDC854 /* MCTradeManager.m */; };
 		0486A0F21835CC6200FDC854 /* MCCartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0486A0F11835CC6200FDC854 /* MCCartCell.m */; };
 		0489950F181A115100E1B156 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0489950E181A115100E1B156 /* Foundation.framework */; };
 		04899511181A115100E1B156 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04899510181A115100E1B156 /* CoreGraphics.framework */; };
@@ -148,7 +142,6 @@
 		04C973391869633100138DB8 /* MCQuickOrderHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C973381869633100138DB8 /* MCQuickOrderHeader.xib */; };
 		04C9733B186A6EF600138DB8 /* MCQuickOrderTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C9733A186A6EF600138DB8 /* MCQuickOrderTableHeader.xib */; };
 		04C9733E186A6F1700138DB8 /* MCQuickOrderTableHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C9733D186A6F1700138DB8 /* MCQuickOrderTableHeader.m */; };
-		04C97345186D292E00138DB8 /* GCPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C97344186D292E00138DB8 /* GCPlaceholderTextView.m */; };
 		04C97348186D565500138DB8 /* MCStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C97347186D565500138DB8 /* MCStep.m */; };
 		04C9734B186D5C4900138DB8 /* MCRecipeIngredientCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C9734A186D5C4900138DB8 /* MCRecipeIngredientCell.m */; };
 		04C9734E186D5C7500138DB8 /* MCRecipeDishDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C9734D186D5C7500138DB8 /* MCRecipeDishDescriptionCell.m */; };
@@ -173,6 +166,7 @@
 		04F059FE185ECF1100BB25C6 /* MCCookBookDetailHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F059FD185ECF1100BB25C6 /* MCCookBookDetailHeader.m */; };
 		04F05A00185ECF4C00BB25C6 /* MCCookBookDetailHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F059FF185ECF4C00BB25C6 /* MCCookBookDetailHeader.xib */; };
 		04F05A20185FE5F100BB25C6 /* MCCookStepCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F05A1F185FE5F100BB25C6 /* MCCookStepCell.m */; };
+		2B1F666D87354467B42B3F2C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ED6BA658CF014DFF9FD2AAAF /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -196,8 +190,6 @@
 		04015AA418B1D2F8002901A1 /* MJRefreshFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshFooterView.m; sourceTree = "<group>"; };
 		04015AA518B1D2F8002901A1 /* MJRefreshHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshHeaderView.h; sourceTree = "<group>"; };
 		04015AA618B1D2F8002901A1 /* MJRefreshHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshHeaderView.m; sourceTree = "<group>"; };
-		04069917184F6693006F615C /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
-		04069918184F6693006F615C /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		0406991A18500C50006F615C /* MCMarketTradeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMarketTradeCell.h; sourceTree = "<group>"; };
 		0406991B18500C50006F615C /* MCMarketTradeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMarketTradeCell.m; sourceTree = "<group>"; };
 		04069920185021D8006F615C /* MCMarketTradeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCMarketTradeCell.xib; sourceTree = "<group>"; };
@@ -254,8 +246,6 @@
 		0437A4891847491A000D427B /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		0437A48D1847491A000D427B /* DataSigner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSigner.h; sourceTree = "<group>"; };
 		0437A48E1847491A000D427B /* DataVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataVerifier.h; sourceTree = "<group>"; };
-		043F2FD918B33B0A00E8D5AD /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		043F2FDA18B33B0A00E8D5AD /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		043F2FDC18B349FA00E8D5AD /* MCSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSettingViewController.h; sourceTree = "<group>"; };
 		043F2FDD18B349FA00E8D5AD /* MCSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSettingViewController.m; sourceTree = "<group>"; };
 		043F2FDF18B34CEC00E8D5AD /* MCSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSettingCell.h; sourceTree = "<group>"; };
@@ -274,6 +264,7 @@
 		043F2FFD18BC7EC700E8D5AD /* MCCartTableViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCartTableViewHeader.h; sourceTree = "<group>"; };
 		043F2FFE18BC7EC700E8D5AD /* MCCartTableViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCartTableViewHeader.m; sourceTree = "<group>"; };
 		043F300018BC7EE900E8D5AD /* MCCartTableViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCCartTableViewHeader.xib; sourceTree = "<group>"; };
+		0449174518BF1C0800C9B3B1 /* MCTradeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTradeManager.m; sourceTree = "<group>"; };
 		044BC9AA1830687800D43115 /* MCMineAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMineAddressViewController.h; sourceTree = "<group>"; };
 		044BC9AB1830687800D43115 /* MCMineAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMineAddressViewController.m; sourceTree = "<group>"; };
 		044BC9AD183083DC00D43115 /* Main_iphone5.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iphone5.storyboard; sourceTree = "<group>"; };
@@ -287,8 +278,6 @@
 		044FF8B4187257AA0077CE67 /* MCHealthCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCHealthCell.m; sourceTree = "<group>"; };
 		044FF8B918725D7B0077CE67 /* MCHealthDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCHealthDetailViewController.h; sourceTree = "<group>"; };
 		044FF8BA18725D7B0077CE67 /* MCHealthDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCHealthDetailViewController.m; sourceTree = "<group>"; };
-		0464C996182F7015009066C3 /* UIViewController+CWPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CWPopup.h"; sourceTree = "<group>"; };
-		0464C997182F7015009066C3 /* UIViewController+CWPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CWPopup.m"; sourceTree = "<group>"; };
 		0464C999182F7074009066C3 /* MCCartConfirmPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCartConfirmPopupView.h; sourceTree = "<group>"; };
 		0464C99A182F7074009066C3 /* MCCartConfirmPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCartConfirmPopupView.m; sourceTree = "<group>"; };
 		0464C99B182F7074009066C3 /* MCCartConfirmPopupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCCartConfirmPopupView.xib; sourceTree = "<group>"; };
@@ -344,14 +333,8 @@
 		0472EBD3189211F800A40C9D /* MCNetWorkObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCNetWorkObject.m; sourceTree = "<group>"; };
 		047390B3183C49B6003F443D /* MCPersonalInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPersonalInfoViewController.h; sourceTree = "<group>"; };
 		047390B4183C49B6003F443D /* MCPersonalInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPersonalInfoViewController.m; sourceTree = "<group>"; };
-		047390BB183C51AE003F443D /* Toast+UIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Toast+UIView.h"; sourceTree = "<group>"; };
-		047390BC183C51AE003F443D /* Toast+UIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Toast+UIView.m"; sourceTree = "<group>"; };
 		047F63C018A8E60900F4D5DA /* MCBaseTabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCBaseTabViewController.h; sourceTree = "<group>"; };
 		047F63C118A8E60900F4D5DA /* MCBaseTabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCBaseTabViewController.m; sourceTree = "<group>"; };
-		047F63C418A8E67200F4D5DA /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
-		047F63C518A8E67200F4D5DA /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
-		047F63C618A8E67200F4D5DA /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
-		047F63C718A8E67200F4D5DA /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		048445C3183DD08A006F4090 /* UIDevice+IdentifierAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+IdentifierAddition.h"; sourceTree = "<group>"; };
 		048445C4183DD08A006F4090 /* UIDevice+IdentifierAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+IdentifierAddition.m"; sourceTree = "<group>"; };
 		048445C6183DD100006F4090 /* NSString+MD5Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5Addition.h"; sourceTree = "<group>"; };
@@ -363,7 +346,6 @@
 		048445CF183DF96D006F4090 /* MCChangeNicknameView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCChangeNicknameView.m; sourceTree = "<group>"; };
 		048445D0183DF96D006F4090 /* MCChangeNicknameView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCChangeNicknameView.xib; sourceTree = "<group>"; };
 		0486A0ED1835BAD100FDC854 /* MCTradeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTradeManager.h; sourceTree = "<group>"; };
-		0486A0EE1835BAD100FDC854 /* MCTradeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCTradeManager.m; path = ../../classes/manager/MCTradeManager.m; sourceTree = "<group>"; };
 		0486A0F01835CC6200FDC854 /* MCCartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCartCell.h; sourceTree = "<group>"; };
 		0486A0F11835CC6200FDC854 /* MCCartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCartCell.m; sourceTree = "<group>"; };
 		0489950B181A115100E1B156 /* MaiCai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MaiCai.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -433,8 +415,6 @@
 		04C9733A186A6EF600138DB8 /* MCQuickOrderTableHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCQuickOrderTableHeader.xib; sourceTree = "<group>"; };
 		04C9733C186A6F1700138DB8 /* MCQuickOrderTableHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCQuickOrderTableHeader.h; sourceTree = "<group>"; };
 		04C9733D186A6F1700138DB8 /* MCQuickOrderTableHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCQuickOrderTableHeader.m; sourceTree = "<group>"; };
-		04C97343186D292E00138DB8 /* GCPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCPlaceholderTextView.h; sourceTree = "<group>"; };
-		04C97344186D292E00138DB8 /* GCPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCPlaceholderTextView.m; sourceTree = "<group>"; };
 		04C97346186D565500138DB8 /* MCStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCStep.h; sourceTree = "<group>"; };
 		04C97347186D565500138DB8 /* MCStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCStep.m; sourceTree = "<group>"; };
 		04C97349186D5C4900138DB8 /* MCRecipeIngredientCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCRecipeIngredientCell.h; sourceTree = "<group>"; };
@@ -481,6 +461,8 @@
 		04F059FF185ECF4C00BB25C6 /* MCCookBookDetailHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCCookBookDetailHeader.xib; sourceTree = "<group>"; };
 		04F05A1E185FE5F100BB25C6 /* MCCookStepCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCookStepCell.h; sourceTree = "<group>"; };
 		04F05A1F185FE5F100BB25C6 /* MCCookStepCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCookStepCell.m; sourceTree = "<group>"; };
+		9372688FC18142929BED54A4 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		ED6BA658CF014DFF9FD2AAAF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -501,6 +483,7 @@
 				04899511181A115100E1B156 /* CoreGraphics.framework in Frameworks */,
 				04899513181A115100E1B156 /* UIKit.framework in Frameworks */,
 				0489950F181A115100E1B156 /* Foundation.framework in Frameworks */,
+				2B1F666D87354467B42B3F2C /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,15 +515,6 @@
 				04015AA618B1D2F8002901A1 /* MJRefreshHeaderView.m */,
 			);
 			path = MJRefresh;
-			sourceTree = "<group>";
-		};
-		04069916184F6693006F615C /* HMSegmentedControl */ = {
-			isa = PBXGroup;
-			children = (
-				04069917184F6693006F615C /* HMSegmentedControl.h */,
-				04069918184F6693006F615C /* HMSegmentedControl.m */,
-			);
-			path = HMSegmentedControl;
 			sourceTree = "<group>";
 		};
 		0437A47118474919000D427B /* alipay */ = {
@@ -587,31 +561,12 @@
 			path = RSA;
 			sourceTree = "<group>";
 		};
-		043F2FD818B33B0A00E8D5AD /* Reachability */ = {
-			isa = PBXGroup;
-			children = (
-				043F2FD918B33B0A00E8D5AD /* Reachability.h */,
-				043F2FDA18B33B0A00E8D5AD /* Reachability.m */,
-			);
-			path = Reachability;
-			sourceTree = "<group>";
-		};
 		043F2FE218B5CB3B00E8D5AD /* log */ = {
 			isa = PBXGroup;
 			children = (
 				043F2FE318B5CB5D00E8D5AD /* MCLog.h */,
 			);
 			path = log;
-			sourceTree = "<group>";
-		};
-		0464C995182F7015009066C3 /* CWPopup */ = {
-			isa = PBXGroup;
-			children = (
-				0486A0EE1835BAD100FDC854 /* MCTradeManager.m */,
-				0464C996182F7015009066C3 /* UIViewController+CWPopup.h */,
-				0464C997182F7015009066C3 /* UIViewController+CWPopup.m */,
-			);
-			path = CWPopup;
 			sourceTree = "<group>";
 		};
 		046962B518ABA52F00A58918 /* customView */ = {
@@ -690,13 +645,14 @@
 		046E99D11827298C0005FB53 /* manager */ = {
 			isa = PBXGroup;
 			children = (
-				046E99D218272A650005FB53 /* MCVegetableManager.h */,
-				046E99D318272A650005FB53 /* MCVegetableManager.m */,
+				0449174518BF1C0800C9B3B1 /* MCTradeManager.m */,
 				04B990BC183496E10018F84E /* MCContextManager.h */,
 				04B990BD183496E10018F84E /* MCContextManager.m */,
 				0486A0ED1835BAD100FDC854 /* MCTradeManager.h */,
 				0497B811183A012B008A6F8B /* MCUserManager.h */,
 				0497B812183A012B008A6F8B /* MCUserManager.m */,
+				046E99D218272A650005FB53 /* MCVegetableManager.h */,
+				046E99D318272A650005FB53 /* MCVegetableManager.m */,
 			);
 			path = manager;
 			sourceTree = "<group>";
@@ -754,26 +710,6 @@
 			path = network;
 			sourceTree = "<group>";
 		};
-		047390BA183C51AE003F443D /* Toast */ = {
-			isa = PBXGroup;
-			children = (
-				047390BB183C51AE003F443D /* Toast+UIView.h */,
-				047390BC183C51AE003F443D /* Toast+UIView.m */,
-			);
-			path = Toast;
-			sourceTree = "<group>";
-		};
-		047F63C318A8E67200F4D5DA /* SVProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				047F63C418A8E67200F4D5DA /* SVProgressHUD-Prefix.pch */,
-				047F63C518A8E67200F4D5DA /* SVProgressHUD.bundle */,
-				047F63C618A8E67200F4D5DA /* SVProgressHUD.h */,
-				047F63C718A8E67200F4D5DA /* SVProgressHUD.m */,
-			);
-			path = SVProgressHUD;
-			sourceTree = "<group>";
-		};
 		048445C2183DD08A006F4090 /* TSDeviceId */ = {
 			isa = PBXGroup;
 			children = (
@@ -792,6 +728,7 @@
 				04899536181A115100E1B156 /* MaiCaiTests */,
 				0489950D181A115100E1B156 /* Frameworks */,
 				0489950C181A115100E1B156 /* Products */,
+				9372688FC18142929BED54A4 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -821,6 +758,7 @@
 				04899510181A115100E1B156 /* CoreGraphics.framework */,
 				04899512181A115100E1B156 /* UIKit.framework */,
 				04899530181A115100E1B156 /* XCTest.framework */,
+				ED6BA658CF014DFF9FD2AAAF /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1016,28 +954,13 @@
 			path = views;
 			sourceTree = "<group>";
 		};
-		04C97342186D292E00138DB8 /* GCPlaceholderTextView */ = {
-			isa = PBXGroup;
-			children = (
-				04C97343186D292E00138DB8 /* GCPlaceholderTextView.h */,
-				04C97344186D292E00138DB8 /* GCPlaceholderTextView.m */,
-			);
-			path = GCPlaceholderTextView;
-			sourceTree = "<group>";
-		};
 		04D230AE182B883E00D4B4AC /* library */ = {
 			isa = PBXGroup;
 			children = (
-				043F2FD818B33B0A00E8D5AD /* Reachability */,
 				04015A9C18B1D2F8002901A1 /* MJRefresh */,
-				047F63C318A8E67200F4D5DA /* SVProgressHUD */,
 				0472EBC0189211F700A40C9D /* MCObjectCUtilities */,
-				04C97342186D292E00138DB8 /* GCPlaceholderTextView */,
-				04069916184F6693006F615C /* HMSegmentedControl */,
 				0437A47118474919000D427B /* alipay */,
 				048445C2183DD08A006F4090 /* TSDeviceId */,
-				047390BA183C51AE003F443D /* Toast */,
-				0464C995182F7015009066C3 /* CWPopup */,
 			);
 			path = library;
 			sourceTree = "<group>";
@@ -1049,9 +972,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04899540181A115100E1B156 /* Build configuration list for PBXNativeTarget "MaiCai" */;
 			buildPhases = (
+				91D2D807E7FA4930AB8E6E33 /* Check Pods Manifest.lock */,
 				04899507181A115100E1B156 /* Sources */,
 				04899508181A115100E1B156 /* Frameworks */,
 				04899509181A115100E1B156 /* Resources */,
+				7A4114C67E834AA8BE21A21E /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1144,7 +1069,6 @@
 				042F25321861400A006783C2 /* MCMineFooter.xib in Resources */,
 				0497B7EC18386541008A6F8B /* MCCartChangeNumView.xib in Resources */,
 				04DAF4C71842E330009C7720 /* MCOrderConfirmSectionHeader.xib in Resources */,
-				047F63C818A8E67200F4D5DA /* SVProgressHUD.bundle in Resources */,
 				04899519181A115100E1B156 /* InfoPlist.strings in Resources */,
 				043F300118BC7EE900E8D5AD /* MCCartTableViewHeader.xib in Resources */,
 				048445D2183DF96D006F4090 /* MCChangeNicknameView.xib in Resources */,
@@ -1162,6 +1086,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7A4114C67E834AA8BE21A21E /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		91D2D807E7FA4930AB8E6E33 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		04899507181A115100E1B156 /* Sources */ = {
@@ -1194,7 +1151,6 @@
 				04F059F8185EA68A00BB25C6 /* MCCookBookDetailViewController.m in Sources */,
 				0472EBD4189211F800A40C9D /* NSArray+MCJsonString.m in Sources */,
 				044FF8B5187257AA0077CE67 /* MCHealthCell.m in Sources */,
-				0464C998182F7015009066C3 /* UIViewController+CWPopup.m in Sources */,
 				0497B816183AFCB1008A6F8B /* MCRegisterViewController.m in Sources */,
 				0486A0F21835CC6200FDC854 /* MCCartCell.m in Sources */,
 				041E5A921883777B00BB0F67 /* MCMineCollectViewController.m in Sources */,
@@ -1233,6 +1189,7 @@
 				0472EBDB189211F800A40C9D /* MCNetWorkObject.m in Sources */,
 				044FF8BB18725D7B0077CE67 /* MCHealthDetailViewController.m in Sources */,
 				043F2FDE18B349FA00E8D5AD /* MCSettingViewController.m in Sources */,
+				0449174618BF1C0800C9B3B1 /* MCTradeManager.m in Sources */,
 				04D230A7182B357E00D4B4AC /* MCBaseNavViewController.m in Sources */,
 				04DAF4BE1842D9AF009C7720 /* MCOrderConfirmHeader.m in Sources */,
 				047390B5183C49B6003F443D /* MCPersonalInfoViewController.m in Sources */,
@@ -1243,23 +1200,19 @@
 				046E99CB18261F6D0005FB53 /* MCVegetableMarketViewController.m in Sources */,
 				04015AAA18B1D2F8002901A1 /* MJRefreshFooterView.m in Sources */,
 				0472EBD9189211F800A40C9D /* MCFileOperation.m in Sources */,
-				047F63C918A8E67200F4D5DA /* SVProgressHUD.m in Sources */,
 				0437A4931847491A000D427B /* AlixPayOrder.m in Sources */,
 				0437A49B1847491A000D427B /* SBJsonWriter.m in Sources */,
 				0489951B181A115100E1B156 /* main.m in Sources */,
 				04B98D8C18331D680018F84E /* MCVegetable.m in Sources */,
 				042F253018613FC3006783C2 /* MCMineFooter.m in Sources */,
-				0486A0EF1835BAD100FDC854 /* MCTradeManager.m in Sources */,
 				0437A49A1847491A000D427B /* SBJsonParser.m in Sources */,
 				0497B7EF1838C51A008A6F8B /* MCCartHeader.m in Sources */,
 				04C97354186D6D7E00138DB8 /* MCCookBookCell.m in Sources */,
 				04BFBCF51867D9D60085F39F /* MCMarketIndexTipsHeader.m in Sources */,
 				0497B80D1839FD40008A6F8B /* MCUser.m in Sources */,
 				043F2FED18B7283400E8D5AD /* MCAddressHelperViewController.m in Sources */,
-				04C97345186D292E00138DB8 /* GCPlaceholderTextView.m in Sources */,
 				0437A4971847491A000D427B /* NSString+SBJSON.m in Sources */,
 				04C97337186962F400138DB8 /* MCQuickOrderHeader.m in Sources */,
-				047390BD183C51AE003F443D /* Toast+UIView.m in Sources */,
 				04C973311869297A00138DB8 /* MCQuickOrderViewController.m in Sources */,
 				04015AA818B1D2F8002901A1 /* MJRefreshBaseView.m in Sources */,
 				0437A4941847491A000D427B /* AlixPayResult.m in Sources */,
@@ -1274,10 +1227,8 @@
 				0467B7F9184ED066005A72F0 /* MCMarketIndexCategoryCell.m in Sources */,
 				0419D53A18505ECD000F7D51 /* MCVegetableDetailViewController.m in Sources */,
 				04B98D8A18331D680018F84E /* MCMarket.m in Sources */,
-				04069919184F6693006F615C /* HMSegmentedControl.m in Sources */,
 				043F2FE118B34CEC00E8D5AD /* MCSettingCell.m in Sources */,
 				04C3733E182A1E9500B01341 /* MCLoginViewController.m in Sources */,
-				043F2FDB18B33B0A00E8D5AD /* Reachability.m in Sources */,
 				046E99C818261F6D0005FB53 /* MCCookBookViewController.m in Sources */,
 				041E5A85187D2F8F00BB0F67 /* MCHealthDetailProductCell.m in Sources */,
 				0423D3961863D71300F08F1E /* MCHotWordsCell.m in Sources */,
@@ -1410,6 +1361,7 @@
 		};
 		04899541181A115100E1B156 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9372688FC18142929BED54A4 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1422,17 +1374,18 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/jack/Programming/workspace/MaiCai/MaiCai/library/alipay,
-					"/Users/jack/Downloads/WS_SECURE_PAY_SDK/øÕªß∂Àdemo/iOS_SDK/AlipaySdkDemo/AlipaySdkDemo/alipay",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		04899542181A115100E1B156 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9372688FC18142929BED54A4 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1445,11 +1398,11 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/jack/Programming/workspace/MaiCai/MaiCai/library/alipay,
-					"/Users/jack/Downloads/WS_SECURE_PAY_SDK/øÕªß∂Àdemo/iOS_SDK/AlipaySdkDemo/AlipaySdkDemo/alipay",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

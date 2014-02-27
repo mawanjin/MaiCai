@@ -8,7 +8,7 @@
 
 #import "MCBaseViewController.h"
 #import "MCAppDelegate.h"
-#import "SVProgressHUD.h"
+#import "MBProgressHUD.h"
 #import "Reachability.h"
 
 
@@ -61,12 +61,12 @@
 
 -(void)showProgressHUD
 {
-    [SVProgressHUD showWithStatus:@"努力加载中..." maskType: SVProgressHUDMaskTypeNone];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 
 -(void)hideProgressHUD
 {
-    [SVProgressHUD dismiss];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
 

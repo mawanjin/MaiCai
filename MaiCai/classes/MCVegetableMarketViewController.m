@@ -26,7 +26,7 @@
 #import "UIColor+ColorWithHex.h"
 #import "MCMarketIndexTipCell.h"
 #import "MCLabelDetailViewController.h"
-#import "SVProgressHUD.h"
+#import "MBProgressHUD.h"
 #import "MCAddressHelperViewController.h"
 
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
@@ -83,8 +83,7 @@
 {
     [super viewDidAppear:animated];
     
-    [self showProgressHUD];
-    
+    [MBProgressHUD showHUDAddedTo:self.scrollView animated:YES];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         data = [[MCVegetableManager getInstance]getMarketIndexInfo];
         if (data) {
@@ -103,11 +102,12 @@
                 [self.categoryCollectionView reloadData];
                 [self.tableView reloadData];
                 self.vegetablePricePageControl.numberOfPages = (recipes.count%1 ==0)?recipes.count/1:(recipes.count/1+1);
-                [self hideProgressHUD];
+               [MBProgressHUD hideHUDForView:self.scrollView animated:YES];
             });
         }else {
             dispatch_sync(dispatch_get_main_queue(), ^{
-                [self hideProgressHUD];
+                [MBProgressHUD hideHUDForView:self.scrollView animated:YES];
+                //[self hideProgressHUD];
                 //[self showMsgHint:MC_ERROR_MSG_0001];
             });
         }
