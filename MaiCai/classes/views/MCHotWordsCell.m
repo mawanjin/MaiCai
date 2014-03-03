@@ -7,7 +7,7 @@
 //
 
 #import "MCHotWordsCell.h"
-#import "UIColor+ColorWithHex.h"
+#import "Colours.h"
 
 @implementation MCHotWordsCell
 
@@ -36,7 +36,7 @@
     CGContextFillRect(currentContext, rect);
     
     //分割线
-    [[UIColor colorWithHexString:DIVIDE_LINE_COLOR andAlpha:1.0f]set];
+    [[UIColor colorFromHexString:DIVIDE_LINE_COLOR]set];
     CGContextSetLineWidth(currentContext,0.5f);
     CGContextMoveToPoint(currentContext,0.0f,rect.size.height);
     CGContextAddLineToPoint(currentContext,rect.size.width,rect.size.height);

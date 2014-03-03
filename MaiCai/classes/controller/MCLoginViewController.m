@@ -7,10 +7,12 @@
 //
 
 #import "MCLoginViewController.h"
+#import "MCAgreementViewController.h"
 #import "MCUserManager.h"
 #import "MCUser.h"
 #import "Toast+UIView.h"
 #import "NSString+Regex.h"
+#import "MCRegisterViewController.h"
 
 
 @implementation MCLoginViewController
@@ -86,11 +88,16 @@
 }
 
 - (IBAction)registerAction:(UIButton *)sender {
-    MCRegisterViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCRegisterViewController"];
-    [vc setShowMsg:^(NSString * msg) {
-        [self showMsgHint:msg];
+    MCAgreementViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCAgreementViewController"];
+    [vc setAgreeComplete:^{
+        MCRegisterViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCRegisterViewController"];
+        vc.hidesBottomBarWhenPushed = YES;
+            [vc setShowMsg:^(NSString * msg) {
+                [self showMsgHint:msg];
+            }];
+        [self.navigationController pushViewController:vc animated:YES];
     }];
-    vc.hidesBottomBarWhenPushed = YES;
+    vc.hidesBottomBarWhenPushed = NO;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

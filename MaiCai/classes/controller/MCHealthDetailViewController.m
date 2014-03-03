@@ -69,7 +69,7 @@
                 
                 if(item[@"image"]&& ![item[@"image"] isEqual:[NSNull null]]) {
                     UIImageView* imageView = [[UIImageView alloc]init];
-                    [imageView loadImageScaleByUrl:item[@"image"]];
+                    [imageView loadImageByUrl:item[@"image"]];
                     [imageView setFrame:CGRectMake(5, height,310,136)];
                     [self.scrollView addSubview:imageView];
                     height = height+imageView.frame.size.height+10;

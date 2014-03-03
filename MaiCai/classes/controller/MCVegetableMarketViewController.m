@@ -23,11 +23,11 @@
 #import "MCQuickOrderViewController.h"
 #import "MCRecipe.h"
 #import "UIImageView+MCAsynLoadImage.h"
-#import "UIColor+ColorWithHex.h"
+#import "Colours.h"
 #import "MCMarketIndexTipCell.h"
 #import "MCLabelDetailViewController.h"
 #import "MBProgressHUD.h"
-#import "MCAddressHelperViewController.h"
+#import "MCDeliveryDescriptionViewController.h"
 
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 
@@ -232,7 +232,7 @@
         cell.nameLabel.text = obj[@"name"];
         [cell.imageIcon loadImageByUrl:obj[@"icon"]];
         NSString* color = obj[@"color"];
-        [cell setBackgroundColor:[UIColor colorWithHexString:color andAlpha:1]];
+        [cell setBackgroundColor:[UIColor colorFromHexString:color]];
     }else if([collectionView.restorationIdentifier isEqualToString:@"quickOrderCollectionView"]){
         myCell = [collectionView
                   dequeueReusableCellWithReuseIdentifier:@"quickOrderCollectionCell"
@@ -285,12 +285,12 @@
 }
 
 -(void)addressHelperAction {
-    MCAddressHelperViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCAddressHelperViewController"];
-    [vc setShowMsg:^{
-        [[[UIAlertView alloc] initWithTitle:@"友情提示"
-                                    message:@"目前配送仅支持下列显示的地址，其他地址请联系客服确认！" delegate:nil
-                          cancelButtonTitle:@"确定" otherButtonTitles:nil]show];
-    }];
+    MCDeliveryDescriptionViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCDeliveryDescriptionViewController"];
+//    [vc setShowMsg:^{
+//        [[[UIAlertView alloc] initWithTitle:@"友情提示"
+//                                    message:@"目前配送仅支持下列显示的地址，其他地址请联系客服确认！" delegate:nil
+//                          cancelButtonTitle:@"确定" otherButtonTitles:nil]show];
+//    }];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc  animated:YES];
 }

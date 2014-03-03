@@ -58,7 +58,7 @@ static MCNetwork* instance;
     //否则就从网上拉取
     NSURL *url = [NSURL URLWithString:urlAsString];
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
-    [urlRequest setTimeoutInterval:30.0f];
+    [urlRequest setTimeoutInterval:15.0f];
     [urlRequest setHTTPMethod:@"GET"];
     
     NSHTTPURLResponse *response;
@@ -92,7 +92,7 @@ static MCNetwork* instance;
     
     NSURL *url = [NSURL URLWithString:urlAsString];
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
-    [urlRequest setTimeoutInterval:30.0f];
+    [urlRequest setTimeoutInterval:15.0f];
     [urlRequest setHTTPMethod:@"POST"];
     
     NSString *body = @"";

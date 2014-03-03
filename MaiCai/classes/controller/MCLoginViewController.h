@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "MCBaseNavViewController.h"
-#import "MCRegisterViewController.h"
-
-
 
 @interface MCLoginViewController : MCBaseNavViewController
 

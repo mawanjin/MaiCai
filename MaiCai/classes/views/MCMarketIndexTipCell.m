@@ -7,7 +7,7 @@
 //
 
 #import "MCMarketIndexTipCell.h"
-#import "UIColor+ColorWithHex.h"
+#import "Colours.h"
 
 @implementation MCMarketIndexTipCell
 
@@ -30,7 +30,7 @@
 -(void)drawRect:(CGRect)rect
 {
     [super drawRect:rect];
-    [[UIColor colorWithHexString:DIVIDE_LINE_COLOR andAlpha:1.0f]set];
+    [[UIColor colorFromHexString:DIVIDE_LINE_COLOR]set];
     CGContextRef currentContext = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(currentContext,0.5f);
     CGContextMoveToPoint(currentContext,0.0f,66.0f);
