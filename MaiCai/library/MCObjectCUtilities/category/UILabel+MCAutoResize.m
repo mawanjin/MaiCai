@@ -14,7 +14,7 @@
     self.frame = CGRectMake(0, 0, 0, 0);
     [self setNumberOfLines:0];
     UIFont *font = [UIFont fontWithName:@"Arial" size:fontSize];
-    CGSize size = CGSizeMake(320,2000);
+    CGSize size = CGSizeMake(290,2000);
     CGSize labelsize = [text sizeWithFont:font constrainedToSize:size lineBreakMode:self.lineBreakMode];
     self.text = text;
     self.font = font;
@@ -24,7 +24,7 @@
 
 +(CGFloat)calculateHeightByText:(NSString*)text FontSize:(int)fontSize
 {
-    CGSize maxSize = CGSizeMake(320, 9999);
+    CGSize maxSize = CGSizeMake(290, 9999);
     UIFont* font = [UIFont fontWithName:@"Arial" size:fontSize];
     CGSize expectedSize = [text sizeWithFont:font constrainedToSize:maxSize lineBreakMode:UILineBreakModeWordWrap];
     return expectedSize.height;

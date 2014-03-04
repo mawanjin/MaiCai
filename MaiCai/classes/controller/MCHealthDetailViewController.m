@@ -50,7 +50,7 @@
                 
                 if (item[@"content"] && ![item[@"content"] isEqual:[NSNull null]]) {
                     UILabel* label = [[UILabel alloc]init];
-                    [label autoResizeByText:item[@"content"] PositionX:0 PositionY:height FontSize:15];
+                    [label autoResizeByText:item[@"content"] PositionX:15 PositionY:height FontSize:15];
                     
                     [self.scrollView addSubview:label];
                     height = height+label.frame.size.height+5;

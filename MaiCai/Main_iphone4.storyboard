@@ -924,15 +924,15 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="vegetableDetailDescriptionCell" rowHeight="84" id="9qC-8f-J7q" customClass="MCVegetableDetailDescriptionCell">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="84"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="vegetableDetailDescriptionCell" rowHeight="14" id="9qC-8f-J7q" customClass="MCVegetableDetailDescriptionCell">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="14"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9qC-8f-J7q" id="WWp-8D-M3y">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="84"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="14"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="298" translatesAutoresizingMaskIntoConstraints="NO" id="Suq-3J-x12">
-                                                    <rect key="frame" x="13" y="0.0" width="298" height="75"/>
+                                                    <rect key="frame" x="13" y="0.0" width="0.0" height="0.0"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                                     <color key="textColor" red="0.46666669849999998" green="0.46666669849999998" blue="0.46666669849999998" alpha="1" colorSpace="deviceRGB"/>
@@ -946,7 +946,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="vegetableDetailShopInfoCell" rowHeight="110" id="OWE-Tt-PFD" customClass="MCVegetableDetailShopInfoCell">
-                                        <rect key="frame" x="0.0" y="106" width="320" height="110"/>
+                                        <rect key="frame" x="0.0" y="36" width="320" height="110"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OWE-Tt-PFD" id="Jdu-zj-mI0">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
@@ -976,7 +976,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="vegetableDetailRecipeCell" rowHeight="68" id="z1u-Xd-aiA" customClass="MCVegetableDetailRecipeCell">
-                                        <rect key="frame" x="0.0" y="216" width="320" height="68"/>
+                                        <rect key="frame" x="0.0" y="146" width="320" height="68"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="z1u-Xd-aiA" id="PPg-eA-63k">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="68"/>
