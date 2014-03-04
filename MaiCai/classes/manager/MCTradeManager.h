@@ -40,4 +40,5 @@ typedef enum
 -(BOOL)deleteProductsInCartOnlineByUserId:(NSString*)id ProductIds:(NSMutableArray*)productIds;
 -(BOOL)changeProductNumInCartOnlineByUserId:(NSString*)id ProductId:(int)productId Quantity:(int)quantity;
 -(BOOL)cancelPaymentByPaymentNo:(NSString*)paymentNo;
+-(NSMutableArray*)getDeliveryDescription;
 @end

@@ -65,6 +65,7 @@
 {
     [self showProgressHUD];
     [self resetCart];
+    [self.tableView.tableHeaderView setHidden:false];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if ([[MCContextManager getInstance]isLogged]) {
             //登入状态
@@ -267,6 +268,8 @@
                         if(vegetables.count == 0) {
                             [data removeObjectAtIndex:indexPath.section];
                         }
+                        isTotalChoosed = false;
+                        [self totalChooseBtnClickAction:nil];
                         [self.tableView reloadData];
                     });
                 }else {
@@ -287,6 +290,8 @@
                          if(vegetables.count == 0) {
                              [data removeObjectAtIndex:indexPath.section];
                          }
+                         isTotalChoosed = false;
+                         [self totalChooseBtnClickAction:nil];
                          [self.tableView reloadData];
                      });
                  }else {
@@ -326,6 +331,7 @@
                 self.data = [[MCTradeManager getInstance]getCartProductsOnlineByUserId:user.userId];
                 dispatch_sync(dispatch_get_main_queue(), ^{
                     [self hideProgressHUD];
+                    [self totalChooseBtnClickAction:nil];
                     [self.tableView reloadData];
                 });
             }else{
@@ -343,6 +349,7 @@
                 self.data = [[MCTradeManager getInstance]getCartProductsByUserId:macId];
                 dispatch_sync(dispatch_get_main_queue(), ^{
                     [self hideProgressHUD];
+                    [self totalChooseBtnClickAction:nil];
                     [self.tableView reloadData];
                 });
             }else {
@@ -380,6 +387,7 @@
     [self dispLayTotalChoosedBtn];
     self.totalPriceLabel.text =[[NSString alloc]initWithFormat:@"总价：0.00元"];
     totalPrice = 0.0f;
+    [self.tableView reloadData];
 }
 
 -(void)calculateTotalPrice
@@ -442,7 +450,7 @@
         }
         
         if (self.totalPrice < 15.0f) {
-            [self showMsgHint:@"需要购买至少15元的商品才能下单"];
+            [self showMsgHint:@"订单满15元起送，请继续添加商品"];
             return;
         }
         
@@ -464,7 +472,7 @@
         }
         
         if (self.totalPrice < 15.0f) {
-            [self showMsgHint:@"需要购买至少15元的商品才能下单"];
+            [self showMsgHint:@"订单满15元起送，请继续添加商品"];
             return;
         }
         

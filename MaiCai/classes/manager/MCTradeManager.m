@@ -680,4 +680,23 @@ static MCTradeManager* instance;
         return false;
     }
 }
+
+-(NSMutableArray*)getDeliveryDescription
+{
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/system/deliveryterm.do",MC_BASE_URL];
+    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:nil];
+    if (result == nil) {
+        return false;
+    }
+    NSError *error;
+    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
+    BOOL flag = [responseData[@"success"]boolValue];
+    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    if(flag) {
+        return responseData[@"data"];
+    }else{
+        return nil;
+    }
+
+}
 @end

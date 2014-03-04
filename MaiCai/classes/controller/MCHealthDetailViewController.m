@@ -42,18 +42,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
          self.health = [[MCVegetableManager getInstance]getHealthDetailById:self.health.id];
         dispatch_sync(dispatch_get_main_queue(), ^{
-//            self.scrollView.scrollEnabled = YES;
-//            UIImageView* bigImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 200)];
-//            [bigImageView loadImageByUrl:self.health.bigImage];
-//            [self.scrollView addSubview:bigImageView];
-//            
-//            UILabel* introduction = [[UILabel alloc]init];
-//            [introduction autoResizeByText:self.health.introduction PositionX:0.0 PositionY:bigImageView.frame.size.height];
-//            [self.scrollView addSubview:introduction];
-            
             NSMutableArray* items = self.health.items;
-            
-            //unsigned int height = bigImageView.frame.size.height+introduction.frame.size.height;
             unsigned int height = 0;
             
             for(int i=0;i<items.count;i++) {

@@ -10,6 +10,7 @@
 #import "NSString+MD5Addition.h"
 #import "MCNetWorkObject.h"
 #import "MCFileOperation.h"
+#import "MCContextManager.h"
 
 @implementation MCNetwork
 static MCNetwork* instance;
@@ -38,7 +39,12 @@ static MCNetwork* instance;
                 urlAsString = [urlAsString stringByAppendingFormat:@"&%@=%@",key,value];
             count++;
         }
+        urlAsString = [urlAsString stringByAppendingFormat:@"&%@=%@",@"client_id",[[MCContextManager getInstance]getDataByKey:MC_MAC_ID]];
+    }else {
+        urlAsString = [urlAsString stringByAppendingFormat:@"?%@=%@",@"client_id",[[MCContextManager getInstance]getDataByKey:MC_MAC_ID]];
     }
+    
+    
     
     NSString * path = [[[MCFileOperation getInstance]getDocumentPath] stringByAppendingPathComponent:[[NSString alloc]initWithFormat:@"%@.txt",[urlAsString stringFromMD5]]];
     
@@ -89,6 +95,8 @@ static MCNetwork* instance;
 -(NSData*) httpPostSynUrl:(NSString*)httpUrl Params:(NSMutableDictionary*)params
 {
     NSString *urlAsString = httpUrl;
+    
+    urlAsString = [urlAsString stringByAppendingFormat:@"?%@=%@",@"client_id",[[MCContextManager getInstance]getDataByKey:MC_MAC_ID]];
     
     NSURL *url = [NSURL URLWithString:urlAsString];
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];

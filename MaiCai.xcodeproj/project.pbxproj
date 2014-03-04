@@ -656,10 +656,10 @@
 		046E99D11827298C0005FB53 /* manager */ = {
 			isa = PBXGroup;
 			children = (
-				0449174518BF1C0800C9B3B1 /* MCTradeManager.m */,
 				04B990BC183496E10018F84E /* MCContextManager.h */,
 				04B990BD183496E10018F84E /* MCContextManager.m */,
 				0486A0ED1835BAD100FDC854 /* MCTradeManager.h */,
+				0449174518BF1C0800C9B3B1 /* MCTradeManager.m */,
 				0497B811183A012B008A6F8B /* MCUserManager.h */,
 				0497B812183A012B008A6F8B /* MCUserManager.m */,
 				046E99D218272A650005FB53 /* MCVegetableManager.h */,

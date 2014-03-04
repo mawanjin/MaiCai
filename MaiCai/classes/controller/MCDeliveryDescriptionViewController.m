@@ -7,7 +7,8 @@
 //
 
 #import "MCDeliveryDescriptionViewController.h"
-
+#import "DTCoreText.h"
+#import "MCTradeManager.h"
 
 @interface MCDeliveryDescriptionViewController ()
 
@@ -27,11 +28,34 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-//    self.label.text = @"第一、xx\n在众多iOS开源项目中，AFNetworking可以称得上是最受开发者欢迎的库项目。AFNetworking是一个轻量级的iOS、Mac OS X网络通信类库，现在是GitHub上第三大Objective-C库。它建立在NSURLConnection、NSOperation等类库的基础上，让很多网络通信功能的实现变得十分简单，因此，许多iOS应用开发都会使用到它。\n第二、xx\n在众多iOS开源项目中，AFNetworking可以称得上是最受开发者欢迎的库项目。AFNetworking是一个轻量级的iOS、Mac OS X网络通信类库，现在是GitHub上第三大Objective-C库。它建立在NSURLConnection、NSOperation等类库的基础上，让很多网络通信功能的实现变得十分简单，因此，许多iOS应用开发都会使用到它。";
-//    self.label.numberOfLines = 0;
-//    [self.label setFont:[UIFont boldSystemFontOfSize:15] range:[self.label.text rangeOfString:@"第一、xx"]];
-//    [self.label setFont:[UIFont boldSystemFontOfSize:15] range:[self.label.text rangeOfString:@"第二、xx"]];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        self.data = [[MCTradeManager getInstance]getDeliveryDescription];
+        if (self.data) {
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 NSMutableString* html = [[NSMutableString alloc]init];
+                 for (int i=0; i<self.data.count; i++) {
+                     NSDictionary* obj = self.data[i];
+                     [html appendFormat:@"<p>"];
+                     [html appendFormat:@"<b>%@</b><br>",obj[@"title"]];
+                     [html appendFormat:@"%@",obj[@"content"]];
+                     [html appendFormat:@"</p>"];
+                 }
+                 
+                 NSData *data = [html dataUsingEncoding:NSUTF8StringEncoding];
+                 NSAttributedString *attrString = [[NSAttributedString alloc] initWithHTMLData:data documentAttributes:NULL];
+                 self.textView.attributedString = attrString;
+                 self.textView.backgroundColor = [UIColor clearColor];
+             });
+        }else {
+        
+        }
+    });
+    
+   
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
