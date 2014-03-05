@@ -36,7 +36,7 @@
                  NSMutableString* html = [[NSMutableString alloc]init];
                  for (int i=0; i<self.data.count; i++) {
                      NSDictionary* obj = self.data[i];
-                     [html appendFormat:@"<p>"];
+                     [html appendFormat:@"<br><p>"];
                      [html appendFormat:@"<b>%@</b><br>",obj[@"title"]];
                      [html appendFormat:@"%@",obj[@"content"]];
                      [html appendFormat:@"</p>"];

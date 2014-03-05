@@ -11,6 +11,8 @@
 #import "Toast+UIView.h"
 #import "MCUserManager.h"
 #import "Toast+UIView.h"
+#import "NSString+Regex.h"
+
 
 @interface MCChangePasswordView ()
 
@@ -54,21 +56,22 @@
     NSString* newPassword = self.passwordTF.text;
     NSString* confirmNewPassword = self.confirmPasswordTF.text;
     
-    if(currentPassword==nil || currentPassword.length == 0) {
-        [self.view makeToast:@"请填写当前密码" duration:1 position:@"center"];
+    
+    if (![currentPassword isPassword]) {
+        [self.view makeToast:@"密码6~10位" duration:1 position:@"center"];
         return;
     }
     
-    if(newPassword==nil || newPassword.length == 0) {
-        [self.view makeToast:@"请填写新密码" duration:1 position:@"center"];
+    if (![newPassword isPassword]) {
+        [self.view makeToast:@"密码6~10位" duration:1 position:@"center"];
         return;
     }
     
-    if(confirmNewPassword==nil || confirmNewPassword.length == 0) {
-        [self.view makeToast:@"请填写确认密码" duration:1 position:@"center"];
+    if(![confirmNewPassword isEqual:newPassword]) {
+        [self.view makeToast:@"两次密码不一致" duration:1 position:@"center"];
         return;
     }
-    
+
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if ([[MCUserManager getInstance]changePassword:currentPassword NewPassword:newPassword]) {
             dispatch_sync(dispatch_get_main_queue(), ^{

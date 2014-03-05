@@ -273,11 +273,13 @@ void exceptionHandler(NSException *exception)
     NSString *stderrPath = [documentsPath stringByAppendingPathComponent:@"stderr.log"];
     if (buttonIndex == 1)
     {
+        NSString* version = @"0.2";
         NSString* content = [[MCFileOperation getInstance]readTextFromPath:stderrPath];
+        NSString* final = [[NSString alloc]initWithFormat:@"version:%@\ncontent:%@\n",version,content];
 //        [[[UIAlertView alloc] initWithTitle:@"提示"
 //                                    message:content delegate:nil
 //                          cancelButtonTitle:@"确定" otherButtonTitles:nil]show];
-        if ([[MCContextManager getInstance]submitErrorMessage:content]) {
+        if ([[MCContextManager getInstance]submitErrorMessage:final]) {
             [[[UIAlertView alloc] initWithTitle:@"提示"
                                        message:@"错误提交成功，技术人员将尽快解决bug" delegate:nil
                              cancelButtonTitle:@"确定" otherButtonTitles:nil]show];

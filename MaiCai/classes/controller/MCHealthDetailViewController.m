@@ -38,12 +38,17 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    self.navigationItem.title = self.health.name;
+    
     [self showProgressHUD];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
          self.health = [[MCVegetableManager getInstance]getHealthDetailById:self.health.id];
         dispatch_sync(dispatch_get_main_queue(), ^{
             NSMutableArray* items = self.health.items;
             unsigned int height = 0;
+            
+            NSError *error;
             
             for(int i=0;i<items.count;i++) {
                 NSDictionary* item = items[i];
@@ -59,7 +64,27 @@
                 if(item[@"image"]&& ![item[@"image"] isEqual:[NSNull null]]) {
                     UIImageView* imageView = [[UIImageView alloc]init];
                     [imageView loadImageByUrl:item[@"image"]];
-                    [imageView setFrame:CGRectMake(5, height,310,136)];
+                    NSString *url  = item[@"image"];
+                    
+                    NSString *regulaStr = @"_[0-9]{1,}x[0-9]{1,}\\.";
+                    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regulaStr
+                                                                                           options:NSRegularExpressionCaseInsensitive
+                                                                                             error:&error];
+                    NSArray *arrayOfAllMatches = [regex matchesInString:url options:0 range:NSMakeRange(0, [url length])];
+            
+                    if (arrayOfAllMatches.count > 0 ) {
+                        NSTextCheckingResult* match = arrayOfAllMatches[0];
+                        url = [url substringWithRange:match.range];
+                        MCLog(@"————————————————————%@",url);
+                        url = [url substringWithRange:NSMakeRange(1, url.length-1)];
+                        NSArray* array = [url componentsSeparatedByString:@"x"];
+                        float width_ = [array[0]floatValue];
+                        float height_ = [array[1]floatValue];
+                        [imageView setFrame:CGRectMake(15,height, 290, height_/width_*290)];
+                        
+                    }else {
+                        [imageView setFrame:CGRectMake(15, height,290,128)];
+                    }
                     [self.scrollView addSubview:imageView];
                     height = height+imageView.frame.size.height+10;
                 }
@@ -149,24 +174,29 @@
 #pragma mark- others
 //一键买菜
 - (IBAction)clickAction:(id)sender {
+    NSMutableArray* choosedProducts = [[NSMutableArray alloc]init];
+    NSArray* products = self.health.products;
+    for(int i=0;i<products.count;i++) {
+        MCVegetable* vegetable = products[i];
+        if(vegetable.isSelected) {
+            NSDictionary* product = @{
+                                      @"id":[[NSNumber alloc]initWithInt:vegetable.id],
+                                      @"quantity":(vegetable.quantity==0)?[NSNumber numberWithInt:1]:[NSNumber numberWithInt:vegetable.quantity]
+                                      // @"dosage":vegetable.dosage
+                                      };
+            [choosedProducts addObject:product];
+        }
+    }
+    
+    if (choosedProducts.count == 0) {
+        [self showMsgHint:@"请选择商品加入菜篮"];
+        return;
+    }
+
     [self showProgressHUD];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if ([[MCContextManager getInstance]isLogged]) {
             MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
-            NSMutableArray* choosedProducts = [[NSMutableArray alloc]init];
-            NSArray* products = self.health.products;
-            for(int i=0;i<products.count;i++) {
-                MCVegetable* vegetable = products[i];
-                if(vegetable.isSelected) {
-                    NSDictionary* product = @{
-                                              @"id":[[NSNumber alloc]initWithInt:vegetable.id],
-                                              @"quantity":[[NSNumber alloc]initWithInt:vegetable.quantity],
-                                             // @"dosage":vegetable.dosage
-                                              };
-                    [choosedProducts addObject:product];
-                }
-            }
-            
             if ([[MCTradeManager getInstance]addProductToCartOnlineByUserId:user.userId Products:choosedProducts Recipe:Nil]) {
                 dispatch_sync(dispatch_get_main_queue(), ^{
                     //结束后需要做些什么
@@ -185,19 +215,6 @@
             }
         }else {
             NSString* macId = (NSString*)[[MCContextManager getInstance]getDataByKey:MC_MAC_ID];
-            NSMutableArray* choosedProducts = [[NSMutableArray alloc]init];
-            NSArray* products = self.health.products;
-            for(int i=0;i<products.count;i++) {
-                MCVegetable* vegetable = products[i];
-                if(vegetable.isSelected) {
-                    NSDictionary* product = @{
-                                              @"id":[[NSNumber alloc]initWithInt:vegetable.id],
-                                              @"quantity":[[NSNumber alloc]initWithInt:vegetable.quantity]
-                                              };
-                    [choosedProducts addObject:product];
-                }
-            }
-
             if ([[MCTradeManager getInstance]addProductToCartByUserId:macId Products:choosedProducts Recipe:nil]) {
                 dispatch_sync(dispatch_get_main_queue(), ^{
                     //结束后需要做些什么

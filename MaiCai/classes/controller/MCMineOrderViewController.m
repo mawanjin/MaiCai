@@ -142,6 +142,7 @@
         }else {
             dispatch_sync(dispatch_get_main_queue(), ^{
                 [self hideProgressHUD];
+                [self.tableView reloadData];
                 //[self showMsgHint:MC_ERROR_MSG_0001];
             });
         }

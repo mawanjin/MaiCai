@@ -287,7 +287,7 @@
         if (self.segmentedControl.selectedSegmentIndex == 0) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 [self.recipes removeAllObjects];
-                NSMutableArray* newData = [[MCVegetableManager getInstance]getRecipesByPage:page Pagesize:pageSize Cache:NO];
+                NSMutableArray* newData = [[MCVegetableManager getInstance]getRecipesByPage:page Pagesize:pageSize Cache:YES];
                 if (newData) {
                     if (self.recipes == nil) {
                         self.recipes = [[NSMutableArray alloc]init];
@@ -308,7 +308,7 @@
         }else {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 [self.healthList removeAllObjects];
-                NSMutableArray* newData = [[MCVegetableManager getInstance]getHealthListByPage:page Pagesize:pageSize Cache:NO];
+                NSMutableArray* newData = [[MCVegetableManager getInstance]getHealthListByPage:page Pagesize:pageSize Cache:YES];
                 if (newData) {
                     if (self.healthList == nil) {
                         self.healthList = [[NSMutableArray alloc]init];
