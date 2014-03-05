@@ -171,8 +171,12 @@
                     [self.navigationController pushViewController:vc animated:YES];
                 }else if([obj[@"type"]integerValue] == 0) {
                     MCHealthDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCHealthDetailViewController"];
+                    [vc setShowMsg:^(NSString * msg) {
+                        [self.view makeToast:@"成功加入菜篮" duration:2 position:@"center"];
+                    }];
                     MCHealth* health = [[MCHealth alloc]init];
                     health.id = [obj[@"id"]integerValue];
+                    health.name = obj[@"name"];
                     vc.health = health;
                     vc.hidesBottomBarWhenPushed = YES;
                     [self.navigationController pushViewController:vc animated:YES];

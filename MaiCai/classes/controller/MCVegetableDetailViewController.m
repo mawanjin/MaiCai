@@ -71,8 +71,8 @@
                 self.priceLabel.text = [[NSString alloc]initWithFormat:@"菜篮价：%.02f元/%@",self.vegetable.price,self.vegetable.unit];
                 self.discoutPriceLabel.text = [[NSString alloc]initWithFormat:@"市场价：%.02f元/%@",self.vegetable.originalPrice,self.vegetable.unit];
                 self.shopLabel.text = self.vegetable.shop.name;
-                [self.tableView reloadData];
                 [self hideProgressHUD];
+                [self.tableView reloadData];
                 
             });
         }else {

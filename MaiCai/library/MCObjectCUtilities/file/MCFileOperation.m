@@ -11,7 +11,6 @@
 @implementation MCFileOperation
 static MCFileOperation* instance;
 
-
 +(MCFileOperation*)getInstance
 {
     @synchronized (self){
@@ -37,6 +36,7 @@ static MCFileOperation* instance;
               error);
     }
 }
+
 /*把内存中的文本信息写入文件*/
 - (void) writeTextToFile:(NSString *)path Contents:(NSString *)contents{
         NSError *error = nil;

@@ -10,6 +10,7 @@
 #import "MCPersonalInfoViewController.h"
 #import "Toast+UIView.h"
 #import "MCUserManager.h"
+#import "MBProgressHUD.h"
 
 @implementation MCChangeNicknameView
 
@@ -43,9 +44,11 @@
         return;
     }
     
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if ([[MCUserManager getInstance]changeNickName:nickname]) {
             dispatch_sync(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
                 [self.previousView.view makeToast:@"修改成功" duration:1 position:@"center"];
                 [self.previousView.nickNameLabel setText:[[NSString alloc]initWithFormat:@"我的昵称：%@",nickname]];
                 if (self.previousView.popupViewController != nil) {
@@ -56,6 +59,7 @@
             });
         }else {
             dispatch_sync(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
                 [self.previousView.view makeToast:@"修改失败" duration:1 position:@"center"];
             });
         }
