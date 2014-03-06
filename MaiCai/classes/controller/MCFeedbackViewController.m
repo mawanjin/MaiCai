@@ -61,11 +61,15 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if ([[MCUserManager getInstance]feedbackByTel:tel Content:content]) {
             dispatch_sync(dispatch_get_main_queue(), ^{
-                [self showMsgHint:@"提交成功"];
+                if (self.submitComplete) {
+                    self.submitComplete();
+                    self.submitComplete = nil;
+                }
+                [self backBtnAction];
             });
         }else {
             dispatch_sync(dispatch_get_main_queue(), ^{
-                //[self showMsgHint:MC_ERROR_MSG_0001];
+                [self showMsgHint:MC_ERROR_MSG_0001];
             });
         }
         

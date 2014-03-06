@@ -531,8 +531,6 @@ static MCTradeManager* instance;
     if (result == nil) {
         return nil;
     }
-    NSString* content = [[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding];
-    
     NSError *error;
     NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
     BOOL flag = [responseData[@"success"]boolValue];

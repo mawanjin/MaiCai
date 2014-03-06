@@ -14,6 +14,7 @@
 #import "MCMineCartViewController.h"
 #import "MCPersonalInfoViewController.h"
 #import "MCMineOrderViewController.h"
+#import "MCFeedbackViewController.h"
 #import "MCMineCell.h"
 #import "MCMineFooter.h"
 #import "MCNetwork.h"
@@ -111,7 +112,10 @@
         }
 
     }else if(indexPath.row == 4) {
-        MCPersonalInfoViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCFeedbackViewController"];
+        MCFeedbackViewController* vc = [self.storyboard instantiateViewControllerWithIdentifier:@"MCFeedbackViewController"];
+        [vc setSubmitComplete:^{
+            [self showMsgHint:@"提交成功"];
+        }];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc  animated:YES];
 

@@ -92,14 +92,13 @@ static MCFileOperation* instance;
 -(long)fileSizeForDir:(NSString*)path
 {
     long size = 0;
-    NSFileManager *fileManager = [[NSFileManager alloc] init];
     NSArray* array = [self.fileManager contentsOfDirectoryAtPath:path error:nil];
     for(int i = 0; i<[array count]; i++)
     {
         NSString *fullPath = [path stringByAppendingPathComponent:[array objectAtIndex:i]];
         
         BOOL isDir;
-        if ( !([fileManager fileExistsAtPath:fullPath isDirectory:&isDir] && isDir) )
+        if ( !([self.fileManager fileExistsAtPath:fullPath isDirectory:&isDir] && isDir) )
         {
             NSDictionary *fileAttributeDic = [self.fileManager attributesOfItemAtPath:fullPath error:nil];
             size += fileAttributeDic.fileSize;
