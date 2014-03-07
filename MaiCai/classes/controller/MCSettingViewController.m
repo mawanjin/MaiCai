@@ -87,9 +87,22 @@
     MCSettingCell* cell = [tableView dequeueReusableCellWithIdentifier:@"settingCell"];
     if (indexPath.section == 0) {
         if ([title isEqualToString:@"文字缓存"]) {
-            cell.label.text =  cell.label.text = [[NSString alloc]initWithFormat:@"%@(%@MB)",title,[[MCNetwork getInstance] sizeDocumentCache]];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                NSString* value = [[MCNetwork getInstance] sizeDocumentCache];
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                     cell.label.text = [[NSString alloc]initWithFormat:@"%@(%@MB)",title,value];
+                });
+                
+            });
+            
         }else {
-            cell.label.text =  cell.label.text = [[NSString alloc]initWithFormat:@"%@(%@MB)",title,[[MCNetwork getInstance] sizeImageCache]];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                NSString* value = [[MCNetwork getInstance] sizeImageCache];
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    cell.label.text = [[NSString alloc]initWithFormat:@"%@(%@MB)",title,value];
+                });
+                
+            });
         }
     }else {
         cell.label.text =  cell.label.text = [[NSString alloc]initWithFormat:@"%@",title];
