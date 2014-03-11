@@ -39,6 +39,8 @@
 		0437A4A2184C870A000D427B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DAF63318472D90009C7720 /* CFNetwork.framework */; };
 		0437A4A3184C871E000D427B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DAF63118472D7A009C7720 /* SystemConfiguration.framework */; };
 		0437A4A4184C8724000D427B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DAF5091846E3B0009C7720 /* Security.framework */; };
+		043A5D5718CDB60000F017E5 /* MCResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 043A5D5418CDB60000F017E5 /* MCResponse.m */; };
+		043A5D5818CDB60000F017E5 /* MCUrlCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 043A5D5618CDB60000F017E5 /* MCUrlCache.m */; };
 		043F2FE118B34CEC00E8D5AD /* MCSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F2FE018B34CEC00E8D5AD /* MCSettingCell.m */; };
 		043F2FEA18B6F28500E8D5AD /* MCConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F2FE918B6F28500E8D5AD /* MCConstants.m */; };
 		043F2FF018B7299A00E8D5AD /* MCAddressHelperCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043F2FEF18B7299A00E8D5AD /* MCAddressHelperCell.m */; };
@@ -74,15 +76,6 @@
 		0449179818BF2F2000C9B3B1 /* MCAgreementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449179718BF2F2000C9B3B1 /* MCAgreementViewController.m */; };
 		0449179B18BF34E100C9B3B1 /* MCDeliveryDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449179A18BF34E100C9B3B1 /* MCDeliveryDescriptionViewController.m */; };
 		0449182218C7114D00C9B3B1 /* MCButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449182118C7114C00C9B3B1 /* MCButton.m */; };
-		0449183B18C7118A00C9B3B1 /* NSArray+MCJsonString.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449182618C7118A00C9B3B1 /* NSArray+MCJsonString.m */; };
-		0449183C18C7118A00C9B3B1 /* NSDictionary+MCJsonString.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449182818C7118A00C9B3B1 /* NSDictionary+MCJsonString.m */; };
-		0449183D18C7118A00C9B3B1 /* NSString+Regex.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449182A18C7118A00C9B3B1 /* NSString+Regex.m */; };
-		0449183E18C7118A00C9B3B1 /* UIImage+MCScaleSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449182C18C7118A00C9B3B1 /* UIImage+MCScaleSize.m */; };
-		0449183F18C7118A00C9B3B1 /* UIImageView+MCAsynLoadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449182E18C7118A00C9B3B1 /* UIImageView+MCAsynLoadImage.m */; };
-		0449184018C7118A00C9B3B1 /* UILabel+MCAutoResize.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449183018C7118A00C9B3B1 /* UILabel+MCAutoResize.m */; };
-		0449184118C7118A00C9B3B1 /* MCFileOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449183318C7118A00C9B3B1 /* MCFileOperation.m */; };
-		0449184218C7118A00C9B3B1 /* MCNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449183818C7118A00C9B3B1 /* MCNetwork.m */; };
-		0449184318C7118A00C9B3B1 /* MCNetWorkObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0449183A18C7118A00C9B3B1 /* MCNetWorkObject.m */; };
 		044BC9B41830A6C900D43115 /* MCMineAdressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 044BC9B31830A6C900D43115 /* MCMineAdressCell.m */; };
 		044FF8AF187154260077CE67 /* MCHealth.m in Sources */ = {isa = PBXBuildFile; fileRef = 044FF8AE187154260077CE67 /* MCHealth.m */; };
 		044FF8B5187257AA0077CE67 /* MCHealthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 044FF8B4187257AA0077CE67 /* MCHealthCell.m */; };
@@ -130,6 +123,15 @@
 		049904921855957C00AE8DFB /* AlixPaylib_arc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0499048E1855957C00AE8DFB /* AlixPaylib_arc.a */; };
 		049904931855957C00AE8DFB /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0499048F1855957C00AE8DFB /* libcrypto.a */; };
 		049904941855957C00AE8DFB /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 049904901855957C00AE8DFB /* libssl.a */; };
+		04B2836418C998F7003B9A6C /* NSArray+MCJsonString.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B2835918C998F7003B9A6C /* NSArray+MCJsonString.m */; };
+		04B2836518C998F7003B9A6C /* NSDictionary+MCJsonString.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B2835B18C998F7003B9A6C /* NSDictionary+MCJsonString.m */; };
+		04B2836618C998F7003B9A6C /* NSString+Regex.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B2835D18C998F7003B9A6C /* NSString+Regex.m */; };
+		04B2836718C998F7003B9A6C /* UIImage+MCScaleSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B2835F18C998F7003B9A6C /* UIImage+MCScaleSize.m */; };
+		04B2836818C998F7003B9A6C /* UIImageView+MCAsynLoadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B2836118C998F7003B9A6C /* UIImageView+MCAsynLoadImage.m */; };
+		04B2836918C998F7003B9A6C /* UILabel+MCAutoResize.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B2836318C998F7003B9A6C /* UILabel+MCAutoResize.m */; };
+		04B2837618C99951003B9A6C /* MCFileOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B2836D18C99951003B9A6C /* MCFileOperation.m */; };
+		04B2837718C99951003B9A6C /* MCNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B2837218C99951003B9A6C /* MCNetwork.m */; };
+		04B2837818C99951003B9A6C /* MCJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B2837518C99951003B9A6C /* MCJsonParser.m */; };
 		04B98D8918331D680018F84E /* MCAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B98D8218331D680018F84E /* MCAddress.m */; };
 		04B98D8A18331D680018F84E /* MCMarket.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B98D8418331D680018F84E /* MCMarket.m */; };
 		04B98D8B18331D680018F84E /* MCShop.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B98D8618331D680018F84E /* MCShop.m */; };
@@ -235,6 +237,10 @@
 		0437A4891847491A000D427B /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		0437A48D1847491A000D427B /* DataSigner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSigner.h; sourceTree = "<group>"; };
 		0437A48E1847491A000D427B /* DataVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataVerifier.h; sourceTree = "<group>"; };
+		043A5D5318CDB60000F017E5 /* MCResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCResponse.h; sourceTree = "<group>"; };
+		043A5D5418CDB60000F017E5 /* MCResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCResponse.m; sourceTree = "<group>"; };
+		043A5D5518CDB60000F017E5 /* MCUrlCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCUrlCache.h; sourceTree = "<group>"; };
+		043A5D5618CDB60000F017E5 /* MCUrlCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCUrlCache.m; sourceTree = "<group>"; };
 		043F2FDF18B34CEC00E8D5AD /* MCSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSettingCell.h; sourceTree = "<group>"; };
 		043F2FE018B34CEC00E8D5AD /* MCSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSettingCell.m; sourceTree = "<group>"; };
 		043F2FE818B6F28500E8D5AD /* MCConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCConstants.h; sourceTree = "<group>"; };
@@ -303,25 +309,6 @@
 		0449179A18BF34E100C9B3B1 /* MCDeliveryDescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCDeliveryDescriptionViewController.m; sourceTree = "<group>"; };
 		0449182018C7114C00C9B3B1 /* MCButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCButton.h; sourceTree = "<group>"; };
 		0449182118C7114C00C9B3B1 /* MCButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCButton.m; sourceTree = "<group>"; };
-		0449182518C7118A00C9B3B1 /* NSArray+MCJsonString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MCJsonString.h"; sourceTree = "<group>"; };
-		0449182618C7118A00C9B3B1 /* NSArray+MCJsonString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+MCJsonString.m"; sourceTree = "<group>"; };
-		0449182718C7118A00C9B3B1 /* NSDictionary+MCJsonString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+MCJsonString.h"; sourceTree = "<group>"; };
-		0449182818C7118A00C9B3B1 /* NSDictionary+MCJsonString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+MCJsonString.m"; sourceTree = "<group>"; };
-		0449182918C7118A00C9B3B1 /* NSString+Regex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Regex.h"; sourceTree = "<group>"; };
-		0449182A18C7118A00C9B3B1 /* NSString+Regex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Regex.m"; sourceTree = "<group>"; };
-		0449182B18C7118A00C9B3B1 /* UIImage+MCScaleSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MCScaleSize.h"; sourceTree = "<group>"; };
-		0449182C18C7118A00C9B3B1 /* UIImage+MCScaleSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MCScaleSize.m"; sourceTree = "<group>"; };
-		0449182D18C7118A00C9B3B1 /* UIImageView+MCAsynLoadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+MCAsynLoadImage.h"; sourceTree = "<group>"; };
-		0449182E18C7118A00C9B3B1 /* UIImageView+MCAsynLoadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+MCAsynLoadImage.m"; sourceTree = "<group>"; };
-		0449182F18C7118A00C9B3B1 /* UILabel+MCAutoResize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+MCAutoResize.h"; sourceTree = "<group>"; };
-		0449183018C7118A00C9B3B1 /* UILabel+MCAutoResize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+MCAutoResize.m"; sourceTree = "<group>"; };
-		0449183218C7118A00C9B3B1 /* MCFileOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCFileOperation.h; sourceTree = "<group>"; };
-		0449183318C7118A00C9B3B1 /* MCFileOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCFileOperation.m; sourceTree = "<group>"; };
-		0449183518C7118A00C9B3B1 /* MCLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCLog.h; sourceTree = "<group>"; };
-		0449183718C7118A00C9B3B1 /* MCNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNetwork.h; sourceTree = "<group>"; };
-		0449183818C7118A00C9B3B1 /* MCNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCNetwork.m; sourceTree = "<group>"; };
-		0449183918C7118A00C9B3B1 /* MCNetWorkObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNetWorkObject.h; sourceTree = "<group>"; };
-		0449183A18C7118A00C9B3B1 /* MCNetWorkObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCNetWorkObject.m; sourceTree = "<group>"; };
 		044BC9AD183083DC00D43115 /* Main_iphone5.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iphone5.storyboard; sourceTree = "<group>"; };
 		044BC9B21830A6C900D43115 /* MCMineAdressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMineAdressCell.h; sourceTree = "<group>"; };
 		044BC9B31830A6C900D43115 /* MCMineAdressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMineAdressCell.m; sourceTree = "<group>"; };
@@ -398,6 +385,25 @@
 		0499048E1855957C00AE8DFB /* AlixPaylib_arc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = AlixPaylib_arc.a; path = MaiCai/library/alipay/AlixPaylib_arc.a; sourceTree = "<group>"; };
 		0499048F1855957C00AE8DFB /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = MaiCai/library/alipay/libcrypto.a; sourceTree = "<group>"; };
 		049904901855957C00AE8DFB /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = MaiCai/library/alipay/libssl.a; sourceTree = "<group>"; };
+		04B2835818C998F7003B9A6C /* NSArray+MCJsonString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MCJsonString.h"; sourceTree = "<group>"; };
+		04B2835918C998F7003B9A6C /* NSArray+MCJsonString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+MCJsonString.m"; sourceTree = "<group>"; };
+		04B2835A18C998F7003B9A6C /* NSDictionary+MCJsonString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+MCJsonString.h"; sourceTree = "<group>"; };
+		04B2835B18C998F7003B9A6C /* NSDictionary+MCJsonString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+MCJsonString.m"; sourceTree = "<group>"; };
+		04B2835C18C998F7003B9A6C /* NSString+Regex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Regex.h"; sourceTree = "<group>"; };
+		04B2835D18C998F7003B9A6C /* NSString+Regex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Regex.m"; sourceTree = "<group>"; };
+		04B2835E18C998F7003B9A6C /* UIImage+MCScaleSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MCScaleSize.h"; sourceTree = "<group>"; };
+		04B2835F18C998F7003B9A6C /* UIImage+MCScaleSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MCScaleSize.m"; sourceTree = "<group>"; };
+		04B2836018C998F7003B9A6C /* UIImageView+MCAsynLoadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+MCAsynLoadImage.h"; sourceTree = "<group>"; };
+		04B2836118C998F7003B9A6C /* UIImageView+MCAsynLoadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+MCAsynLoadImage.m"; sourceTree = "<group>"; };
+		04B2836218C998F7003B9A6C /* UILabel+MCAutoResize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+MCAutoResize.h"; sourceTree = "<group>"; };
+		04B2836318C998F7003B9A6C /* UILabel+MCAutoResize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+MCAutoResize.m"; sourceTree = "<group>"; };
+		04B2836C18C99951003B9A6C /* MCFileOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCFileOperation.h; sourceTree = "<group>"; };
+		04B2836D18C99951003B9A6C /* MCFileOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCFileOperation.m; sourceTree = "<group>"; };
+		04B2836F18C99951003B9A6C /* MCLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCLog.h; sourceTree = "<group>"; };
+		04B2837118C99951003B9A6C /* MCNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNetwork.h; sourceTree = "<group>"; };
+		04B2837218C99951003B9A6C /* MCNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCNetwork.m; sourceTree = "<group>"; };
+		04B2837418C99951003B9A6C /* MCJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCJsonParser.h; sourceTree = "<group>"; };
+		04B2837518C99951003B9A6C /* MCJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCJsonParser.m; sourceTree = "<group>"; };
 		04B98D8118331D680018F84E /* MCAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAddress.h; sourceTree = "<group>"; };
 		04B98D8218331D680018F84E /* MCAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCAddress.m; sourceTree = "<group>"; };
 		04B98D8318331D680018F84E /* MCMarket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMarket.h; sourceTree = "<group>"; };
@@ -560,6 +566,17 @@
 			path = RSA;
 			sourceTree = "<group>";
 		};
+		043A5D5218CDB60000F017E5 /* cache */ = {
+			isa = PBXGroup;
+			children = (
+				043A5D5318CDB60000F017E5 /* MCResponse.h */,
+				043A5D5418CDB60000F017E5 /* MCResponse.m */,
+				043A5D5518CDB60000F017E5 /* MCUrlCache.h */,
+				043A5D5618CDB60000F017E5 /* MCUrlCache.m */,
+			);
+			path = cache;
+			sourceTree = "<group>";
+		};
 		0449174718BF1E2E00C9B3B1 /* controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -623,67 +640,10 @@
 			path = controller;
 			sourceTree = "<group>";
 		};
-		0449182318C7118A00C9B3B1 /* MCToolKit */ = {
-			isa = PBXGroup;
-			children = (
-				0449182418C7118A00C9B3B1 /* category */,
-				0449183118C7118A00C9B3B1 /* file */,
-				0449183418C7118A00C9B3B1 /* log */,
-				0449183618C7118A00C9B3B1 /* network */,
-			);
-			path = MCToolKit;
-			sourceTree = "<group>";
-		};
-		0449182418C7118A00C9B3B1 /* category */ = {
-			isa = PBXGroup;
-			children = (
-				0449182518C7118A00C9B3B1 /* NSArray+MCJsonString.h */,
-				0449182618C7118A00C9B3B1 /* NSArray+MCJsonString.m */,
-				0449182718C7118A00C9B3B1 /* NSDictionary+MCJsonString.h */,
-				0449182818C7118A00C9B3B1 /* NSDictionary+MCJsonString.m */,
-				0449182918C7118A00C9B3B1 /* NSString+Regex.h */,
-				0449182A18C7118A00C9B3B1 /* NSString+Regex.m */,
-				0449182B18C7118A00C9B3B1 /* UIImage+MCScaleSize.h */,
-				0449182C18C7118A00C9B3B1 /* UIImage+MCScaleSize.m */,
-				0449182D18C7118A00C9B3B1 /* UIImageView+MCAsynLoadImage.h */,
-				0449182E18C7118A00C9B3B1 /* UIImageView+MCAsynLoadImage.m */,
-				0449182F18C7118A00C9B3B1 /* UILabel+MCAutoResize.h */,
-				0449183018C7118A00C9B3B1 /* UILabel+MCAutoResize.m */,
-			);
-			path = category;
-			sourceTree = "<group>";
-		};
-		0449183118C7118A00C9B3B1 /* file */ = {
-			isa = PBXGroup;
-			children = (
-				0449183218C7118A00C9B3B1 /* MCFileOperation.h */,
-				0449183318C7118A00C9B3B1 /* MCFileOperation.m */,
-			);
-			path = file;
-			sourceTree = "<group>";
-		};
-		0449183418C7118A00C9B3B1 /* log */ = {
-			isa = PBXGroup;
-			children = (
-				0449183518C7118A00C9B3B1 /* MCLog.h */,
-			);
-			path = log;
-			sourceTree = "<group>";
-		};
-		0449183618C7118A00C9B3B1 /* network */ = {
-			isa = PBXGroup;
-			children = (
-				0449183718C7118A00C9B3B1 /* MCNetwork.h */,
-				0449183818C7118A00C9B3B1 /* MCNetwork.m */,
-				0449183918C7118A00C9B3B1 /* MCNetWorkObject.h */,
-				0449183A18C7118A00C9B3B1 /* MCNetWorkObject.m */,
-			);
-			path = network;
-			sourceTree = "<group>";
-		};
 		046E99BA18261F6D0005FB53 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				04B2835718C998F7003B9A6C /* category */,
 				0449174718BF1E2E00C9B3B1 /* controller */,
 				046E99D11827298C0005FB53 /* manager */,
 				043F2FE818B6F28500E8D5AD /* MCConstants.h */,
@@ -804,6 +764,72 @@
 				04899539181A115100E1B156 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		04B2835718C998F7003B9A6C /* category */ = {
+			isa = PBXGroup;
+			children = (
+				04B2835818C998F7003B9A6C /* NSArray+MCJsonString.h */,
+				04B2835918C998F7003B9A6C /* NSArray+MCJsonString.m */,
+				04B2835A18C998F7003B9A6C /* NSDictionary+MCJsonString.h */,
+				04B2835B18C998F7003B9A6C /* NSDictionary+MCJsonString.m */,
+				04B2835C18C998F7003B9A6C /* NSString+Regex.h */,
+				04B2835D18C998F7003B9A6C /* NSString+Regex.m */,
+				04B2835E18C998F7003B9A6C /* UIImage+MCScaleSize.h */,
+				04B2835F18C998F7003B9A6C /* UIImage+MCScaleSize.m */,
+				04B2836018C998F7003B9A6C /* UIImageView+MCAsynLoadImage.h */,
+				04B2836118C998F7003B9A6C /* UIImageView+MCAsynLoadImage.m */,
+				04B2836218C998F7003B9A6C /* UILabel+MCAutoResize.h */,
+				04B2836318C998F7003B9A6C /* UILabel+MCAutoResize.m */,
+			);
+			path = category;
+			sourceTree = "<group>";
+		};
+		04B2836A18C99951003B9A6C /* MCToolKit */ = {
+			isa = PBXGroup;
+			children = (
+				043A5D5218CDB60000F017E5 /* cache */,
+				04B2836B18C99951003B9A6C /* file */,
+				04B2836E18C99951003B9A6C /* log */,
+				04B2837018C99951003B9A6C /* network */,
+				04B2837318C99951003B9A6C /* parser */,
+			);
+			path = MCToolKit;
+			sourceTree = "<group>";
+		};
+		04B2836B18C99951003B9A6C /* file */ = {
+			isa = PBXGroup;
+			children = (
+				04B2836C18C99951003B9A6C /* MCFileOperation.h */,
+				04B2836D18C99951003B9A6C /* MCFileOperation.m */,
+			);
+			path = file;
+			sourceTree = "<group>";
+		};
+		04B2836E18C99951003B9A6C /* log */ = {
+			isa = PBXGroup;
+			children = (
+				04B2836F18C99951003B9A6C /* MCLog.h */,
+			);
+			path = log;
+			sourceTree = "<group>";
+		};
+		04B2837018C99951003B9A6C /* network */ = {
+			isa = PBXGroup;
+			children = (
+				04B2837118C99951003B9A6C /* MCNetwork.h */,
+				04B2837218C99951003B9A6C /* MCNetwork.m */,
+			);
+			path = network;
+			sourceTree = "<group>";
+		};
+		04B2837318C99951003B9A6C /* parser */ = {
+			isa = PBXGroup;
+			children = (
+				04B2837418C99951003B9A6C /* MCJsonParser.h */,
+				04B2837518C99951003B9A6C /* MCJsonParser.m */,
+			);
+			path = parser;
 			sourceTree = "<group>";
 		};
 		04B98D8018331D680018F84E /* model */ = {
@@ -958,7 +984,7 @@
 		04D230AE182B883E00D4B4AC /* library */ = {
 			isa = PBXGroup;
 			children = (
-				0449182318C7118A00C9B3B1 /* MCToolKit */,
+				04B2836A18C99951003B9A6C /* MCToolKit */,
 				04015A9C18B1D2F8002901A1 /* MJRefresh */,
 				0437A47118474919000D427B /* alipay */,
 				048445C2183DD08A006F4090 /* TSDeviceId */,
@@ -1139,29 +1165,30 @@
 				04C9734B186D5C4900138DB8 /* MCRecipeIngredientCell.m in Sources */,
 				04DAF4E61845DD9C009C7720 /* MCOrderDetailFooter.m in Sources */,
 				041E5A8D187FC2E600BB0F67 /* MCLabelDetailHeader.m in Sources */,
-				0449183C18C7118A00C9B3B1 /* NSDictionary+MCJsonString.m in Sources */,
+				04B2836518C998F7003B9A6C /* NSDictionary+MCJsonString.m in Sources */,
 				04C9732E186928D200138DB8 /* MCQuickOrderCell.m in Sources */,
 				041E5A7F187BC90D00BB0F67 /* MCVegetableDetailShopInfoCell.m in Sources */,
-				0449184318C7118A00C9B3B1 /* MCNetWorkObject.m in Sources */,
 				04B98D8B18331D680018F84E /* MCShop.m in Sources */,
-				0449183E18C7118A00C9B3B1 /* UIImage+MCScaleSize.m in Sources */,
+				04B2836718C998F7003B9A6C /* UIImage+MCScaleSize.m in Sources */,
 				04F05A20185FE5F100BB25C6 /* MCCookStepCell.m in Sources */,
 				0449179318BF1E2E00C9B3B1 /* MCSettingViewController.m in Sources */,
 				0467B7F6184EBCA2005A72F0 /* MCMarketIndexNewsCell.m in Sources */,
 				0449178118BF1E2E00C9B3B1 /* MCCookBookDetailViewController.m in Sources */,
 				0449179018BF1E2E00C9B3B1 /* MCQuickOrderViewController.m in Sources */,
 				0464C99C182F7074009066C3 /* MCCartConfirmPopupView.m in Sources */,
+				04B2837818C99951003B9A6C /* MCJsonParser.m in Sources */,
 				042F252D186044FE006783C2 /* MCMineCell.m in Sources */,
 				0449178618BF1E2E00C9B3B1 /* MCLoginViewController.m in Sources */,
-				0449183D18C7118A00C9B3B1 /* NSString+Regex.m in Sources */,
+				04B2836618C998F7003B9A6C /* NSString+Regex.m in Sources */,
 				043F2FEA18B6F28500E8D5AD /* MCConstants.m in Sources */,
 				0449179418BF1E2E00C9B3B1 /* MCVegetableDetailViewController.m in Sources */,
 				044FF8B5187257AA0077CE67 /* MCHealthCell.m in Sources */,
 				0486A0F21835CC6200FDC854 /* MCCartCell.m in Sources */,
 				0449178218BF1E2E00C9B3B1 /* MCCookBookViewController.m in Sources */,
 				0449178818BF1E2E00C9B3B1 /* MCMineCartViewController.m in Sources */,
+				043A5D5818CDB60000F017E5 /* MCUrlCache.m in Sources */,
 				048445C5183DD08A006F4090 /* UIDevice+IdentifierAddition.m in Sources */,
-				0449183B18C7118A00C9B3B1 /* NSArray+MCJsonString.m in Sources */,
+				04B2836418C998F7003B9A6C /* NSArray+MCJsonString.m in Sources */,
 				04015AA918B1D2F8002901A1 /* MJRefreshConst.m in Sources */,
 				0449178F18BF1E2E00C9B3B1 /* MCPersonalInfoViewController.m in Sources */,
 				0437A4991847491A000D427B /* SBJsonBase.m in Sources */,
@@ -1179,7 +1206,7 @@
 				04DAF4E31845D77D009C7720 /* MCOrderDetailCell.m in Sources */,
 				0437A4981847491A000D427B /* SBJSON.m in Sources */,
 				0497B813183A012B008A6F8B /* MCUserManager.m in Sources */,
-				0449184218C7118A00C9B3B1 /* MCNetwork.m in Sources */,
+				04B2837718C99951003B9A6C /* MCNetwork.m in Sources */,
 				0449177F18BF1E2E00C9B3B1 /* MCBaseViewController.m in Sources */,
 				0449177C18BF1E2E00C9B3B1 /* MCAddressHelperViewController.m in Sources */,
 				04C9733418692D5400138DB8 /* MCRecipe.m in Sources */,
@@ -1189,7 +1216,7 @@
 				041E5A79187BC89200BB0F67 /* MCVegetableDetailRecipeCell.m in Sources */,
 				0449177E18BF1E2E00C9B3B1 /* MCBaseTabViewController.m in Sources */,
 				043F2FF018B7299A00E8D5AD /* MCAddressHelperCell.m in Sources */,
-				0449184118C7118A00C9B3B1 /* MCFileOperation.m in Sources */,
+				04B2837618C99951003B9A6C /* MCFileOperation.m in Sources */,
 				0449178518BF1E2E00C9B3B1 /* MCLabelDetailViewController.m in Sources */,
 				0449178718BF1E2E00C9B3B1 /* MCMineAddressViewController.m in Sources */,
 				048445D1183DF96D006F4090 /* MCChangeNicknameView.m in Sources */,
@@ -1203,7 +1230,7 @@
 				0437A4931847491A000D427B /* AlixPayOrder.m in Sources */,
 				0437A49B1847491A000D427B /* SBJsonWriter.m in Sources */,
 				0489951B181A115100E1B156 /* main.m in Sources */,
-				0449183F18C7118A00C9B3B1 /* UIImageView+MCAsynLoadImage.m in Sources */,
+				04B2836818C998F7003B9A6C /* UIImageView+MCAsynLoadImage.m in Sources */,
 				04B98D8C18331D680018F84E /* MCVegetable.m in Sources */,
 				042F253018613FC3006783C2 /* MCMineFooter.m in Sources */,
 				0437A49A1847491A000D427B /* SBJsonParser.m in Sources */,
@@ -1214,7 +1241,7 @@
 				0449178318BF1E2E00C9B3B1 /* MCFeedbackViewController.m in Sources */,
 				0437A4971847491A000D427B /* NSString+SBJSON.m in Sources */,
 				04C97337186962F400138DB8 /* MCQuickOrderHeader.m in Sources */,
-				0449184018C7118A00C9B3B1 /* UILabel+MCAutoResize.m in Sources */,
+				04B2836918C998F7003B9A6C /* UILabel+MCAutoResize.m in Sources */,
 				04015AA818B1D2F8002901A1 /* MJRefreshBaseView.m in Sources */,
 				0437A4941847491A000D427B /* AlixPayResult.m in Sources */,
 				0449179118BF1E2E00C9B3B1 /* MCRegisterViewController.m in Sources */,
@@ -1232,6 +1259,7 @@
 				043F2FE118B34CEC00E8D5AD /* MCSettingCell.m in Sources */,
 				041E5A85187D2F8F00BB0F67 /* MCHealthDetailProductCell.m in Sources */,
 				0423D3961863D71300F08F1E /* MCHotWordsCell.m in Sources */,
+				043A5D5718CDB60000F017E5 /* MCResponse.m in Sources */,
 				04B990BE183496E10018F84E /* MCContextManager.m in Sources */,
 				04BEB3111859685800A5D39F /* MCOrderDetailHeader.m in Sources */,
 				0449179818BF2F2000C9B3B1 /* MCAgreementViewController.m in Sources */,

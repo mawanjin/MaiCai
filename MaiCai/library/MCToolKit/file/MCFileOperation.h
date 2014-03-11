@@ -9,15 +9,18 @@
 #import <Foundation/Foundation.h>
 
 @interface MCFileOperation : NSObject
-@property NSFileManager* fileManager;
-
 +(MCFileOperation*)getInstance;
-- (void) createFolder:(NSString *)paramPath;
-- (void) writeTextToFile:(NSString *)path Contents:(NSString *)contents;
-- (NSString *) readTextFromPath:(NSString *)paramPath;
-- (void) emptyFolder:(NSString *)paramPath;
-- (void) deleteFolderOrFile:(NSString *)paramPath;
+-(BOOL) createFolder:(NSString *)paramPath;
+-(BOOL) writeTextToFile:(NSString *)path Contents:(NSString *)contents;
+-(NSString *) readTextFromPath:(NSString *)paramPath;
+-(BOOL) emptyFolder:(NSString *)paramPath;
+-(BOOL) deleteFolderOrFile:(NSString *)paramPath;
 -(long)fileSizeForDir:(NSString*)path;
+-(void)clearExpiredFileCache;
+
+-(BOOL)saveObject:(NSObject<NSCoding>*)obj toFilePath:(NSString*)path;
+-(NSObject*)getObjectFromFilePath:(NSString*)path;
+
 -(NSString*)getDocumentPath;
 -(NSString*)getCachePath;
 -(NSString*)getTmpPath;

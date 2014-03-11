@@ -8,7 +8,7 @@
 
 #import "MCSettingViewController.h"
 #import "MCSettingCell.h"
-#import "MCNetwork.h"
+#import "MCUrlCache.h"
 
 @interface MCSettingViewController ()
 {
@@ -36,7 +36,7 @@
     //初始化数据结构
     data = [[NSMutableArray alloc]init];
     
-    NSDictionary* obj1 = @{@"name":@"缓存",@"data": @[@"文字缓存",@"图片缓存"]};
+    NSDictionary* obj1 = @{@"name":@"缓存",@"data": @[@"缓存"]};
     NSDictionary* obj2 = @{@"name":@"版本",@"data": @[@"检查更新"]};
     
     [data addObject:obj1];
@@ -57,18 +57,9 @@
      NSString* title = data[indexPath.section][@"data"][indexPath.row];
     if (indexPath.section == 0) {
         [self showProgressHUD];
-        if ([title isEqualToString:@"文字缓存"]) {
+        if ([title isEqualToString:@"缓存"]) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [[MCNetwork getInstance]clearDocumentCache];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self hideProgressHUD];
-                    [self showMsgHint:@"清空缓存成功..."];
-                    [self.tableView reloadData];
-                });
-            });
-        }else {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [[MCNetwork getInstance]clearImageCache];
+                [[MCUrlCache getInstance]removeAllCachedResponses];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self hideProgressHUD];
                     [self showMsgHint:@"清空缓存成功..."];
@@ -86,20 +77,11 @@
     
     MCSettingCell* cell = [tableView dequeueReusableCellWithIdentifier:@"settingCell"];
     if (indexPath.section == 0) {
-        if ([title isEqualToString:@"文字缓存"]) {
+        if ([title isEqualToString:@"缓存"]) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                NSString* value = [[MCNetwork getInstance] sizeDocumentCache];
+                NSString* value = [[NSString alloc]initWithFormat:@"%.2f",[[MCUrlCache getInstance] currentDiskUsage]];
                 dispatch_sync(dispatch_get_main_queue(), ^{
                      cell.label.text = [[NSString alloc]initWithFormat:@"%@(%@MB)",title,value];
-                });
-                
-            });
-            
-        }else {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                NSString* value = [[MCNetwork getInstance] sizeImageCache];
-                dispatch_sync(dispatch_get_main_queue(), ^{
-                    cell.label.text = [[NSString alloc]initWithFormat:@"%@(%@MB)",title,value];
                 });
                 
             });

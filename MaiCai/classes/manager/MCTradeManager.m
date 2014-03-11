@@ -39,72 +39,73 @@ static MCTradeManager* instance;
     NSDictionary* params = @{
                              @"id":id,
                              };
-    NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/offline/cart/index.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:url Params:data Cache:NO];
-    if (result == nil) {
-        return nil;
-    }
-    NSError *error;
-    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-   BOOL flag = [responseData[@"success"]boolValue];
-     MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(flag){
-        NSDictionary* obj = responseData[@"data"];
-         NSMutableArray* finalResult = [[NSMutableArray alloc]init];
-        if([obj count] == 0) {
-        
-        }else {
-            NSArray* shops = obj[@"tenants"];
-            unsigned int i=0;
-            unsigned int j=0;
-            unsigned int z=0;
-            for(i=0;i<shops.count;i++) {
-                NSDictionary* shop = shops[i];
-                MCShop* temp = [[MCShop alloc]init];
-                temp.id = [shop[@"id"]integerValue];
-                temp.name = shop[@"name"];
-                MCMarket* market = [[MCMarket alloc]init];
-                market.name = shop[@"market_name"];
-                temp.market = market;
-                
-                NSMutableArray* vegetables = [[NSMutableArray alloc]init];
-                NSArray* products = shop[@"products"];
-                for(j=0;j<products.count;j++) {
-                    NSDictionary* product = products[j];
-                    MCVegetable* vegetable = [[MCVegetable alloc]init];
-                    vegetable.id = [product[@"id"]integerValue];
-                    vegetable.name = product[@"name"];
-                    vegetable.product_id = [product[@"product_id"]integerValue];
-                    vegetable.price = [product[@"price"]floatValue];
-                    vegetable.unit = product[@"unit"];
-                    vegetable.quantity = [product[@"quantity"]integerValue];
-                    vegetable.image = product[@"image"];
+    __block NSMutableArray* result = nil;
+    
+    [[MCNetwork getInstance]httpGetSynUrl:url Params:params Cache:NO Complete:^(NSURLRequest *request, MCResponse *response, NSData *data) {
+        if(data && response.statusCode == 200) {
+            NSError *error;
+            NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            MCLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+            if([responseData[@"success"]boolValue]){
+                NSDictionary* obj = responseData[@"data"];
+                NSMutableArray* finalResult = [[NSMutableArray alloc]init];
+                if([obj count] == 0) {
                     
-                    NSArray* recipes_ = product[@"recipes"];
-                    NSMutableArray* recipes = [[NSMutableArray alloc]init];
-                    if((NSNull*)recipes_ != [NSNull null]) {
-                        for(z=0;z<recipes_.count;z++) {
-                            NSDictionary* recipe_ = recipes_[z];
-                            MCRecipe* recipe = [[MCRecipe alloc]init];
-                            recipe.id = [recipe_[@"id"]integerValue];
-                            recipe.name = recipe_[@"name"];
-                            recipe.image = recipe_[@"image"];
-                            recipe.dosage = recipe_[@"dosage"];
-                            [recipes addObject:recipe];
+                }else {
+                    NSArray* shops = obj[@"tenants"];
+                    unsigned int i=0;
+                    unsigned int j=0;
+                    unsigned int z=0;
+                    for(i=0;i<shops.count;i++) {
+                        NSDictionary* shop = shops[i];
+                        MCShop* temp = [[MCShop alloc]init];
+                        temp.id = [shop[@"id"]integerValue];
+                        temp.name = shop[@"name"];
+                        MCMarket* market = [[MCMarket alloc]init];
+                        market.name = shop[@"market_name"];
+                        temp.market = market;
+                        
+                        NSMutableArray* vegetables = [[NSMutableArray alloc]init];
+                        NSArray* products = shop[@"products"];
+                        for(j=0;j<products.count;j++) {
+                            NSDictionary* product = products[j];
+                            MCVegetable* vegetable = [[MCVegetable alloc]init];
+                            vegetable.id = [product[@"id"]integerValue];
+                            vegetable.name = product[@"name"];
+                            vegetable.product_id = [product[@"product_id"]integerValue];
+                            vegetable.price = [product[@"price"]floatValue];
+                            vegetable.unit = product[@"unit"];
+                            vegetable.quantity = [product[@"quantity"]integerValue];
+                            vegetable.image = product[@"image"];
+                            
+                            NSArray* recipes_ = product[@"recipes"];
+                            NSMutableArray* recipes = [[NSMutableArray alloc]init];
+                            if((NSNull*)recipes_ != [NSNull null]) {
+                                for(z=0;z<recipes_.count;z++) {
+                                    NSDictionary* recipe_ = recipes_[z];
+                                    MCRecipe* recipe = [[MCRecipe alloc]init];
+                                    recipe.id = [recipe_[@"id"]integerValue];
+                                    recipe.name = recipe_[@"name"];
+                                    recipe.image = recipe_[@"image"];
+                                    recipe.dosage = recipe_[@"dosage"];
+                                    [recipes addObject:recipe];
+                                }
+                            }
+                            vegetable.recipes = recipes;
+                            [vegetables addObject:vegetable];
                         }
+                        temp.vegetables = vegetables;
+                        [finalResult addObject:temp];
                     }
-                    vegetable.recipes = recipes;
-                    [vegetables addObject:vegetable];
                 }
-                temp.vegetables = vegetables;
-                [finalResult addObject:temp];
+                result =  finalResult;
             }
+
         }
-        return finalResult;
-    }else {
-        return nil;
-    }
+    }];
+    
+    return result;
 }
 
 -(NSMutableArray*)getCartProductsOnlineByUserId:(NSString*)id
@@ -114,71 +115,70 @@ static MCTradeManager* instance;
                              @"id":id,
                              @"sign":sign
                              };
-    NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/cart/index.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:url Params:data Cache:NO];
-    if (result == nil) {
-        return nil;
-    }
-    NSError *error;
-    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-    BOOL flag = [responseData[@"success"]boolValue];
-    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(flag){
-        NSDictionary* obj = responseData[@"data"];
-        NSMutableArray* finalResult = [[NSMutableArray alloc]init];
-        if([obj count] == 0) {
-            
-        }else {
-            NSArray* shops = obj[@"tenants"];
-            unsigned int i=0;
-            unsigned int j=0;
-            for(i=0;i<shops.count;i++) {
-                NSDictionary* shop = shops[i];
-                MCShop* temp = [[MCShop alloc]init];
-                temp.id = [shop[@"id"]integerValue];
-                temp.name = shop[@"name"];
-                MCMarket* market = [[MCMarket alloc]init];
-                market.name = shop[@"market_name"];
-                temp.market = market;
-                NSMutableArray* vegetables = [[NSMutableArray alloc]init];
-                NSArray* products = shop[@"products"];
-                for(j=0;j<products.count;j++) {
-                    NSDictionary* product = products[j];
-                    MCVegetable* vegetable = [[MCVegetable alloc]init];
-                    vegetable.id = [product[@"id"]integerValue];
-                    vegetable.name = product[@"name"];
-                    vegetable.product_id = [product[@"product_id"]integerValue];
-                    vegetable.price = [product[@"price"]floatValue];
-                    vegetable.unit = product[@"unit"];
-                    vegetable.quantity = [product[@"quantity"]integerValue];
-                    vegetable.image = product[@"image"];
+    __block NSMutableArray* result = nil;
+    [[MCNetwork getInstance]httpGetSynUrl:url Params:params Cache:NO Complete:^(NSURLRequest *request, MCResponse *response, NSData *data) {
+        if(data && response.statusCode == 200) {
+            NSError *error;
+            NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            MCLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+            if([responseData[@"success"]boolValue]){
+                NSDictionary* obj = responseData[@"data"];
+                NSMutableArray* finalResult = [[NSMutableArray alloc]init];
+                if([obj count] == 0) {
                     
-                    NSArray* recipes_ = product[@"recipes"];
-                    NSMutableArray* recipes = [[NSMutableArray alloc]init];
-                    if((NSNull*)recipes_ != [NSNull null]) {
-                        for(int z=0;z<recipes_.count;z++) {
-                            NSDictionary* recipe_ = recipes_[z];
-                            MCRecipe* recipe = [[MCRecipe alloc]init];
-                            recipe.id = [recipe_[@"id"]integerValue];
-                            recipe.name = recipe_[@"name"];
-                            recipe.image = recipe_[@"image"];
-                            recipe.dosage = recipe_[@"dosage"];
-                            [recipes addObject:recipe];
+                }else {
+                    NSArray* shops = obj[@"tenants"];
+                    unsigned int i=0;
+                    unsigned int j=0;
+                    for(i=0;i<shops.count;i++) {
+                        NSDictionary* shop = shops[i];
+                        MCShop* temp = [[MCShop alloc]init];
+                        temp.id = [shop[@"id"]integerValue];
+                        temp.name = shop[@"name"];
+                        MCMarket* market = [[MCMarket alloc]init];
+                        market.name = shop[@"market_name"];
+                        temp.market = market;
+                        NSMutableArray* vegetables = [[NSMutableArray alloc]init];
+                        NSArray* products = shop[@"products"];
+                        for(j=0;j<products.count;j++) {
+                            NSDictionary* product = products[j];
+                            MCVegetable* vegetable = [[MCVegetable alloc]init];
+                            vegetable.id = [product[@"id"]integerValue];
+                            vegetable.name = product[@"name"];
+                            vegetable.product_id = [product[@"product_id"]integerValue];
+                            vegetable.price = [product[@"price"]floatValue];
+                            vegetable.unit = product[@"unit"];
+                            vegetable.quantity = [product[@"quantity"]integerValue];
+                            vegetable.image = product[@"image"];
+                            
+                            NSArray* recipes_ = product[@"recipes"];
+                            NSMutableArray* recipes = [[NSMutableArray alloc]init];
+                            if((NSNull*)recipes_ != [NSNull null]) {
+                                for(int z=0;z<recipes_.count;z++) {
+                                    NSDictionary* recipe_ = recipes_[z];
+                                    MCRecipe* recipe = [[MCRecipe alloc]init];
+                                    recipe.id = [recipe_[@"id"]integerValue];
+                                    recipe.name = recipe_[@"name"];
+                                    recipe.image = recipe_[@"image"];
+                                    recipe.dosage = recipe_[@"dosage"];
+                                    [recipes addObject:recipe];
+                                }
+                            }
+                            vegetable.recipes = recipes;
+                            
+                            [vegetables addObject:vegetable];
                         }
+                        temp.vegetables = vegetables;
+                        [finalResult addObject:temp];
                     }
-                    vegetable.recipes = recipes;
-                    
-                    [vegetables addObject:vegetable];
                 }
-                temp.vegetables = vegetables;
-                [finalResult addObject:temp];
+                result =  finalResult;
             }
+
         }
-        return finalResult;
-    }else {
-        return nil;
-    }
+    }];
+    return result;
 }
 
 
@@ -202,24 +202,21 @@ static MCTradeManager* instance;
     NSDictionary* params = @{
                              @"param":param
                             };
-    NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/offline/cart/save.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
+    __block BOOL result = false;
+    [[MCNetwork getInstance]httpPostSynUrl:url Params:params Cache:NO Complete:^(NSURLRequest *request, MCResponse *response, NSData *data) {
+        if(data && response.statusCode == 200) {
+            NSError *error;
+            
+            NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            MCLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+            if([responseData[@"success"]boolValue]) {
+                result = true;
+            }
+        }
+    }];
     
-    if (result == nil) {
-        return false;
-    }
-    
-    NSError *error;
-
-    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-    BOOL flag = [responseData[@"success"]boolValue];
-    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(flag) {
-        return true;
-    }else {
-        return false;
-    }
+    return result;
 }
 
 
@@ -247,23 +244,20 @@ static MCTradeManager* instance;
                              @"param":param,
                              @"sign":sign
                              };
-    NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
+   
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/cart/save.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
-    
-    if (result == nil) {
-        return false;
-    }
-    
-    NSError* error;
-    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-    BOOL flag = [responseData[@"success"]boolValue];
-    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(flag) {
-        return true;
-    }else {
-        return false;
-    }
+    __block BOOL result = false;
+    [[MCNetwork getInstance]httpPostSynUrl:url Params:params Cache:NO Complete:^(NSURLRequest *request, MCResponse *response, NSData *data) {
+        if(data && response.statusCode == 200) {
+            NSError* error;
+            NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            MCLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+            if([responseData[@"success"]boolValue]) {
+                result = true;
+            }
+        }
+    }];
+    return result;
 }
 
 
@@ -272,23 +266,19 @@ static MCTradeManager* instance;
     NSDictionary* params = @{
                              @"id":id,
                              };
-    NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/offline/cart/quantity/index.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:url Params:data Cache:NO];
-    if (result == nil) {
-        return 0;
-    }
-    NSError *error;
-    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-    int num = 0;
-    BOOL flag = [responseData[@"success"]boolValue];
-    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(!flag) {
-        return num;
-    }else {
-         num = [responseData[@"data"]integerValue];
-        return num;
-    }
+    __block int num = 0;
+    [[MCNetwork getInstance]httpGetSynUrl:url Params:params Cache:NO Complete:^(NSURLRequest *request, MCResponse *response, NSData *data) {
+        if(data && response.statusCode == 200) {
+            NSError *error;
+            NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            MCLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+            if([responseData[@"success"]boolValue]) {
+                num = [responseData[@"data"]integerValue];
+            }
+        }
+    }];
+    return num;
 }
 
 -(int)getProductsNumInCartOnlineByUserId:(NSString*)id
@@ -298,25 +288,21 @@ static MCTradeManager* instance;
                              @"id":id,
                              @"sign":sign
                              };
-    NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/cart/quantity/index.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpGetSynUrl:url Params:data Cache:NO];
-    if (result == nil) {
-        return 0;
-    }
-    NSError *error;
-    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-    int num = 0;
-    
-    BOOL flag = [responseData[@"success"]boolValue];
-    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(!flag) {
-
-    }else {
-        num = [responseData[@"data"]integerValue];
-    }
+    __block int num = 0;
+    [[MCNetwork getInstance]httpGetSynUrl:url Params:params Cache:NO Complete:^(NSURLRequest *request, MCResponse *response, NSData *data) {
+        if(data && response.statusCode == 200) {
+            NSError *error;
+            NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            
+            
+            MCLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+            if([responseData[@"success"]boolValue]) {
+                num = [responseData[@"data"]integerValue];
+            }
+        }
+    }];
     return num;
-
 }
 
 
@@ -327,23 +313,20 @@ static MCTradeManager* instance;
     NSDictionary* params = @{
                                 @"param":param
                             };
-    NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/offline/cart/quantity/update.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
     
-    if (result == nil) {
-        return false;
-    }
-    
-    NSError *error;
-    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-    BOOL flag = [responseData[@"success"]boolValue];
-    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(!flag) {
-        return false;
-    }else {
-        return true;
-    }
+    __block BOOL result = false;
+    [[MCNetwork getInstance]httpPostSynUrl:url Params:params Cache:NO Complete:^(NSURLRequest *request, MCResponse *response, NSData *data) {
+        if(data && response.statusCode == 200) {
+            NSError *error;
+            NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            MCLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+            if([responseData[@"success"]boolValue]) {
+                result = true;
+            }
+        }
+    }];
+    return result;
 }
 
 -(BOOL)changeProductNumInCartOnlineByUserId:(NSString*)id ProductId:(int)productId Quantity:(int)quantity
@@ -354,21 +337,19 @@ static MCTradeManager* instance;
                              @"param":param,
                              @"sign":sign
                              };
-    NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/cart/quantity/update.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
-    if (result == nil) {
-        return false;
-    }
-    NSError *error;
-    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-    BOOL flag = [responseData[@"success"]boolValue];
-    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(flag) {
-        return true;
-    }else {
-        return false;
-    }
+    __block BOOL result = false;
+    [[MCNetwork getInstance]httpPostSynUrl:url Params:params Cache:NO Complete:^(NSURLRequest *request, MCResponse *response, NSData *data) {
+        if(data && response.statusCode == 200) {
+            NSError *error;
+            NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            MCLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+            if([responseData[@"success"]boolValue]) {
+                result =  true;
+            }
+        }
+    }];
+    return result;
 }
 
 -(BOOL)deleteProductsInCartByUserId:(NSString*)id ProductIds:(NSMutableArray*)productIds
@@ -386,22 +367,22 @@ static MCTradeManager* instance;
     NSDictionary* params = @{
                              @"param":param
                              };
-    NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
+    
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/offline/cart/delete.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
-    if (result == nil) {
-        return false;
-    }
-    NSError *error;
-    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-    BOOL flag = [responseData[@"success"]boolValue];
-    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(flag) {
-        return true;
-    }else {
-        return false;
-    }
+    __block BOOL result = false;
+    [[MCNetwork getInstance]httpPostSynUrl:url Params:params Cache:NO Complete:^(NSURLRequest *request, MCResponse *response, NSData *data) {
+        if(data && response.statusCode == 200) {
+            NSError *error;
+            NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            MCLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+            if([responseData[@"success"]boolValue]) {
+                result =  true;
+            }
+        }
+    }];
+    return result;
 }
+
 
 -(BOOL)deleteProductsInCartOnlineByUserId:(NSString*)id ProductIds:(NSMutableArray*)productIds
 {
@@ -420,21 +401,19 @@ static MCTradeManager* instance;
                              @"param":param,
                              @"sign":sign
                              };
-    NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/cart/delete.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
-    if (result == nil) {
-        return false;
-    }
-    NSError *error;
-    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-    BOOL flag = [responseData[@"success"]boolValue];
-    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(flag) {
-        return true;
-    }else {
-        return false;
-    }
+    __block BOOL result = false;
+    [[MCNetwork getInstance]httpPostSynUrl:url Params:params Cache:NO Complete:^(NSURLRequest *request, MCResponse *response, NSData *data) {
+        if(data && response.statusCode == 200) {
+            NSError *error;
+            NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            MCLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+            if([responseData[@"success"]boolValue]) {
+                result =  true;
+            }
+        }
+    }];
+    return result;
 }
 
 
@@ -487,34 +466,35 @@ static MCTradeManager* instance;
     param[@"message"] = review;
     param[@"total"] = [[NSNumber alloc]initWithFloat:totalPrice];
     
-    NSError *error;
+   
     
     NSString* sign = [@"/api/ios/v1/private/order/save.dodhfuewjcuehiudjuwdwyfcs" stringFromMD5];
     NSDictionary* params = @{
                              @"param":[param jsonStringWithPrettyPrint:NO],
                              @"sign":sign
                              };
-    NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
+    
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/order/save.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
-    if (result == nil) {
-        return nil;
-    }
-    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-    BOOL flag = [responseData[@"success"]boolValue];
-    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(flag) {
-        int addressId = [((NSDictionary*)responseData[@"data"])[@"address_id"]integerValue];
-        
-        MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
-        if(user.defaultAddress == Nil) {
-            address.id = addressId;
-            user.defaultAddress = address;
+    __block NSString* result = nil;
+    [[MCNetwork getInstance]httpPostSynUrl:url Params:params Cache:NO Complete:^(NSURLRequest *request, MCResponse *response, NSData *data) {
+        if (data && response.statusCode == 200) {
+            NSError *error;
+            NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            MCLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+            if([responseData[@"success"]boolValue]) {
+                int addressId = [((NSDictionary*)responseData[@"data"])[@"address_id"]integerValue];
+                
+                MCUser* user = (MCUser*)[[MCContextManager getInstance]getDataByKey:MC_USER];
+                if(user.defaultAddress == Nil) {
+                    address.id = addressId;
+                    user.defaultAddress = address;
+                }
+                result = ((NSDictionary*)responseData[@"data"])[@"pay_no"];
+            }
         }
-        return ((NSDictionary*)responseData[@"data"])[@"pay_no"];
-    }else {
-        return nil;
-    }
+    }];
+    
+    return result;
 }
 
 -(NSMutableArray*)getOrdersByUserId:(NSString*)userId Status:(NSString*)status
@@ -525,44 +505,43 @@ static MCTradeManager* instance;
                              @"param":param,
                              @"sign":sign
                              };
-    NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/order/index.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
-    if (result == nil) {
-        return nil;
-    }
-    NSError *error;
-    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-    BOOL flag = [responseData[@"success"]boolValue];
-    MCLog(@"%@",content);
-    if(flag) {
-        NSArray* data_ = responseData[@"data"];
-        NSMutableArray* orders = [[NSMutableArray alloc]init];
-        unsigned int i=0;
-        for(i=0;i<data_.count;i++) {
-            NSDictionary* order_ = data_[i];
-            MCOrder* order = [[MCOrder alloc]init];
-            order.id = [order_[@"id"]integerValue];
-            order.shipper = order_[@"shipper"];
-            order.tel = order_[@"tel"];
-            order.address = order_[@"address"];
-            order.orderNo = order_[@"order_no"];
-            order.shopId = order_[@"tenant_id"];
-            order.marketName = order_[@"market_name"];
-            order.shopName = order_[@"tenant_name"];
-            order.customerId = order_[@"customer_id"];
-            order.total = [order_[@"total"]floatValue];
-            order.status = order_[@"status"];
-            order.dateAdded = order_[@"date_added"];
-            order.dateModified = order_[@"date_modified"];
-            order.image = order_[@"image"];
-            order.quantity = [order_[@"quantity"]integerValue];
-            [orders addObject:order];
+    __block NSMutableArray* result = nil;
+    
+    [[MCNetwork getInstance]httpPostSynUrl:url Params:params Cache:NO Complete:^(NSURLRequest *request, MCResponse *response, NSData *data) {
+        if (data && response.statusCode == 200) {
+            NSError *error;
+            NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            if([responseData[@"success"]boolValue]) {
+                NSArray* data_ = responseData[@"data"];
+                NSMutableArray* orders = [[NSMutableArray alloc]init];
+                unsigned int i=0;
+                for(i=0;i<data_.count;i++) {
+                    NSDictionary* order_ = data_[i];
+                    MCOrder* order = [[MCOrder alloc]init];
+                    order.id = [order_[@"id"]integerValue];
+                    order.shipper = order_[@"shipper"];
+                    order.tel = order_[@"tel"];
+                    order.address = order_[@"address"];
+                    order.orderNo = order_[@"order_no"];
+                    order.shopId = order_[@"tenant_id"];
+                    order.marketName = order_[@"market_name"];
+                    order.shopName = order_[@"tenant_name"];
+                    order.customerId = order_[@"customer_id"];
+                    order.total = [order_[@"total"]floatValue];
+                    order.status = order_[@"status"];
+                    order.dateAdded = order_[@"date_added"];
+                    order.dateModified = order_[@"date_modified"];
+                    order.image = order_[@"image"];
+                    order.quantity = [order_[@"quantity"]integerValue];
+                    [orders addObject:order];
+                }
+                result =  orders;
+            }
+
         }
-        return orders;
-    }else {
-        return nil;
-    }
+    }];
+    return result;
 }
 
 -(MCOrder*)getOrderDetailByOrderId:(NSString*)orderId
@@ -572,60 +551,59 @@ static MCTradeManager* instance;
                              @"id":orderId,
                              @"sign":sign
                              };
-    NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/order/detail.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
-    if (result == nil) {
-        return nil;
-    }
-    NSError *error;
-    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-    BOOL flag = [responseData[@"success"]boolValue];
-    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(flag) {
-        NSDictionary* data_ = responseData[@"data"];
-        
-        MCOrder* order = [[MCOrder alloc]init];
-        order.id = [data_[@"id"]integerValue];
-        order.shipper = data_[@"shipper"];
-        order.tel = data_[@"tel"];
-        order.address = data_[@"address"];
-        order.orderNo = data_[@"order_no"];
-        order.shopId = data_[@"tenant_id"];
-        order.marketName = data_[@"market_name"];
-        order.shopName = data_[@"tenant_name"];
-        order.customerId = data_[@"customer_id"];
-        order.total = [data_[@"total"]floatValue];
-        order.status = data_[@"status"];
-        order.dateAdded = data_[@"date_added"];
-        order.dateModified = data_[@"date_modified"];
-        order.image = data_[@"image"];
-        order.quantity = [data_[@"quantity"]integerValue];
-        order.paymentMethod = data_[@"payment_method"];
-        order.shipMethod = data_[@"ship_method"];
-        order.message = data_[@"message"];
-        
-        NSArray* products = data_[@"products"];
-        NSMutableArray* vegetables = [[NSMutableArray alloc]init];
-        unsigned int i=0;
-        for (i=0; i<products.count; i++) {
-            NSDictionary* product = products[i];
-            MCVegetable* vegetable = [[MCVegetable alloc]init];
-            vegetable.id = [product[@"id"]integerValue];
-            vegetable.name = product[@"name"];
-            vegetable.product_id = [product[@"product_id"]integerValue];
-            vegetable.quantity = [product[@"quantity"]integerValue];
-            vegetable.price = [product[@"price"]floatValue];
-            vegetable.image = product[@"image"];
-            [vegetables addObject:vegetable];
+    __block MCOrder* result = nil;
+    [[MCNetwork getInstance]httpPostSynUrl:url Params:params Cache:NO Complete:^(NSURLRequest *request, MCResponse *response, NSData *data) {
+        if (data && response.statusCode == 200) {
+            NSError *error;
+            NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            MCLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+            if([responseData[@"success"]boolValue]) {
+                NSDictionary* data_ = responseData[@"data"];
+                
+                MCOrder* order = [[MCOrder alloc]init];
+                order.id = [data_[@"id"]integerValue];
+                order.shipper = data_[@"shipper"];
+                order.tel = data_[@"tel"];
+                order.address = data_[@"address"];
+                order.orderNo = data_[@"order_no"];
+                order.shopId = data_[@"tenant_id"];
+                order.marketName = data_[@"market_name"];
+                order.shopName = data_[@"tenant_name"];
+                order.customerId = data_[@"customer_id"];
+                order.total = [data_[@"total"]floatValue];
+                order.status = data_[@"status"];
+                order.dateAdded = data_[@"date_added"];
+                order.dateModified = data_[@"date_modified"];
+                order.image = data_[@"image"];
+                order.quantity = [data_[@"quantity"]integerValue];
+                order.paymentMethod = data_[@"payment_method"];
+                order.shipMethod = data_[@"ship_method"];
+                order.message = data_[@"message"];
+                
+                NSArray* products = data_[@"products"];
+                NSMutableArray* vegetables = [[NSMutableArray alloc]init];
+                unsigned int i=0;
+                for (i=0; i<products.count; i++) {
+                    NSDictionary* product = products[i];
+                    MCVegetable* vegetable = [[MCVegetable alloc]init];
+                    vegetable.id = [product[@"id"]integerValue];
+                    vegetable.name = product[@"name"];
+                    vegetable.product_id = [product[@"product_id"]integerValue];
+                    vegetable.quantity = [product[@"quantity"]integerValue];
+                    vegetable.price = [product[@"price"]floatValue];
+                    vegetable.image = product[@"image"];
+                    [vegetables addObject:vegetable];
+                }
+                
+                order.products = vegetables;
+                
+                result =  order;
+            }
         }
-        
-        order.products = vegetables;
-        
-        return order;
-    }else {
-        return nil;
-    }
+    }];
+    return  result;
+    
 }
 
 -(NSString*)getPaymentNoByUserId:(NSString*)userId OrderIds:(NSString*)ids Amount:(float)amount
@@ -637,22 +615,20 @@ static MCTradeManager* instance;
                              @"amount":[[NSString alloc]initWithFormat:@"%.02f",amount],
                              @"sign":sign
                              };
-    NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
+   
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/pay/index.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
-    if (result == nil) {
-        return nil;
-    }
-    NSError *error;
-    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-    BOOL flag = [responseData[@"success"]boolValue];
-    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(flag) {
-        NSString* data_ = responseData[@"data"];
-        return data_;
-    }else {
-        return nil;
-    }
+    __block NSString* result = nil;
+    [[MCNetwork getInstance]httpPostSynUrl:url Params:params Cache:NO Complete:^(NSURLRequest *request, MCResponse *response, NSData *data) {
+        if (data && response.statusCode == 200) {
+            NSError *error;
+            NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            MCLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+            if([responseData[@"success"]boolValue]) {
+                result = responseData[@"data"];
+            }
+        }
+    }];
+    return result;
 }
 
 -(BOOL)cancelPaymentByPaymentNo:(NSString*)paymentNo
@@ -662,39 +638,35 @@ static MCTradeManager* instance;
                              @"id":paymentNo,
                              @"sign":sign
                              };
-    NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/pay/esc.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
-    if (result == nil) {
-        return false;
-    }
-    NSError *error;
-    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-    BOOL flag = [responseData[@"success"]boolValue];
-    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(flag) {
-        return true;
-    }else{
-        return false;
-    }
+    __block BOOL result = false;
+    [[MCNetwork getInstance]httpPostSynUrl:url Params:params Cache:NO Complete:^(NSURLRequest *request, MCResponse *response, NSData *data) {
+        if (data && response.statusCode == 200) {
+            NSError *error;
+            NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            MCLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+            if([responseData[@"success"]boolValue]) {
+                result =  true;
+            }
+        }
+    }];
+    return result;
 }
 
 -(NSMutableArray*)getDeliveryDescription
 {
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/public/system/deliveryterm.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:nil];
-    if (result == nil) {
-        return false;
-    }
-    NSError *error;
-    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-    BOOL flag = [responseData[@"success"]boolValue];
-    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(flag) {
-        return responseData[@"data"];
-    }else{
-        return nil;
-    }
-
+    __block NSMutableArray* result = nil;
+    [[MCNetwork getInstance]httpGetSynUrl:url Params:nil Cache:YES Complete:^(NSURLRequest *request, MCResponse *response, NSData *data) {
+        if (data && response.statusCode == 200) {
+            NSError *error;
+            NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            MCLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+            if([responseData[@"success"]boolValue]) {
+                result = responseData[@"data"];
+            }
+        }
+    }];
+    return result;
 }
 @end

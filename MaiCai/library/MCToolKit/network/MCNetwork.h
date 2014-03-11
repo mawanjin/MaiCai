@@ -7,14 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MCUrlCache.h"
+
+typedef void(^completeBlock)(NSURLRequest* request,MCResponse* response,NSData* data);
 
 @interface MCNetwork : NSObject
 +(MCNetwork*)getInstance;
--(NSData*) httpGetSynUrl:(NSString*)httpUrl Params:(NSMutableDictionary*)params Cache:(BOOL)flag;
--(NSData*) httpPostSynUrl:(NSString*)httpUrl Params:(NSMutableDictionary*)params;
+-(void) httpGetSynUrl:(NSString*)httpUrl Params:(NSDictionary*)params Cache:(BOOL)cache Complete:(completeBlock)completeBlock;
+-(void) httpPostSynUrl:(NSString*)httpUrl Params:(NSDictionary*)params Cache:(BOOL)cache Complete:(completeBlock)completeBlock;
+-(void) httpDeleteSynUrl:(NSString*)httpUrl Params:(NSDictionary*)params Cache:(BOOL)cache Complete:(completeBlock)completeBlock;
+-(void) httpPutSynUrl:(NSString*)httpUrl Params:(NSDictionary*)params Cache:(BOOL)cache Complete:(completeBlock)completeBlock;
 -(UIImage*) loadImageFromSource:(NSString*)url;
--(void)clearImageCache;
--(void)clearDocumentCache;
-- (NSString *)sizeImageCache;
-- (NSString *)sizeDocumentCache;
 @end

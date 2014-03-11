@@ -8,6 +8,7 @@
 
 #import "MCContextManager.h"
 #import "MCNetwork.h"
+#import "MCJsonParser.h"
 
 
 @implementation MCContextManager
@@ -53,17 +54,18 @@ bool isLogged;
                              @"content":errorMessage,
                              @"log_type":@"4"
                              };
-    NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
-    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/mobile/client/log.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
-    if (result == nil) {
-        return false;
-    }
-    NSError *error;
-    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
+    __block BOOL flag = false;
     
-    BOOL flag = [responseData[@"success"]boolValue];
-    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
+    NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/mobile/client/log.do",MC_BASE_URL];
+    
+    [[MCNetwork getInstance]httpPostSynUrl:url Params:params Cache:NO Complete:^(NSURLRequest *request, MCResponse *response, NSData *data) {
+        if (data && response.statusCode == 200) {
+            NSError *error;
+            NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            flag = [responseData[@"success"]boolValue];
+            MCLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+        }
+    }];
     return flag;
 }
 @end

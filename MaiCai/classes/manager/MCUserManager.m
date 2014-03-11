@@ -36,21 +36,19 @@ static MCUserManager* instance;
                              @"param":param,
                              @"sign":sign
                              };
-    NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/customer/register.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
-    if (result == nil) {
-        return false;
-    }
-    NSError *error;
-    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-    BOOL flag = [responseData[@"success"]boolValue];
-     MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(flag) {
-        return true;
-    }else {
-        return false;
-    }
+    __block BOOL result = false;
+    [[MCNetwork getInstance]httpPostSynUrl:url Params:params Cache:NO Complete:^(NSURLRequest *request, MCResponse *response, NSData *data) {
+        if (data && response.statusCode == 200) {
+            NSError *error;
+            NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            MCLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+            if([responseData[@"success"]boolValue]) {
+                result = true;
+            }
+        }
+    }];
+    return result;
 }
 
 -(BOOL)login:(MCUser*)user {
@@ -60,36 +58,34 @@ static MCUserManager* instance;
                              @"param":param,
                              @"sign":sign
                              };
-    NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/customer/login.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
-    if (result == nil) {
-        return false;
-    }
-    NSError *error;
-    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-    BOOL flag = [responseData[@"success"]boolValue];
-     MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(flag) {
-        NSDictionary* address_ = ((NSDictionary*)responseData[@"data"])[@"address"];
-        if(address_ !=nil && address_ != (NSDictionary*)[NSNull null] && [address_ count]>0) {
-            MCAddress* address = [[MCAddress alloc]init];
-            address.id = [address_[@"id"]integerValue];
-            address.name = address_[@"name"];
-            address.shipper = address_[@"shipper"];
-            address.mobile = address_[@"tel"];
-            address.address = address_[@"address"];
-            user.defaultAddress = address;
+    __block BOOL result = false;
+    [[MCNetwork getInstance]httpPostSynUrl:url Params:params Cache:NO Complete:^(NSURLRequest *request, MCResponse *response, NSData *data) {
+        if (data && response.statusCode == 200) {
+            NSError *error;
+            NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            MCLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+            if([responseData[@"success"]boolValue]) {
+                NSDictionary* address_ = ((NSDictionary*)responseData[@"data"])[@"address"];
+                if(address_ !=nil && address_ != (NSDictionary*)[NSNull null] && [address_ count]>0) {
+                    MCAddress* address = [[MCAddress alloc]init];
+                    address.id = [address_[@"id"]integerValue];
+                    address.name = address_[@"name"];
+                    address.shipper = address_[@"shipper"];
+                    address.mobile = address_[@"tel"];
+                    address.address = address_[@"address"];
+                    user.defaultAddress = address;
+                }
+                
+                [[MCContextManager getInstance] addKey:MC_USER Data:user];
+                [[MCContextManager getInstance] setLogged:YES];
+                
+                [[MCUserManager getInstance]saveLoginStatusByUser:user];
+                result =  true;
+            }
         }
-        
-        [[MCContextManager getInstance] addKey:MC_USER Data:user];
-        [[MCContextManager getInstance] setLogged:YES];
-        
-        [[MCUserManager getInstance]saveLoginStatusByUser:user];
-        return true;
-    }else {
-        return false;
-    }
+    }];
+    return result;
 }
 
 -(MCUser*)getUserInfo:(NSString*)id
@@ -101,24 +97,23 @@ static MCUserManager* instance;
                                                                                  @"sign":sign
                                                                                  }];
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/customer/index.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:params];
-    if (result == nil) {
-        return nil;
-    }
-    NSError *error;
-    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-    
-    BOOL flag = [responseData[@"success"]boolValue];
-     MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(flag) {
-        MCUser* user = [[MCUser alloc]init];
-        user.userId = ((NSDictionary*)responseData[@"data"])[@"id"];
-        user.name = ((NSDictionary*)responseData[@"data"])[@"name"];
-        return user;
-    }else {
-        return nil;
-    }
+    __block MCUser* result = nil;
+    [[MCNetwork getInstance]httpPostSynUrl:url Params:params Cache:NO Complete:^(NSURLRequest *request, MCResponse *response, NSData *data) {
+        if(data && response.statusCode == 200) {
+            NSError *error;
+            NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            MCLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+            if([responseData[@"success"]boolValue]) {
+                MCUser* user = [[MCUser alloc]init];
+                user.userId = ((NSDictionary*)responseData[@"data"])[@"id"];
+                user.name = ((NSDictionary*)responseData[@"data"])[@"name"];
+                result = user;
+            }
+        }
+    }];
+    return result;
 }
+
 
 -(BOOL)changeNickName:(NSString*)nickname
 {
@@ -130,22 +125,21 @@ static MCUserManager* instance;
                              @"param":param,
                              @"sign":sign
                              };
-    NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/customer/update/name.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
-    if (result == nil) {
-        return false;
-    }
-    NSError *error;
-    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-    BOOL flag = [responseData[@"success"]boolValue];
-     MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(flag) {
-        return true;
-    }else {
-        return false;
-    }
+    __block BOOL result = false;
+    [[MCNetwork getInstance]httpPostSynUrl:url Params:params Cache:NO Complete:^(NSURLRequest *request, MCResponse *response, NSData *data) {
+        if (data && response.statusCode == 200) {
+            NSError *error;
+            NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            MCLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+            if([responseData[@"success"]boolValue]) {
+                result =  true;
+            }
+        }
+    }];
+    return result;
 }
+
 
 -(BOOL)changePassword:(NSString*)oldPassword NewPassword:(NSString*)newPassword
 {
@@ -157,21 +151,19 @@ static MCUserManager* instance;
                              @"param":param,
                              @"sign":sign
                              };
-    NSMutableDictionary* data = [[NSMutableDictionary alloc]initWithDictionary:params];
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/customer/update/password.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:data];
-    if (result == nil) {
-        return false;
-    }
-    NSError *error;
-    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-     BOOL flag = [responseData[@"success"]boolValue];
-     MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(flag) {
-        return true;
-    }else {
-        return false;
-    }
+    __block BOOL result = false;
+    [[MCNetwork getInstance]httpPostSynUrl:url Params:params Cache:NO Complete:^(NSURLRequest *request, MCResponse *response, NSData *data) {
+        if (data && response.statusCode == 200) {
+            NSError *error;
+            NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            MCLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+            if([responseData[@"success"]boolValue]) {
+                result = true;
+            }
+        }
+    }];
+    return result;
 }
 
 -(NSMutableArray*)getUserAddressByUserId:(NSString*)id {
@@ -181,33 +173,31 @@ static MCUserManager* instance;
                                                                                    @"sign":sign
                                                                                    }];
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/address/index.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:params];
-    if (result == nil) {
-        return nil;
-    }
-    NSError *error;
-    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-    
-    BOOL flag = [responseData[@"success"]boolValue];
-     MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(flag) {
-        NSArray* dataArray = responseData[@"data"];
-        NSMutableArray* finalResult = [[NSMutableArray alloc]init];
-        unsigned int i=0;
-        for(i=0;i<dataArray.count;i++) {
-            NSDictionary* temp = dataArray[i];
-            MCAddress* address = [[MCAddress alloc]init];
-            address.id = [temp[@"id"]integerValue];
-            address.name = temp[@"name"];
-            address.shipper = temp[@"shipper"];
-            address.mobile = temp[@"tel"];
-            address.address = temp[@"address"];
-            [finalResult addObject:address];
+    __block NSMutableArray* result = nil;
+    [[MCNetwork getInstance]httpPostSynUrl:url Params:params Cache:NO Complete:^(NSURLRequest *request, MCResponse *response, NSData *data) {
+        if(data && response.statusCode == 200) {
+            NSError *error;
+            NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            MCLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+            if([responseData[@"success"]boolValue]) {
+                NSArray* dataArray = responseData[@"data"];
+                NSMutableArray* finalResult = [[NSMutableArray alloc]init];
+                unsigned int i=0;
+                for(i=0;i<dataArray.count;i++) {
+                    NSDictionary* temp = dataArray[i];
+                    MCAddress* address = [[MCAddress alloc]init];
+                    address.id = [temp[@"id"]integerValue];
+                    address.name = temp[@"name"];
+                    address.shipper = temp[@"shipper"];
+                    address.mobile = temp[@"tel"];
+                    address.address = temp[@"address"];
+                    [finalResult addObject:address];
+                }
+                result = finalResult;
+            }
         }
-        return finalResult;
-    }else {
-        return nil;
-    }
+    }];
+    return result;
 }
 
 
@@ -219,23 +209,18 @@ static MCUserManager* instance;
                                                                                    @"sign":sign
                                                                                    }];
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/address/save.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:params];
-    
-    if (result == nil) {
-        return false;
-    }
-    
-    NSError *error;
-    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-    
-    BOOL flag = [responseData[@"success"]boolValue];
-     MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if(flag) {
-        return true;
-    }else {
-        return false;
-    }
-   
+    __block BOOL result = false;
+    [[MCNetwork getInstance]httpPostSynUrl:url Params:params Cache:NO Complete:^(NSURLRequest *request, MCResponse *response, NSData *data) {
+        if(data && response.statusCode == 200) {
+            NSError *error;
+            NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            MCLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+            if([responseData[@"success"]boolValue]) {
+                result =  true;
+            }
+        }
+    }];
+    return result;
 }
 
 
@@ -248,18 +233,16 @@ static MCUserManager* instance;
                                                                                    @"sign":sign
                                                                                    }];
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/address/delete.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:params];
-    
-    if (result == nil) {
-        return false;
-    }
-    
-    NSError *error;
-    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-    
-    BOOL flag = [responseData[@"success"]boolValue];
-    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    return flag;
+    __block BOOL result = false;
+    [[MCNetwork getInstance]httpPostSynUrl:url Params:params Cache:NO Complete:^(NSURLRequest *request, MCResponse *response, NSData *data) {
+        if (data && response.statusCode == 200) {
+            NSError *error;
+            NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            result = [responseData[@"success"]boolValue];
+            MCLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+        }
+    }];
+    return result;
 }
 
 -(BOOL)updateUserAddress:(MCAddress*)address UserId:(NSString*)userId;
@@ -271,65 +254,63 @@ static MCUserManager* instance;
                                                                                    @"sign":sign
                                                                                    }];
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1/private/address/update.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:params];
-    if (result == nil) {
-        return false;
-    }
-    
-    NSError *error;
-    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-    
-    BOOL flag = [responseData[@"success"]boolValue];
-     MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    return flag;
+   
+    __block BOOL result = false;
+    [[MCNetwork getInstance]httpPostSynUrl:url Params:params Cache:NO Complete:^(NSURLRequest *request, MCResponse *response, NSData *data) {
+        if (data && response.statusCode == 200) {
+            NSError *error;
+            NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            result = [responseData[@"success"]boolValue];
+            MCLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+        }
+    }];
+    return result;
 }
 
 -(BOOL)feedbackByTel:(NSString*)tel Content:(NSString*)content
 {
-    
     NSMutableDictionary* params = [[NSMutableDictionary alloc]initWithDictionary:@{
                                                                                    @"suggest":content,
                                                                                     @"tel":tel
                                                                                    }];
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/mobile/client/feedback.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:params];
-    if (result == nil) {
-        return false;
-    }
-    NSError *error;
-    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-    BOOL flag = [responseData[@"success"]boolValue];
-     MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    return flag;
+    __block BOOL result = false;
+    [[MCNetwork getInstance]httpPostSynUrl:url Params:params Cache:NO Complete:^(NSURLRequest *request, MCResponse *response, NSData *data) {
+        if (data && response.statusCode == 200) {
+            NSError *error;
+            NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            result = [responseData[@"success"]boolValue];
+            MCLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+        }
+    }];
+    return result;
 }
 
 -(NSMutableArray*)getAddressHelperList {
     NSString* url = [[NSString alloc]initWithFormat:@"%@maicai/api/ios/v1//public/address/help.do",MC_BASE_URL];
-    NSData* result = [[MCNetwork getInstance]httpPostSynUrl:url Params:nil];
-    if (result == nil) {
-        return false;
-    }
-    NSError *error;
-    NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:&error];
-    BOOL flag = [responseData[@"success"]boolValue];
-    MCLog(@"%@",[[NSString alloc]initWithData:result encoding:NSUTF8StringEncoding]);
-    if (flag) {
-        return responseData[@"data"];
-    }else {
-        return nil;
-    }
+    __block NSMutableArray* result = nil;
+    [[MCNetwork getInstance]httpPostSynUrl:url Params:nil Cache:NO Complete:^(NSURLRequest *request, MCResponse *response, NSData *data) {
+        if (data && response.statusCode == 200) {
+            NSError *error;
+            NSDictionary* responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            MCLog(@"%@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+            if ([responseData[@"success"]boolValue]) {
+                result = responseData[@"data"];
+            }
+        }
+    }];
+    return result;
 }
 
 -(void)saveLoginStatusByUser:(MCUser*)user
 {
     NSString * path = [[[MCFileOperation getInstance]getDocumentPath] stringByAppendingPathComponent:[[NSString alloc]initWithFormat:@"%@.txt",[@"UserLoginStatus" stringFromMD5]]];
-
-    [NSKeyedArchiver archiveRootObject:user toFile:path];
+    [[MCFileOperation getInstance]saveObject:user toFilePath:path];
 }
 
 -(MCUser*)getLoginStatus{
     NSString * path = [[[MCFileOperation getInstance]getDocumentPath] stringByAppendingPathComponent:[[NSString alloc]initWithFormat:@"%@.txt",[@"UserLoginStatus" stringFromMD5]]];
-    return [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+    return (MCUser*)[[MCFileOperation getInstance]getObjectFromFilePath:path];
 }
 
 -(void)clearLoginStatus{
